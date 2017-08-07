@@ -1,0 +1,7 @@
+
+
+permalink:          pretty
+
+encoding: 			utf-8
+
+highlighter:		pygments.rb
