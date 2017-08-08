@@ -1,7 +1,10 @@
-
-
-permalink:          pretty
-
-encoding: 			utf-8
-
-highlighter:		pygments.rb
+permalink:              pretty
+encoding:               utf-8
+highlighter:            rouge
+# pygments:               true
+# my info
+authorEN:               linxingyang
+author:                 lxy
+personnal-email:        951912617@qq.com
+work-email:             linxingy@newlandcomputer.com
+phone:                  186-5048-5410

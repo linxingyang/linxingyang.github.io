@@ -34,4 +34,7 @@ public class B {
 * 当前时间：{{ site.time | date_to_xmlschema  }}
 * 文章字数：{{ page.content | number_of_words }}
 
-
+* 作者：{{ site.author }}
+* 个人邮件： {{ site.personnal-email }}
+* 公司邮件：{{ site.work-email }}
+* 电话:{{ site.phone }}
