@@ -1,6 +1,7 @@
 ---
-layout: post
+layout: default
 title: hello github
+author: qgs
 ---
 
 ## you know, i'm new here, {{ page.title }}##
