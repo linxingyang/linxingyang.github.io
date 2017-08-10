@@ -8,6 +8,11 @@ tags:
 comments: true
 ---
 
+111111
+* Table of Contents
+{:toc}
+
+# 1 问懂啊发
 The [config.yml file](https://github.com/yulijia/freshman21/blob/master/_config.yml) in the Freshman21 theme includes five parts. 
 
 **First part** is the site info.
@@ -23,7 +28,7 @@ keywords: "Jekyll, theme, Freshman21" # html meta keywords
 baseurl: "/freshman21" # the subpath of your site, e.g. /blog
 url: "http://yulijia.net/freshman21" # the base hostname & protocol for your site
 ```
-
+## 1.1 啊扥
 **Part 2**, Personal info and site tools info, twitter, github, aboutme and aboutme_photo only appears on the sidebar aboutme-box, you can <q>Hide</q> in two ways <sup>[[1]](#[1])</sup>:
 
 ```yaml
@@ -34,7 +39,7 @@ favicon:     "images/favicon.ico"
 aboutme: Hi, this is Lijia Yu. I made the Freshman21 theme. Please enjoy it. # these are shown on aboutme-box(sidebar).
 aboutme_photo: https://i.imgur.com/15BT1.jpg # your personal photo.
 ```
-
+## 1.2 浮动
 **Part3**, Site setting:
 
 ```yaml
@@ -42,10 +47,10 @@ ShowContactInfo: "True" # Personal Info (twitter,github,email) can be seen on ab
 default_column: "two" # blog style: two columns, if default_column != "two", you will see a one column blog.
 default_locale: "en" # blog sidebar language set, only include: English(en) and Chinese (cn)
 ```
-
+# 2 懂法扥
 
 **Part4**, Blogroll info, only *name* tags can shown on the page.
-
+## 2.1 浮动啊肥
 ```yaml
 Blogroll:
       - name: Freshman
@@ -55,7 +60,7 @@ Blogroll:
         href: http://yulijia.net/
         title: Lijia Yu's website
 ```
-
+### 2.1.1 冬粉
 **Part5**, Build settings
 
 ```yaml
@@ -63,13 +68,14 @@ markdown: kramdown
 highlighter: pygments # highlight
 paginate: 5  # how many post can seen in the main page
 ```
-
+#### 2.1.1.1 放大森
 =====
 
 <ul style='list-style-type:none;'> 
 <li id="[1]"> [1], you can set those info at <strong>Part3</strong> or just delete the <q>aboutme.html</q> at <q>sidebar.html</q> in <code>_include</code> folder. </li>
 </ul>
 
+#### 2.1.1.2 放大校招森
 ```html
 <div class="col-sm-2">
   <!--{ % include Aboutme.html % }-->
