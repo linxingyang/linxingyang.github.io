@@ -8,6 +8,9 @@
 	<script src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		//alert($('#content').css('height') + " " + $('#plugin').css('height'));
+		$('#plugin').css('height', $('#content').css('height'));
+		
 		
 	});
 	onscroll = function() {
@@ -20,6 +23,31 @@
         {
             hello.style.display = 'none';
         }*/
+		/*
+		var pluginContentTop = $('#pluginContent')[0].offsetTop;
+		var nowWindowTop = $(window).scrollTop();
+		var distance1 = pluginContentTop - nowWindowTop;
+		// alert('距离' + result + "px");
+		// console.log($('#content')[0].offsetTop + " --- " + $('#content').css('height'));
+		var contentBottom = $('#content')[0].offsetTop + parseInt($('#content').css('height'));// $('#plugin').css('height');
+		var distance2 = contentBottom - nowWindowTop;
+
+		// var mHeight = $('#pluginContent').css('height');
+		console.log(distance1 + "  " + distance2);
+		if(distance1 < 0) {
+
+			// $('#plugin')[0].offsetTop = "0px";
+			if(distance2 > 0) {
+				$('#pluginContent').css('position', 'fixed');
+				$('#pluginContent').css('top', '0px');
+				
+			} else {
+				$('#pluginContent').css('position', 'relative');
+				// $('#plugin').css('top', '0px');
+			}
+		}
+		
+		*/
     }
 </script>
 
