@@ -32,6 +32,10 @@
 	{% if site.plugin-gitment-use %}
 		<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
 	{% endif %}
+	
+	<!-- jquery比较特殊，有些插件会比较早用到 -->
+	<script src="{{ site.baseurl }}/js/jquery.min.js"></script>
+	<!-- 暂时未知这个是什么 -->
 	<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 
