@@ -1,40 +1,78 @@
-permalink:              pretty
-encoding:               utf-8
-highlighter:            rouge
+
+# 页面信息
+meta-keywords:                 "AlienLin's blog,java,xmpp,openfire"
+twitter_username:              XingYangLin
+description: "AlienLin's blog, xmpp,java,js,html,spring,hibernate..."  # 网站描述 会出现在meta中和feed.xml中
+baseurl: "" 
+url: "http://alienlin.com" # 网站地址
+locale: en_US
+somewords: 涂大姐应该改叫涂婷婷，哈哈  # header中的，一句话，类似个性签名啥的
+
+
+# 页面引用资源文件
+favicon:     "/images/favicon.ico"
+main-css:    "/css/main.css"
+feed-xml:    "/feed.xml"
+
+# 设置
+permalink:              pretty # 连接样式
+encoding:               utf-8  # 编码格式
+highlighter:            rouge  # 代码高亮方式
+
+
+# 编译
+incremental: true # 应该类似调试模式？就是实时响应增加文件
+port:  4040 # 端口
+
+
 # pygments:               true
 # my info
-authorEN:               linxingyang
-author:                 lxy
-personnal-email:        951912617@qq.com
-work-email:             linxingy@newlandcomputer.com
+email1:        951912617@qq.com
+email2:            linxingy@newlandcomputer.com
+email3:        alienlin@alienlin.com
 phone:                  186-5048-5410
 
-### Site info:
-title: Freshman21
-tagline: Another Jekyll theme, Freshman twenty-first
-author: Lijia Yu
-email: yu@lijiayu.net
-description: "Freshman21 is a Jekyll blog theme." # You can edit this line in _config.yml. It will appear in your document head meta and in your feed.xml site description
-keywords: "Jekyll, theme, Freshman21"
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://yulijia.net/freshman21" # the base hostname & protocol for your site
-locale: en_US
+# keywords: "Jekyll, theme, Freshman21"
 
 ### Personal info and site tools info:
-twitter_username: yulijia
-github_username:  yulijia
+
+github_username:  linxingyang
 disqus_shortname: freshman21
-favicon:     "resources/images/favicon.ico"
+
 aboutme: Hi, this is Lijia Yu. I made the Freshman21 theme. Please enjoy it. # these are shown on aboutme-sidebar.
 aboutme_photo: https://i.imgur.com/Mdc4szJl.jpg# your photo.
 google_analytics_key: UA-57979084-1 # put YOUR key here to enable tracking! (blank to disable)
 
+### your Blogroll info, only name can shown on the page.
+
+Blogroll:
+      - name: Freshman
+        href: http://yulijia.net/freshman
+        title: Another Jekyll blog theme
+      - name: author's website
+        href: http://yulijia.net/
+        title: Lijia Yu's website
+
+
+### Build settings
+markdown: kramdown
+#highlighter: pygments
+kramdown:
+        input: GFM
+        syntax_highlighter: rouge
+plugins: [jekyll-paginate]
+paginate: 5
+excerpt_separator: <!-- more -->
+
 
 ### Site setting:
 ShowContactInfo: "True" # Personal Info (twitter,github,email) can be seen on aboutme-sidebar, those info only shown where ShowContactInfo == True
-default_column: "two" # blog style: two columns, if default_column != "two", you will see a one column blog.
+
+default_column: "one" # 博客风格是2列还是1列，2列会有一个侧边栏
+# 默认地区，配合下面的国际化使用
 default_locale: "cn" # blog sidebar language set, only include: English (en), Chinese (cn), Japanese (jp), Polish (pl), Korean (kr), Russian (ru), and Turkish (tr)
 
+# 国际化
 locales:
     en:
       Aboutme: "About Me"
@@ -53,8 +91,12 @@ locales:
       Home: "Home"
       About: "About"
       Guestbook: "Guestbook"
-      Subscribe: "Subscribe"
+      Subscribe: "Subscribe"  
+      title: "AlienLin's blog"
+      author: "Aline Lin"
     cn:
+      author: "林兴洋"
+      title: "林兴洋的博客"
       Aboutme: "关于我"
       Archives: "存档"
       Blogroll: "良师益友"        
@@ -163,28 +205,4 @@ locales:
       Guestbook: "Konuk Defteri"
       Subscribe: "Abone Ol"
 
-### your Blogroll info, only name can shown on the page.
 
-Blogroll:
-      - name: Freshman
-        href: http://yulijia.net/freshman
-        title: Another Jekyll blog theme
-      - name: author's website
-        href: http://yulijia.net/
-        title: Lijia Yu's website
-
-
-### Build settings
-markdown: kramdown
-#highlighter: pygments
-kramdown:
-        input: GFM
-        syntax_highlighter: rouge
-plugins: [jekyll-paginate]
-paginate: 5
-excerpt_separator: <!-- more -->
-encoding: utf-8
-
-
-port:  4040
-incremental: true
