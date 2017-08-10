@@ -1,6 +1,8 @@
 ---
 layout: post
 title: hello jekyll
+categories: 博客
+tags: [jekyll, java]
 ---
 {{ page.excerpt | markdownify }}
 

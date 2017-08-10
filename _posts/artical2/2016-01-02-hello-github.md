@@ -1,7 +1,9 @@
 ---
-layout: default
+layout: post
 title: hello github
 author: qgs
+categories: java
+tags: [java]
 ---
 
 ## you know, i'm new here, {{ page.title }}##
