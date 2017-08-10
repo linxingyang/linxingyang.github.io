@@ -9,6 +9,7 @@
 	* page_pagination.html page中的分页，上一页下一页
 	* post_pagination.html 也是分页。。
 	* Recent_Posts.html 近期文章，侧边栏中包含
+	* share.html 文章分享
 	* sidebar.html 侧边栏
 	* Tags.html 侧边栏中包含
 	*

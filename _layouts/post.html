@@ -20,7 +20,7 @@ layout: default
 			{% endif %}
 			<br>
 			<time itemprop="datePublished" datetime="{{ page.date | date: '%Y-%m-%d' }}">
-				{{ site.locales[site.default_locale].PostDate }}{{ page.date | date: "%b %-d, %Y" }}
+				{{ site.locales[site.default_locale].PostDate }}{{ page.date | date: "%Y-%m-%d" }}
 			</time>
 		</p>
 	</header>
@@ -28,9 +28,16 @@ layout: default
 		{{ content }}
 	</article>
 	<hr />
+	{% if site.plugin-share-use %}
+		{% include share.html %}
+	{% endif %}
+	{% if site.plugin-gitment-use %}
+		{% include gitment.html %}
+	{% endif %}
+	
 </div>
 
-
-{% include page_pagination.html%}
+<!-- 不需要前一页后一页，感觉怪怪的 -->
+<!-- {% include page_pagination.html%} -->
 {% include comments.html %}
 

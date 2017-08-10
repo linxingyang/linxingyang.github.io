@@ -25,6 +25,13 @@
 	<link rel="canonical" href="{{ page.url | replace:'index.html','' |  prepend: site.url }}">
 	<link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ site.feed-xml | prepend: site.url }}" />
 
+	{% if site.plugin-share-use %}
+		<!-- share，分享用的 -->
+		<link rel="stylesheet" href="{{ site.baseurl }}/plugins/share/css/share.min.css">
+	{% endif %}
+	{% if site.plugin-gitment-use %}
+		<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+	{% endif %}
 	<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </head>
 
