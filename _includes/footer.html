@@ -9,25 +9,49 @@
 		<script src="{{ site.baseurl }}/plugins/share/js/jquery.share.min.js"></script>
 	{% endif %}
 	{% if site.plugin-gitment-use %}
+		<!-- gitment评论 -->
 		<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
 	{% endif %}
-	<!-- <script src="//dn-lbstatics.qbox.me/lbservice/counter/1.0/counter.mini.js"></script>-->
-	<script src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-	
-	<!-- <span id="container_site_counter">本站总访问量<span id="value_site_counter"></span>次</span>-->
+	{% if site.plugin-busuanzi-use %}
+		<!-- -不蒜子计数 -->
+		<script src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	{% endif %}
+	<script src="{{ site.baseurl }}/plugins/toc/js/toc.js"></script>
+   <script type="text/javascript">
+	$(document).ready(function() {
+		$('#toc').toc({
+			listType: 'ul',
+			minimumHeaders: 2,
+		//	headers: ' .content h4, .content h5, .content h6',
+			list: 'lorem ipsum',
+			item: 'dolor sit amet',
+			showEffect: 'slideDown'
+		});
+	});
+	</script>
+	<style>
+		.clickable-header {
+		  cursor:pointer;
+		}
+		.clickable-header:hover {
+		  text-decoration:underline;
+		}
+		.top-level-header {
+		  display:inline;
+		}
+		.back-to-top {
+		  margin-left:5px;
+		  cursor:pointer;
+		}
+	</style>
   
+	<p>
+		{% if site.plugin-busuanzi-use %}
+			{% include counter.html %}
+		{% endif %}
+	</p>
 	<p>不知道说点什么好，此处留白咯</p>
-	<span id="busuanzi_container_site_pv">
-		本站总访问量<span id="busuanzi_value_site_pv"></span>次
-	</span>
-	<span id="busuanzi_container_site_uv">
-	  本站访客数<span id="busuanzi_value_site_uv"></span>人次
-	</span>
-	<span id="busuanzi_container_page_pv">
-	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-	</span>
-	
-	<p>本主题及作者信息：Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a> 
+	<p>该主题及作者信息：Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a> 
 	on 
 	<a href="https://github.com/">Github</a>
 	| Theme <a href="https://github.com/yulijia/freshman21/">Freshman21</a> Design by <a href="http://yulijia.net">Lijia Yu</a>  

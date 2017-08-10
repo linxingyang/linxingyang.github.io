@@ -26,8 +26,9 @@ port:  4040 # 端口
 
 
 # 使用插件 
-plugin-share-use: true
-plugin-gitment-use: true
+plugin-share-use: true	# 分享
+plugin-gitment-use: true # gitment评论
+plugin-busuanzi-use: true # 不蒜子计数
 
 # pygments:               true
 # my info
