@@ -3,8 +3,8 @@ layout: default
 ---
 
 <div class="post" itemscope itemtype="http://schema.org/BlogPosting">
-	<div id="plugin" class="page-content col-sm-2" style="background-color:gray" >
-		<div id="pluginContent" style="background-color:red" >
+	<div id="plugin" class="page-content col-sm-2" >
+		<div id="pluginContent" style="overflow-y: auto;" >
 			{% if site.plugin-toc-use %}
 				<!-- 目录插件 -->	
 				{% include toc.html %}

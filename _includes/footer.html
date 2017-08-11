@@ -1,19 +1,50 @@
 <footer class="site-footer">
 	<!-- <p>Copyright &copy; <a href="{{ site.baseurl }}/">{{site.title}}</a></p> -->
-     
+     // 评论gitment
+	 // 不蒜子计数
+	 // 分享
+	 
+	 // 目录 用toc.js
+	// 基本完工了
+	// 目录跟着走。
 	<!-- -不蒜子计数 
 		这个插件只要存在，就会进行计数，不管你是不是要显示
 		所以不判断是否开启了计数，就让他一直存在。
 	-->
 	<script src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <script type="text/javascript">
+	var tocScrollRangeStart;
+	var tocScrollRangeEnd;
+	var tocHeight;
 	$(document).ready(function() {
 		//alert($('#content').css('height') + " " + $('#plugin').css('height'));
-		$('#plugin').css('height', $('#content').css('height'));
 		
+		var $content = $('#content');
+		var top = $content.offset().top;
+		var height = $content.css('height');
 		
+		// plugin的高度与内容的高度一致
+		$('#plugin').css('height', height);
+		// $('#pluginContent').css('max-height', $(window).height());
+		$(window).trigger('resize');
+		$(window).trigger('scroll');
+		
+		tocScrollRangeStart = top;
+		tocScrollRangeEnd = top + parseInt(height);
+		// tocHeight = parseInt($('#pluginContent').css('height'));
+		// alert($(window).height()); //浏览器时下窗口可视区域高度 
+		// alert($(document).height()); //浏览器时下窗口文档的高度 
+		// 要给silderbar单独做一个scroll
+		console.log("top " + top + "  height" + height + " start " + tocScrollRangeEnd + "   tocHeight" + tocHeight + " ");
 	});
+	
+	
+	onresize = function() {
+		console.log('here');
+		$('#pluginContent').css('max-height', $(window).height());
+	}
 	onscroll = function() {
+		console.log('here22');
        /* var st = document.documentElement.scrollTop || document.body.scrollTop;
         if (!hello.offsetWidth && st >= 300)
         {
@@ -23,31 +54,66 @@
         {
             hello.style.display = 'none';
         }*/
-		/*
-		var pluginContentTop = $('#pluginContent')[0].offsetTop;
-		var nowWindowTop = $(window).scrollTop();
-		var distance1 = pluginContentTop - nowWindowTop;
-		// alert('距离' + result + "px");
-		// console.log($('#content')[0].offsetTop + " --- " + $('#content').css('height'));
-		var contentBottom = $('#content')[0].offsetTop + parseInt($('#content').css('height'));// $('#plugin').css('height');
+		console.log("可视窗口" + $(window).height());
+		// pluginContent的最大高度不能超过height
+		
+		
+		
+		var tocHeight = parseInt($('#pluginContent').css('height'));
+		// console.log("__>"+parseInt($('#pluginContent').css('height')));
+		// var $pluginContentTop = $('#pluginContent')[0].offsetTop;
+		var $pluginContentTop = $('#pluginContent');
+		var $nowWindowTop = $(window).scrollTop();
+		// var distance1 = pluginContentTop - nowWindowTop;
+		// console.log('距离' + pluginContentTop + "  " + nowWindowTop + "  " + distance1 + "px");
+		console.log($pluginContentTop.offset().top + ' ' + $pluginContentTop.offset().left + " " + $nowWindowTop);
+		var distance = $nowWindowTop - $pluginContentTop.offset().top;
+		//if(distance < 0) {
+		if($nowWindowTop > tocScrollRangeStart) {
+		
+			var distance2 = $nowWindowTop + tocHeight;
+			if(distance2 > tocScrollRangeEnd) {
+				console.log('大');
+				$pluginContentTop.offset({
+					top: tocScrollRangeEnd - tocHeight
+				});
+			} else {
+				console.log('大');
+				$pluginContentTop.offset({
+					top: $nowWindowTop
+				});
+			}
+			
+		} else {
+		console.log('小');
+			$pluginContentTop.offset({
+				top: 250
+			});
+		}	
+		//}
+		
+		
+		//console.log($('#pluginContent')[0].offsetTop + " --- " + $('#content').css('height'));
+		/*var contentBottom = $('#content')[0].offsetTop + parseInt($('#content').css('height'));// $('#plugin').css('height');
 		var distance2 = contentBottom - nowWindowTop;
 
 		// var mHeight = $('#pluginContent').css('height');
-		console.log(distance1 + "  " + distance2);
+		//console.log(distance1 + "  " + distance2);
 		if(distance1 < 0) {
 
 			// $('#plugin')[0].offsetTop = "0px";
 			if(distance2 > 0) {
-				$('#pluginContent').css('position', 'fixed');
-				$('#pluginContent').css('top', '0px');
+				// $('#pluginContent').css('position', 'fixed');
+				// $('#pluginContent').css('top', '0px');
+				$('#pluginContent').css('padding-top', -distance1);
 				
 			} else {
 				$('#pluginContent').css('position', 'relative');
 				// $('#plugin').css('top', '0px');
 			}
 		}
-		
 		*/
+		
     }
 </script>
 
