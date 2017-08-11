@@ -1,5 +1,13 @@
 # linxingyang
 
+##
+
+* comment(gitment) 评论
+* counter 不蒜子计数
+* share(share.js) 分享
+* toc(toc.js) 目录
+
+
 ## 目录结构
 * _includes
 	* Aboutme.html 关于我，侧边栏中包含
