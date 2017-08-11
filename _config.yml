@@ -2,11 +2,13 @@
 # 页面信息
 meta-keywords:                 "AlienLin's blog,java,xmpp,openfire"
 twitter_username:              XingYangLin
-description: "AlienLin's blog, xmpp,java,js,html,spring,hibernate..."  # 网站描述 会出现在meta中和feed.xml中
-baseurl: "" 
-url: "http://alienlin.com" # 网站地址
-locale: en_US
-somewords: 涂大姐应该改叫涂婷婷，哈哈  # header中的，一句话，类似个性签名啥的
+description:                   "AlienLin's blog, xmpp,java,js,html,spring,hibernate..."  # 网站描述 会出现在meta中和feed.xml中
+baseurl:                       "" 
+url:                           "http://alienlin.com" # 网站地址
+locale:                        en_US
+somewords:                     涂大姐应该改叫涂婷婷，哈哈  # header中的，一句话，类似个性签名啥的
+author:                        Alien Lin
+aboutme:                       程序猿啊程序猿。还是初级的。。 # these are shown on aboutme-sidebar.
 
 
 # 页面引用资源文件
@@ -31,22 +33,19 @@ plugin-gitment-use: true # gitment评论
 plugin-busuanzi-use: true # 不蒜子计数
 plugin-toc-use: true # table of content 目录插件
 
-# pygments:               true
-# my info
+
+# 个人信息
 email1:        951912617@qq.com
-email2:            linxingy@newlandcomputer.com
-email3:        alienlin@alienlin.com
+# email2:        linxingy@newlandcomputer.com
+email2:        alienlin@alienlin.com
 phone:                  186-5048-5410
+github_username:  linxingyang
+aboutme_photo:  "images/fd.jgp"   # your photo.
+# disqus_shortname: freshman21
 
 # keywords: "Jekyll, theme, Freshman21"
 
-### Personal info and site tools info:
 
-github_username:  linxingyang
-disqus_shortname: freshman21
-
-aboutme: Hi, this is Lijia Yu. I made the Freshman21 theme. Please enjoy it. # these are shown on aboutme-sidebar.
-aboutme_photo: https://i.imgur.com/Mdc4szJl.jpg# your photo.
 google_analytics_key: UA-57979084-1 # put YOUR key here to enable tracking! (blank to disable)
 
 ### your Blogroll info, only name can shown on the page.
