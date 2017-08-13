@@ -17,7 +17,7 @@ main-css:    "/css/main.css"
 feed-xml:    "/feed.xml"
 
 # 设置
-permalink:              pretty # 连接样式
+permalink:              /:year/:month/:day/:title/ # pretty # 连接样式
 encoding:               utf-8  # 编码格式
 highlighter:            rouge  # 代码高亮方式
 
@@ -70,7 +70,7 @@ excerpt_separator: <!-- more -->
 
 
 ### Site setting:
-ShowContactInfo: "True" # 是否显示个人信息 Personal Info (twitter,github,email) can be seen on aboutme-sidebar, those info only shown where ShowContactInfo == True
+ShowContactInfo: "True" # 是否显示个人信息 
 
 default_column: "one" # 博客风格是2列还是1列，2列会有一个侧边栏
 # 默认地区，配合下面的国际化使用
