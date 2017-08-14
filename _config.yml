@@ -17,7 +17,8 @@ main-css:    "/css/main.css"
 feed-xml:    "/feed.xml"
 
 # 设置
-permalink:              /:year/:month/:day/:title/ # pretty # 连接样式
+# pretty # 连接样式
+permalink:              /:title/ 
 encoding:               utf-8  # 编码格式
 highlighter:            rouge  # 代码高亮方式
 
