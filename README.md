@@ -5,7 +5,10 @@
 * comment(gitment) 评论
 * counter 不蒜子计数
 * share(share.js) 分享
+	* 
 * toc(toc.js) 目录
+	* scrollfix.js 使用到了这个插件
+	* jq
 
 
 ## 目录结构
