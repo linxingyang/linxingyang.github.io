@@ -12,14 +12,11 @@ picUrl: images\public\1000\002
 问题：
 myeclipse对项目进行部署后，在tomcat目录下，仅看到部分的文件夹，其它一些文件夹没有部署到tomcat中。
 
+```
+项目右键->properties-> myeclipse->deployment assembly 
 
-重启tomcat，无效
-
-更换tomcat，无效
-
-改用eclipse部署，无效
-
-重新创建一个myeclipse工作空间，无效
+```
+在这里进行配置项目目录与部署目录。我是因为 WebRoot下的东西没有发布到tomcat下，加上最后一条就行了，其他的类推。
 
 
-重启电脑，解决了。
+![01.png]({{site.baseurl}}/{{ page.picUrl }}/01.png)
