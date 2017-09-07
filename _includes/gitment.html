@@ -1,0 +1,20 @@
+
+<div id="comments"></div>
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		var gitment = new Gitment({
+			id: window.location.pathname, 
+			owner: 'linxingyang',
+			repo: 'linxingyang.github.io',
+			oauth: {
+				client_id: '0fc522c9251a7ee6252a',
+				client_secret: '71d776d309d064510f9f34ed727b5762100878f2',
+			},
+		});
+		gitment.render('comments');
+	});
+</script>

@@ -1,213 +1,63 @@
+# Site settings
+title: 林兴洋的博客
+email: linxingy@foxmail.com
+description: > # this means to ignore newlines until "baseurl:"
 
-# 页面信息
-meta-keywords:                 "AlienLin's blog,java,xmpp,openfire"
-twitter_username:              XingYangLin
-description:                   "AlienLin's blog, xmpp,java,js,html,spring,hibernate..."  # 网站描述 会出现在meta中和feed.xml中
-baseurl:                       "" 
-url:                           "http://alienlin.com" # 网站地址
-locale:                        en_US
-somewords:                     涂大姐应该改叫涂婷婷，哈哈  # header中的，一句话，类似个性签名啥的
-author:                        Alien Lin
-aboutme:                       程序猿啊程序猿。还是初级的。。 # these are shown on aboutme-sidebar.
+baseurl: "" # the subpath of your site, e.g. /blog/
+# url: http://yansu.org # the base hostname & protocol for your site
+rss_url: /pages/feed.xml
+author: Alien Lin
 
+# Sidebar filter
+# Choose 'tag' or 'category' as filter in sidebar.
+filter: 'category'
+recent_num: 20
 
-# 页面引用资源文件
-favicon:     "/images/favicon.ico"
-main-css:    "/css/main.css"
-feed-xml:    "/feed.xml"
+# Social account
+twitter: XingYangLin
+# weibo: suyan0830
+github: linxingyang
+# instagram: suyan0830
+# linkedin: suyan0830
 
-# 设置
-# pretty # 连接样式
-permalink:              /:title/ 
-encoding:               utf-8  # 编码格式
-highlighter:            rouge  # 代码高亮方式
+# avatar and Favicon
+avatar: /assets/img/fd.jpg
+favicon: /assets/img/favicon.icon
 
 
 # 编译
 incremental: true # 应该类似调试模式？就是实时响应增加文件
 port:  4040 # 端口
 
+# 分享
+plugin-share-use: true	
+# gitment评论
+plugin-gitment-use: true 
+# 不蒜子计数
+plugin-busuanzi-use: true 
 
-# 使用插件 
-plugin-share-use: true	# 分享
-plugin-gitment-use: true # gitment评论
-plugin-busuanzi-use: true # 不蒜子计数
-plugin-toc-use: true # table of content 目录插件
+# disqus config
+disqus:
+  shortname: suyan-zh
 
+# google analytics config
+ga:
+  id: UA-54767140-1
+  url: alienlin.com
 
-# 个人信息
-email1:        951912617@qq.com
-# email2:        linxingy@newlandcomputer.com
-email2:        alienlin@alienlin.com
-phone:                  186-5048-5410
-github_username:  linxingyang
-aboutme_photo:  "images/fd.jgp"   # your photo.
-# disqus_shortname: freshman21
-
-# keywords: "Jekyll, theme, Freshman21"
-
-
-google_analytics_key: UA-57979084-1 # put YOUR key here to enable tracking! (blank to disable)
-
-### your Blogroll info, only name can shown on the page.
-Blogroll:
-      - name: Freshman
-        href: http://yulijia.net/freshman
-        title: Another Jekyll blog theme
-      - name: author's website
-        href: http://yulijia.net/
-        title: Lijia Yu's website
-
-
-### Build settings
+# Build settings
+encoding:               utf-8  # 编码格式
+permalink: /year/:title/ 
 markdown: kramdown
-#highlighter: pygments
-kramdown:
-        input: GFM
-        syntax_highlighter: rouge
-plugins: [jekyll-paginate]
-paginate: 5
-excerpt_separator: <!-- more -->
+highlighter: rouge
+mathjax: disabled
+sass:
+  style: compressed
 
-
-### Site setting:
-ShowContactInfo: "True" # 是否显示个人信息 
-
-default_column: "one" # 博客风格是2列还是1列，2列会有一个侧边栏
-# 默认地区，配合下面的国际化使用
-default_locale: "cn" # blog sidebar language set, only include: English (en), Chinese (cn), Japanese (jp), Polish (pl), Korean (kr), Russian (ru), and Turkish (tr)
-
-# 国际化
-locales:
-    en:
-      Aboutme: "About Me"
-      Archives: "Archives"
-      Blogroll: "Blogroll"
-      Categories: "Categories"
-      Copyright_Notice: "Copyright Notice"
-      Recent_Posts: "Recent Posts"
-      Tags: "Tags"
-      Previous: "Older"
-      Next: "Newer"
-      PostedInCategories: "Posted in"
-      Taggedwith: "and tagged"
-      PostDate: "on "
-      Google_search: "Site Search"
-      Home: "Home"
-      About: "About"
-      Guestbook: "Guestbook"
-      Subscribe: "Subscribe"  
-      title: "AlienLin's blog"
-      author: "Aline Lin"
-    cn:
-      author: "林兴洋"
-      title: "林兴洋的博客"
-      Aboutme: "关于我"
-      Archives: "存档"
-      Blogroll: "良师益友"        
-      Categories: "分类目录"    
-      Copyright_Notice: "版权声明"
-      Recent_Posts: "近期文章"
-      Tags: "标签" 
-      Previous: "前一页"
-      Next: "后一页"
-      PostedInCategories: "分类:"   
-      Taggedwith: "标签:"
-      PostDate: "发表时间: "
-      Google_search: "站内搜索"
-      Home: "首页"
-      About: "关于"
-      Guestbook: "留言"
-      Subscribe: "订阅"
-    jp:
-      Aboutme: "著者"
-      Archives: "アーカイブ"
-      Blogroll: "ブログロール"
-      Categories: "カテゴリー"
-      Copyright_Notice: "著作権表示"
-      Recent_Posts: "最近の投稿"
-      Tags: "タグ"
-      Previous: "前の記事"
-      Next: "次の記事"
-      PostedInCategories: "カテゴリー："
-      Taggedwith: "| タグ："
-      PostDate: "| 投稿日時: "
-      Google_search: "サイト内検索"
-      Home: "ホーム"
-      About: "このブログについて"
-      Guestbook: "メッセージ"
-      Subscribe: "購読"
-    pl:
-      Aboutme: "O mnie"
-      Archives: "Archiwum"
-      Blogroll: "Odnośniki"
-      Categories: "Kategorie"
-      Copyright_Notice: "Prawa autorskie"
-      Recent_Posts: "Najnowsze wpisy"
-      Tags: "Tagi"
-      Previous: "Starsze"
-      Next: "Nowsze"
-      PostedInCategories: "Kategoria"
-      Taggedwith: "tagi"
-      PostDate: "on "
-      Google_search: "Wyszukiwarka"
-      Home: "Strona główna"
-      About: "O mnie"
-      Guestbook: "Księga gości"
-      Subscribe: "Subskrypcja"
-    kr:
-      Aboutme: "저자 소개"
-      Archives: "모든 게시물"
-      Blogroll: "참조 링크"
-      Categories: "카테고리"
-      Copyright_Notice: "저작권"
-      Recent_Posts: "최근 게시물"
-      Tags: "태그"
-      Previous: "이전 게시물"
-      Next: "다음 게시물"
-      PostedInCategories: "카테고리: "
-      Taggedwith: "태그: "
-      PostDate: "작성일: "
-      Google_search: "게시물 검색"
-      Home: "홈"
-      About: "소개"
-      Guestbook: "방명록"
-      Subscribe: "구독하기"
-    ru:
-      Aboutme: "Обо мне" # = 'About me'
-      Archives: "Архив"
-      Blogroll: "Ссылки" # = 'Links'
-      Categories: "Разделы"
-      Copyright_Notice: "Авторские права"
-      Recent_Posts: "Свежие посты"
-      Tags: "Теги"
-      Previous: "Предыдущий пост"          # = 'Previous post'
-      Next: "Следующий пост"               # = 'Next post'
-      PostedInCategories: "Опубликовано в" # = 'Posted in'
-      Taggedwith: "с тегами"
-      PostDate: ""
-      Google_search: "Поиск на Google"
-      Home: "Домой"
-      About: "О блоге"            # = 'About blog'
-      Guestbook: "Гостевая книга"
-      Subscribe: "Подписаться"
-    tr:
-      Aboutme: "Hakkımda"
-      Archives: "Arşivler"
-      Blogroll: "Bağlantılar"
-      Categories: "Kategoriler"
-      Copyright_Notice: "Telif Hakkı Bildirimi"
-      Recent_Posts: "Son Yazılar"
-      Tags: "Etiketler"
-      Previous: "Daha Eski"
-      Next: "Daha Yeni"
-      PostedInCategories: "Şuraya gönderildi:"
-      Taggedwith: "ve şöyle etiketlendi:"
-      PostDate: "şu tarihte:"
-      Google_search: "Sitede Ara"
-      Home: "Anasayfa"
-      About: "Hakkında"
-      Guestbook: "Konuk Defteri"
-      Subscribe: "Abone Ol"
-
+# Jekyll Plugin
+# https://help.github.com/articles/adding-jekyll-plugins-to-a-github-pages-site/
+gems:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-feed
 
