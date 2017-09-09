@@ -1,7 +1,5 @@
 _site
 .sass-cache
-_posts/private
-images/private
 _drafts/
 .DS_Store
 .idea/
@@ -10,3 +8,10 @@ Gemfile.lock
 _posts/.MWebMetaData/
 .jekyll-metadata
 start
+
+
+
+*.*
+!*public.md
+#!*.png
+#!*.jpg
