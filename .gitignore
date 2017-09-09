@@ -12,7 +12,6 @@ start
 
 
 *.*
-!*public.md
-#!*.png
+!*pub.md
+!*pub.png
 #!*.jpg
-!*pub
