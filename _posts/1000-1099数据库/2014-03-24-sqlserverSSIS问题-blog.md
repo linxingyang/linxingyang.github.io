@@ -2,7 +2,7 @@
 layout: post
 permalink: /:year/a000318540b7457fa23cc20a3acdfcb6
 title: sqlserverSSIS的问题
-categories: [软件]
+categories: [数据库]
 tags: [sqlserver2008,错误,SSIS]
 excerpt: sqlserver2008,错误,SSIS
 description: sqlserver2008,错误,SSIS

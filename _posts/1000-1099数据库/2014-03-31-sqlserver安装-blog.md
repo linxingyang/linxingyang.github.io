@@ -2,7 +2,7 @@
 layout: post
 permalink: /:year/bb97a16f894d42aaab09bc92c3785f33
 title: sqlserver2008安装
-categories: [软件]
+categories: [数据库]
 tags: [sqlserver2008,安装]
 excerpt: sqlserver2008,安装
 description: sqlserver2008,安装
