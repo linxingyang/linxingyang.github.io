@@ -1,7 +1,7 @@
 ---
 layout: post
 permalink: /:year/0a4926e9dd684d038e9b9fb5cc22c326
-title: codeblock中文乱码
+title: 2014-03-06-codeblock中文乱码
 categories: [软件]
 tags: [codeblock,软件错误]
 excerpt: codeblock中文乱码

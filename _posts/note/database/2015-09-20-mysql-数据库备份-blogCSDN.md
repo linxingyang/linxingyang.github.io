@@ -1,9 +1,9 @@
 ---
 layout: post
 permalink: /:year/d82539d76f8245f4b9fd25494dfeb872
-title: mysql数据库备份（备份 data文件夹）
+title: 2015-09-20-mysql数据库备份（备份 data文件夹）
 categories: [数据库]
-tags: [sql,mysql,备份,mysql数据库备份]
+tags: [mysql,备份,mysql数据库备份]
 excerpt: sql,mysql,备份,mysql数据库备份
 description: sql,mysql,备份,mysql数据库备份
 ---
@@ -24,14 +24,14 @@ description: sql,mysql,备份,mysql数据库备份
 * data 文件夹中就是数据库中的数据
 * my.ini 是配置文件
 
-![http://note.youdao.com/yws/public/resource/744235b40c5391940db2eaf218a9c1be/xmlnote/3EF05C59F93A47F885DC88F40633AD9F/59643](http://note.youdao.com/yws/public/resource/744235b40c5391940db2eaf218a9c1be/xmlnote/3EF05C59F93A47F885DC88F40633AD9F/59643)
+![http://oyqsej5zi.bkt.clouddn.com/image/note/2015-09-20-mysql/01.png](http://oyqsej5zi.bkt.clouddn.com/image/note/2015-09-20-mysql/01.png)
 
 # 2 #
 打开my.in ，其中  datadir指示的是数据的目录。
 
 可以通过更改该路径切换数据库。。。
 
-![http://note.youdao.com/yws/public/resource/744235b40c5391940db2eaf218a9c1be/xmlnote/7262BA5692B343D29B7F93116560A326/59644](http://note.youdao.com/yws/public/resource/744235b40c5391940db2eaf218a9c1be/xmlnote/7262BA5692B343D29B7F93116560A326/59644)
+![http://oyqsej5zi.bkt.clouddn.com/image/note/2015-09-20-mysql/02.png](http://oyqsej5zi.bkt.clouddn.com/image/note/2015-09-20-mysql/02.png)
 
 
 # 3 #

@@ -1,8 +1,11 @@
 ---
-title: /:year/f75c2b092de84ce887ed74e79f73fbed
+title: ohoh这是主页
 layout: post
 date: 2017-09-07
 ---
 
+林兴洋的博客
 
-这是一个空白页
+![http://oyqsej5zi.bkt.clouddn.com/image/note/2017-11-07-blogimage/01.jpg](http://oyqsej5zi.bkt.clouddn.com/image/note/2017-11-07-blogimage/01.jpg)
+
+

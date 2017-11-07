@@ -1,16 +1,14 @@
 ---
 layout: post
 permalink: /:year/a000318540b7457fa23cc20a3acdfcb6
-title: sqlserverSSIS的问题
-categories: [数据库]
+title: 2014-03-24-sqlserverSSIS的问题
+categories: [问题解决]
 tags: [sqlserver2008,错误,SSIS]
 excerpt: sqlserver2008,错误,SSIS
 description: sqlserver2008,错误,SSIS
 ---
 
 [TOC]
-
----
 
 ETL实验的时候碰到的问题
 
@@ -22,20 +20,18 @@ ETL实验的时候碰到的问题
 下载了一个  SqlServer2008R2，安装的时候，勾选了那个服务，安装完后就有了
 或者也可以直接往SqlServer2008添加功能
 
-![http://note.youdao.com/yws/public/resource/6c342a9fb920ad4cb9b99b3194a15895/xmlnote/A4ED3B85E8B74D398D3FE42D4B5FD5B1/60009](http://note.youdao.com/yws/public/resource/6c342a9fb920ad4cb9b99b3194a15895/xmlnote/A4ED3B85E8B74D398D3FE42D4B5FD5B1/60009)
+![http://oyqsej5zi.bkt.clouddn.com/image/note/2014-03-24-sqlserver/01.png](http://oyqsej5zi.bkt.clouddn.com/image/note/2014-03-24-sqlserver/01.png)
 
-![http://note.youdao.com/yws/public/resource/6c342a9fb920ad4cb9b99b3194a15895/xmlnote/740DEDF12E6E4922B47BAC4839202CE2/60008](http://note.youdao.com/yws/public/resource/6c342a9fb920ad4cb9b99b3194a15895/xmlnote/740DEDF12E6E4922B47BAC4839202CE2/60008)
+![http://oyqsej5zi.bkt.clouddn.com/image/note/2014-03-24-sqlserver/02.png](http://oyqsej5zi.bkt.clouddn.com/image/note/2014-03-24-sqlserver/02.png)
 
-![http://note.youdao.com/yws/public/resource/6c342a9fb920ad4cb9b99b3194a15895/xmlnote/1BEBF685CE574DC89F2C3BC10AFBC0AF/60006](http://note.youdao.com/yws/public/resource/6c342a9fb920ad4cb9b99b3194a15895/xmlnote/1BEBF685CE574DC89F2C3BC10AFBC0AF/60006)
-
+![http://oyqsej5zi.bkt.clouddn.com/image/note/2014-03-24-sqlserver/03.png](http://oyqsej5zi.bkt.clouddn.com/image/note/2014-03-24-sqlserver/03.png)
 
 ---
 ## 问题二：新建 Integration Services项目，点击确定后报错，无法保存包，加载类型库/DLL 出错 ##
 
-![http://note.youdao.com/yws/public/resource/6c342a9fb920ad4cb9b99b3194a15895/xmlnote/B4F0E53EB5E2499FA292E09AE0ECB452/60002](http://note.youdao.com/yws/public/resource/6c342a9fb920ad4cb9b99b3194a15895/xmlnote/B4F0E53EB5E2499FA292E09AE0ECB452/60002)
+![http://oyqsej5zi.bkt.clouddn.com/image/note/2014-03-24-sqlserver/04.png](http://oyqsej5zi.bkt.clouddn.com/image/note/2014-03-24-sqlserver/04.png)
 
-![http://note.youdao.com/yws/public/resource/6c342a9fb920ad4cb9b99b3194a15895/xmlnote/BFE6C95E71F84CC58EDA698E5F5EF2E2/60004](http://note.youdao.com/yws/public/resource/6c342a9fb920ad4cb9b99b3194a15895/xmlnote/BFE6C95E71F84CC58EDA698E5F5EF2E2/60004)
-
+![http://oyqsej5zi.bkt.clouddn.com/image/note/2014-03-24-sqlserver/05.png](http://oyqsej5zi.bkt.clouddn.com/image/note/2014-03-24-sqlserver/05.png)
 ### 解决方法 ###
 
 * 方法一:在 开始菜单-运行 中 依次输入并运行以下命令：
@@ -63,7 +59,7 @@ for %1 in (%windir%\system32\*.dll) do regsvr32.exe /s %1
 ---
 ## 问题三：进入项目后，发现SSIS包时打叉的（如图） ##
 
-![http://note.youdao.com/yws/public/resource/6c342a9fb920ad4cb9b99b3194a15895/xmlnote/BD3B1D3C799048B5ADF271997EE6E807/60003](http://note.youdao.com/yws/public/resource/6c342a9fb920ad4cb9b99b3194a15895/xmlnote/BD3B1D3C799048B5ADF271997EE6E807/60003)
+![http://oyqsej5zi.bkt.clouddn.com/image/note/2014-03-24-sqlserver/06.png](http://oyqsej5zi.bkt.clouddn.com/image/note/2014-03-24-sqlserver/06.png)
 
 ### 解决方法 ###
 
@@ -81,9 +77,10 @@ for %1 in (%windir%\system32\*.dll) do regsvr32.exe /s %1
 
 新建一个 Integration Services Project ，添加  数据流任务  控件后，点击保存，提示无法保存保存数据流工具，无法保存包。
 
-![http://note.youdao.com/yws/public/resource/6c342a9fb920ad4cb9b99b3194a15895/xmlnote/FFEFFACA7F5C47A88FFE665DDDCECE96/60005](http://note.youdao.com/yws/public/resource/6c342a9fb920ad4cb9b99b3194a15895/xmlnote/FFEFFACA7F5C47A88FFE665DDDCECE96/60005)
+![http://oyqsej5zi.bkt.clouddn.com/image/note/2014-03-24-sqlserver/07.png](http://oyqsej5zi.bkt.clouddn.com/image/note/2014-03-24-sqlserver/07.png)
 
-![http://note.youdao.com/yws/public/resource/6c342a9fb920ad4cb9b99b3194a15895/xmlnote/887370DD5CF7486888FC0F4899D82385/60007](http://note.youdao.com/yws/public/resource/6c342a9fb920ad4cb9b99b3194a15895/xmlnote/887370DD5CF7486888FC0F4899D82385/60007)
+![http://oyqsej5zi.bkt.clouddn.com/image/note/2014-03-24-sqlserver/08.png](http://oyqsej5zi.bkt.clouddn.com/image/note/2014-03-24-sqlserver/08.png)
+
 
 ### 解决方法 ###
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 permalink: /:year/8a9603c61757413992fba38c907efd5f
-title: codeblock无法运行
+title: 2014-01-01-codeblock无法运行
 categories: [软件]
 tags: [codeblock,软件错误]
 excerpt: coldeblock无法运行
