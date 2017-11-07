@@ -30,9 +30,11 @@ incremental: true # 应该类似调试模式？就是实时响应增加文件
 port:  4040 # 端口
 
 # 分享
-plugin-share-use: true	
+plugin-share-use: false	
 # gitment评论
-plugin-gitment-use: true 
+plugin-gitment-use: false
+# uyan评论
+plugin-uyan-use: true 
 # 不蒜子计数
 plugin-busuanzi-use: true 
 
