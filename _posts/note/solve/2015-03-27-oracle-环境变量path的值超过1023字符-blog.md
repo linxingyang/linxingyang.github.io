@@ -1,7 +1,7 @@
 ---
 layout: post
 permalink: /:year/8b072ff2a1da49c2be51643cab4d2a6f
-title: 2015-03-27-环境变量path的值超过1023字符，无法设置改值
+title: 2015-03-27-oracle-环境变量path的值超过1023字符，无法设置改值
 categories: [问题解决]
 tags: [数据库,oracle,软件安装,错误]
 excerpt: oracle,软件安装,错误

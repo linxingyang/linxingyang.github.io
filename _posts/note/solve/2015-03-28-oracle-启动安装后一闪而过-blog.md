@@ -1,7 +1,7 @@
 ---
 layout: post
 permalink: /:year/a57166ac481f42d49a831f17e2fffd5d
-title: 2015-03-28-oracle启动后一闪而过
+title: 2015-03-28-oracle-启动后一闪而过
 categories: [问题解决]
 tags: [oracle,错误,软件]
 excerpt: oracle,一闪而过

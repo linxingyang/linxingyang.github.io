@@ -1,7 +1,7 @@
 ---
 layout: post
 permalink: /:year/a000318540b7457fa23cc20a3acdfcb6
-title: 2014-03-24-sqlserverSSIS的问题
+title: 2014-03-24-sqlserver-SSIS问题
 categories: [问题解决]
 tags: [sqlserver2008,错误,SSIS]
 excerpt: sqlserver2008,错误,SSIS
@@ -9,6 +9,8 @@ description: sqlserver2008,错误,SSIS
 ---
 
 [TOC]
+
+---
 
 ETL实验的时候碰到的问题
 
