@@ -11,7 +11,8 @@ author: Alien Lin
 # Sidebar filter
 # Choose 'tag' or 'category' as filter in sidebar.
 filter: 'category'
-recent_num: 20
+# 最近文章数量
+recent_num: 30
 
 # Social account
 twitter: XingYangLin
@@ -21,9 +22,8 @@ github: linxingyang
 # linkedin: suyan0830
 
 # avatar and Favicon
-avatar: /assets/img/fd.jpg
-favicon: /assets/img/favicon.icon
-
+avatar: /assets/img/favicon.png # 头像
+favicon: /assets/img/favicon.png # 网站图标
 
 # 编译
 incremental: true # 应该类似调试模式？就是实时响应增加文件
@@ -39,16 +39,16 @@ plugin-uyan-use: true
 plugin-busuanzi-use: true 
 
 # google analytics config
-ga:
-  id: UA-54767140-1
-  url: alienlin.com
+# ga:
+  # id: UA-54767140-1
+  # url: alienlin.com
 
 # Build settings
-encoding:               utf-8  # 编码格式
+encoding: utf-8  # 编码格式
 permalink: /year/:title/ 
 markdown: kramdown
 highlighter: rouge
-mathjax: disabled
+mathjax: disabled # 数学公式暂时没用到
 sass:
   style: compressed
 
@@ -58,4 +58,3 @@ gems:
   # - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll-feed
-

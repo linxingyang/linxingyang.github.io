@@ -14,20 +14,12 @@ layout: default
 	<span class="post-meta-span visit" id="busuanzi_container_page_pv">
 	  文章总阅读量：<span id="busuanzi_value_page_pv"></span>次
 	</span>
-
   </div>
-
   <h1 class="post-title">{{ page.title }}</h1>
   {{ content }}
 </article>
-
 <div class="post-share">
   <div class="container">
-	<!--
-    <a href="https://twitter.com/share?url={{ page.url | prepend: site.baseurl | prepend: site.url }}&text={{ page.title }}" target="_blank" class="post-share-icon twitter"></a>
-    <a href="https://www.evernote.com/clip.action?url={{ page.url | prepend: site.baseurl | prepend: site.url }}&title={{ page.title }}" target="_blank" class="post-share-icon evernote"></a>
-    <a href="http://service.weibo.com/share/share.php?url={{ page.url | prepend: site.baseurl | prepend: site.url }}&title={{ page.title }}" target="_blank" class="post-share-icon weibo"></a>
-	--?
 	<!-- 分享插件 -->
 	{% if site.plugin-share-use %}
 		{% include share.html %}
@@ -38,8 +30,6 @@ layout: default
 	{% if site.plugin-gitment-use %}
 		{% include gitment.html %}
 	{% endif %}
-
-
     <!-- 友言评论插件 -->
     {% if site.plugin-uyan-use %} 
         {% include uyan.html %}

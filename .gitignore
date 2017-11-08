@@ -1,5 +1,5 @@
-_site
 .sass-cache
+_site
 _drafts/
 .DS_Store
 .idea/
@@ -7,4 +7,3 @@ Gemfile
 Gemfile.lock
 _posts/.MWebMetaData/
 .jekyll-metadata
-start
