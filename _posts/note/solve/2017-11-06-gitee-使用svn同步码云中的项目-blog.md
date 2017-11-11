@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/627df980b17e475bbed4027db194dc37
+permalink: /:year/4c2a681fcb4e4114be84d1f5a774f494
 title: 2017-11-06-gitee-使用svn同步码云中的项目
 categories: [问题解决]
 tags: [gitee,使用svn同步码云中的项目]
@@ -8,11 +8,6 @@ excerpt: gitee,使用svn同步码云中的项目
 description: gitee,使用svn同步码云中的项目
 ---
 
-* 创建码云账号 
-[https://gitee.com/](https://gitee.com/)
-
-* 加入我创建的组织（我拉你们进来也行，到时候账号告诉我）
-[https://gitee.com/organizations/ydmstudio](https://gitee.com/organizations/ydmstudio)
 
 * 下载个svn客户端并安装
 
