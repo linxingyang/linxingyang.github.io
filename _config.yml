@@ -1,42 +1,48 @@
-# Site settings
-title: 林兴洋的博客
+title: linxingyang's blog
 email: linxingy@foxmail.com
 description: > # this means to ignore newlines until "baseurl:"
 
 baseurl: "" # the subpath of your site, e.g. /blog/
 # url: http://yansu.org # the base hostname & protocol for your site
 rss_url: /pages/feed.xml
-author: Alien Lin
+author: linxingyang
+authorCN: 林兴洋
+ 
+motto: 凡事预则立不预则废
+introduce: 林兴洋的博客
+mysite: linxingyang.net/
 
 # Sidebar filter
 # Choose 'tag' or 'category' as filter in sidebar.
 filter: 'category'
-# 最近文章数量
+# recent articles show
 recent_num: 30
 
 # Social account
-twitter: XingYangLin
-# weibo: suyan0830
+# twitter: XingYangLin
+# weibo: 
 github: linxingyang
-# instagram: suyan0830
-# linkedin: suyan0830
+# instagram: 
+# linkedin: 
 
 # avatar and Favicon
-avatar: /assets/img/favicon.png # 头像
-favicon: /assets/img/favicon.png # 网站图标
+avatar: /assets/img/favicon.png 
+favicon: /assets/img/favicon.png 
 
-# 编译
-incremental: true # 应该类似调试模式？就是实时响应增加文件
-port:  4040 # 端口
+# build params
+incremental: true 
+port:  4040 
 
-# 分享
+# share plugin
 plugin-share-use: false	
-# gitment评论
+# gitment plugin
 plugin-gitment-use: false
-# uyan评论
-plugin-uyan-use: true 
-# 不蒜子计数
+# uyan plugin
+plugin-uyan-use: false 
+# counter plugin
 plugin-busuanzi-use: true 
+# changyan plugin
+plugin-changyan-use: true
 
 # google analytics config
 # ga:
@@ -44,11 +50,11 @@ plugin-busuanzi-use: true
   # url: alienlin.com
 
 # Build settings
-encoding: utf-8  # 编码格式
+encoding: utf-8  
 permalink: /year/:title/ 
 markdown: kramdown
 highlighter: rouge
-mathjax: disabled # 数学公式暂时没用到
+mathjax: disabled 
 sass:
   style: compressed
 

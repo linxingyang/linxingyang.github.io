@@ -1,21 +1,20 @@
 # linxingyang(AlienLin)'s blog
 
-##
-
+## about plugin
 * discard comment(gitment)  replace by uyan
 * comment(uyan)
-* counter 不蒜子计数
-* share(share.js) share plugin, stop using
-* toc(toc.js) Table Of Content目录
-	* scrollfix.js 使用到了这个插件
+* counter    : count website visit number
+* share(share.js)  : share plugin, stop using
+* toc(toc.js)  table of content plugin, it using the flowwing js file
+	* scrollfix.js �
 	* jq
 
-## 目录结构
+## about file
 * _includes
 * _layouts
 	* default.html 
 	* page.html
 	* post.html
-* _posts 所以文章放在这里
-* _config.yml 配置文件 
+* _posts : all all artical
+* _config.yml : config file 
 * README.md
