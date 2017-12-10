@@ -2,7 +2,7 @@
 layout: post
 permalink: /:year/0a4926e9dd684d038e9b9fb5cc22c326
 title: 2014-03-06-codeblock-中文乱码
-categories: [问题错误,codeblock]
+categories: [问题解决,codeblock]
 tags: [codeblock,问题解决,中文乱码]
 excerpt: codeblock,问题解决,中文乱码
 description: codeblock中文乱码
