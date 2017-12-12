@@ -34,7 +34,7 @@ incremental: true
 port:  4040 
 
 # share plugin
-plugin-share-use: false	
+plugin-share-use: true	
 # gitment plugin
 plugin-gitment-use: false
 # uyan plugin
