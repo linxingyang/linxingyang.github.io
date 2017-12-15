@@ -2,7 +2,7 @@
 layout: post
 permalink: /:year/8b072ff2a1da49c2be51444cab4d2aqw
 title: 2017-01-04-maven-eclipse中控制台中文乱码
-categories: [问题解决,eclise,maven]
+categories: [问题解决,eclipse,maven]
 tags: [问题解决,中文乱码,eclipse,maven]
 excerpt: 问题解决,中文乱码,eclipse,maven
 description: 解决maven test命令时console出现中文乱码乱码
