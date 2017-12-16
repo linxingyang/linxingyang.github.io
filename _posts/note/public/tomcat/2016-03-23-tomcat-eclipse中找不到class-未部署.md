@@ -1,9 +1,9 @@
 ---
 layout: post
 permalink: /:year/8b072ff2a1da49c2be51643cab4d2agg
-title: 2016-03-23-tomcat-myeclipse中找不到class-未部署
-categories: [问题解决,java,myeclipse,tomcat]
-tags: [问题解决,java,tomcat,myeclipse,未部署]
+title: 2016-03-23-tomcat-eclipse中找不到class-未部署
+categories: [问题解决,java,eclipse,tomcat]
+tags: [问题解决,java,tomcat,eclipse,未部署]
 excerpt: myeclipse,tomcat找不到class,未部署
 description: myeclipse,tomcat找不到class,未部署
 

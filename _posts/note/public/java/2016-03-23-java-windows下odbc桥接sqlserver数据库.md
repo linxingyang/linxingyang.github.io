@@ -2,7 +2,7 @@
 layout: post
 permalink: /:year/8b072ff2a1da49c2be51643cab4d2aee
 title: 2016-03-23-java-windows下odbc桥接sqlserver数据库
-categories: [问题解决,windows,odbc,sqlserver,java]
+categories: [问题解决,windows,sqlserver,java]
 tags: [java,windows,odbc,sqlserver,桥接,问题解决]
 excerpt: java,windows,odbc,sqlserver,桥接,问题解决
 description: windows下java通过odbc数据源桥接sqlserver数据库

@@ -2,7 +2,7 @@
 layout: post
 permalink: /:year/bb97ax6f894d42aaab09bc92c3785fcs
 title: 2015-03-25-java-windows下的bat文件快速运行编译java代码
-categories: [windows,bat,java]
+categories: [windows,java]
 tags: [windows,bat,java]
 excerpt: java-windows下的bat文件快速运行编译java代码
 description: java-windows下的bat文件快速运行编译java代码
