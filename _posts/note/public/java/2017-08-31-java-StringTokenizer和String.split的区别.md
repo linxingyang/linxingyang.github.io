@@ -41,6 +41,6 @@ public class StringAndStringTokenizer {
 
 从javadoc上看到：StringTokenizer的是一个被保留，是因为兼容性的原因，不鼓励使用在新的代码中。建议任何人都寻求这种功能使用split或java.util.regex包。
 
-转载：String.split和StringTokenizer的区别，String.Split（）使用正则表达式，而StringTokenizer的只是使用逐字分裂的字符。所以，如果我想更复杂的逻辑比单个字符（如\ r \ n分割）来标记一个字符串，可以不使用StringTokenizer，而用String.Split（） 。
+> 转载：String.split和StringTokenizer的区别，String.Split（）使用正则表达式，而StringTokenizer的只是使用逐字分裂的字符。所以，如果我想更复杂的逻辑比单个字符（如\ r \ n分割）来标记一个字符串，可以不使用StringTokenizer，而用String.Split（） 。
 
 
