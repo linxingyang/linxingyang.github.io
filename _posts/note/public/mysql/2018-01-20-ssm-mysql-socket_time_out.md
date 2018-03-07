@@ -2,7 +2,7 @@
 layout: post
 permalink: /:year/4c58xxvv202743b68622d47e6587b2d0
 title: 2018-01-20-ssm-mysql-socket_time_out
-categories: [问题解决,mysql,ssm]
+categories: [数据库,问题解决,mysql,ssm]
 tags: [问题解决,mysql,ssm,socket_time_out]
 excerpt:  问题解决,mysql,ssm,socket_time_out
 description: web项目中mysql报错socket_time_out
