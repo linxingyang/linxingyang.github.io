@@ -7,7 +7,9 @@
 {% endif %}
 
 {% if site.plugin-busuanzi-use %}
-    <script id="reloadjs1" type="text/javascript" src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div id="busuanzi">
+        <script id="reloadjs1" type="text/javascript" src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    </div>
 {% endif %}
 
 {% if site.plugin-uyan-use %}
@@ -15,16 +17,21 @@
 {% endif %}
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        // console.log("lxy 隐藏侧边栏");
-        $('#menu').click();
+    var busuanziJs = '<script id="reloadjs1" type="text/javascript" src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">&lt;/script>';
+    $(document).on("click", "#toc .toc-link", function() {
+        /* 关闭左侧侧边栏 */
+        $("#menu").click();
+        /* 移除不蒜子计数脚本 */
+        $("#busuanzi reloadjs1").remove();
+        setTimeout(function() {
+            /* 重新添加不蒜子脚本，这样才可以重新加载当前页的计数信息 */    
+            $("#busuanzi").html(busuanziJs);
+        }, 1000);
     });
-    // console.log("因为该框架本身是ajax请求文章的，但是我需要使用不蒜子计数，所以需要让页面重新。");
-    /*
-    $('#toc a.toc-link').off('click');
-    $('#toc a.toc-link').bind('click', function() {
-        location.reload();
-    }); */
+    $(document).ready(function() {
+        $("#menu").click();
+    });
+  
 </script>
 
 {% if site.ga %}

@@ -5,22 +5,21 @@ layout: default
     <div>
         <h3>{{ site.motto }}| {{ site.introduce }} </h3>
     </div>
+    <h1 class="post-title">{{ page.title }}</h1>
     <div class="post-meta">
-        <span class="post-meta-span date">{{ page.date | date:"%Y-%m-%d" }}</span>
-        {% if page.tags.size > 0 %}
-            <br>
-            <span class="post-meta-span tag">{{ page.tags | join: ', ' }}</span>
-        {% endif %}
-        <br>
-        <span class="post-meta-span count-word">文章字数：{{ page.content | number_of_words }}</span>
-        <br>
+        <span class="post-meta-span date">写于{{ page.date | date:"%Y-%m-%d" }}</span>        
+        <span class="post-meta-span count-word">共{{ page.content | number_of_words }}字</span>
         {% if site.plugin-busuanzi-use %}
             <span class="post-meta-span visit" id="busuanzi_container_page_pv">
-                文章总阅读量：<span id="busuanzi_value_page_pv"></span>次
+                <span id="busuanzi_value_page_pv"></span>次阅读
             </span>
         {% endif %}
+        <br>
+        {% if page.tags.size > 0 %}
+            <span class="post-meta-span tag">{{ page.tags | join: ', ' }}</span>
+        {% endif %}
     </div>
-    <h1 class="post-title">{{ page.title }}</h1>
+    <br/><br/>
     {{ content }}
 </article>
 <div class="post-share">
