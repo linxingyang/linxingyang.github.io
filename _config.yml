@@ -16,7 +16,7 @@ mysite: linxingyang.net/
 # Choose 'tag' or 'category' as filter in sidebar.
 filter: 'category'
 # recent articles show
-recent_num: 30
+recent_num: 10
 
 # Social account
 # twitter: XingYangLin
@@ -26,8 +26,8 @@ github: linxingyang
 # linkedin: 
 
 # avatar and Favicon
-avatar: /assets/img/favicon.png 
-favicon: /assets/img/favicon.png 
+avatar: /assets/img/fd.jpg
+favicon: /assets/img/fd.jpg
 
 # build params
 incremental: true 
