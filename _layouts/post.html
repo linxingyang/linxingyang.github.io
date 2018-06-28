@@ -9,11 +9,16 @@ layout: default
     <div class="post-meta">
         <span class="post-meta-span date">写于{{ page.date | date:"%Y-%m-%d" }}</span>        
         <span class="post-meta-span count-word">共{{ page.content | number_of_words }}字</span>
+        
+        <!-- 不蒜子 每篇文章的阅读数放在post中即可 -->
         {% if site.plugin-busuanzi-use %}
+            <!-- pv的方式，单个用户点击1篇文章，本篇文章记录1次阅读量。 -->
             <span class="post-meta-span visit" id="busuanzi_container_page_pv">
                 <span id="busuanzi_value_page_pv"></span>次阅读
             </span>
         {% endif %}
+        <!-- 不蒜子 -->
+        
         <br>
         {% if page.tags.size > 0 %}
             <span class="post-meta-span tag">{{ page.tags | join: ', ' }}</span>
@@ -24,44 +29,51 @@ layout: default
 </article>
 <div class="post-share">
     <div class="container">
-        <!-- 分享插件 -->
+    
+        <!-- 分享 -->
         {% if site.plugin-share-use %}
-            {% include share.html %}
+            <div id="share">
+                <div class="social-share"></div>
+                <link rel="stylesheet" href="{{ site.baseurl }}/assets/share/css/share.min.css">
+                <script src="{{ site.baseurl }}/assets/share/js/jquery.share.min.js"></script>
+            </div>
         {% endif %}
+        <!-- 分享 -->
         <hr>
         <br>
         
-        <!-- 评论插件 -->
+        <!-- gitment评论插件 -->
         {% if site.plugin-gitment-use %}
-            {% include gitment.html %}
-        {% endif %}
-        
-        <!-- 友言评论插件 -->
-        {% if site.plugin-uyan-use %} 
-            {% include uyan.html %}
+            <div id="comments"></div>
+            <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+            <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    var gitment = new Gitment({
+                        id: window.location.pathname, 
+                        owner: 'linxingyang',
+                        repo: 'linxingyang.github.io',
+                        oauth: {
+                            client_id: '0fc522c9251a7ee6252a',
+                            client_secret: '71d776d309d064510f9f34ed727b5762100878f2',
+                        },
+                    });
+                    gitment.render('comments');
+                });
+            </script>
         {% endif %}
         
         <!-- 畅言评论插件 -->
         {% if site.plugin-changyan-use %} 
-            <div id="SOHUCS" ></div>
-            <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+            <div id="SOHUCS"></div>
+            <script id="changyanJs" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
             <script type="text/javascript">
                 window.changyan.api.config({
                     appid: 'cytj7BvLE',
                     conf: 'prod_3cdadfa04be49f84275422418066f6c4'
                 });
-            </script>
+            </script> 
         {% endif %}
         
-        <!-- disqus评论 -->
-        <!--
-            {% if site.disqus.shortname %}
-            <div class="comment container">
-                <div id="disqus_thread">
-                </div>
-            </div>
-            {% endif %}
-        -->
     </div>
 </div>
-

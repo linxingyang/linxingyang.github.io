@@ -12,7 +12,7 @@ description: typescript中引入jquery插件
 
 命令行输入：
 
-```nodejs
+```typescript
 
 
 // typescript2.0+推荐使用这种。

@@ -6,30 +6,51 @@
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 {% endif %}
 
+
+<!-- 不蒜子 脚本 -->
 {% if site.plugin-busuanzi-use %}
     <div id="busuanzi">
         <script id="reloadjs1" type="text/javascript" src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <script type="text/javascript">
+            function reloadBSZ() {
+                console.log("reloadBSZ");
+                var busuanziJs = '<script id="reloadjs1" type="text/javascript" src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">&lt;/script>';
+                $("#busuanzi #reloadjs1").remove();
+                setTimeout(function() {
+                    /* 重新添加不蒜子脚本，这样才可以重新加载当前页的计数信息 */    
+                    $("#busuanzi").append(busuanziJs);
+                }, 1000);
+            }
+        </script>
     </div>
 {% endif %}
-
-{% if site.plugin-uyan-use %}
-    <script id="reloadjs2" type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2148259"></script>
-{% endif %}
+<!-- 不蒜子 -->
 
 <script type="text/javascript">
-    var busuanziJs = '<script id="reloadjs1" type="text/javascript" src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">&lt;/script>';
+    
+    var changyanJs = '<script id="changyanJs" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js">&lt;/script>';
     $(document).on("click", "#toc .toc-link", function() {
         /* 关闭左侧侧边栏 */
-        $("#menu").click();
-        /* 移除不蒜子计数脚本 */
-        $("#busuanzi reloadjs1").remove();
-        setTimeout(function() {
-            /* 重新添加不蒜子脚本，这样才可以重新加载当前页的计数信息 */    
-            $("#busuanzi").html(busuanziJs);
-        }, 1000);
+        $("#menu").click(); 
+        
+        /* 默认展开TOC */
+        var interval = setInterval(function() {
+            if (0 != $("#post-toc-menu").length) {
+                if (!$("#post-toc").hasClass("open")) {
+                    $("#post-toc-menu").click();
+                }           
+                clearInterval(interval);
+            }
+        }, 100);
+        
+        /* 重新加载不蒜子计数脚本 */
+        reloadBSZ();
+        /* 刷新畅言脚本没有用，需要刷新页面才行 */
+        
     });
     $(document).ready(function() {
         $("#menu").click();
+        $("#post-toc-menu").click(); 
     });
   
 </script>
