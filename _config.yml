@@ -16,7 +16,7 @@ mysite: linxingyang.net/
 # Choose 'tag' or 'category' as filter in sidebar.
 filter: 'category'
 # recent articles show
-recent_num: 10
+recent_num: 15
 
 # Social account
 # twitter: XingYangLin
