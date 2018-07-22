@@ -1,5 +1,8 @@
 # LinXingYang's Space 
  
+[LinXingYang's Space](http://www.linxingyang.net)
+
+
 modify from [Hux blog Template](http://huxpro.github.io)。
 
 if you need more infomation about this template please visit the prevous link, it's a detailed article。
