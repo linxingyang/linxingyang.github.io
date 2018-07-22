@@ -1,0 +1,74 @@
+---
+layout: page
+title: 日常~说说
+description: "大白天做了个梦~"
+header-img: "img/about-bg.jpg"
+multilingual: false
+---
+
+
+<div class="zh post-container">
+    {% capture about_zh %}{% include talks/2018/2018-07-18-talks.md %}{% endcapture %}
+    {{ about_zh | markdownify | truncate:300}}
+    <ul class="pager">
+        <li class="next">
+            <a href="{{ "/talks/2018/2018-07-18-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
+        </li>
+    </ul>
+    <hr>
+
+    <!--
+    {% capture about_zh %}{% include talks/2018/2018-07-18-talks.md %}{% endcapture %}
+    {{ about_zh | markdownify | truncate:300}}
+    <ul class="pager">
+        <li class="next">
+            <a href="{{ "/talks/2018/2018-07-18-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
+        </li>
+    </ul>
+    <hr>
+    -->
+    <!--
+    <ul class="pager">
+        <li class="next">
+            <a href="{{ "/talks/pager/2018/2018-07-21-page" | prepend: site.baseurl}}">下一页 &rarr;</a>
+        </li>
+    </ul>-->
+</div>
+
+{% if site.disqus_username %}
+    <!-- disqus 评论框 start -->
+    <div class="comment">
+        <div id="disqus_thread" class="disqus-thread">
+
+        </div>
+    </div>
+    <!-- disqus 评论框 end -->
+
+    <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES * * */
+        var disqus_shortname = "{{site.disqus_username}}";
+        var disqus_identifier = "{{site.disqus_username}}/{{page.url}}";
+        var disqus_url = "{{site.url}}{{page.url}}";
+
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <!-- disqus 公共JS代码 end -->
+{% endif %}
+
+
+<!-- 畅言评论插件 -->
+{% if site.plugin-changyan-use %}
+    <div id="SOHUCS"></div>
+    <script id="changyanJs" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+    <script type="text/javascript">
+        window.changyan.api.config({
+            appid: 'cytj7BvLE',
+            conf: 'prod_3cdadfa04be49f84275422418066f6c4'
+        });
+    </script>
+{% endif %}

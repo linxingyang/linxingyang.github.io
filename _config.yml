@@ -1,66 +1,131 @@
-title: 林兴洋的博客
+# Site settings
+title: 林兴洋的空间站
+SEOTitle: 林兴洋的空间站 | linxingyang
+header-img: img/home/home-bg.jpg
 email: linxingy@foxmail.com
-description: > # this means to ignore newlines until "baseurl:"
+description: "林兴洋, 林兴洋的主页, 林兴洋的博客, 林兴洋的简历, 个人网站, 博客, 说说, Java, 简历"
+keyword: "林兴洋, 林兴洋的主页, 林兴洋的博客, 林兴洋的简历, 个人网站, 博客, 说说, Java, 简历"
+url: "http://linxingyang.net"              # your host, for absolute URL
+baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
-baseurl: "" # the subpath of your site, e.g. /blog/
-# url: http://yansu.org # the base hostname & protocol for your site
-rss_url: /pages/feed.xml
-author: linxingyang
-authorCN: 林兴洋
- 
-motto: 凡事预则立不预则废
-introduce: 林兴洋的博客
-mysite: linxingyang.net/
+# Publish posts or collection documents with a future date.
+future: true
 
-# Sidebar filter
-# Choose 'tag' or 'category' as filter in sidebar.
-filter: 'category'
-# recent articles show
-recent_num: 15
+# SNS settings
+RSS: true
+# weibo_username:     huxpro
+# zhihu_username:     huxpro
+github_username:    linxingyang
+# twitter_username:   huxpro
+#facebook_username:  huxpro
+#linkedin_username:  firstname-lastname-idxxxx
 
-# Social account
-# twitter: XingYangLin
-# weibo: 
-github: linxingyang
-# instagram: 
-# linkedin: 
 
-# avatar and Favicon
-avatar: /assets/img/fd.jpg
-favicon: /assets/img/fd.jpg
-
-# build params
-incremental: true 
-port:  4040 
-
-# share plugin
-plugin-share-use: true	
-# gitment plugin
-plugin-gitment-use: false
-# uyan plugin
-plugin-uyan-use: false 
-# counter plugin
-plugin-busuanzi-use: true 
-# changyan plugin
-plugin-changyan-use: true
-
-# google analytics config
-# ga:
-  # id: UA-54767140-1
-  # url: alienlin.com
 
 # Build settings
-encoding: utf-8  
-permalink: /year/:title/ 
-markdown: kramdown
+# from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
 highlighter: rouge
-mathjax: disabled 
-sass:
-  style: compressed
+permalink: pretty
+paginate: 10
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md"]
+anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
+# If you have timezone issue (e.g. #68) in China, uncomment to use this:
+#timezone: CN  
 
-# Jekyll Plugin
-# https://help.github.com/articles/adding-jekyll-plugins-to-a-github-pages-site/
-gems:
-  # - jekyll-sitemap
-  - jekyll-seo-tag
-  - jekyll-feed
+
+
+# Gems
+# from PR#40, to support local preview for Jekyll 3.0
+# make sure you have this gem installed
+# `$ gem install jekyll-paginate`
+plugins: [jekyll-paginate]
+
+catalog: true
+
+# Markdown settings
+# replace redcarpet to kramdown,
+# although redcarpet can auto highlight code, the lack of header-id make the catalog impossible, so I switch to kramdown
+# document: http://jekyllrb.com/docs/configuration/#kramdown
+markdown: kramdown
+kramdown:
+  input: GFM                            # use Github Flavored Markdown !important
+
+
+
+# Disqus settings
+# disqus_username: hux
+
+# Netease settings
+# netease_comment: false
+
+# 畅言
+plugin-changyan-use: true
+plugin-busuanzi-use: true
+
+# Analytics settings
+# Baidu Analytics 
+# ba_track_id: [your track id]
+
+# Google Analytics
+# ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
+# ga_domain: huangxuan.me
+
+
+
+# Sidebar settings
+sidebar: true                           # whether or not using Sidebar.
+sidebar-about-description: "Java开发、开源爱好者"
+sidebar-avatar: /img/fd.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+
+
+
+# Featured Tags
+featured-tags: true                     # whether or not using Feature-Tags
+featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
+
+
+
+# Progressive Web Apps
+chrome-tab-theme-color: "#000000"
+service-worker: true
+
+
+
+# Friends
+
+friends: [
+    {
+    #     title: "Su",
+    #     href: "http://su.gallery/"
+    # },{
+        title: "乱序",
+        href: "http://mida.re/"
+    },{
+        title: "前端外刊评论",
+        href: "http://qianduan.guru/"
+    },{
+        title: "天镶的博客",
+        href: "http://lingyu.wang/"
+    },{
+        title: "Luke 的自留地",
+        href: "http://hmqk1995.github.io"
+    },{
+        title: "Ebn's Blog",
+        href: "http://ebnbin.com/"
+    },{
+        title: "SmdCn's Blog",
+        href: "http://blog.smdcn.net"
+    },{
+        title: "David's Game",
+        href: "https://www.ruoyaowu.com/"
+    },{
+        title: "DHong Say",
+        href: "http://dhong.co"
+    },{
+        title: "尹峰以为",
+        href: "http://ingf.github.io/"
+    },{
+        title: "解旻的博客",
+        href: "http://xieminis.me/"
+    }
+]

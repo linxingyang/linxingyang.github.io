@@ -1,9 +1,7 @@
-.sass-cache
 _site
-_drafts/
+node_modules
+npm-debug.log
 .DS_Store
-.idea/
-Gemfile
-Gemfile.lock
-_posts/.MWebMetaData/
-.jekyll-metadata
+*/.DS_Store
+*/*/.DS_Store
+*.sh
