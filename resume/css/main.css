@@ -336,6 +336,13 @@ h2.resp-accordion:first-child {
     .resp-vtabs .resp-tabs-container {
         margin-left: 0 !important;
     }
+    #profile_desc  br {
+        display: none;
+    }
+    #profile_desc  p.p-first{
+        display: none;
+    }
+    
     ul.about li span.value {
         margin-right: 30px;
     }
@@ -1137,6 +1144,17 @@ ul.about {
     #profile_desc {
         border-bottom: 0 !important;
     }
+    .resp-vtabs .resp-tabs-container { 
+        /* width:89%;  lxyÐÞ¸Ä*/
+        width:100%; 
+    }
+    #profile_desc  br {
+        display: none;
+    }
+    #profile_desc  p.p-first{
+        display: none;
+    }
+
 }
 
 /*--------------------------------------------------
@@ -2554,10 +2572,9 @@ ul.info-post li {
 
 
 @media screen and (min-width:850px) and (max-width: 1200px)  { 
-    .resp-vtabs .resp-tabs-container { 
-        width:89%; 
-    }
 }
+
+
 
 @media screen and (max-width: 1200px) {
 

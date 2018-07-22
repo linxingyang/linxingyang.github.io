@@ -19,6 +19,7 @@
                     <li>
                         <a href="{{ site.baseurl }}/">主页</a>
                     </li>
+
                     <!-- 林兴洋备注：恩，要注意的就是这里，如果一个page是有title的
                         那么它的title就会被加载到页面顶端
                     -->
@@ -29,6 +30,9 @@
                             </li>
                         {% endif %}
                     {% endfor %}
+                    <li>
+                        <a target="_blank" href="{{'/resume/' | prepend: site.baseurl }}">简历</a>
+                    </li>
                 </ul>
             </div>
         </div>
