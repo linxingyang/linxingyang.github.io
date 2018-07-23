@@ -39,7 +39,8 @@ layout: default
                     <div class="tags">
         				{% for tag in site.tags %}
                             {% if tag[1].size > site.featured-condition-size %}
-                				<a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
+                				<a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}"
+                                    rel="{{ tag[1].size }}">
                                     {{ tag[0] }}
                                 </a>
                             {% endif %}
@@ -95,10 +96,10 @@ layout: default
                             {% if site.email %}
                                 <li>
                                     <a href="mailto:{{ site.email}}">
-                                    <span class="fa-stack fa-lg">
-                                                <i class="fa fa-circle fa-stack-2x"></i>
-                                                <i class="fa fa-envelope-o fa-fw fa-stack-1x fa-inverse"></i>
-                                            </span>
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-envelope-o fa-fw fa-stack-1x fa-inverse"></i>
+                                        </span>
                                     </a>
                                 </li>
                             {% endif %}
@@ -182,7 +183,8 @@ layout: default
                         <h5><a href="{{'/categories/' | prepend: site.baseurl }}">所有分类</a></h5>
                         <div class="tags">
                             {% for category in site.categories %}
-                                <a href="{{ site.baseurl }}/categories/#{{ category[0] }}" title="{{ category[0] }}" rel="{{ category[1].size }}">
+                                <a href="{{ site.baseurl }}/categories/#{{ category[0] }}" title="{{ category[0] }}"
+                                    rel="{{ category[1].size }}">
                                     {{ category[0] }} ({{ category[1].size }})
                                 </a>
                             {% endfor %}
@@ -198,7 +200,8 @@ layout: default
                         <div class="tags">
                             {% for tag in site.tags %}
                                 {% if tag[1].size > site.featured-condition-size %}
-                                    <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
+                                    <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}"
+                                        rel="{{ tag[1].size }}">
                                         {{ tag[0] }}({{ tag[1].size }})
                                     </a>
                                 {% endif %}

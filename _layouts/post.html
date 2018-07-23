@@ -78,15 +78,16 @@ layout: default
                         <option value="0" selected> 中文 Chinese </option>
                         <option value="1"> 英文 English </option>
                     </select>
-                    {% endif %}
+                {% endif %}
 
-				    {{ content }}
+                {{ content }}
                 <hr style="visibility: hidden;">
 
                 <ul class="pager">
                     {% if page.previous.url %}
                         <li class="previous">
-                            <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">
+                            <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}"
+                                data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">
                                 更早的文章<br>
                             <span>{{page.previous.title}}</span>
                             </a>
@@ -94,7 +95,8 @@ layout: default
                     {% endif %}
                     {% if page.next.url %}
                         <li class="next">
-                            <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">
+                            <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}"
+                                data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">
                                 更新的文章<br>
                             <span>{{page.next.title}}</span>
                             </a>
@@ -117,14 +119,7 @@ layout: default
 
                 <!-- 畅言评论插件 -->
                 {% if site.plugin-changyan-use %}
-                    <div id="SOHUCS"></div>
-                    <script id="changyanJs" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
-                    <script type="text/javascript">
-                        window.changyan.api.config({
-                            appid: 'cytj7BvLE',
-                            conf: 'prod_3cdadfa04be49f84275422418066f6c4'
-                        });
-                    </script>
+                    {% include plugins/changyan.html %}
                 {% endif %}
             </div>  
 
@@ -150,7 +145,6 @@ layout: default
                 col-lg-8 col-lg-offset-2
                 col-md-10 col-md-offset-1
                 sidebar-container">
-
                 <!-- Featured Tags -->
                 {% if site.featured-tags %}
                     <section>

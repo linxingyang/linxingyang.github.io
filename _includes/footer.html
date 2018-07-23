@@ -7,10 +7,10 @@
                     {% if site.email %}
                         <li>
                             <a href="mailto:{{ site.email}}">
-                                        <span class="fa-stack fa-lg">
-                                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                                    <i class="fa fa-envelope-o fa-fw fa-stack-1x fa-inverse"></i>
-                                                </span>
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-envelope-o fa-fw fa-stack-1x fa-inverse"></i>
+                                </span>
                             </a>
                         </li>
                     {% endif %}
@@ -98,7 +98,7 @@
                         </span>
                         <br>
                         <span id="busuanzi_container_page_pv">
-                          本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+                          本页面访问量<span id="busuanzi_value_page_pv"></span>次
                         </span>
                         <br>
                     {% endif %}
@@ -121,7 +121,8 @@
 <!-- 不蒜子 脚本 -->
 {% if site.plugin-busuanzi-use %}
     <div id="busuanzi">
-        <script id="reloadjs1" type="text/javascript" src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <script id="reloadjs1" type="text/javascript" src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+        </script>
     </div>
 {% endif %}
 <!-- 不蒜子 -->
