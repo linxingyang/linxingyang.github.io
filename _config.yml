@@ -60,7 +60,10 @@ kramdown:
 
 # 畅言
 plugin-changyan-use: true
+# 不蒜子
 plugin-busuanzi-use: true
+# disqus
+plugin-disqus-use: false
 
 # Analytics settings
 # Baidu Analytics 
