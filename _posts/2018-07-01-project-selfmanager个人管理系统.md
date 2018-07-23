@@ -6,7 +6,7 @@ categories: [project]
 tags: [project,个人管理系统,selfmanager]
 excerpt:  project,个人管理系统,selfmanager
 description: selfmanager个人管理系统
-
+header-img: "img/post/bg-cup.jpg"
 ---
 
 
