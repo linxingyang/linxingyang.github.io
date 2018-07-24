@@ -16,11 +16,29 @@ multilingual: false
     </ul>
     <hr>
 
+    {% capture talks8 %}{% include talks/2018/2018-06-25-talks.md %}{% endcapture %}
+    {{ talks8 | markdownify | truncate:300}}
+    <ul class="pager">
+        <li class="next">
+            <a href="{{ "/talks/2018/2018-06-25-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
+        </li>
+    </ul>
+    <hr>
+
     {% capture talks5 %}{% include talks/2018/2018-05-16-talks.md %}{% endcapture %}
     {{ talks5 | markdownify | truncate:258}}
     <ul class="pager">
         <li class="next">
             <a href="{{ "/talks/2018/2018-05-16-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
+        </li>
+    </ul>
+    <hr>
+
+    {% capture talks7 %}{% include talks/2018/2018-05-07-talks.md %}{% endcapture %}
+    {{ talks7 | markdownify | truncate:258}}
+    <ul class="pager">
+        <li class="next">
+            <a href="{{ "/talks/2018/2018-05-07-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
         </li>
     </ul>
     <hr>

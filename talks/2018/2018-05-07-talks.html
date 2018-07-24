@@ -1,0 +1,19 @@
+---
+layout: page 
+description: 李白《黄鹤楼送孟浩然之广陵》<br/>故人西辞黄鹤楼，烟花三月下扬州。<br/>孤帆远影碧空尽，唯见长江天际流。<br/>
+header-img: "img/talks/bg-nightlight.jpg"
+multilingual: false
+---
+
+<div class="zh post-container">
+    {% capture talks %}{% include talks/2018/2018-05-07-talks.md %}{% endcapture %}
+    {{ talks | markdownify}}
+</div>
+
+{% if site.plugin-changyan-use %}
+    {% include plugins/changyan.html %}
+{% endif %}
+
+{% if site.plugin-disqus-use %}
+    {% include plugins/disqus.html %}
+{% endif %}
