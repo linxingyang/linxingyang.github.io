@@ -6,7 +6,6 @@ header-img: "img/home/bg-talks.jpg"
 multilingual: false
 ---
 
-
 <div class="zh post-container">
     {% capture talks1 %}{% include talks/2018/2018-07-18-talks.md %}{% endcapture %}
     {{ talks1 | markdownify | truncate:300}}
@@ -16,7 +15,25 @@ multilingual: false
         </li>
     </ul>
     <hr>
-    
+
+    {% capture talks5 %}{% include talks/2018/2018-05-16-talks.md %}{% endcapture %}
+    {{ talks5 | markdownify | truncate:258}}
+    <ul class="pager">
+        <li class="next">
+            <a href="{{ "/talks/2018/2018-05-16-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
+        </li>
+    </ul>
+    <hr>
+
+    {% capture talks6 %}{% include talks/2017/2017-10-12-talks.md %}{% endcapture %}
+    {{ talks6 | markdownify | truncate:200}}
+    <ul class="pager">
+        <li class="next">
+            <a href="{{ "/talks/2017/2017-10-12-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
+        </li>
+    </ul>
+    <hr>
+
     {% capture talks2 %}{% include talks/2017/2017-08-19-talks.md %}{% endcapture %}
     {{ talks2 | markdownify | truncate:300}}
     <ul class="pager">
@@ -25,7 +42,7 @@ multilingual: false
         </li>
     </ul>
     <hr>
-    
+
     {% capture talks3 %}{% include talks/2017/2017-07-06-talks.md %}{% endcapture %}
     {{ talks3 | markdownify | truncate:227}}
     <ul class="pager">
