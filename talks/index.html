@@ -34,6 +34,15 @@ multilingual: false
         </li>
     </ul>
     <hr>
+    
+    {% capture talks4 %}{% include talks/2017/2017-02-12-talks.md %}{% endcapture %}
+    {{ talks4 | markdownify | truncate:227}}
+    <ul class="pager">
+        <li class="next">
+            <a href="{{ "/talks/2017/2017-02-12-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
+        </li>
+    </ul>
+    <hr>
     <!--
     <ul class="pager">
         <li class="next">
