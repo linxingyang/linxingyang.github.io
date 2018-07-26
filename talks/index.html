@@ -7,6 +7,15 @@ multilingual: false
 ---
 
 <div class="zh post-container">
+    {% capture talks11 %}{% include talks/2018/2018-07-26-talks.md %}{% endcapture %}
+    {{ talks11 | markdownify | truncate:300}}
+    <ul class="pager">
+        <li class="next">
+            <a href="{{ "/talks/2018/2018-07-26-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
+        </li>
+    </ul>
+    <hr>
+
     {% capture talks1 %}{% include talks/2018/2018-07-18-talks.md %}{% endcapture %}
     {{ talks1 | markdownify | truncate:300}}
     <ul class="pager">
@@ -89,21 +98,11 @@ multilingual: false
     </ul>
     <hr>
 
-    {% capture talks10 %}{% include talks/2016/2016-12-28-talks.md %}{% endcapture %}
-    {{ talks10 | markdownify | truncate:238}}
-    <ul class="pager">
-        <li class="next">
-            <a href="{{ "/talks/2016/2016-12-28-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
-        </li>
-    </ul>
-    <hr>
-
-    <!--
     <ul class="pager">
         <li class="next">
             <a href="{{ "/talks/pager/2018/2018-07-21-page" | prepend: site.baseurl}}">下一页 &rarr;</a>
         </li>
-    </ul>-->
+    </ul>
 </div>
 
 {% if site.plugin-changyan-use %}
