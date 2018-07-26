@@ -43,6 +43,16 @@ multilingual: false
     </ul>
     <hr>
 
+
+    {% capture talks9 %}{% include talks/2018/2018-04-01-talks.md %}{% endcapture %}
+    {{ talks9 | markdownify | truncate:300}}
+    <ul class="pager">
+        <li class="next">
+            <a href="{{ "/talks/2018/2018-04-01-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
+        </li>
+    </ul>
+    <hr>
+
     {% capture talks6 %}{% include talks/2017/2017-10-12-talks.md %}{% endcapture %}
     {{ talks6 | markdownify | truncate:200}}
     <ul class="pager">
@@ -78,6 +88,16 @@ multilingual: false
         </li>
     </ul>
     <hr>
+
+    {% capture talks10 %}{% include talks/2016/2016-12-28-talks.md %}{% endcapture %}
+    {{ talks10 | markdownify | truncate:238}}
+    <ul class="pager">
+        <li class="next">
+            <a href="{{ "/talks/2016/2016-12-28-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
+        </li>
+    </ul>
+    <hr>
+
     <!--
     <ul class="pager">
         <li class="next">
