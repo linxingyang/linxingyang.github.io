@@ -7,6 +7,15 @@ multilingual: false
 ---
 
 <div class="zh post-container">
+    {% capture talks12 %}{% include talks/2018/2018-07-27-talks.md %}{% endcapture %}
+    {{ talks12 | markdownify | truncate:300}}
+    <ul class="pager">
+        <li class="next">
+            <a href="{{ "/talks/2018/2018-07-27-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
+        </li>
+    </ul>
+    <hr>
+
     {% capture talks11 %}{% include talks/2018/2018-07-26-talks.md %}{% endcapture %}
     {{ talks11 | markdownify | truncate:300}}
     <ul class="pager">
@@ -52,6 +61,14 @@ multilingual: false
     </ul>
     <hr>
 
+    {% capture talks13 %}{% include talks/2018/2018-05-06-talks.md %}{% endcapture %}
+    {{ talks13 | markdownify | truncate:300}}
+    <ul class="pager">
+        <li class="next">
+            <a href="{{ "/talks/2018/2018-05-06-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
+        </li>
+    </ul>
+    <hr>
 
     {% capture talks9 %}{% include talks/2018/2018-04-01-talks.md %}{% endcapture %}
     {{ talks9 | markdownify | truncate:300}}
@@ -76,24 +93,6 @@ multilingual: false
     <ul class="pager">
         <li class="next">
             <a href="{{ "/talks/2017/2017-08-19-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
-        </li>
-    </ul>
-    <hr>
-
-    {% capture talks3 %}{% include talks/2017/2017-07-06-talks.md %}{% endcapture %}
-    {{ talks3 | markdownify | truncate:227}}
-    <ul class="pager">
-        <li class="next">
-            <a href="{{ "/talks/2017/2017-07-06-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
-        </li>
-    </ul>
-    <hr>
-    
-    {% capture talks4 %}{% include talks/2017/2017-02-12-talks.md %}{% endcapture %}
-    {{ talks4 | markdownify | truncate:227}}
-    <ul class="pager">
-        <li class="next">
-            <a href="{{ "/talks/2017/2017-02-12-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
         </li>
     </ul>
     <hr>
