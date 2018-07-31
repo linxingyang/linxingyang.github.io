@@ -33,6 +33,24 @@ multilingual: false
     </ul>
     <hr>
 
+    {% capture talks15 %}{% include talks/2016/2016-01-02-talks.md %}{% endcapture %}
+    {{ talks15 | markdownify | truncate:300}}
+    <ul class="pager">
+        <li class="next">
+            <a href="{{ "/talks/2016/2016-01-02-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
+        </li>
+    </ul>
+    <hr>
+
+    {% capture talks14 %}{% include talks/2016/2016-01-01-talks.md %}{% endcapture %}
+    {{ talks14 | markdownify | truncate:300}}
+    <ul class="pager">
+        <li class="next">
+            <a href="{{ "/talks/2016/2016-01-01-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
+        </li>
+    </ul>
+    <hr>
+
     <!-- 分页 -->
     <ul class="pager">
         <li class="previous">

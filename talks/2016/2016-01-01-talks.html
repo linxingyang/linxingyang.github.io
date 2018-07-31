@@ -1,0 +1,21 @@
+---
+layout: page 
+description: 李白《静夜思》<br/>床前明月光，疑是地上霜。<br/>举头望明月，低头思故乡。
+header-img: "img/talks/bg-sad.jpg"
+multilingual: false
+---
+
+
+<div class="zh post-container">
+    {% capture talks %}{% include talks/2016/2016-01-01-talks.md %}{% endcapture %}
+    {{ talks | markdownify}}
+</div>
+
+{% if site.plugin-changyan-use %}
+    {% include plugins/changyan.html %}
+{% endif %}
+
+{% if site.plugin-disqus-use %}
+    {% include plugins/disqus.html %}
+{% endif %}
+
