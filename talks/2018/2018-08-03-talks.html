@@ -1,0 +1,20 @@
+---
+layout: page 
+description: 李商隐《无题》<br/>相见时难别亦难，东风无力百花残。<br/>春蚕到死丝方尽，蜡炬成灰泪始干。<br/>晓镜但愁云鬓改，夜吟应觉月光寒。<br/>蓬山此去无多路，青鸟殷勤为探看。
+header-img: "img/talks/bg-e.jpg"
+multilingual: false
+---
+
+
+<div class="zh post-container">
+    {% capture talks %}{% include talks/2018/2018-08-03-talks.md %}{% endcapture %}
+    {{ talks | markdownify}}
+</div>
+
+{% if site.plugin-changyan-use %}
+    {% include plugins/changyan.html %}
+{% endif %}
+
+{% if site.plugin-disqus-use %}
+    {% include plugins/disqus.html %}
+{% endif %}
