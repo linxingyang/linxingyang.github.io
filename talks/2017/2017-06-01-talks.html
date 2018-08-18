@@ -1,0 +1,20 @@
+---
+layout: page 
+description: 崔护《题都城南庄》<br/>去年今日此门中，人面桃花相映红。<br/>人面不知何处去，桃花依旧笑春风。
+header-img: "img/talks/bg-gray.jpg"
+multilingual: false
+---
+
+<div class="zh post-container">
+    {% capture talks %}{% include talks/2017/2017-06-01-talks.md %}{% endcapture %}
+    {{ talks | markdownify}}
+</div>
+
+{% if site.plugin-changyan-use %}
+    {% include plugins/changyan.html %}
+{% endif %}
+
+{% if site.plugin-disqus-use %}
+    {% include plugins/disqus.html %}
+{% endif %}
+
