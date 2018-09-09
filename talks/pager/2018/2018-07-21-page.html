@@ -6,6 +6,16 @@ multilingual: false
 ---
 
 <div class="zh post-container">
+
+    {% capture talks6 %}{% include talks/2017/2017-10-12-talks.md %}{% endcapture %}
+    {{ talks6 | markdownify | truncate:200}}
+    <ul class="pager">
+        <li class="next">
+            <a href="{{ "/talks/2017/2017-10-12-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
+        </li>
+    </ul>
+    <hr>
+
     {% capture talks2 %}{% include talks/2017/2017-08-19-talks.md %}{% endcapture %}
     {{ talks2 | markdownify | truncate:300}}
     <ul class="pager">

@@ -1,0 +1,20 @@
+---
+layout: page 
+description: 李商隐《登乐游原》<br/>向晚意不适，驱车登古原。<br/>夕阳无限好，只是近黄昏。
+header-img: "img/talks/bg-glass.jpg"
+multilingual: false
+---
+
+
+<div class="zh post-container">
+    {% capture talks %}{% include talks/2018/2018-09-09-talks.md %}{% endcapture %}
+    {{ talks | markdownify}}
+</div>
+
+{% if site.plugin-changyan-use %}
+    {% include plugins/changyan.html %}
+{% endif %}
+
+{% if site.plugin-disqus-use %}
+    {% include plugins/disqus.html %}
+{% endif %}
