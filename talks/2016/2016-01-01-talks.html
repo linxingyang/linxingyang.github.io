@@ -5,7 +5,6 @@ header-img: "img/talks/bg-sad.jpg"
 multilingual: false
 ---
 
-
 <div class="zh post-container">
     {% capture talks %}{% include talks/2016/2016-01-01-talks.md %}{% endcapture %}
     {{ talks | markdownify}}
@@ -14,8 +13,3 @@ multilingual: false
 {% if site.plugin-changyan-use %}
     {% include plugins/changyan.html %}
 {% endif %}
-
-{% if site.plugin-disqus-use %}
-    {% include plugins/disqus.html %}
-{% endif %}
-

@@ -1,6 +1,6 @@
 ---
 layout: page
-description: 《金缕衣》<br/>劝君莫惜金缕衣，劝君惜取少年时。<br/> 花开堪折直须折，莫待无花空折枝。
+description:
 ---
 
 {% for post in paginator.posts %}
@@ -25,7 +25,7 @@ description: 《金缕衣》<br/>劝君莫惜金缕衣，劝君惜取少年时�
             {% else %}
                 {{ site.title }}
             {% endif %} -->
-            写于
+
             {{ post.date | date: "%Y-%m-%d" }}
         </p>
     </div>

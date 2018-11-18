@@ -65,6 +65,23 @@ plugin-busuanzi-use: true
 # disqus
 plugin-disqus-use: false
 
+# 说说的分页
+talks-enable: true
+talks: [
+     {
+         title: "2018年",
+         href: "/talks/pager/2018/2018-01-01-page"
+     },{
+         title: "2017年",
+         href: "/talks/pager/2017/2017-01-01-page"
+     },{
+         title: "2016年",
+        href: "/talks/pager/2016/2016-01-01-page"
+     }
+ ]
+
+
+
 # Analytics settings
 # Baidu Analytics 
 # ba_track_id: [your track id]
@@ -106,29 +123,5 @@ friends: [
     },{
         title: "前端外刊评论",
         href: "http://qianduan.guru/"
-    },{
-        title: "天镶的博客",
-        href: "http://lingyu.wang/"
-    },{
-        title: "Luke 的自留地",
-        href: "http://hmqk1995.github.io"
-    },{
-        title: "Ebn's Blog",
-        href: "http://ebnbin.com/"
-    },{
-        title: "SmdCn's Blog",
-        href: "http://blog.smdcn.net"
-    },{
-        title: "David's Game",
-        href: "https://www.ruoyaowu.com/"
-    },{
-        title: "DHong Say",
-        href: "http://dhong.co"
-    },{
-        title: "尹峰以为",
-        href: "http://ingf.github.io/"
-    },{
-        title: "解旻的博客",
-        href: "http://xieminis.me/"
     }
 ]

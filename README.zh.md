@@ -1,6 +1,3 @@
-
-
-
 # 林兴洋的空间站
 
 [林兴洋的空间站](http://www.linxingyang.net)

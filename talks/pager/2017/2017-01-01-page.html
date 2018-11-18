@@ -1,11 +1,17 @@
 ---
 layout: page
-description: 杜牧《绝句》<br/>两个黄鹂鸣翠柳，一行白鹭上青天。<br/>窗含西岭千秋雪，门泊东吴万里船。
-header-img: "img/talks/bg-kids2.jpg"
+description: 李白《赠汪伦》<br/>李白乘舟将欲行，忽闻岸上踏歌声。<br/>桃花潭水深千尺，不及汪伦送我情。
+header-img: "img/talks/bg-bamboo.jpg"
 multilingual: false
+isPager: true
 ---
 
 <div class="zh post-container">
+    <!-- 6, 2, 3, 17, 4-->
+    <!--  2, 3, 4, 6, 17-->
+
+     哇呀呀呀呀
+    <hr/>
 
     {% capture talks6 %}{% include talks/2017/2017-10-12-talks.md %}{% endcapture %}
     {{ talks6 | markdownify | truncate:200}}
@@ -52,45 +58,4 @@ multilingual: false
     </ul>
     <hr>
 
-    {% capture talks10 %}{% include talks/2016/2016-12-28-talks.md %}{% endcapture %}
-    {{ talks10 | markdownify | truncate:238}}
-    <ul class="pager">
-        <li class="next">
-            <a href="{{ "/talks/2016/2016-12-28-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
-        </li>
-    </ul>
-    <hr>
-
-    {% capture talks15 %}{% include talks/2016/2016-01-02-talks.md %}{% endcapture %}
-    {{ talks15 | markdownify | truncate:240}}
-    <ul class="pager">
-        <li class="next">
-            <a href="{{ "/talks/2016/2016-01-02-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
-        </li>
-    </ul>
-    <hr>
-
-    {% capture talks14 %}{% include talks/2016/2016-01-01-talks.md %}{% endcapture %}
-    {{ talks14 | markdownify | truncate:300}}
-    <ul class="pager">
-        <li class="next">
-            <a href="{{ "/talks/2016/2016-01-01-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
-        </li>
-    </ul>
-    <hr>
-
-    <!-- 分页 -->
-    <ul class="pager">
-        <li class="previous">
-            <a href="{{ "/talks" | prepend: site.baseurl }}">&larr; 上一页</a>
-        </li>
-    </ul>
 </div>
-
-{% if site.plugin-changyan-use %}
-    {% include plugins/changyan.html %}
-{% endif %}
-
-{% if site.plugin-disqus-use %}
-    {% include plugins/disqus.html %}
-{% endif %}

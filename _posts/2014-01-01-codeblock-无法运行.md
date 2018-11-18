@@ -6,7 +6,6 @@ categories: [codeblock]
 tags: [codeblock,问题解决]
 excerpt: codeblock,问题解决
 description: coldeblock无法运行
-
 ---
 
 如果安装包只有20多M的那种，是不行的。
