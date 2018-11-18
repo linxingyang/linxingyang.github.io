@@ -33,41 +33,35 @@ layout: default
                 sidebar-container">
                 <!-- Featured Tags -->
                 {% if page.isPager %}
-
                     {% if site.talks-enable %}
-                    <section>
-                        <hr class="hidden-sm hidden-xs">
-                        <h5><a href="{{'/categories/' | prepend: site.baseurl }}">说说</a></h5>
-                        <div class="tags">
-                            {% for talk in site.talks %}
-
-                            <a href="{{talk.href | prepend: site.baseurl }}" title="{{ talk.title }}"
-                            >
-                                {{ talk.title }}
-                            </a>
-                            {% endfor %}
-                        </div>
-                    </section>
+                        <section>
+                            <hr class="hidden-sm hidden-xs">
+                            <h5><a href="{{'/categories/' | prepend: site.baseurl }}">说说</a></h5>
+                            <div class="tags">
+                                {% for talk in site.talks %}
+                                    <a href="{{talk.href | prepend: site.baseurl }}" title="{{ talk.title }}">
+                                    {{ talk.title }}
+                                </a>
+                                {% endfor %}
+                            </div>
+                        </section>
                     {% endif %}
                 {% else %}
-
-
-
                     {% if site.featured-tags %}
-                    <section>
-                        <!-- no hr -->
-                        <h5><a href="{{'/tags/' | prepend: site.baseurl }}">推荐标签</a></h5>
-                        <div class="tags">
-                            {% for tag in site.tags %}
-                                {% if tag[1].size > site.featured-condition-size %}
-                                    <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}"
-                                        rel="{{ tag[1].size }}">
-                                        {{ tag[0] }}
-                                    </a>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    </section>
+                        <section>
+                            <!-- no hr -->
+                            <h5><a href="{{'/tags/' | prepend: site.baseurl }}">推荐标签</a></h5>
+                            <div class="tags">
+                                {% for tag in site.tags %}
+                                    {% if tag[1].size > site.featured-condition-size %}
+                                        <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}"
+                                            rel="{{ tag[1].size }}">
+                                            {{ tag[0] }}
+                                        </a>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </section>
                     {% endif %}
                 {% endif %}
                 <!-- Friends Blog 
@@ -103,16 +97,13 @@ layout: default
                 sidebar-container
             ">
                 {% if page.isPager %}
-
                     {% if site.talks-enable %}
                     <section>
                         <hr class="hidden-sm hidden-xs">
                         <h5><a href="{{'/categories/' | prepend: site.baseurl }}">说说</a></h5>
                         <div class="tags">
                             {% for talk in site.talks %}
-
-                            <a href="{{talk.href | prepend: site.baseurl }}" title="{{ talk.title }}"
-                            >
+                                <a href="{{talk.href | prepend: site.baseurl }}" title="{{ talk.title }}">
                                 {{ talk.title }}
                             </a>
                             {% endfor %}
@@ -120,7 +111,6 @@ layout: default
                     </section>
                     {% endif %}
                 {% else %}
-
                 <!-- Short About 关于我 -->
                 <section class="visible-md visible-lg">
                     <hr><h5><a href="{{'/about/' | prepend: site.baseurl }}">关于我</a></h5>
@@ -263,7 +253,6 @@ layout: default
                 </ul>
                 {% endif %}
                 -->
-
                 {% endif %}
             </div>
         {% endif %}
