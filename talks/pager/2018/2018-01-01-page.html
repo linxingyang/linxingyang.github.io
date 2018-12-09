@@ -16,6 +16,15 @@ isPager: true
     nice 2018!
     <hr/>
 
+    {% capture talks21 %}{% include talks/2018/2018-11-28-talks.md %}{% endcapture %}
+    {{ talks21 | markdownify | truncate:300}}
+    <ul class="pager">
+        <li class="next">
+            <a href="{{ "/talks/2018/2018-11-28-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
+        </li>
+    </ul>
+    <hr>
+
     {% capture talks20 %}{% include talks/2018/2018-11-14-talks.md %}{% endcapture %}
     {{ talks20 | markdownify | truncate:300}}
     <ul class="pager">
