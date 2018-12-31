@@ -15,9 +15,21 @@ isPager: true
     <!-- 1, 5, 7, 8, 9, 11, 12, 13, 16, 18, 19, 20 -->
     nice 2018! <br/>
 	
-	2018 快要结束了，今天是2018-12-20。
+	2018 快要结束了，今天是2018-12-20。<br/>
 	
-	
+    再见,2018！现在是2019-01-01 00:18
+    
+    <hr/>
+	{% capture talks23 %}{% include talks/2018/2018-12-29-talks.md %}{% endcapture %}
+    {{ talks23 | markdownify | truncate:300}}
+    <ul class="pager">
+        <li class="next">
+            <a href="{{ "/talks/2018/2018-12-29-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
+        </li>
+    </ul>
+    <hr>
+    
+    
     <hr/>
 	{% capture talks22 %}{% include talks/2018/2018-12-14-talks.md %}{% endcapture %}
     {{ talks22 | markdownify | truncate:300}}
