@@ -69,6 +69,9 @@ plugin-disqus-use: false
 talks-enable: true
 talks: [
      {
+         title: "2019年",
+        href: "/talks/pager/2019/2019-01-01-page"
+     },{
          title: "2018年",
          href: "/talks/pager/2018/2018-01-01-page"
      },{
