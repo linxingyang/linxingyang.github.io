@@ -15,10 +15,59 @@ isPager: true
 
     <!-- 20, 19, 18, 16, 11, 12, 1, 8, 5, 7, 13, 9 -->
     <!-- 1, 5, 7, 8, 9, 11, 12, 13, 16, 18, 19, 20 -->
+	
+	转眼快3月了~把堆积的几篇说说放上来
+	<br/>
     2019--------------2019------------努力，奋斗！
     <br/>
     
     <hr/>
+	
+	{% capture talks28 %}{% include talks/2019/2019-02-22-talks.md %}{% endcapture %}
+    {{ talks28 | markdownify | truncate:300}}
+    <ul class="pager">
+        <li class="next">
+            <a href="{{ "/talks/2019/2019-02-22-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
+        </li>
+    </ul>
+    <hr>
+	
+	{% capture talks27 %}{% include talks/2019/2019-02-17-talks.md %}{% endcapture %}
+    {{ talks27 | markdownify | truncate:300}}
+    <ul class="pager">
+        <li class="next">
+            <a href="{{ "/talks/2019/2019-02-17-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
+        </li>
+    </ul>
+    <hr>
+	
+	{% capture talks26 %}{% include talks/2019/2019-02-07-talks.md %}{% endcapture %}
+    {{ talks26 | markdownify | truncate:300}}
+    <ul class="pager">
+        <li class="next">
+            <a href="{{ "/talks/2019/2019-02-07-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
+        </li>
+    </ul>
+    <hr>
+	
+	{% capture talks25 %}{% include talks/2019/2019-02-04-talks.md %}{% endcapture %}
+    {{ talks25 | markdownify | truncate:300}}
+    <ul class="pager">
+        <li class="next">
+            <a href="{{ "/talks/2019/2019-02-04-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
+        </li>
+    </ul>
+    <hr>
+	
+	{% capture talks24 %}{% include talks/2019/2019-01-26-talks.md %}{% endcapture %}
+    {{ talks24 | markdownify | truncate:300}}
+    <ul class="pager">
+        <li class="next">
+            <a href="{{ "/talks/2019/2019-01-26-talks" | prepend: site.baseurl }}"> 阅读全文  &rarr;</a>
+        </li>
+    </ul>
+    <hr>
+	
 	{% capture talks23 %}{% include talks/2019/2019-01-18-talks.md %}{% endcapture %}
     {{ talks23 | markdownify | truncate:300}}
     <ul class="pager">
@@ -27,7 +76,5 @@ isPager: true
         </li>
     </ul>
     <hr>
-
-	
 
 </div>
