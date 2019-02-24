@@ -1,0 +1,16 @@
+---
+layout: page 
+description: 陆游《卜算子·咏梅》<br/>驿外断桥边，寂寞开无主。已是黄昏独自愁，更著风和雨。 <br/>无意苦争春，一任群芳妒。零落成泥碾作尘，只有香如故。
+header-img: "img/talks/2019/2019-01-18-talks.jpg"
+multilingual: false
+---
+
+
+<div class="zh post-container">
+    {% capture talks %}{% include talks/2019/2019-01-18-talks.md %}{% endcapture %}
+    {{ talks | markdownify}}
+</div>
+
+{% if site.plugin-changyan-use %}
+    {% include plugins/changyan.html %}
+{% endif %}
