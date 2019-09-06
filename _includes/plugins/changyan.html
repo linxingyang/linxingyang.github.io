@@ -1,9 +1,29 @@
 <!-- 畅言评论插件 -->
-<div id="SOHUCS"></div>
+<link rel="stylesheet" href="/css/gitment/default.css">
+<div id="comments"></div>
+<script type="text/javascript" src="/js/gitment/gitment.browser.js" ></script>
+<script type="text/javascript">
+const gitment = new Gitment({
+  id: 'page1', // optional
+  owner: 'linxingyang',
+  repo: 'linxingyang.net',
+  oauth: {
+    client_id: 'a7145f818fb32e001082',
+    client_secret: 'b0804a53ec387c6c1c631371d0836b66749bb29c',
+  },
+  // ...
+  // ...
+  // ...
+  // For more available options, check out the documentation below
+})
+gitment.render('comments')
+</script>
+
+<!--<div id="SOHUCS"></div>
 <script id="changyanJs" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
 	window.changyan.api.config({
 		appid: 'cytj7BvLE',
 		conf: 'prod_3cdadfa04be49f84275422418066f6c4'
 	});
-</script>
+</script>-->
