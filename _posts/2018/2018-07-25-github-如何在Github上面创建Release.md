@@ -2,13 +2,13 @@
 layout: post
 permalink: /:year/905257ae2c16434bae326d58aae9e81f
 title: 2018-07-25-github-如何在Github上面创建Release
-categories: [github]
-tags: [github,release,创建]
+categories: [工具]
+tags: [github,git]
 excerpt:  github-如何在Github上面创建Release
 description: github-如何在Github上面创建Release
-header-img: "img/post/bg-cup.jpg"
+gitalk-id: 905257ae2c16434bae326d58aae9e81f
+toc: true
 ---
-
 
 自己的个人网站要发布1.1版本，看别的Github项目都有一条类似timeline(时间线)的版本列表，如下
 

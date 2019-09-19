@@ -1,5 +1,3 @@
-Java开发，开源爱好者（多个名头不压身啊）
 
-十足的吃货（哇哇哇哇，体检说我要注意饮食，多吃五谷杂粮，少喝啤酒少吃烧烤油腻）
 
-喜欢推理电视剧、电影
+java programmer, like eating delicious food, reading, watching moive and so on.

@@ -2,14 +2,13 @@
 layout: post
 permalink: /:year/bf6b45256d9d48c3a0ae55e318d077f4
 title: 2018-11-12-mosquitto-配置桥接
-categories: [mosquitto]
-tags: [mosquitto,配置桥接]
+categories: [编程,mosquitto系列]
+tags: [c&c++,mqtt,mosquitto]
 excerpt:  mosquitto,配置桥接
 description: mosquitto,配置桥接
-header-img: "img/post/bg-cup.jpg"
+gitalk-id: bf6b45256d9d48c3a0ae55e318d077f4
+toc: true
 ---
-
-[TOC]
 
 # mosquitto
 

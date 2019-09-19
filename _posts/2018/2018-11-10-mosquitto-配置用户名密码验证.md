@@ -2,14 +2,13 @@
 layout: post
 permalink: /:year/798abc8b2bff498a9d4c4933c0b1d91e
 title: 2018-11-10-mosquitto-配置用户名密码验证
-categories: [mosquitto]
-tags: [mosquitto,配置用户名密码验证]
+categories: [编程,mosquitto系列]
+tags: [c&c++,mqtt,mosquitto]
 excerpt:  mosquitto,配置用户名密码验证
 description: mosquitto,配置用户名密码验证
-header-img: "img/post/bg-cup.jpg"
+gitalk-id: 798abc8b2bff498a9d4c4933c0b1d91e
+toc: true
 ---
-
-[TOC]
 
 # mosquitto
 

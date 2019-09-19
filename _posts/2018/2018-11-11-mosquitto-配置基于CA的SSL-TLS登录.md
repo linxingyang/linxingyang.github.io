@@ -2,14 +2,13 @@
 layout: post
 permalink: /:year/67756e86d8834aac97b1530cf4bbdfb1
 title: 2018-11-11-mosquitto-配置基于CA的SSL-TLS登录
-categories: [mosquitto]
-tags: [mosquitto,CA,SSL-TLS,登录]
+categories: [编程,mosquitto系列]
+tags: [c&c++,mqtt,mosquitto]
 excerpt:  mosquitto,CA,SSL-TLS,登录
 description: mosquitto,CA,SSL-TLS,登录
-header-img: "img/post/bg-cup.jpg"
+gitalk-id: 67756e86d8834aac97b1530cf4bbdfb1
+toc: true
 ---
-
-[TOC]
 
 # mosquitto
 

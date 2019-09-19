@@ -2,18 +2,15 @@
 layout: post
 permalink: /:year/6efdf2685be94f6b9c4fce8d52233bab
 title: 2018-11-13-mosquitto-配置基于CA的SSL-TLS的桥接
-categories: [mosquitto]
-tags: [mosquitto,CA,桥接,SSL-TLS]
+categories: [编程,mosquitto系列]
+tags: [c&c++,mqtt,mosquitto]
 excerpt:  mosquitto,CA,桥接,SSL-TLS
 description: mosquitto,CA,桥接,SSL-TLS
-header-img: "img/post/bg-cup.jpg"
+gitalk-id: 6efdf2685be94f6b9c4fce8d52233bab
+toc: true
 ---
 
-[toc]
-
-
 # mosquitto
-
 
 还是4台机器，128，129，130，131
 

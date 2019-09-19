@@ -2,11 +2,12 @@
 layout: post
 permalink: /:year/bb97a16f894d42aaab09bc92c3785ccf
 title: 2017-08-10-log4j-filter
-categories: [log4j]
-tags: [java,log,log4j,日志,源码,filter]
+categories: [编程,log4j系列]
+tags: [java,log4j]
 excerpt: java,log,log4j,日志,源码,filter
 description: java,log,log4j,日志,源码,filter
-
+gitalk-id: bb97a16f894d42aaab09bc92c3785ccf
+toc: true
 ---
 
 

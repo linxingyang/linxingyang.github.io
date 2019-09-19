@@ -2,13 +2,13 @@
 layout: post
 permalink: /:year/be282d30a8dd4b28aa0104a20bf32b3d
 title: 2018-11-07-mosquitto-mosquiito.conf
-categories: [mosquitto]
-tags: [mosquitto,mosquitto.conf]
+categories: [编程,mosquitto系列]
+tags: [c&c++,mqtt,mosquitto]
 excerpt:  mosquitto,mosquitto.conf
 description: mosquitto,mosquitto.conf
-header-img: "img/post/bg-cup.jpg"
+gitalk-id: be282d30a8dd4b28aa0104a20bf32b3d
+toc: true
 ---
-[toc]
 
 # mosquitto
 

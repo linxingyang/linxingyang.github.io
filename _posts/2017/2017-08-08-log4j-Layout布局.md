@@ -2,11 +2,12 @@
 layout: post
 permalink: /:year/bb97a16f8945544aab09bc92c3785ccf
 title: 2017-08-08-log4j-layout布局
-categories: [log4j]
-tags: [java,log,log4j,日志,源码,layout,布局]
+categories: [编程,log4j系列]
+tags: [java,log4j]
 excerpt: java,log,log4j,日志,源码,layout,布局
 description: java,log,log4j,日志,源码,layout,布局
-
+gitalk-id: bb97a16f8945544aab09bc92c3785ccf
+toc: true
 ---
 
 # 1. Log4j #

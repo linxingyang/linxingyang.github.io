@@ -2,20 +2,14 @@
 
 [LinXingYang's Space](http://www.linxingyang.net)
 
-modify from [Hux blog Template](http://huxpro.github.io)。
+Theme by [Hux blog Template](http://huxpro.github.io)。
 
-if you need more infomation about this template please visit the prevous link, it's a detailed article。
+## change list
 
-
-## what's new
-
-* talks page(it's my personal hobby)
-* categories page ， i need categores list more than tags list， because every post of my blog
-has one category but more than two tags。
-* [busuanzi visit counter](http://busuanzi.ibruce.info/)
-* [ChangYan comment](https://changyan.kuaizhan.com/)
-* resume
+* Add [busuanzi visit counter](http://busuanzi.ibruce.info/)
+* Add [gitalk comment](https://github.com/gitalk)
 
 ## Thanks
 
-thanks for Hux's template。
+* thanks for Hux's template。
+* thanks jekyll

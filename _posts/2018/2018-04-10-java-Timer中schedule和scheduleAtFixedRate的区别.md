@@ -2,13 +2,13 @@
 layout: post
 permalink: /:year/4cxx9xxxx0274vsc8622d47e6587bdsd
 title: 2018-04-10-java-Timer中schedule和scheduleAtFixedRate的区别
-categories: [java]
-tags: [java,Timer,schedule,scheduleAtFixedRate,区别]
+categories: [编程]
+tags: [java]
 excerpt:  java,Timer,schedule,scheduleAtFixedRate,区别
 description: Timer中schedule和scheduleAtFixedRate的区别
-
+gitalk-id: 4cxx9xxxx0274vsc8622d47e6587bdsd
+toc: true
 ---
-
 
 schedule属于固定延迟的，scheduleAtFixedRate属于固定速率的
 
@@ -22,8 +22,8 @@ schedule属于固定延迟的，scheduleAtFixedRate属于固定速率的
 
 如果其中出现了GC，使用G表示GC回收执行了1秒。
 
+# schedule
 
-# schedule #
 > In fixed-delay execution, each execution is scheduled relative to the actual execution time of the previous execution. If an execution is delayed for any reason (such as garbage collection or other background activity), subsequent executions will be delayed as well.
 
 那么在schedule中，因为固定延迟，任务二因为GC被推迟了2秒开始执行，那么任务三是参考的是任务二开始的时间+5秒的延迟。它会是这样的
@@ -32,8 +32,8 @@ schedule属于固定延迟的，scheduleAtFixedRate属于固定速率的
 
 好看一点 ： `TTWWW` `GG` `TTWWW` `TTWWW`
 
+# scheduleAtFixedRate
 
-# scheduleAtFixedRate #
 > In fixed-rate execution, each execution is scheduled relative to the scheduled execution time of the initial execution. If an execution is delayed for any reason (such as garbage collection or other background activity), two or more executions will occur in rapid succession to "catch up."
 
 在scheduleAtFixRate中，因为固定速率，他的速率是参照第一个，所以当其中一个任务因为任何原因被延迟了，后续的任务会进行追赶。它是这样的
@@ -41,7 +41,6 @@ schedule属于固定延迟的，scheduleAtFixedRate属于固定速率的
 `TTWWWGGTTWTTWWW`
 
 好看一点 ： `TTWWW` `GG` `TTW` `TTWWW`
-
 
 
 上面情况都是在任务的period周期 > 任务所需要执行的时间。 （任务周期为5S，运行需要1S）
@@ -57,7 +56,6 @@ schedule属于固定延迟的，scheduleAtFixedRate属于固定速率的
 如下：任务执行需要1秒，周期为5秒，并把任务开始时间设置在程序运行的1分钟之前。
 
 ```java
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -103,12 +101,9 @@ public class TimerTest2 {
 }
 ```
 
-
-
 如下运行结果及注释：
 
 ```java
-
 程序启动时间:20时01分43秒
 Timer-0:任务0开始时间:20时01分43秒 // 1S正常
 Timer-0:任务0结束时间:20时01分44秒 
@@ -153,12 +148,9 @@ Timer-0:任务0结束时间:20时02分14秒
     
 ```
 
-
-
 scheduleAtFixedRate，为了追赶中间这1分钟的差距,它会在上个任务执行完马上执行下个任务。
 
 原来周期为5S，那么差了1分钟，为了追上，要多执行12次（60S / 5S = 12）
-
 
 
 程序从20时01分43秒启动，周期为5S，实际任务中只运行1S（因为线程只sleep 1秒），那么剩余的4S（周期5S-运行1S）可以用来追赶前面1分钟的那12次，那12次任务，每个需要1S。
@@ -172,11 +164,9 @@ scheduleAtFixedRate，为了追赶中间这1分钟的差距,它会在上个任�
 当15秒执行完毕时时，发现已经能追赶上了（12个全部追赶完毕），所以第16秒开始就正常执行，不追赶了。
 
 
-
 这里如果我们使用schedule而不是scheduleAtFixedRate，那么是不会去追赶前面少掉的次数的。使用schedule的结果
 
 ```java
-
 程序启动时间:20时23分03秒
 Timer-0:任务0开始时间:20时23分03秒
 Timer-0:任务0结束时间:20时23分04秒
@@ -187,17 +177,13 @@ Timer-0:任务0结束时间:20时23分14秒
 Timer-0:任务0开始时间:20时23分18秒
 Timer-0:任务0结束时间:20时23分19秒
 Timer-0:任务0开始时间:20时23分23秒
-
 ```
-
 
 
 个人理解：
 
 * 在不需要追赶的情况下，schedule和scheduleAtFixedRate的表现一样。
 * 在需要追赶的情况下，如果任务执行的时间超过period，二者的表现也是一样的，因为scheduleAtFixedRated没有多余的时间去追赶。
-
-
 
 参考：[What is the difference between schedule and scheduleAtFixedRate?
 ](https://stackoverflow.com/questions/22486997/what-is-the-difference-between-schedule-and-scheduleatfixedrate)

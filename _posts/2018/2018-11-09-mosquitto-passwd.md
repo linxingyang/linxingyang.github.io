@@ -2,14 +2,14 @@
 layout: post
 permalink: /:year/60baaf14d2bb4ec89e1a3684d7819b01
 title: 2018-11-09-mosquitto-passwd
-categories: [mosquitto]
-tags: [mosquitto,passwod]
+categories: [编程,mosquitto系列]
+tags: [c&c++,mqtt,mosquitto]
 excerpt:  mosquitto,passwd
 description: mosquitto,passwod
-header-img: "img/post/bg-cup.jpg"
+gitalk-id: 60baaf14d2bb4ec89e1a3684d7819b01
+toc: true
 ---
 
-[toc]
 # mosquitto
 
 ## mosquitto_passwd 用户管理

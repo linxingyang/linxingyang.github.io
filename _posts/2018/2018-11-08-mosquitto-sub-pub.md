@@ -2,14 +2,13 @@
 layout: post
 permalink: /:year/3a7989b061fd44c7a9ff4cdd7be5f8c2
 title: 2018-11-08-mosquitto-sub-pub
-categories: [mosquitto]
-tags: [mosquitto,mosquitto_pub,mosquitto_sub]
+categories: [编程,mosquitto系列]
+tags: [c&c++,mqtt,mosquitto]
 excerpt:  mosquitto,mosquitto_pub,mosquitto_sub
 description: mosquitto,mosquitto_pub,mosquitto_sub
-header-img: "img/post/bg-cup.jpg"
+gitalk-id: 3a7989b061fd44c7a9ff4cdd7be5f8c2
+toc: true
 ---
-
-[toc]
 
 # mosquitto
 

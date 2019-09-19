@@ -2,33 +2,31 @@
 layout: post
 permalink: /:year/1aa51ec7327b4cbf87dff3086c9afc7d
 title: 2017-08-29-java-serialVersionID的作用
-categories: [java]
-tags: [java,serialVersionID的作用]
+categories: [编程]
+tags: [java]
 excerpt:  java,问题解决,serialVersionID的作用
 description: java中serialVersionID的作用
-
+gitalk-id: 1aa51ec7327b4cbf87dff3086c9afc7d
+toc: true
 ---
 
+# java-serialVersionID的作用
 
 很多代码都有一句
 
 ```java
-
 private static final long serialVersionUID = 1L
-
 ```
 
 这句是什么作用呢？看网站上扯了一大堆。。。看多了反而不明白。
 
-
 暂且理解为，在java序列化和反序列化的时候，需要判断这个对象能否被反序列化，这个serialVersionUID是作为判断的一部分存在吧。
 
-## 一个例子 ##
+## 一个例子
 
 上代码。定义一个worker，有id,name,age三个属性，当然如果需要序列化，需要实现Serializable接口，下面这个Worker认为是版本1。
 
 ```java
-
 package test;
 
 import java.io.Serializable;
@@ -69,14 +67,11 @@ public class Worker implements Serializable {
 		return "Worker [id=" + id + ", name=" + name + ", age=" + age + "]";
 	}
 }
-
 ```
-
 
 新建两个对象，并保存到文件中
 
 ```java
-
 package test;
 
 import java.io.File;
@@ -108,14 +103,11 @@ public class App {
 		}
 	}
 }
-
 ```
-
 
 在从文件中读取出这两个对象
 
 ```java
-
 package test;
 
 import java.io.File;
@@ -141,32 +133,24 @@ public class App2 {
 		}
 	}
 }
-
 ```
 
 结果：
 
 ```
-
 Worker [id=100, name=alien lin, age=24]
 Worker [id=60, name=jack ma , age=66]
-
 ```
-
-
 
 现在我们在不改动Worker其他属性的情况下，把Worker的serialVersionUID改成2L，认为是版本2。如下
 
 ```java
-
 private static final long serialVersionUID = 2L;
-
 ```
 
 然后再次运行上面的读取对象的代码，结果报了一个错
 
 ```java
-
 java.io.InvalidClassException: test.Worker; local class incompatible: stream classdesc serialVersionUID = 1, local class serialVersionUID = 2
 	at java.io.ObjectStreamClass.initNonProxy(ObjectStreamClass.java:617)
 	at java.io.ObjectInputStream.readNonProxyDesc(ObjectInputStream.java:1622)
@@ -175,11 +159,9 @@ java.io.InvalidClassException: test.Worker; local class incompatible: stream cla
 	at java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1350)
 	at java.io.ObjectInputStream.readObject(ObjectInputStream.java:370)
 	at test.App2.main(App2.java:16)
-
 ```
 
 根据提示我们知道，这两个冲突了。因为serialVersionUID的不同导致了读出对象失败。可以认为它做的是一个版本是否兼容的功能。
-
 
 
 java中，如果版本1和版本2兼容，即它们之间可以任意序列化反序列化，那么它们的serialVersionUID就应该相同。相反的，如果认为版本1和版本2之间不应该进行任意序列化反序列化，那么就不应该有相同的serialVersionUID。
@@ -193,7 +175,6 @@ java中，如果版本1和版本2兼容，即它们之间可以任意序列化�
 下面新建一个版本3，新增了一个属性gender，去掉了一个属性age。但是serialVersionUID不变，说明版本3兼容版本1，它们之间可以任意序列化反序列化。但是由于属性的不对等，所以会造成数据的缺失。
 
 ```java
-
 package test;
 
 import java.io.Serializable;
@@ -243,20 +224,16 @@ public class Worker implements Serializable {
 	// this.age = age;
 	// }
 }
-
 ```
 
 运行进行读取程序，结果如下。age缺失，genkder为空，
 
 ```java
-
 Worker [id=100, name=alien lin, gender=null]
 Worker [id=60, name=jack ma , gender=null]
-
 ```
 
-
-## 那么如果我们不指定serialVersionUID的值，那将会如何？ ##
+## 那么如果我们不指定serialVersionUID的值，那将会如何？
 
 如果我们不显示指定serialVersionUID的值，那么JVM会根据属性的生成一个serialVersionUID，如果我们更改了属性，添加了非private方法，那么serialVersionUID就不同了，就不能序列化了。
 
@@ -264,7 +241,6 @@ Worker [id=60, name=jack ma , gender=null]
 定义一个Person，有id,name属性及其get/set方法。注意该对象我们没有设置serialVersionUID的值
 
 ```java
-
 package test;
 
 import java.io.Serializable;
@@ -288,11 +264,9 @@ public class Person implements Serializable {
 
 ```
 
-
 使用Test1将两个Person对象存入文本中
 
 ```java
-
 package test;
 
 import java.io.FileNotFoundException;
@@ -329,7 +303,6 @@ public class Test1 {
 使用Test2读出该对象。
 
 ```java
-
 package test;
 
 import java.io.FileInputStream;
@@ -350,16 +323,13 @@ public class Test2 {
 		}
 		
 	}
-
 }
-
 ```
 
 
 现在我们给Person新增一个属性age及其get/set属性
 
 ```java
-
 package test;
 
 import java.io.Serializable;
@@ -386,8 +356,6 @@ public class Person implements Serializable {
 	public void setAge(Integer age) {
 		this.age = age;
 	}
-	
-
 }
 
 ```
@@ -395,7 +363,6 @@ public class Person implements Serializable {
 再运行Test2.发现报错了。发现是的serialVersionUID不同导致的，从这里我们可以知道，如果我们没有指定serialVersionUID，那么将会根据属性得到一个serialVersionUID。
 
 ```
-
 Exception in thread "main" java.io.InvalidClassException: test.Person; local class incompatible: stream classdesc serialVersionUID = -3988139021726296639, local class serialVersionUID = -2271613962938391343
 	at java.io.ObjectStreamClass.initNonProxy(ObjectStreamClass.java:562)
 	at java.io.ObjectInputStream.readNonProxyDesc(ObjectInputStream.java:1583)
@@ -404,15 +371,12 @@ Exception in thread "main" java.io.InvalidClassException: test.Person; local cla
 	at java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1329)
 	at java.io.ObjectInputStream.readObject(ObjectInputStream.java:351)
 	at test.Test2.main(Test2.java:16)
-
-
 ```
 
 
 如果给Person加上一个私有的方法private void whateverMethod(){}。结果是没有报错的，但是如果修饰符不是private就会报同样的错误。
 
 ```java
-
 package test;
 
 import java.io.Serializable;
@@ -437,6 +401,5 @@ public class Person implements Serializable {
 		
 	}
 }
-
 ```
 

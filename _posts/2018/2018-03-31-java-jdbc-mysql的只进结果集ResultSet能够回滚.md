@@ -2,20 +2,19 @@
 layout: post
 permalink: /:year/4cxx9xxxx0274vxv8622d47e6587bdsd
 title: 2018-03-31-java-jdbc-mysql的只进结果集ResultSet能够回滚
-categories: [java]
-tags: [java,jdbc,mysql,ResultSet,能够回滚]
+categories: [编程]
+tags: [java,mysql]
 excerpt:  java,jdbc,mysql,ResultSet,能够回滚
 description: java,jdbc,mysql,ResultSet,能够回滚
-
+gitalk-id: 4cxx9xxxx0274vxv8622d47e6587bdsd
+toc: true
 ---
-
 
 使用mysql数据库的连接，使用只进结果集，在后面调用beforeFirst()方法，让指针回到第一条数据之前。
 
 设想应该是报错，结果没有报错。
 
 ```
-
 package test.use;
 
 import java.sql.Connection;
@@ -24,7 +23,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 
 public class JDBC1 {
 
@@ -61,15 +59,11 @@ public class JDBC1 {
 		connection.close();
 	}
 }
-
-
 ```
-
 
 同一段代码，使用sqlserver数据库，结果报错了。
 
 ```
-
 package test.use;
 
 import java.sql.Connection;
@@ -78,7 +72,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 
 public class JDBC1 {
 
@@ -114,13 +107,9 @@ public class JDBC1 {
 		connection.close();
 	}
 }
-
-
 ```
 
-
 会抛出异常 
-
 
 ```
 
@@ -134,17 +123,11 @@ Exception in thread "main" com.microsoft.sqlserver.jdbc.SQLServerException: 只�
 	at com.microsoft.sqlserver.jdbc.SQLServerResultSet.beforeFirst(SQLServerResultSet.java:1239)
 	at test.use.JDBC1.test1(JDBC1.java:75)
 	at test.use.JDBC1.main(JDBC1.java:15)
-
-
 ```
-
-
 
 稍微看了下mysql-connector的源码，它没有完全按照java.sql.ResultSet中对于接口的规定来实现：当只进结果集调用prevous(),beforeFirst()等方法时应该抛出异常。而mysql-connector却没有。
 
-
 ```
-
     /**
      * Moves the cursor to the front of
      * this <code>ResultSet</code> object, just before the
@@ -158,16 +141,4 @@ Exception in thread "main" com.microsoft.sqlserver.jdbc.SQLServerException: 只�
      * @since 1.2
      */
     void beforeFirst() throws SQLException;
-
 ```
-
-
-
-
-
-
-
-
-
-
-

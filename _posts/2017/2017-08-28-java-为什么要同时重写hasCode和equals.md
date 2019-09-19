@@ -2,13 +2,15 @@
 layout: post
 permalink: /:year/a90ab5dbfa254f4385f44268cd663768
 title: 2017-08-28-java-为什么要同时重写hasCode和equals
-categories: [java]
-tags: [java问题,equals,hashCode,重写]
+categories: [编程]
+tags: [java]
 excerpt:  java问题,equals,hashCode,重写
 description: 为什么要同时重写hasCode和equals
-
+gitalk-id: a90ab5dbfa254f4385f44268cd663768
+toc: true
 ---
 
+# 为什么要同时重写hasCode和equals
 
 之前也是有点有点郁闷，为什么hashCode和equals要同时重写。就是javadoc建议二者最好一起重写。
 
@@ -17,7 +19,6 @@ description: 为什么要同时重写hasCode和equals
 下面通过代码的方式来说，一个类Worker，有id,name,age三个属性。
 
 ```java
-
 public class Worker {
 	private Integer id;
 	private String name;
@@ -31,7 +32,6 @@ public class Worker {
 	}
 	// 省略get/set方法
 }
-
 ```
 
 平时我们比较两个对象是否相等，都是通过equals方法进行比较，
@@ -41,7 +41,6 @@ public class Worker {
 如下代码：
 
 ```java
-
 public class Test {
 	public static void main(String[] args) {
 		Worker w1 = new Worker();
@@ -54,12 +53,11 @@ public class Test {
 		System.out.println(w1.equals(w3)); // true
 	}
 }
-
 ```
 
 如上代码，我们平常一般是这么用的。
 
-## 重写equals方法 ##
+## 重写equals方法
 
 但是现在有个需求，如果员工的id相同，那么就是同一个员工。
 
@@ -93,7 +91,6 @@ public class Worker {
 重写了equals之后，则下面的测试结果都为true。
 
 ```java
-
 public class Test {
 	public static void main(String[] args) {
 		Worker w1 = new Worker();
@@ -106,15 +103,13 @@ public class Test {
 		System.out.println(w1.equals(w3)); // true
 	}
 }
-
 ```
 
-## 重写hashCode方法 ##
+## 重写hashCode方法
 
 现在又有了新的需求，我们需要把这些东西存在HashSet中，先看看以下代码。就过一眼就好了。
 
 ```java 
-
 	// 放入方法，
 	public V put(K key, V value) {
         if (key == null)
@@ -144,7 +139,6 @@ public class Test {
         h ^= (h >>> 20) ^ (h >>> 12);
         return h ^ (h >>> 7) ^ (h >>> 4);
     }
-
 ```
 
 以上代码来自HasmMap，`int hash = hash(key.hashCode());`这一行我们可以知道，通过获取key的哈希值，然后通过hash方法计算出一个值，这个值作为比对的依据。
@@ -155,7 +149,7 @@ public class Test {
 
 分割线插个小问题。
 
-### 为什么要用到hashCode？ ###
+### 为什么要用到hashCode？
 
 来自[http://blog.csdn.net/fanfanjin/article/details/6881474](http://blog.csdn.net/fanfanjin/article/details/6881474)
 
@@ -268,15 +262,4 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 	* 两个equals()返回true的对象，hashCode也要相同。
 	* 反之则不必，hashCode相同不一定要equals()=true
 * 在ORM中，要使用get/set方法来获取时属性，因为有时候变量会被延迟加载。
-	* 例如上面的 使用id == id 可能就会出现这个问题，使用getId() == getId()就不会了。
-
-
-
-
-
-
-
-
-
-
-
+	* 例如上面的 使用id == id 可能就会出现这个问题，使用getId() == getId()就不会了

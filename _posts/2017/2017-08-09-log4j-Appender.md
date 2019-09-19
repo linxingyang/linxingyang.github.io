@@ -2,11 +2,12 @@
 layout: post
 permalink: /:year/bb91234f894d42aaab09bc92c3785ccf
 title: 2017-08-09-log4j-Appender
-categories: [log4j]
-tags: [java,log,log4j,日志,源码,Appender]
+categories: [编程,log4j系列]
+tags: [java,log4j]
 excerpt: java,log,log4j,日志,源码,Appender
 description: java,log,log4j,日志,源码,Appender
-
+gitalk-id: bb91234f894d42aaab09bc92c3785ccf
+toc: true
 ---
 
 

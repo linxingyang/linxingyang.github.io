@@ -2,15 +2,14 @@
 layout: post
 permalink: /:year/9f841b1490fc46aa8285db2576b1b7e0
 title: 2018-11-05-mosquitto-安装启动
-categories: [mosquitto]
-tags: [mosquitto,安装启动]
+categories: [编程,mosquitto系列]
+tags: [c&c++,mqtt,mosquitto]
 excerpt:  mosquitto,安装启动
 description: mosquitto,安装启动
-header-img: "img/post/bg-cup.jpg"
+gitalk-id: 9f841b1490fc46aa8285db2576b1b7e0
+toc: true
 ---
 
-
-[toc]
 # mosquitto
 
 ## 官网

@@ -3,8 +3,8 @@ title: 林兴洋的空间站
 SEOTitle: 林兴洋的空间站 | linxingyang
 header-img: img/home/bg-home.jpg
 email: linxingy@foxmail.com
-description: "林兴洋, 林兴洋的主页, 林兴洋的博客, 林兴洋的简历, 个人网站, 博客, 说说, Java, 简历"
-keyword: "林兴洋, 林兴洋的主页, 林兴洋的博客, 林兴洋的简历, 个人网站, 博客, 说说, Java, 简历"
+description: "林兴洋, 林兴洋的主页, 林兴洋的博客, java"
+keyword: "林兴洋, 林兴洋的主页, 林兴洋的博客"
 url: "http://linxingyang.net"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
@@ -21,7 +21,6 @@ github_username:    linxingyang
 #linkedin_username:  firstname-lastname-idxxxx
 
 
-
 # Build settings
 # from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
 highlighter: rouge
@@ -33,13 +32,15 @@ anchorjs: true                          # if you want to customize anchor. check
 #timezone: CN  
 
 
-
 # Gems
 # from PR#40, to support local preview for Jekyll 3.0
 # make sure you have this gem installed
 # `$ gem install jekyll-paginate`
-plugins: [jekyll-paginate]
-
+# plugins: [jekyll-paginate, jekyll-toc]
+plugins:
+  - jekyll-paginate
+  - jekyll-toc
+  
 catalog: true
 
 # Markdown settings
@@ -50,20 +51,10 @@ markdown: kramdown
 kramdown:
   input: GFM                            # use Github Flavored Markdown !important
 
-
-
-# Disqus settings
-# disqus_username: hux
-
-# Netease settings
-# netease_comment: false
-
-# 畅言
-plugin-changyan-use: true
+# git talks
+plugin-gitalk-use: false
 # 不蒜子
 plugin-busuanzi-use: true
-# disqus
-plugin-disqus-use: false
 
 # 说说的分页
 talks-enable: true
@@ -83,8 +74,6 @@ talks: [
      }
  ]
 
-
-
 # Analytics settings
 # Baidu Analytics 
 # ba_track_id: [your track id]
@@ -93,20 +82,14 @@ talks: [
 # ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
 # ga_domain: huangxuan.me
 
-
-
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "Java开发、开源爱好者"
+sidebar-about-description: "林兴洋"
 sidebar-avatar: /img/avatar/fd.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
-
-
 
 # Featured Tags
 featured-tags: true                     # whether or not using Feature-Tags
 featured-condition-size: 3              # A tag will be featured if the size of it is more than this condition value
-
-
 
 # Progressive Web Apps
 chrome-tab-theme-color: "#000000"

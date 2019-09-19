@@ -2,15 +2,13 @@
 layout: post
 permalink: /:year/cb7c9049036a4fa7a973b2052f96e231
 title: 2018-10-02-mysql-2002错误Can't connect to local MySQL server through socket
-categories: [mysql]
-tags: [mysql,错误2002]
+categories: [编程]
+tags: [mysql,数据库]
 excerpt:  mysql,错误2002
 description: mysql-2002错误Can't connect to local MySQL server through socket
-header-img: "img/post/bg-cup.jpg"
+gitalk-id: cb7c9049036a4fa7a973b2052f96e231
+toc: true
 ---
-
-
-
 
 今天玩阿里云上的mysql，遇到了这个问题，其实挺早就看到这个问题，但是只是本机无法登陆，远程还是可以访问，所以之前没解决。
 
@@ -32,7 +30,6 @@ ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run
 #socket         = /var/run/mysqld/mysqld.sock
 ```
 
-
 然后再次启动mysql，还是没启动起来
 
 查看一下mysql的错误日志，日志的路径就看你的mysql配置文件中的log_error一项
@@ -44,7 +41,6 @@ log_error = /var/log/mysql/error.log
 打开后，发现其中有几行ERROR，发现说的是mysql在`/var/run/mysqld/`文件夹下不能创建mysqld.sock.lock文件。那就猜是mysql对于那个文件夹(mysqld)没有权限
 
 ```
-
 2018-10-02T15:36:57.072472Z 0 [Note]   - '0.0.0.0' resolves to '0.0.0.0';
 2018-10-02T15:36:57.072649Z 0 [Note] Server socket created on IP: '0.0.0.0'.
 2018-10-02T15:36:57.072822Z 0 [ERROR] Could not create unix socket lock file /var/run/mysqld/mysqld.sock.lock.
@@ -53,7 +49,6 @@ log_error = /var/log/mysql/error.log
 
 2018-10-02T15:36:57.073246Z 0 [Note] Binlog end
 2018-10-02T15:36:57.073426Z 0 [Note] Shutting down plugin 'ngram'
-
 ```
 
 那就给权限吧，执行如下命令
@@ -94,5 +89,4 @@ socket          = /var/run/mysqld/mysqld.sock
 
 观察mysql程序是否启动
 # ps -ef | grep mysql
-
 ```
