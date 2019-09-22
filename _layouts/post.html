@@ -77,10 +77,8 @@ layout: default
             <option value="1"> 英文 English </option>
           </select>
         {% endif %}
-        <div>
-          
-        </div>
-        {{ content | toc }}
+        <div id="myToc"></div>
+        {{ content }}
         <hr style="visibility: hidden;">
         <ul class="pager">
           {% if page.previous.url %}
@@ -197,3 +195,34 @@ layout: default
         }
     </style>
 {% endif %}
+
+<script type="text/javascript">
+  function addToc(name, markid, level) {
+    if (name === '') {
+      return;
+    }
+    var title = "";
+    for (var i = 0; i < level; i++) {
+      title += "&nbsp;&nbsp;&nbsp;&nbsp;";
+    }
+    title += "<a href='#" + markid + "'>" + name + "</a></br>";
+    $("#myToc").append(title);
+  }
+  
+  var interval = setInterval(function() {
+    if (typeof $ == 'function') {
+      clearInterval(interval);
+      $(document).ready(function() {
+        $("div.post-container").children().each(function(index, element) {
+          var tagName = $(this).get(0).tagName;
+          if (tagName.substr(0, 1).toUpperCase() == "H") {
+            var contentH=$(this).text();
+            var markId = $(this).attr("id");
+            var nLevel = tagName.substr(1, 1);
+            addToc(contentH, markId, nLevel);
+          }
+        });
+      });
+    }
+  }, 100);
+</script>

@@ -1,5 +1,6 @@
 {
   "editor.formatOnSave": false,
   "editor.tabSize": 2,
-  "editor.tabCompletion": "on"
+  "editor.tabCompletion": "on",
+  "editor.detectIndentation": false
 }

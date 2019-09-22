@@ -39,7 +39,7 @@ anchorjs: true                          # if you want to customize anchor. check
 # plugins: [jekyll-paginate, jekyll-toc]
 plugins:
   - jekyll-paginate
-  - jekyll-toc
+#  - jekyll-toc
   
 catalog: true
 
@@ -52,7 +52,7 @@ kramdown:
   input: GFM                            # use Github Flavored Markdown !important
 
 # git talks
-plugin-gitalk-use: false
+plugin-gitalk-use: true
 # 不蒜子
 plugin-busuanzi-use: true
 
@@ -95,10 +95,7 @@ featured-condition-size: 3              # A tag will be featured if the size of 
 chrome-tab-theme-color: "#000000"
 service-worker: true
 
-
-
 # Friends
-
 friends: [
     {
     #     title: "Su",
