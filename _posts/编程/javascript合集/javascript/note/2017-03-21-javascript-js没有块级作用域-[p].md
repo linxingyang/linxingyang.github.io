@@ -1,7 +1,7 @@
 ---
 layout: post
 permalink: /:year/7d8cf5dda21cexpcxxa3174ceaec9e85
-title: 2017-02-22-js-没有块级作用域
+title: 2017-03-21-javascript-js没有块级作用域
 categories: [编程]
 tags: [js]
 excerpt: js,块作用域

@@ -98,6 +98,31 @@ cp -r lib/uuid/    /usr/include/
 cp -rf lib/libuuid.so* /usr/lib  
 ```
 
+
+### 问题：libwebsockets.h missing from the src directory
+
+这个问题是因为我要使用到websocket功能，所以在 
+
+[来源github](https://github.com/eclipse/mosquitto/issues/583)，按照下面命令照撸就行了
+
+```
+git clone -b v2.4.1 https://github.com/warmcat/libwebsockets.git
+cd libwebsockets
+mkdir build
+cd build
+cmake .. -DLIB_SUFFIX=64
+make
+make install
+```
+
+如果没有安装cmake
+```
+apt-install install cmake
+```
+
+
+
+
 我就出现了这几个错误，然后使用make && make isntall，可以了。
 
 
@@ -106,6 +131,39 @@ cp -rf lib/libuuid.so* /usr/lib
 终于要启动了
 
 ### 启动
+
+
+#### 问题：libwebsockets.so.12: cannot open shared object file: No such file or directory
+
+
+[参考文章](https://blog.csdn.net/houjixin/article/details/79789448)
+
+```
+
+mosquitto -c /etc/mosquitto/mosquitto.conf 
+mosquitto: error while loading shared libraries: libwebsockets.so.12: cannot open shared object file: No such file or directory
+
+```
+
+为什么是lib64，因为我们前面cmake的时候安装`cmake .. -DLIB_SUFFIX=64`
+
+```
+
+[root@localhost lib]# cd /usr/local/lib64/
+[root@localhost lib64]# ll
+总用量 516
+drwxr-xr-x. 3 root root     27 12月 20 09:49 cmake
+-rw-r--r--. 1 root root 311854 12月 20 09:49 libwebsockets.a
+lrwxrwxrwx. 1 root root     19 12月 20 09:49 libwebsockets.so -> libwebsockets.so.12
+-rwxr-xr-x. 1 root root 211208 12月 20 09:49 libwebsockets.so.12
+drwxr-xr-x. 2 root root     61 12月 20 09:49 pkgconfig
+[root@localhost lib64]# ln -s /usr/local/lib64/libwebsockets.so.12 /usr/lib/libwebsockets.so.12
+[root@localhost lib64]# ldconfig
+
+```
+
+再次启动就可以了
+
 
 ```
 mosquitto -c /etc/mosquitto/mosquitto.conf

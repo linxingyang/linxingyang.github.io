@@ -1,7 +1,7 @@
 ---
 layout: post
 permalink: /:year/4cxx5353vv0sssssc8622d47e658vxdbb
-title: 2018-06-22-js-关于数组中使用indexOf碰到的一个问题
+title: 2018-06-22-javascript-关于数组中使用indexOf碰到的一个问题
 categories: [编程]
 tags: [js]
 excerpt:  js,数组,indexOf,问题

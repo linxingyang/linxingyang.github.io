@@ -1,7 +1,7 @@
 ---
 layout: post
 permalink: /:year/7d8cf5dda21cexp484a3174ceaec9e85
-title: 2017-02-22-js-keyup事件输入中文会卡顿
+title: 2017-03-19-javascript-keyup事件输入中文会卡顿
 categories: [编程]
 tags: [js]
 excerpt: js,keyup,输入中文会卡顿

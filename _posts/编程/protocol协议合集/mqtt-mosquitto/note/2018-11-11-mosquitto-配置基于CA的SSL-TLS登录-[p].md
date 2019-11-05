@@ -250,7 +250,7 @@ drwxr-xr-x 4 root root 4096 Nov  9 23:06 ../
 ```
 
 
-## 配置
+## 双向认证配置
 
 到mosquitto.conf中进行配置，注意我这里直接修改默认的listener，然后修改端口为8883
 
@@ -342,7 +342,7 @@ Enter PEM pass phrase:
 
 只因为多加了一个 -d ，绕地球一圈找解决方案~
 
-## 测试
+## 双向认证测试
 
 启动成功，测测
 
@@ -412,4 +412,67 @@ i'm 128, msg to 128, port 8883
 
 
 
+
+## 单向认证配置
+
+我自己测试的时候都是用的双向认证，后面发现公司用的版本是单向认证。
+
+所以又搞了一下。
+
+
+
+双向认证，发布和订阅都需要带上客户端自己的crt,key还有ca.crt。因为服务端和客户端需要互相认证。
+
+单向认证只需要客户端认证服务端即可。所以客户端发布订阅的时候只要有ca.crt就可以了。
+
+
+
+单向认证的服务端配置
+
+```
+listener 9883
+protocol mqtt
+cafile /etc/mosquitto/ca.crt
+certfile /etc/mosquitto/server.crt
+keyfile /etc/mosquitto/server.key
+```
+
+
+
+双向配置
+
+```
+
+```
+
+
+
+
+
+
+
+
+
+## 单向认证测试
+
+
+
+只需要指定`--cafile`，ca证书即可。
+
+```
+[root@localhost mosquitto-cmd]# mosquitto_pub -h 192.168.45.190  -p 9883 -t "test" -m "wtf" --cafile ca.crt --insecure -u test -P test
+```
+
+
+
+```
+[root@localhost ~]# mosquitto_sub -h 192.168.45.190 -p 9883 -t "test" --cafile ca.crt --insecure  -u test -P test
+```
+
+不指定`--insecure`会出现 A TLS 错误。暂时不知道为啥
+
+```
+[root@localhost mosquitto-cmd]# mosquitto_pub -h 192.168.45.190  -p 9883 -t "test" -m "wtf" --cafile /usr/local/mosquitto-1.6/mosquitto-1.6.3/mosquitto-cmd/test-conf/ssl/ca.crt -u admin -P password 
+Error: A TLS error occurred.
+```
 
