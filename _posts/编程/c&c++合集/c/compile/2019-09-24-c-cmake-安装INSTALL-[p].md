@@ -1,7 +1,7 @@
 ---
 layout: post
 permalink: /:year/271c83f318834c3eae3a63d39a4b9d91
-title: 2019-09-23-c-cmake-安装INSTALL
+title: 2019-09-24-c-cmake-安装INSTALL
 categories: [工具,cmake系列]
 tags: [cmake]
 excerpt: cmake-依赖库
@@ -409,3 +409,5 @@ INSTALL(DIRECTORY icons scripts/ DESTINATION share/myproj
 ## 参考
 
 * cmake practice
+* [为何要使用cmake中文翻译参考](https://www.cnblogs.com/liu3yuan/p/6895419.html)
+* [cmake变量](https://cmake.org/cmake/help/latest/manual/cmake-variables.7.html#variables-that-change-behavior)
