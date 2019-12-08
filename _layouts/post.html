@@ -36,7 +36,7 @@ layout: default
                             <a class="tag" href="{{ site.baseurl }}/categories/#{{ cat }}" title="{{ cat }}">{{ cat }}</a>
                         {% endfor %}
                         {% for tag in page.tags %}
-                            <a class="tag" href="{{ site.baseurl }}/tag/#{{ tag }}" title="{{ tag }}">{{ tag }}</a>
+                            <a class="tag" href="{{ site.baseurl }}/tags/#{{ tag }}" title="{{ tag }}">{{ tag }}</a>
                         {% endfor %}
                     </div>
                     <!-- title -->
@@ -191,7 +191,12 @@ layout: default
                         {% endfor %}
                     </ul>
                 {% endif %}
-                
+                <!-- gitalk -->
+                {% if site.plugin-gitalk-use %}
+                  <hr>
+                  {% include plugins/gitalk.html %}
+                {% endif %}
+              </div>
             </div>
         </div>
     </div>
