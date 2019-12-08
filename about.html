@@ -1,16 +1,16 @@
 ---
 layout: page
-title: 关于我
+title: About Me
 description: 元稹《离思》<br/>曾经沧海难为水，除却巫山不是云。<br/>取次花丛懒回顾，半缘修道半缘君。
 header-img: "img/home/bg-about.jpg"
-multilingual: false
+multilingual: true
 ---
 
 <!-- Language Selector -->
-<!--<select class="sel-lang" onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
+<select class="sel-lang" onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
     <option value="0" selected> 中文 Chinese </option>
     <option value="1"> 英文 English </option>
-</select>-->
+</select>
 
 <!-- Chinese Version -->
 <div class="zh post-container">
@@ -19,12 +19,7 @@ multilingual: false
 </div>
 
 <!-- English Version -->
-<!--
 <div class="en post-container">
     {% capture about_en %}{% include about/en.md %}{% endcapture %}
     {{ about_en | markdownify }}
-</div>-->
-
-{% if site.plugin-gitalk-use %}
-    {% include plugins/gitalk.html %}
-{% endif %}
+</div>

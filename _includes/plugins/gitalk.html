@@ -2,11 +2,15 @@
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 <div id="gitalk-container"></div>
 <script type="text/javascript">
-// console.log({{ page.gitalk-id }});
+
 var id = location.pathname;
-{% if page.gitalk-id %}
-  id = "{{ page.gitalk-id }}";
+{% if page.permalink %}
+  var sPermalink = "{{ page.permalink }}";
+  var nLastBackSlashIndex = sPermalink.lastIndexOf("/");
+  var nSubStartIndex = nLastBackSlashIndex + 1;
+  id = sPermalink.substring(nSubStartIndex);
 {% endif %}
+
 // alert(id);
 
 var gitalk = new Gitalk({

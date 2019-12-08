@@ -11,6 +11,7 @@ baseurl: ""                             # for example, '/blog' if your blog host
 # Publish posts or collection documents with a future date.
 future: true
 
+
 # SNS settings
 RSS: true
 # weibo_username:     huxpro
@@ -39,8 +40,8 @@ anchorjs: true                          # if you want to customize anchor. check
 # plugins: [jekyll-paginate, jekyll-toc]
 plugins:
   - jekyll-paginate
-#  - jekyll-toc
-  
+#  - jekyll-toc # github page doesn't support jeyll-toc
+
 catalog: true
 
 # Markdown settings
@@ -55,28 +56,12 @@ kramdown:
 plugin-gitalk-use: true
 # 不蒜子
 plugin-busuanzi-use: true
-
-# 说说的分页
-talks-enable: true
-talks: [
-     {
-         title: "2019年",
-        href: "/talks/pager/2019/2019-01-01-page"
-     },{
-         title: "2018年",
-         href: "/talks/pager/2018/2018-01-01-page"
-     },{
-         title: "2017年",
-         href: "/talks/pager/2017/2017-01-01-page"
-     },{
-         title: "2016年",
-        href: "/talks/pager/2016/2016-01-01-page"
-     }
- ]
+# 我的计数
+plugin-mycounter-use: false
 
 # Analytics settings
 # Baidu Analytics 
-# ba_track_id: [your track id]
+ba_track_id: 248a1d751848090a4aeb3a0e92fe605e
 
 # Google Analytics
 # ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
@@ -96,15 +81,20 @@ chrome-tab-theme-color: "#000000"
 service-worker: true
 
 # Friends
-friends: [
-    {
-    #     title: "Su",
-    #     href: "http://su.gallery/"
-    # },{
-        title: "乱序",
-        href: "http://mida.re/"
-    },{
-        title: "前端外刊评论",
-        href: "http://qianduan.guru/"
-    }
-]
+# friends: [
+#    {
+#       title: "Su",
+#       href: "http://su.gallery/"
+#    },{
+#        title: "乱序",
+#        href: "http://mida.re/"
+#    },{
+#        title: "前端外刊评论",
+#        href: "http://qianduan.guru/"
+#    }
+#]
+
+
+
+# note
+# relative-tags 不要引入会有重复的文章的标签

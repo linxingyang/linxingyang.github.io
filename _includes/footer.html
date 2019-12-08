@@ -1,6 +1,17 @@
 <!-- Footer -->
 <footer>
     <div class="container">
+
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- gitalk -->
+                {% if site.plugin-gitalk-use %}
+                  <hr>
+                  {% include plugins/gitalk.html %}
+                {% endif %}
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <ul class="list-inline text-center">
@@ -55,6 +66,7 @@
                             </a>
                         </li>
                     {% endif %}
+                    
                     {% if site.facebook_username %}
                         <li>
                             <a target="_blank" href="https://www.facebook.com/{{ site.facebook_username }}">
@@ -87,22 +99,23 @@
                     {% endif %}
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; {{ site.title }} {{ site.time | date: '%Y' }}
-                    <br>
+                    {% if site.plugin-mycounter-use %}
+                        本页面访问量<span id="visitCount"></span>次,
+                        本站访问量<span id="totalVisit"></span>次
+                    {% endif %}
                     {% if site.plugin-busuanzi-use %}
                         <span id="busuanzi_container_site_pv">
-                            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                            本站访问量<span id="busuanzi_value_site_pv"></span>次
                         </span>
                         <span id="busuanzi_container_site_uv">
                             本站访客数<span id="busuanzi_value_site_uv"></span>人次
                         </span>
-                        <br>
-                        <span id="busuanzi_container_page_pv">
+                        <!--<span id="busuanzi_container_page_pv">
                             本页面访问量<span id="busuanzi_value_page_pv"></span>次
-                        </span>
-                        <br>
+                        </span>-->
                     {% endif %}
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <br/>Copyright &copy; {{ site.title }} {{ site.time | date: '%Y' }}
+                    <br/>Theme by <a href="http://huangxuan.me">Hux</a> 
                     <!-- |
                     <iframe
                         style="margin-left: 2px; margin-bottom:-5px;"
@@ -126,7 +139,11 @@
         </script>-->
     </div>
 {% endif %}
-<!-- 不蒜子 -->
+
+<!-- mycounter -->
+{% if site.plugin-mycounter-use %}
+    {% include plugins/mycounter.html %}
+{% endif %}
 
 <!-- Bootstrap Core JavaScript -->
 <!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
@@ -172,7 +189,6 @@
     <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
 -->
 
-
 <!-- jquery.tagcloud.js -->
 <script>
     // only load tagcloud.js in tag.html
@@ -195,7 +211,6 @@
     })
 </script>
 
-
 <!-- Google Analytics -->
 {% if site.ga_track_id %}
 <script>
@@ -214,7 +229,6 @@
 </script>
 {% endif %}
 
-
 <!-- Baidu Tongji -->
 {% if site.ba_track_id %}
 <script>
@@ -232,8 +246,7 @@
 </script>
 {% endif %}
 
-
-<!-- Side Catalog -->
+<!-- Side Catalog, TOC -->
 {% if page.catalog %}
 <script type="text/javascript">
     function generateCatalog (selector) {
@@ -346,4 +359,3 @@
         _render();
     </script>
 {% endif %}
-

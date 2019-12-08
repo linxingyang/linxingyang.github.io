@@ -1,0 +1,792 @@
+I"#�<h1 id="cmake">CMake</h1>
+
+<p>接着上一篇，这篇介绍依赖库，在介绍依赖库之前，先看看如何添加源代码子目录。</p>
+
+<h2 id="添加源代码子目录">添加源代码子目录</h2>
+
+<p>当前所在位置</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test04# pwd
+/tmp/c/2019-09-12-cmaketest/test04
+</code></pre></div></div>
+
+<p>当前目录中的文件/文件夹，我们新建了一个src目录并将helloworld.cpp放在其中</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test04# tree
+.
+├── build
+├── CMakeLists.txt
+└── src
+    ├── CMakeLists.txt
+    └── helloworld.cpp
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">test04/build</code>是用来存放中间文件的空文件夹，<code class="highlighter-rouge">test04/CMakeLists.txt</code>是项目的配置文件，<code class="highlighter-rouge">test04/src/CMakeLists.txt</code>是src文件夹的配置文件，<code class="highlighter-rouge">test04/src/helloworld.cpp</code>则还是那个只打印一句helloworld的程序。</p>
+
+<p><code class="highlighter-rouge">test04/CMakeLists.txt</code>的内容</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test04# vi CMakeLists.txt 
+CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+PROJECT (HELLOWORLD)
+MESSAGE (STATUS "this is BINARY dir " ${HELLOWORLD_BINARY_DIR})
+MESSAGE (STATUS "this is SOURCE dir " ${HELLOWORLD_SOURCE_DIR})
+# ADD_EXECUTABLE (helloworld helloworld.cpp)
+
+ADD_SUBDIRECTORY (src)
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">test04/src/CMakeLists.txt</code>的内容</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test04# vi src/CMakeLists.txt 
+ADD_EXECUTABLE (helloworld helloworld.cpp)
+SET (EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">test04/src/helloworld.cpp</code>中的内容</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test04# cat src/helloworld.cpp 
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(int argc, char * args[]) {
+  printf("hello world\n");
+}
+</code></pre></div></div>
+
+<p>进入到build目录进行编译</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test04# cd build
+
+test04/build# cmake ..
+-- The C compiler identification is GNU 5.4.0
+-- The CXX compiler identification is GNU 5.4.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- this is BINARY dir /tmp/c/2019-09-12-cmaketest/test04/build
+-- this is SOURCE dir /tmp/c/2019-09-12-cmaketest/test04
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /tmp/c/2019-09-12-cmaketest/test04/build
+
+build# make
+Scanning dependencies of target helloworld
+[ 50%] Building CXX object src/CMakeFiles/helloworld.dir/helloworld.cpp.o
+[100%] Linking CXX executable ../bin/helloworld
+[100%] Built target helloworld
+</code></pre></div></div>
+
+<p>运行可执行程序，注意当前可执行程序路径为<code class="highlighter-rouge">test04/build/bin/helloworld</code></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test04/build# ./bin/helloworld 
+hello world
+</code></pre></div></div>
+
+<p>看看当前的目录结构，helloworld的所在位置</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test04/build# cd ..
+
+test04# tree -F -L 3 -I CMakeFiles
+.
+├── build/
+│   ├── bin/
+│   │   └── helloworld*
+│   ├── CMakeCache.txt
+│   ├── cmake_install.cmake
+│   ├── Makefile
+│   └── src/
+│       ├── CMakeFiles/
+│       ├── cmake_install.cmake
+│       └── Makefile
+├── CMakeLists.txt
+└── src/
+    ├── CMakeLists.txt
+    └── helloworld.cpp
+</code></pre></div></div>
+
+<h3 id="配置文件test04cmakeliststxt">配置文件<code class="highlighter-rouge">test04/CMakeLists.txt</code></h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+PROJECT (HELLOWORLD)
+MESSAGE (STATUS "this is BINARY dir " ${HELLOWORLD_BINARY_DIR})
+MESSAGE (STATUS "this is SOURCE dir " ${HELLOWORLD_SOURCE_DIR})
+# ADD_EXECUTABLE (helloworld helloworld.cpp)
+
+ADD_SUBDIRECTORY (src)
+</code></pre></div></div>
+
+<p>在这个配置文件中，将ADD_EXECUTABLE注释掉了，因为当前test04目录下是没有hellworld.cpp文件的，这个文件已经移动到<code class="highlighter-rouge">test04/src</code>目录中了。</p>
+
+<h4 id="add_subdirectory-添加存放源文件的子目录">add_subdirectory 添加存放源文件的子目录</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ADD_SUBDIRECTORY(source_dir [binary_dir] [EXCLUDE_FROM_ALL]) 
+</code></pre></div></div>
+
+<p>这个指令用于</p>
+<ul>
+  <li>source_dir 向当前工程添加存放源文件的子目录，</li>
+  <li>binary_dir 并可以指定中间二进制和目标二进制存放的位置。</li>
+  <li>EXCLUDE_FROM_ALL 参数的含义是将这个目录从编译过程中排除，比如，工程的 example，可能就需要工程构建完成后，再进入 example 目录单独进行构建(当然，你也可以通过定义依赖来解决此类问题)。</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ADD_SUBDIRECTORY (src bin)
+</code></pre></div></div>
+<p>上面的例子定义了将 src 子目录加入工程，并指定编译输出(包含编译中间结果)路径为 bin 目录。如果不进行 bin 目录的指定，那么编译结果(包括中间结果)都将存放在 <code class="highlighter-rouge">src</code> 目录下，指定 bin 目录后，相当于在编译时 将 src 重命名为 bin，所有的中间结果和目标二进制都将存放在 <code class="highlighter-rouge">bin</code> 目录。</p>
+
+<p>此例使用到了<code class="highlighter-rouge">ADD_SUBDIRECTORY (src)</code>表示将向当前工程添加src目录作为存放源文件的子目录</p>
+
+<p>至于为什么cmake要使用这种每个源文件的目录都需要放一个CMakeLists.txt文件，而不是如maven一样，只需要一个pom.xml文件，暂未深究。是不是因为C/C++项目中的东西太杂了，不好弄。。。</p>
+
+<h3 id="配置文件test04srccmakeliststxt">配置文件<code class="highlighter-rouge">test04/src/CMakeLists.txt</code></h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test04# vi src/CMakeLists.txt 
+ADD_EXECUTABLE (helloworld helloworld.cpp)
+SET (EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+</code></pre></div></div>
+<p>由于helloworld.cpp在该目录下，所以理所当然是这个配置文件指定可执行程序<code class="highlighter-rouge">ADD_EXECUTABLE (helloworld helloworld.cpp)</code></p>
+
+<p>接着有两个新东西，SET 和 EXECUTABLE_OUTPUT_PATH</p>
+
+<h4 id="set-设置变量">set 设置变量</h4>
+
+<p>SET(VAR [VALUE] [CACHE TYPE DOCSTRING [FORCE]])</p>
+
+<p>SET 指令可以用来显式的定义变量。</p>
+
+<h4 id="executable_output_path-可执行程序的输出路径">EXECUTABLE_OUTPUT_PATH 可执行程序的输出路径</h4>
+
+<p>这个用来指定可执行文件的输出目录，这个例子指定在编译目录的bin目录下</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+</code></pre></div></div>
+
+<p>所以最后可执行程序helloworld的路径为<code class="highlighter-rouge">test04/build/bin/helloworld</code></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test04# ll build/bin/helloworld 
+-rwxr-xr-x 1 root root 8.5K Oct 27 14:56 build/bin/helloworld*
+</code></pre></div></div>
+
+<h2 id="创建依赖库">创建依赖库</h2>
+
+<p>好了接着来看看在CMake中使用依赖库的例子。</p>
+
+<p>当前目录</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test05# pwd
+/tmp/c/2019-09-12-cmaketest/test05
+</code></pre></div></div>
+
+<p>当前目录下的文件/文件夹。我们将helloworld.cpp放到了<code class="highlighter-rouge">test05/src/main</code>中，又新建了一个<code class="highlighter-rouge">test05/src/math</code>作为一个库。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test05# tree -F
+.
+├── build/
+├── CMakeLists.txt
+└── src/
+    ├── CMakeLists.txt
+    ├── main/
+    │   ├── CMakeLists.txt
+    │   └── helloworld.cpp
+    └── math/
+        ├── CMakeLists.txt
+        ├── math.cpp
+        └── math.h
+
+4 directories, 7 files
+</code></pre></div></div>
+
+<p>接着来看看各个文件的内容</p>
+
+<p><code class="highlighter-rouge">test05/CMakeLists.txt</code>的内容</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test05# cat CMakeLists.txt 
+CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+PROJECT (HELLOWORLD)
+MESSAGE (STATUS "this is BINARY dir " ${HELLOWORLD_BINARY_DIR})
+MESSAGE (STATUS "this is SOURCE dir " ${HELLOWORLD_SOURCE_DIR})
+ADD_SUBDIRECTORY (src)
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">test05/src/CMakeLists.txt</code>的内容，其中就是添加了两个子目录</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test05# cat src/CMakeLists.txt 
+ADD_SUBDIRECTORY (main)
+ADD_SUBDIRECTORY (math)
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">test05/src/main/CMakeLists.txt</code>的内容，指定生成可执行程序，设置了可执行程序存放的目录，还有设置链接库。这些稍后解释。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test05# cat src/main/CMakeLists.txt 
+ADD_EXECUTABLE (helloworld helloworld.cpp)
+SET (EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+TARGET_LINK_LIBRARIES (helloworld math)
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">test05/src/main/helloworld.cpp</code>的内容，做了修改，使用了math库，注意其中引用math.h的方式是使用相对路径的–<code class="highlighter-rouge">#include "../math/math.h"</code></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test05# cat src/main/helloworld.cpp 
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include "../math/math.h"
+
+int main(int argc, char * args[]) {
+  printf("hello world\n");
+  int n1 = 5;
+  int n2 = 10;
+  int nRet = add(5, 10);
+  printf("%d + %d = %d\n", n1, n2, nRet);
+}
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">test05/src/math/CMakeLists.txt</code>的内容，添加了一个库，并指定生成这个库的路径。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test05# cat src/math/CMakeLists.txt 
+ADD_LIBRARY (math math.cpp)
+SET (LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">test05/src/math/math.h</code>的内容，这个库比较简单，就定义了一个方法add。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test05# cat src/math/math.h 
+#ifndef MATH_H__20191027
+#define MATH_H__20191027
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int add(int n1, int n2);
+
+#endif // MATH_H__20191027
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">test05/src/math/math.h</code>的内容。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test05# cat src/math/math.cpp 
+#include "math.h"
+
+int add(int n1, int n2) {
+  return n1 + n2;
+}
+</code></pre></div></div>
+
+<p>编译</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test05# cd build/
+
+test05/build# cmake ..
+-- The C compiler identification is GNU 5.4.0
+-- The CXX compiler identification is GNU 5.4.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- this is BINARY dir /tmp/c/2019-09-12-cmaketest/test05/build
+-- this is SOURCE dir /tmp/c/2019-09-12-cmaketest/test05
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /tmp/c/2019-09-12-cmaketest/test05/build
+
+test05/build# make
+Scanning dependencies of target math
+[ 25%] Building CXX object src/math/CMakeFiles/math.dir/math.cpp.o
+[ 50%] Linking CXX static library ../../lib/libmath.a
+[ 50%] Built target math
+Scanning dependencies of target helloworld
+[ 75%] Building CXX object src/main/CMakeFiles/helloworld.dir/helloworld.cpp.o
+[100%] Linking CXX executable ../../bin/helloworld
+[100%] Built target helloworld
+</code></pre></div></div>
+
+<p>运行</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test05/build# ./bin/helloworld 
+hello world
+5 + 10 = 15
+</code></pre></div></div>
+
+<p>编译后的目录情况，由于CMakeFiles目录中的东西过多，所以此处将其隐去。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test05# tree -F -L 3 -I CMakeFiles
+.
+├── build/
+│   ├── bin/
+│   │   └── helloworld*
+│   ├── CMakeCache.txt
+│   ├── cmake_install.cmake
+│   ├── lib/
+│   │   └── libmath.a
+│   ├── Makefile
+│   └── src/
+│       ├── cmake_install.cmake
+│       ├── main/
+│       ├── Makefile
+│       └── math/
+├── CMakeLists.txt
+└── src/
+    ├── CMakeLists.txt
+    ├── main/
+    │   ├── CMakeLists.txt
+    │   └── helloworld.cpp
+    └── math/
+        ├── CMakeLists.txt
+        ├── math.cpp
+        └── math.h
+
+9 directories, 14 files
+</code></pre></div></div>
+
+<p>注意其中libmath.a库文件的路径为<code class="highlighter-rouge">test05/build/lib/libmath.a</code></p>
+
+<h3 id="配置文件test05srcmathcmakeliststxt">配置文件<code class="highlighter-rouge">test05/src/math/CMakeLists.txt</code></h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test05# cat src/math/CMakeLists.txt 
+ADD_LIBRARY (math math.cpp)
+SET (LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
+</code></pre></div></div>
+
+<h4 id="add_library-添加库">add_library 添加库</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ADD_LIBRARY(libname [SHARED|STATIC|MODULE] [EXCLUDE_FROM_ALL] source1 source2 ... sourceN)
+</code></pre></div></div>
+
+<ul>
+  <li>libname：你不需要写全 libhello.so，只需要填写 hello 即可，cmake 系统会自动为你生成 libhello.X</li>
+  <li>生成的库类型，有三种:
+    <ul>
+      <li>SHARED，动态库</li>
+      <li>STATIC，静态库</li>
+      <li>MODULE，在使用 dyld 的系统有效，如果不支持 dyld，则被当作 SHARED 对待。</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ADD_LIBRARY(common math.cpp) # 默认生成静态库
+ADD_LIBRARY(common STATIC math.cpp) # 生成静态库
+ADD_LIBRARY(common SHARED math.cpp) # 生成动态库
+</code></pre></div></div>
+
+<p>上面配置对应分别生成：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>libmath.a
+libmath.a
+libmath.so
+</code></pre></div></div>
+
+<ul>
+  <li>EXCLUDE_FROM_ALL 参数的意思是这个库不会被默认构建，除非有其他的组件依赖或者手工构建。</li>
+  <li>source1 source2 … sourceN 源文件列表</li>
+</ul>
+
+<p>配置文件中的<code class="highlighter-rouge">ADD_LIBRARY (math math.cpp)</code>代表根据math.cpp源文件生成名为libmath.a的静态库</p>
+
+<h4 id="library_output_path-设置库存放路径">LIBRARY_OUTPUT_PATH 设置库存放路径</h4>
+
+<p>和EXECUTABLE_OUTPUT_PATH类似的，LIBRARY_OUTPUT_PATH指定了库输出的目录</p>
+
+<p>这里指定编译目录下的lib作为库输出的目录</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SET (LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
+</code></pre></div></div>
+
+<p>所以可以看到math库的路径为<code class="highlighter-rouge">test05/build/lib/libmath.a</code></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test05# ll build/lib/libmath.a 
+-rw-r--r-- 1 root root 1.4K Oct 27 16:13 build/lib/libmath.a
+</code></pre></div></div>
+
+<h3 id="配置文件test05srcmaincmakeliststxt">配置文件<code class="highlighter-rouge">test05/src/main/CMakeLists.txt</code></h3>
+
+<p>使用了TARGET_LINK_LIBRARIES用于指示链接库math。可以指定全名用于链接动态库或者静态库，如果libmath.a则链接静态库，libmath.so则链接动态库</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test05# cat src/main/CMakeLists.txt 
+ADD_EXECUTABLE (helloworld helloworld.cpp)
+SET (EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+TARGET_LINK_LIBRARIES (helloworld math)
+</code></pre></div></div>
+
+<h4 id="target_link_libraries-链接文件">target_link_libraries 链接文件</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TARGET_LINK_LIBRARIES(target library1 &lt;debug | optimized&gt; library2 ...)
+</code></pre></div></div>
+
+<p>这个指令可以用来为 target 添加需要链接的共享库，本例中是一个可执行文件，但是同样可以用于为自己编写的共享库添加共享库链接。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TARGET_LINK_LIBRARIES(helloworld math)
+</code></pre></div></div>
+
+<p>也可以写成</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TARGET_LINK_LIBRARIES(helloworld libmath.a)
+</code></pre></div></div>
+
+<h2 id="同时生成静态依赖库和动态依赖库">同时生成静态依赖库和动态依赖库</h2>
+
+<p>有时候我们希望同时生成静态库和动态库。</p>
+
+<p>当前路径</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test06# pwd
+/tmp/c/2019-09-12-cmaketest/test06
+</code></pre></div></div>
+
+<p>当前目录情况</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test06# tree -F
+.
+├── build/
+├── CMakeLists.txt
+└── src/
+    ├── main/
+    │   ├── CMakeLists.txt
+    │   └── helloworld.cpp
+    └── math/
+        ├── CMakeLists.txt
+        ├── math.cpp
+        └── math.h
+
+4 directories, 6 files
+</code></pre></div></div>
+
+<p>上面内容都是test05的拷贝，这次只修改<code class="highlighter-rouge">test06/src/math/CMakeLists.txt</code>文件</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test06# vi src/math/CMakeLists.txt 
+ADD_LIBRARY (math_static STATIC math.cpp)
+ADD_LIBRARY (math SHARED math.cpp)
+
+SET_TARGET_PROPERTIES (math_static PROPERTIES OUTPUT_NAME "math")
+GET_TARGET_PROPERTY (OUTPUT_VALUE math_static OUTPUT_NAME)
+
+MESSAGE (STATUS "this is math_static OUTPUT_NAME:" ${OUTPUT_VALUE})
+
+SET (LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
+</code></pre></div></div>
+
+<p>编译</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test06# cd build/
+
+test06/build# cmake ..
+-- The C compiler identification is GNU 5.4.0
+-- The CXX compiler identification is GNU 5.4.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- this is BINARY dir /tmp/c/2019-09-12-cmaketest/test06/build
+-- this is SOURCE dir /tmp/c/2019-09-12-cmaketest/test06
+-- this is math_static OUTPUT_NAME:math
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /tmp/c/2019-09-12-cmaketest/test06/build
+
+test06/build# make
+Scanning dependencies of target math
+[ 16%] Building CXX object src/math/CMakeFiles/math.dir/math.cpp.o
+[ 33%] Linking CXX shared library ../../lib/libmath.so
+[ 33%] Built target math
+Scanning dependencies of target helloworld
+[ 50%] Building CXX object src/main/CMakeFiles/helloworld.dir/helloworld.cpp.o
+[ 66%] Linking CXX executable ../../bin/helloworld
+[ 66%] Built target helloworld
+Scanning dependencies of target math_static
+[ 83%] Building CXX object src/math/CMakeFiles/math_static.dir/math.cpp.o
+[100%] Linking CXX static library ../../lib/libmath.a
+[100%] Built target math_static
+</code></pre></div></div>
+
+<p>运行</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test06/build# ./bin/helloworld 
+hello world
+5 + 10 = 15
+</code></pre></div></div>
+
+<p>查看目录，可以看到<code class="highlighter-rouge">test06/build/lib</code>下生成了libmath.a（静态库）和libmath.so(动态库)。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test06/build# cd ..
+
+test06# tree -F -L 3 -I CMakeFiles
+.
+├── build/
+│   ├── bin/
+│   │   └── helloworld*
+│   ├── CMakeCache.txt
+│   ├── cmake_install.cmake
+│   ├── lib/
+│   │   ├── libmath.a
+│   │   └── libmath.so*
+│   ├── Makefile
+│   └── src/
+│       ├── cmake_install.cmake
+│       ├── main/
+│       ├── Makefile
+│       └── math/
+├── CMakeLists.txt
+└── src/
+    ├── CMakeLists.txt
+    ├── main/
+    │   ├── CMakeLists.txt
+    │   └── helloworld.cpp
+    └── math/
+        ├── CMakeLists.txt
+        ├── math.cpp
+        └── math.h
+
+9 directories, 15 files
+</code></pre></div></div>
+
+<h3 id="配置文件test06srcmathcmakeliststxt">配置文件<code class="highlighter-rouge">test06/src/math/CMakeLists.txt</code></h3>
+
+<p>来看看<code class="highlighter-rouge">test06/src/math/CMakeLists.txt</code>配置文件</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test06# vi src/math/CMakeLists.txt 
+ADD_LIBRARY (math_static STATIC math.cpp)
+ADD_LIBRARY (math SHARED math.cpp)
+
+SET_TARGET_PROPERTIES (math_static PROPERTIES OUTPUT_NAME "math")
+GET_TARGET_PROPERTY (OUTPUT_VALUE math_static OUTPUT_NAME)
+
+MESSAGE (STATUS "this is math_static OUTPUT_NAME:" ${OUTPUT_VALUE})
+
+SET (LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)             
+</code></pre></div></div>
+
+<p>注意这里如果使用如下的语法，那么只会生成动态库，因为如果静态库取名math，那么为静态库根本没有被构建，仍然只生成一个动态库。因为 math 作为一个 target 是不能重名的，所以，静态库构建指令无效。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ADD_LIBRARY (math STATIC math.cpp)
+ADD_LIBRARY (math SHARED math.cpp)
+</code></pre></div></div>
+
+<p>所以此处将静态库使用的名称为math_static</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ADD_LIBRARY (math_static STATIC math.cpp)
+ADD_LIBRARY (math SHARED math.cpp)
+</code></pre></div></div>
+
+<p>但是我们又想要静态库和动态库出来之后的样子是：libmath.a和libmath.so，而不是libmath_static.a和libmath.so。所以此处用到了SET_TARGET_PROPERTIES和GET_TARGET_PROPERTY</p>
+
+<h4 id="set_target_properties-设置目标属性">set_target_properties 设置目标属性</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SET_TARGET_PROPERTIES(target1 target2 ... PROPERTIES prop1 value1 prop2 value2 ...)
+</code></pre></div></div>
+
+<p>这条指令可以用来设置输出的名称，对于动态库，还可以用来指定动态库版本和 API 版本。</p>
+
+<p>在本例中，我们需要做的是向 <code class="highlighter-rouge">t06/src/CMakeLists.txt</code> 中添加一条：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SET_TARGET_PROPERTIES (math_static PROPERTIES OUTPUT_NAME "math")
+</code></pre></div></div>
+<p>这样，我们就可以同时得到libmath.a和libmath.so两个库了。 与该命令对应的指令是：</p>
+
+<h4 id="get_target_property-获取目标属性">get_target_property 获取目标属性</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET_TARGET_PROPERTY(VAR target property) 
+</code></pre></div></div>
+
+<p>具体用法如</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SET_TARGET_PROPERTIES (math_static PROPERTIES OUTPUT_NAME "math")
+GET_TARGET_PROPERTY (OUTPUT_VALUE math_static OUTPUT_NAME)
+
+MESSAGE (STATUS "this is math_static OUTPUT_NAME:" ${OUTPUT_VALUE})
+</code></pre></div></div>
+
+<p>界面就会输出</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-- this is math_static OUTPUT_NAME:math
+</code></pre></div></div>
+
+<h2 id="设置动态库版本">设置动态库版本</h2>
+
+<p>前面知道SET_TARGET_PROPERTIES还可以指定动态库版本，偷懒一下，直接修改上个例子，添加<code class="highlighter-rouge">SET_TARGET_PROPERTIES(math PROPERTIES VERSION 1.2 SOVERSION 1)</code>这么一句，其中 VERSION 指代动态库版本，SOVERSION 指代 API 版本。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test06# vi src/math/CMakeLists.txt 
+DD_LIBRARY (math math.cpp)
+ADD_LIBRARY (math_static STATIC math.cpp)
+ADD_LIBRARY (math SHARED math.cpp)
+SET_TARGET_PROPERTIES(math PROPERTIES VERSION 1.2 SOVERSION 1)
+
+SET_TARGET_PROPERTIES (math_static PROPERTIES OUTPUT_NAME "math")
+GET_TARGET_PROPERTY (OUTPUT_VALUE math_static OUTPUT_NAME)
+
+MESSAGE (STATUS "this is math_static OUTPUT_NAME:" ${OUTPUT_VALUE})
+
+SET (LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
+</code></pre></div></div>
+
+<p>最后编译生成如下，可以看到lib中的动态库已经变成带版本的了。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test06/build# tree -F -L 3 -I CMakeFiles
+.
+├── bin/
+│   └── helloworld*
+├── CMakeCache.txt
+├── cmake_install.cmake
+├── lib/
+│   ├── libmath.a
+│   ├── libmath.so -&gt; libmath.so.1*
+│   ├── libmath.so.1 -&gt; libmath.so.1.2*
+│   └── libmath.so.1.2*
+├── Makefile
+└── src/
+    ├── cmake_install.cmake
+    ├── main/
+    │   ├── cmake_install.cmake
+    │   └── Makefile
+    ├── Makefile
+    └── math/
+        ├── cmake_install.cmake
+        └── Makefile
+
+5 directories, 14 files
+</code></pre></div></div>
+
+<h2 id="添加外部依赖库">添加外部依赖库</h2>
+
+<p>前面的例子使用是项目内的依赖库。现在将helloworld程序中的math库移到外部。因为install指令下一次才讲，所以此处就直接将math库的头文件和动态库静态库直接拷到middleware目录下。</p>
+
+<p>middleware所在路径</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>middleware# pwd
+/tmp/c/2019-09-12-cmaketest/middleware
+</code></pre></div></div>
+
+<p>middleware中内容</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>middleware# tree
+.
+├── include
+│   └── math
+│       └── math.h
+└── lib
+    ├── libmath.a
+    ├── libmath.so
+    ├── libmath.so.1
+    └── libmath.so.1.2
+</code></pre></div></div>
+
+<p>当前目录，相对于上一个例子test06，已将math模块移除，并且做了一些修改</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test07# pwd
+/tmp/c/2019-09-12-cmaketest/test07
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test07# tree
+.
+├── build
+├── CMakeLists.txt
+└── src
+    ├── CMakeLists.txt
+    └── main
+        ├── CMakeLists.txt
+        └── helloworld.cpp
+
+3 directories, 4 files
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">test07/CMakeLists.txt</code>的内容，添加了INCLUDE_DIRECTORIES和LINK_DIRECTORIES，分别指向头文件和库文件所在的目录</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test07# vi CMakeLists.txt 
+CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+PROJECT (HELLOWORLD)
+MESSAGE (STATUS "this is BINARY dir " ${HELLOWORLD_BINARY_DIR})
+MESSAGE (STATUS "this is SOURCE dir " ${HELLOWORLD_SOURCE_DIR})
+# ADD_EXECUTABLE (helloworld helloworld.cpp)
+
+INCLUDE_DIRECTORIES (/tmp/c/2019-09-12-cmaketest/middleware/include)
+LINK_DIRECTORIES (/tmp/c/2019-09-12-cmaketest/middleware/lib)
+
+ADD_SUBDIRECTORY (src)
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">test07/src/CMakeLists.txt</code>的内容，现在只有main一个子目录了</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test07# vi src/CMakeLists.txt 
+ADD_SUBDIRECTORY (main)
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">test07/src/main/CMakeLists.txt</code>的内容没有改变</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test07# vi src/main/CMakeLists.txt 
+ADD_EXECUTABLE (helloworld helloworld.cpp)
+SET (EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+TARGET_LINK_LIBRARIES (helloworld math)
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">test07/src/main/helloworld.cpp</code>的内容，注意将引入头文件math.h的方式由 <code class="highlighter-rouge">#include "../math/math.h"</code> 改为 <code class="highlighter-rouge">#include "math/math.h"</code></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test07# vi src/main/helloworld.cpp 
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include "math/math.h"
+
+int main(int argc, char * args[]) {
+  printf("hello world\n");
+  int n1 = 5;
+  int n2 = 10;
+  int nRet = add(5, 10);
+  printf("%d + %d = %d\n", n1, n2, nRet);
+}
+</code></pre></div></div>
+
+<p>编译</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test07# cd build/
+
+test07/build# cmake ..
+-- The C compiler identification is GNU 5.4.0
+-- The CXX compiler identification is GNU 5.4.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- this is BINARY dir /tmp/c/2019-09-12-cmaketest/test07/build
+-- this is SOURCE dir /tmp/c/2019-09-12-cmaketest/test07
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /tmp/c/2019-09-12-cmaketest/test07/build
+
+build# make
+Scanning dependencies of target helloworld
+[ 50%] Building CXX object src/main/CMakeFiles/helloworld.dir/helloworld.cpp.o
+[100%] Linking CXX executable ../../bin/helloworld
+[100%] Built target helloworld
+</code></pre></div></div>
+
+<p>运行</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>build# ./bin/helloworld 
+hello world
+5 + 10 = 15
+</code></pre></div></div>
+
+<h3 id="配置文件test07cmakeliststxt">配置文件<code class="highlighter-rouge">test07/CMakeLists.txt</code></h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test07# vi CMakeLists.txt 
+CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
+PROJECT (HELLOWORLD)
+MESSAGE (STATUS "this is BINARY dir " ${HELLOWORLD_BINARY_DIR})
+MESSAGE (STATUS "this is SOURCE dir " ${HELLOWORLD_SOURCE_DIR})
+# ADD_EXECUTABLE (helloworld helloworld.cpp)
+
+INCLUDE_DIRECTORIES (/tmp/c/2019-09-12-cmaketest/middleware/include)
+LINK_DIRECTORIES (/tmp/c/2019-09-12-cmaketest/middleware/lib)
+
+ADD_SUBDIRECTORY (src)
+</code></pre></div></div>
+
+<p>该文件添加了INCLUDE_DIRECTORIES和LINK_DIRECTORIES指令。我们也可以将这两个命令写在<code class="highlighter-rouge">test07/src/main/CMakeLists.txt</code>中，但是这种一般是写在项目根目录中的CMakeLists.txt中</p>
+
+<h4 id="include_directories-包含头文件目录">include_directories 包含头文件目录</h4>
+
+<p>用来指定需要的头文件路径</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INCLUDE_DIRECTORIES (/tmp/c/2019-09-12-cmaketest/middleware/include)
+</code></pre></div></div>
+<p>此处指定了包含的目录为<code class="highlighter-rouge">/tmp/c/2019-09-12-cmaketest/middleware/include</code>，但是math.h的路径是<code class="highlighter-rouge">/tmp/c/2019-09-12-cmaketest/middleware/include/math/math.h</code>，所以在helloworld.cpp中使用如下方式来引用。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include "math/math.h"
+</code></pre></div></div>
+
+<p>我们也可以直接指定<code class="highlighter-rouge">/tmp/c/2019-09-12-cmaketest/middleware/include/math</code>，这样就直接如下引用即可</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#include "math.h"
+</code></pre></div></div>
+<p>但因为我们到时候可能使用的不止一个库，可能是多个在middleware下的库，所以该路径到include即可。</p>
+
+<h4 id="link_directories-包含库文件目录">link_directories 包含库文件目录</h4>
+
+<p>用来指定第三方库所在的路径，可以理解为gcc中的-L</p>
+
+<p>—分割线</p>
+
+<p>又到了恰饭的点了，下次整理INSTALL。</p>
+
+<h2 id="参考">参考</h2>
+
+<ul>
+  <li>cmake practice</li>
+  <li><a href="https://www.cnblogs.com/liu3yuan/p/6895419.html">为何要使用cmake中文翻译参考</a></li>
+  <li><a href="https://cmake.org/cmake/help/latest/manual/cmake-variables.7.html#variables-that-change-behavior">cmake变量</a></li>
+</ul>
+:ET

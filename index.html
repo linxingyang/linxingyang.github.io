@@ -1,6 +1,6 @@
 ---
 layout: page
-description:
+description: stop waste your time
 ---
 <!-- content -->
 {% for post in paginator.posts %}
@@ -19,12 +19,13 @@ description:
       </div>
     </a>
     <p class="post-meta">
+      post by
       {% if post.author %}
           {{ post.author }}
       {% else %}
           {{ site.title }}
       {% endif %}
-      发布于 
+      at
       {{ post.date | date: "%Y-%m-%d" }}
     </p>
   </div>
@@ -45,8 +46,4 @@ description:
     </li>
     {% endif %}
   </ul>
-{% endif %}
-
-{% if site.plugin-gitalk-use %}
-  {% include plugins/gitalk.html %}
 {% endif %}

@@ -2,13 +2,16 @@
 layout: post
 permalink: /:year/271c83f318834c3eae3a63d39a4b9d91
 title: 2019-09-24-c-cmake-安装INSTALL
-categories: [工具,cmake系列]
-tags: [cmake]
-excerpt: cmake-依赖库
+categories: [c]
+tags: [cmake系列,cmake]
+relative-tags: [cmake系列]
+excerpt: c,c++,cmake,install
 description: cmake-依赖库
-gitalk-id: 271c83f318834c3eae3a63d39a4b9d91
-toc: true
+catalog: true
+author: 林兴洋
 ---
+
+
 
 # CMAKE
 

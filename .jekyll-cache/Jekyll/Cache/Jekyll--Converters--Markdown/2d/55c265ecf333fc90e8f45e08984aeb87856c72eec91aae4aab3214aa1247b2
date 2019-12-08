@@ -1,0 +1,1205 @@
+I"+�<p>一个c语言五子棋实例。</p>
+
+<p><img src="http://image.linxingyang.net/image/C-cpp/image/2014-04-03/01.png" alt="图" /></p>
+
+<p><img src="http://image.linxingyang.net/image/C-cpp/image/2014-04-03/02.png" alt="图" /></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* 头文件  */</span>
+<span class="cp">#include "stdio.h"
+#include "conio.h"
+#include "graphics.h"
+#include &lt;bios.h&gt;
+</span><span class="cm">/* 系统键 玩家1 和 玩家2 的操作键    */</span>
+<span class="cp">#define Esc 0x11b
+#define Player1_up 18432
+#define Player1_down 20480
+#define Player1_left 19200
+#define Player1_right 19712
+#define Player1_do 7181    </span><span class="cm">/*enter*/</span><span class="cp">
+#define Player2_up 4471
+#define Player2_down 8051
+#define Player2_left 7777
+#define Player2_right 8292
+#define Player2_do 14624    </span><span class="cm">/*space*/</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">j</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">key</span><span class="p">;</span><span class="cm">/*键盘输入*/</span>
+<span class="kt">int</span> <span class="n">flag</span><span class="p">;</span><span class="cm">/*标志*/</span>
+<span class="kt">int</span> <span class="n">PlayMode</span><span class="p">;</span><span class="cm">/*游戏模式*/</span>
+<span class="kt">int</span> <span class="n">RedXianhou</span><span class="p">;</span><span class="cm">/*红方先后*/</span>
+<span class="kt">int</span> <span class="n">AllChessNumber</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="cm">/*棋盘中所有的棋子*/</span>
+<span class="kt">int</span> <span class="n">Chess</span><span class="p">[</span><span class="mi">15</span><span class="p">][</span><span class="mi">15</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span><span class="cm">/*存棋子的棋盘*/</span>
+<span class="kt">int</span> <span class="n">CountNumber</span><span class="p">;</span>  <span class="cm">/*连成五子时画出的五子连接线*/</span>
+<span class="kt">int</span> <span class="n">JudgeX</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">JudgeY</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">LineX1</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">LineX2</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">LineY1</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">LineY2</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">XiaoQiPanX1</span> <span class="o">=</span> <span class="mi">230</span><span class="p">;</span><span class="cm">/*小棋盘数据*/</span>
+<span class="kt">int</span> <span class="n">XiaoQiPanX2</span> <span class="o">=</span> <span class="mi">380</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">XiaoQiPanY1</span> <span class="o">=</span> <span class="mi">230</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">XiaoQiPanY2</span> <span class="o">=</span> <span class="mi">380</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">XiaoYuanX1</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span><span class="cm">/*代表红方白方的圆的数据*/</span>
+<span class="kt">int</span> <span class="n">XiaoYuanY1</span> <span class="o">=</span> <span class="mi">335</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">XiaoYuanX2</span> <span class="o">=</span> <span class="mi">520</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">XiaoYuanY2</span> <span class="o">=</span> <span class="mi">335</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">YuanR</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">DaQiPanX1</span> <span class="o">=</span> <span class="mi">170</span><span class="p">;</span><span class="cm">/*大棋盘的数据*/</span>
+<span class="kt">int</span> <span class="n">DaQiPanX2</span> <span class="o">=</span> <span class="mi">450</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">DaQiPanY1</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">DaQiPanY2</span> <span class="o">=</span> <span class="mi">380</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">ChessRedLocalX</span> <span class="o">=</span> <span class="mi">170</span><span class="p">;</span><span class="cm">/*初始红方棋子的落点 */</span>
+<span class="kt">int</span> <span class="n">ChessRedLocalY</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">ChessWhiteLocalX</span> <span class="o">=</span> <span class="mi">170</span><span class="p">;</span><span class="cm">/* 初始白方棋子的落点 */</span>
+<span class="kt">int</span> <span class="n">ChessWhiteLocalY</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">ChessLocalBoxX</span><span class="p">;</span><span class="cm">/*棋子在棋盘二维数组中的位置*/</span>
+<span class="kt">int</span> <span class="n">ChessLocalBoxY</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">Welcome</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span><span class="cm">/*欢迎界面*/</span>
+<span class="kt">void</span> <span class="nf">ModeChoose</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span><span class="cm">/*模式选择*/</span>
+<span class="kt">void</span> <span class="nf">DrawChessBox</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span><span class="cm">/*棋盘*/</span>
+<span class="kt">void</span> <span class="nf">ChooseFirst_Or_Second</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span><span class="cm">/*先手后手的选择*/</span>
+<span class="kt">void</span> <span class="nf">DrawChessR_W</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">color</span><span class="p">);</span><span class="cm">/*画棋盘上的红子和白子*/</span>
+<span class="kt">void</span> <span class="nf">DrawStandForRed</span><span class="p">();</span><span class="cm">/*代表红方的圆*/</span>
+<span class="kt">void</span> <span class="nf">DrawStandForWhite</span><span class="p">();</span><span class="cm">/*代表白方的圆*/</span>
+<span class="kt">void</span> <span class="nf">Player1_vs_Player2</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span><span class="cm">/*人人对战*/</span>
+<span class="kt">void</span> <span class="nf">Player_vs_Computer</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span><span class="cm">/*人机对战*/</span>
+<span class="kt">void</span> <span class="nf">ChessNowLocal</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">);</span><span class="cm">/* 光标显示当前棋子位置 */</span>
+<span class="kt">void</span> <span class="nf">ChessActionRed</span><span class="p">(</span><span class="kt">int</span> <span class="n">key</span><span class="p">);</span><span class="cm">/*player1*/</span>
+<span class="kt">void</span> <span class="nf">ChessActionWhite</span><span class="p">(</span><span class="kt">int</span> <span class="n">key</span><span class="p">);</span> <span class="cm">/*player2*/</span>
+<span class="kt">void</span> <span class="nf">RedWin</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span><span class="cm">/*红方胜利显示的胜利提示*/</span>
+<span class="kt">void</span> <span class="nf">WhiteWin</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span> <span class="cm">/*白方。。。*/</span>
+<span class="kt">void</span> <span class="nf">PrintfChess</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span><span class="cm">/*在清空棋盘后将所有的棋子重新打印出来*/</span>
+<span class="kt">void</span> <span class="nf">JudgeHeng</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">R_or_W</span><span class="p">);</span><span class="cm">/*各个方向上的判断*/</span>
+<span class="kt">void</span> <span class="nf">JudgeShu</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">R_or_W</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">JudgeZuoXie</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">R_or_W</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">JudgeYouXie</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">R_or_W</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">ComputeYouXie</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">R_or_W</span><span class="p">);</span><span class="cm">/*人机模式时各个方向的分数判断*/</span>
+<span class="kt">int</span> <span class="nf">ComputeShu</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">R_or_W</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">ComputeZuoXie</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">R_or_W</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">ComputeHeng</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">R_or_W</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">ScoreReturn</span><span class="p">(</span><span class="kt">int</span> <span class="n">CountLeft</span><span class="p">,</span><span class="kt">int</span> <span class="n">CountRight</span><span class="p">,</span><span class="kt">int</span> <span class="n">LeftLive</span><span class="p">,</span><span class="kt">int</span> <span class="n">RightLive</span><span class="p">,</span><span class="kt">int</span> <span class="n">R_or_W</span><span class="p">);</span><span class="cm">/*分数计算*/</span>
+<span class="kt">void</span> <span class="nf">PCChessActionWhite</span><span class="p">();</span><span class="cm">/*机器*/</span>
+<span class="kt">void</span> <span class="nf">Exit</span><span class="p">();</span><span class="cm">/*退出游戏*/</span>
+
+<span class="n">main</span><span class="p">()</span><span class="cm">/*主函数*/</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">gdriver</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">gmode</span><span class="p">;</span>
+    <span class="n">gdriver</span> <span class="o">=</span> <span class="n">DETECT</span><span class="p">;</span>
+    <span class="n">initgraph</span><span class="p">(</span><span class="o">&amp;</span><span class="n">gdriver</span><span class="p">,</span><span class="o">&amp;</span><span class="n">gmode</span><span class="p">,</span><span class="s">""</span> <span class="p">);</span>
+    <span class="n">Welcome</span><span class="p">();</span><span class="cm">/*欢迎界面*/</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span><span class="s">"player1 vs player2"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="s">"player vs computer"</span><span class="p">);</span>
+    <span class="n">DrawChessR_W</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span><span class="n">BLUE</span><span class="p">);</span>
+    <span class="n">ModeChoose</span><span class="p">();</span><span class="cm">/*模式选择，人机或者人人*/</span>
+    <span class="n">DrawChessBox</span><span class="p">();</span><span class="cm">/*棋盘*/</span>
+    <span class="n">ChooseFirst_Or_Second</span><span class="p">();</span><span class="cm">/*先后*/</span>
+    <span class="n">DrawChessBox</span><span class="p">();</span><span class="cm">/*棋盘*/</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">PlayMode</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+       <span class="n">Player1_vs_Player2</span><span class="p">();</span><span class="cm">/*人人对战*/</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+       <span class="n">Player_vs_Computer</span><span class="p">();</span><span class="cm">/*人机对战*/</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">Player1_vs_Player2</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="cm">/*人人对战*/</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">RedXianhou</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="cm">/*红方先手*/</span>
+    <span class="p">{</span>
+        <span class="n">setcolor</span><span class="p">(</span><span class="n">GREEN</span><span class="p">);</span>
+        <span class="n">outtextxy</span><span class="p">(</span><span class="mi">220</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="s">"Red,please put your chess! "</span><span class="p">);</span>
+        <span class="n">outtextxy</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="s">"press Esc to exit!"</span><span class="p">);</span>
+        <span class="n">DrawChessR_W</span><span class="p">(</span><span class="n">ChessRedLocalX</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="p">,</span><span class="n">RED</span><span class="p">);</span><span class="cm">/*画红方第一颗棋子*/</span>
+        <span class="n">ChessNowLocal</span><span class="p">(</span><span class="n">ChessRedLocalX</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="p">);</span><span class="cm">/*棋子光标*/</span>
+        <span class="n">DrawStandForRed</span><span class="p">();</span><span class="cm">/*代表红方的圆*/</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">bioskey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">bioskey</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">key</span> <span class="o">!=</span> <span class="n">Esc</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">ChessActionRed</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="n">Exit</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">else</span><span class="cm">/*白方先手*/</span>
+    <span class="p">{</span>
+        <span class="n">setcolor</span><span class="p">(</span><span class="n">GREEN</span><span class="p">);</span>
+        <span class="n">outtextxy</span><span class="p">(</span><span class="mi">220</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="s">"White,please put your chess! "</span><span class="p">);</span>
+        <span class="n">outtextxy</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="s">"press Esc to exit!"</span><span class="p">);</span>
+        <span class="n">DrawChessR_W</span><span class="p">(</span><span class="n">ChessWhiteLocalX</span><span class="p">,</span><span class="n">ChessWhiteLocalY</span><span class="p">,</span><span class="n">WHITE</span><span class="p">);</span><span class="cm">/*画白方第一颗棋子*/</span>
+        <span class="n">ChessNowLocal</span><span class="p">(</span><span class="n">ChessWhiteLocalX</span><span class="p">,</span><span class="n">ChessWhiteLocalY</span><span class="p">);</span><span class="cm">/*棋子光标*/</span>
+        <span class="n">DrawStandForWhite</span><span class="p">();</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">bioskey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">bioskey</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">key</span> <span class="o">!=</span> <span class="n">Esc</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">ChessActionWhite</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="n">Exit</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">Player_vs_Computer</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="cm">/*人机对战*/</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">RedXianhou</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="cm">/*红方先手*/</span>
+    <span class="p">{</span>
+        <span class="n">setcolor</span><span class="p">(</span><span class="n">GREEN</span><span class="p">);</span>
+        <span class="n">outtextxy</span><span class="p">(</span><span class="mi">220</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="s">"White,please put your chess! "</span><span class="p">);</span>
+        <span class="n">outtextxy</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="s">"press Esc to exit!"</span><span class="p">);</span>
+        <span class="n">DrawChessR_W</span><span class="p">(</span><span class="n">ChessRedLocalX</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="p">,</span><span class="n">RED</span><span class="p">);</span><span class="cm">/*画红方第一颗棋子*/</span>
+        <span class="n">ChessNowLocal</span><span class="p">(</span><span class="n">ChessRedLocalX</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="p">);</span><span class="cm">/*棋子光标*/</span>
+        <span class="n">DrawStandForRed</span><span class="p">();</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">bioskey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">bioskey</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">key</span> <span class="o">!=</span> <span class="n">Esc</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">ChessActionRed</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="n">Exit</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">else</span><span class="cm">/*白方先手*/</span>
+    <span class="p">{</span>
+        <span class="n">Chess</span><span class="p">[</span><span class="mi">9</span><span class="p">][</span><span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="n">PrintfChess</span><span class="p">();</span>
+        <span class="n">setcolor</span><span class="p">(</span><span class="n">GREEN</span><span class="p">);</span>
+        <span class="n">outtextxy</span><span class="p">(</span><span class="mi">220</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="s">"Red,please put your chess! "</span><span class="p">);</span>
+        <span class="n">outtextxy</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="s">"press Esc to exit!"</span><span class="p">);</span>
+        <span class="n">DrawChessR_W</span><span class="p">(</span><span class="n">ChessRedLocalX</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="p">,</span><span class="n">RED</span><span class="p">);</span><span class="cm">/*画红方第一颗棋子*/</span>
+        <span class="n">ChessNowLocal</span><span class="p">(</span><span class="n">ChessRedLocalX</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="p">);</span><span class="cm">/*棋子光标*/</span>
+        <span class="n">DrawStandForRed</span><span class="p">();</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">bioskey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">bioskey</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">key</span> <span class="o">!=</span> <span class="n">Esc</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">ChessActionRed</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="n">Exit</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">ChessActionRed</span><span class="p">(</span><span class="kt">int</span> <span class="n">key</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">setcolor</span><span class="p">(</span><span class="n">GREEN</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">220</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="s">"Red,please put your chess！"</span><span class="p">);</span>
+    <span class="k">do</span>
+    <span class="p">{</span>
+         <span class="n">DrawChessR_W</span><span class="p">(</span><span class="n">ChessRedLocalX</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="p">,</span><span class="n">RED</span><span class="p">);</span>
+         <span class="n">ChessNowLocal</span><span class="p">(</span><span class="n">ChessRedLocalX</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="p">);</span>
+         <span class="n">ChessLocalBoxX</span> <span class="o">=</span> <span class="p">(</span><span class="n">ChessRedLocalX</span> <span class="o">-</span> <span class="mi">170</span><span class="p">)</span> <span class="o">/</span> <span class="mi">20</span><span class="p">;</span>
+         <span class="n">ChessLocalBoxY</span> <span class="o">=</span> <span class="p">(</span><span class="n">ChessRedLocalY</span> <span class="o">-</span> <span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="mi">20</span><span class="p">;</span>
+         <span class="n">flag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+         <span class="k">switch</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+         <span class="p">{</span>
+            <span class="k">case</span> <span class="n">Player1_up</span>   <span class="p">:</span> <span class="n">ChessRedLocalY</span> <span class="o">=</span> <span class="n">ChessRedLocalY</span> <span class="o">-</span> <span class="mi">20</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="n">Player1_down</span> <span class="p">:</span> <span class="n">ChessRedLocalY</span> <span class="o">=</span> <span class="n">ChessRedLocalY</span> <span class="o">+</span> <span class="mi">20</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="n">Player1_left</span> <span class="p">:</span> <span class="n">ChessRedLocalX</span> <span class="o">=</span> <span class="n">ChessRedLocalX</span> <span class="o">-</span> <span class="mi">20</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="n">Player1_right</span><span class="p">:</span> <span class="n">ChessRedLocalX</span> <span class="o">=</span> <span class="n">ChessRedLocalX</span> <span class="o">+</span> <span class="mi">20</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="n">Player1_do</span>   <span class="p">:</span>
+            <span class="p">{</span>
+                 <span class="k">if</span> <span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">ChessLocalBoxX</span><span class="p">][</span><span class="n">ChessLocalBoxY</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span><span class="cm">/*若此处不为零则说明有棋子存在，系统提示*/</span>
+                 <span class="p">{</span>
+                       <span class="n">flag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                       <span class="n">setcolor</span><span class="p">(</span><span class="n">GREEN</span><span class="p">);</span>
+                       <span class="n">outtextxy</span><span class="p">(</span><span class="mi">180</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="s">"Red,you can not put your chess here! "</span><span class="p">);</span>
+                       <span class="k">break</span><span class="p">;</span>
+                 <span class="p">}</span>
+                    <span class="n">Chess</span><span class="p">[</span><span class="n">ChessLocalBoxX</span><span class="p">][</span><span class="n">ChessLocalBoxY</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="cm">/*没有棋子的情况下，则执行这里的操作*/</span>
+                    <span class="n">JudgeHeng</span><span class="p">(</span><span class="n">ChessLocalBoxX</span><span class="p">,</span><span class="n">ChessLocalBoxY</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+                    <span class="n">cleardevice</span><span class="p">();</span>
+                    <span class="n">DrawChessBox</span><span class="p">();</span>
+                    <span class="n">PrintfChess</span><span class="p">();</span>
+                    <span class="n">DrawStandForWhite</span><span class="p">();</span>
+                    <span class="n">setcolor</span><span class="p">(</span><span class="n">GREEN</span><span class="p">);</span>
+                    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">220</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="s">"White,please put your chess! "</span><span class="p">);</span>
+                 <span class="k">if</span> <span class="p">(</span><span class="n">PlayMode</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="cm">/*若是人人对战则进入这里*/</span>
+                 <span class="p">{</span>
+                     <span class="n">DrawChessR_W</span><span class="p">(</span><span class="n">ChessWhiteLocalX</span><span class="p">,</span><span class="n">ChessWhiteLocalY</span><span class="p">,</span><span class="n">WHITE</span><span class="p">);</span>
+                     <span class="n">ChessNowLocal</span><span class="p">(</span><span class="n">ChessWhiteLocalX</span><span class="p">,</span><span class="n">ChessWhiteLocalY</span><span class="p">);</span>
+                     <span class="n">setcolor</span><span class="p">(</span><span class="n">BLACK</span><span class="p">);</span>
+                     <span class="n">line</span><span class="p">(</span><span class="n">ChessRedLocalX</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="p">,</span><span class="n">ChessRedLocalX</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="p">);</span>
+                     <span class="n">line</span><span class="p">(</span><span class="n">ChessRedLocalX</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="n">ChessRedLocalX</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="o">+</span><span class="mi">5</span><span class="p">);</span>
+                     <span class="k">while</span><span class="p">(</span><span class="n">bioskey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+                     <span class="n">key</span> <span class="o">=</span> <span class="n">bioskey</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+                     <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">!=</span> <span class="n">Esc</span><span class="p">)</span><span class="cm">/*得到当前白方输入的 key 进行调用，若是输入ESC则退出游戏*/</span>
+                     <span class="p">{</span>
+                         <span class="n">ChessActionWhite</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+                     <span class="p">}</span>
+                     <span class="k">else</span>
+                     <span class="p">{</span>
+                         <span class="n">Exit</span><span class="p">();</span>
+                     <span class="p">}</span>
+                 <span class="p">}</span>
+                 <span class="k">else</span> <span class="cm">/*人机对战*/</span>
+                 <span class="p">{</span>
+                    <span class="n">PCChessActionWhite</span><span class="p">();</span>
+                 <span class="p">}</span>
+            <span class="p">}</span><span class="k">break</span><span class="p">;</span>
+            <span class="k">default</span> <span class="o">:</span> <span class="k">break</span><span class="p">;</span>
+         <span class="p">}</span>
+         <span class="k">if</span> <span class="p">(</span><span class="n">ChessRedLocalX</span> <span class="o">&gt;=</span> <span class="mi">170</span> <span class="o">&amp;&amp;</span> <span class="n">ChessRedLocalX</span> <span class="o">&lt;=</span> <span class="mi">450</span> <span class="o">&amp;&amp;</span> <span class="n">ChessRedLocalY</span> <span class="o">&gt;=</span> <span class="mi">100</span> <span class="o">&amp;&amp;</span> <span class="n">ChessRedLocalY</span> <span class="o">&lt;=</span> <span class="mi">380</span> <span class="o">&amp;&amp;</span> <span class="n">key</span> <span class="o">!=</span> <span class="n">Player1_do</span><span class="p">)</span><span class="cm">/*判断是否越界了*/</span>
+         <span class="p">{</span><span class="cm">/*没有越界则执行移动，*/</span>
+             <span class="n">cleardevice</span><span class="p">();</span>
+             <span class="n">DrawChessBox</span><span class="p">();</span>
+             <span class="n">PrintfChess</span><span class="p">();</span>
+             <span class="n">DrawChessR_W</span><span class="p">(</span><span class="n">ChessRedLocalX</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="p">,</span><span class="n">RED</span><span class="p">);</span>
+             <span class="n">ChessNowLocal</span><span class="p">(</span><span class="n">ChessRedLocalX</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="p">);</span>
+             <span class="n">DrawStandForRed</span><span class="p">();</span>
+             <span class="n">setcolor</span><span class="p">(</span><span class="n">BLACK</span><span class="p">);</span>
+             <span class="n">line</span><span class="p">(</span><span class="n">ChessWhiteLocalX</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="n">ChessWhiteLocalY</span><span class="p">,</span><span class="n">ChessWhiteLocalX</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span><span class="n">ChessWhiteLocalY</span><span class="p">);</span>
+             <span class="n">line</span><span class="p">(</span><span class="n">ChessWhiteLocalX</span><span class="p">,</span><span class="n">ChessWhiteLocalY</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="n">ChessWhiteLocalX</span><span class="p">,</span><span class="n">ChessWhiteLocalY</span><span class="o">+</span><span class="mi">5</span><span class="p">);</span>
+             <span class="n">setcolor</span><span class="p">(</span><span class="n">GREEN</span><span class="p">);</span>
+             <span class="n">outtextxy</span><span class="p">(</span><span class="mi">220</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="s">"Red,please put your chess! "</span><span class="p">);</span>
+             <span class="n">outtextxy</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="s">"press Esc to exit!"</span><span class="p">);</span>
+         <span class="p">}</span>
+         <span class="k">else</span>
+         <span class="p">{</span>   <span class="cm">/*越界了，则将加上的减掉则还是在原来的位置*/</span>
+            <span class="k">switch</span> <span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="p">{</span>
+                 <span class="k">case</span> <span class="n">Player1_up</span>   <span class="p">:</span> <span class="n">ChessRedLocalY</span> <span class="o">=</span> <span class="n">ChessRedLocalY</span> <span class="o">+</span> <span class="mi">20</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+                 <span class="k">case</span> <span class="n">Player1_down</span> <span class="p">:</span> <span class="n">ChessRedLocalY</span> <span class="o">=</span> <span class="n">ChessRedLocalY</span> <span class="o">-</span> <span class="mi">20</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+                 <span class="k">case</span> <span class="n">Player1_left</span> <span class="p">:</span> <span class="n">ChessRedLocalX</span> <span class="o">=</span> <span class="n">ChessRedLocalX</span> <span class="o">+</span> <span class="mi">20</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+                 <span class="k">case</span> <span class="n">Player1_right</span><span class="p">:</span> <span class="n">ChessRedLocalX</span> <span class="o">=</span> <span class="n">ChessRedLocalX</span> <span class="o">-</span> <span class="mi">20</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+         <span class="p">}</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">bioskey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">bioskey</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="n">Esc</span><span class="p">)</span>
+        <span class="p">{</span>
+             <span class="n">Exit</span><span class="p">();</span>
+        <span class="p">}</span>
+     <span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">PCChessActionWhite</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">j</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">max</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">remberx</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">rembery</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">PCChessScore</span><span class="p">[</span><span class="mi">15</span><span class="p">][</span><span class="mi">15</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span><span class="cm">/*存分数的二维数组*/</span>
+    <span class="kt">int</span> <span class="n">PlayerChessScore</span><span class="p">[</span><span class="mi">15</span><span class="p">][</span><span class="mi">15</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span><span class="cm">/*存分数的二维数组*/</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">PlayerChessScore</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">ComputeHeng</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">ComputeShu</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">ComputeZuoXie</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">ComputeYouXie</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+                <span class="n">PCChessScore</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">ComputeHeng</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">ComputeShu</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">ComputeZuoXie</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">ComputeYouXie</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">max</span> <span class="o">=</span> <span class="n">PlayerChessScore</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">remberx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">rembery</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">max</span> <span class="o">&lt;</span> <span class="n">PlayerChessScore</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+            <span class="p">{</span>
+                <span class="n">max</span> <span class="o">=</span> <span class="n">PlayerChessScore</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+                <span class="n">remberx</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+                <span class="n">rembery</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">max</span> <span class="o">&lt;</span> <span class="n">PCChessScore</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+            <span class="p">{</span>
+                <span class="n">max</span> <span class="o">=</span> <span class="n">PCChessScore</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+                <span class="n">remberx</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+                <span class="n">rembery</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">Chess</span><span class="p">[</span><span class="n">remberx</span><span class="p">][</span><span class="n">rembery</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">cleardevice</span><span class="p">();</span>
+    <span class="n">DrawChessBox</span><span class="p">();</span>
+    <span class="n">PrintfChess</span><span class="p">();</span>
+    <span class="n">JudgeHeng</span><span class="p">(</span><span class="n">remberx</span><span class="p">,</span><span class="n">rembery</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+    <span class="n">ChessWhiteLocalX</span> <span class="o">=</span> <span class="n">remberx</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">170</span><span class="p">;</span>
+    <span class="n">ChessWhiteLocalY</span> <span class="o">=</span> <span class="n">rembery</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">100</span><span class="p">;</span>
+    <span class="n">setcolor</span><span class="p">(</span><span class="n">BLACK</span><span class="p">);</span>
+    <span class="n">line</span><span class="p">(</span><span class="n">ChessWhiteLocalX</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="n">ChessWhiteLocalY</span><span class="p">,</span><span class="n">ChessWhiteLocalX</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span><span class="n">ChessWhiteLocalY</span><span class="p">);</span>
+    <span class="n">line</span><span class="p">(</span><span class="n">ChessWhiteLocalX</span><span class="p">,</span><span class="n">ChessWhiteLocalY</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="n">ChessWhiteLocalX</span><span class="p">,</span><span class="n">ChessWhiteLocalY</span><span class="o">+</span><span class="mi">5</span><span class="p">);</span>
+    <span class="n">DrawChessR_W</span><span class="p">(</span><span class="n">ChessRedLocalX</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="p">,</span><span class="n">RED</span><span class="p">);</span>
+    <span class="n">ChessNowLocal</span><span class="p">(</span><span class="n">ChessRedLocalX</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="p">);</span>
+    <span class="n">DrawStandForRed</span><span class="p">();</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">bioskey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="n">bioskey</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">!=</span> <span class="n">Esc</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">ChessActionRed</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">Exit</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">ScoreReturn</span><span class="p">(</span><span class="kt">int</span> <span class="n">CountLeft</span><span class="p">,</span><span class="kt">int</span> <span class="n">CountRight</span><span class="p">,</span><span class="kt">int</span> <span class="n">LeftLive</span><span class="p">,</span><span class="kt">int</span> <span class="n">RightLive</span><span class="p">,</span><span class="kt">int</span> <span class="n">R_or_W</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">Score</span> <span class="o">=</span> <span class="n">CountLeft</span> <span class="o">+</span> <span class="n">CountRight</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">R_or_W</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+       <span class="k">switch</span><span class="p">(</span><span class="n">Score</span><span class="p">)</span>
+       <span class="p">{</span>
+            <span class="k">case</span> <span class="mi">0</span> <span class="p">:</span>
+            <span class="p">{</span>
+                <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="p">}</span><span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">1</span> <span class="p">:</span>
+            <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">LeftLive</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">RightLive</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="cm">/*下在这个空格能成活2*/</span>
+                <span class="p">{</span>
+                  <span class="k">return</span> <span class="mi">50</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">else</span>
+                <span class="p">{</span>
+                   <span class="k">if</span><span class="p">(</span><span class="n">LeftLive</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">RightLive</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="cm">/*下在这个空格能成死2*/</span>
+                   <span class="p">{</span>
+                      <span class="k">return</span> <span class="mi">10</span><span class="p">;</span>
+                   <span class="p">}</span>
+                   <span class="k">else</span> <span class="cm">/*下在这个空格能成半活2*/</span>
+                   <span class="p">{</span>
+                     <span class="k">return</span> <span class="mi">35</span><span class="p">;</span>
+                   <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span><span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="p">{</span>
+                 <span class="k">if</span> <span class="p">(</span><span class="n">LeftLive</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">RightLive</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="cm">/*下在这个空格能成活3*/</span>
+                 <span class="p">{</span>
+                     <span class="k">return</span> <span class="mi">700</span><span class="p">;</span>
+                 <span class="p">}</span>
+                 <span class="k">else</span>
+                 <span class="p">{</span>
+                     <span class="k">if</span> <span class="p">(</span><span class="n">LeftLive</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">RightLive</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="cm">/*下在这个空格能成死3*/</span>
+                     <span class="p">{</span>
+                         <span class="k">return</span> <span class="mi">100</span><span class="p">;</span>
+                     <span class="p">}</span>
+                     <span class="k">else</span><span class="cm">/*下在这个空格能成半活3*/</span>
+                     <span class="p">{</span>
+                        <span class="k">return</span> <span class="mi">650</span><span class="p">;</span>
+                     <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span><span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="p">{</span>
+                 <span class="k">if</span> <span class="p">(</span><span class="n">LeftLive</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">RightLive</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="cm">/*下在这个空格能成活4*/</span>
+                 <span class="p">{</span>
+                     <span class="k">return</span> <span class="mi">3500</span><span class="p">;</span>
+                 <span class="p">}</span>
+                 <span class="k">else</span>
+                 <span class="p">{</span>
+                     <span class="k">if</span> <span class="p">(</span><span class="n">LeftLive</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">RightLive</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>  <span class="cm">/*下在这个空格能成死4*/</span>
+                     <span class="p">{</span>
+                         <span class="k">return</span> <span class="mi">800</span><span class="p">;</span>
+                     <span class="p">}</span>
+                     <span class="k">else</span><span class="cm">/*下在这个空格能成半活4*/</span>
+                     <span class="p">{</span>
+                         <span class="k">return</span> <span class="mi">3000</span><span class="p">;</span>
+                     <span class="p">}</span>
+                 <span class="p">}</span>
+            <span class="p">}</span><span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="p">{</span>
+                  <span class="k">if</span> <span class="p">(</span><span class="n">LeftLive</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">RightLive</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="cm">/*下在这个空格能成活5*/</span>
+                  <span class="p">{</span>
+                      <span class="k">return</span> <span class="mi">15000</span><span class="p">;</span>
+                  <span class="p">}</span>
+                  <span class="k">else</span>
+                  <span class="p">{</span>
+                      <span class="k">if</span> <span class="p">(</span><span class="n">LeftLive</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">RightLive</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="cm">/*下在这个空格能成死5*/</span>
+                      <span class="p">{</span>
+                          <span class="k">return</span> <span class="mi">15000</span><span class="p">;</span>
+                      <span class="p">}</span>
+                      <span class="k">else</span><span class="cm">/*下在这个空格能成半活5*/</span>
+                      <span class="p">{</span>
+                         <span class="k">return</span> <span class="mi">15000</span><span class="p">;</span>
+                      <span class="p">}</span>
+                  <span class="p">}</span>
+            <span class="p">}</span><span class="k">break</span><span class="p">;</span>
+       <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="k">switch</span><span class="p">(</span><span class="n">Score</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">case</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="p">{</span>
+                <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="p">}</span><span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">LeftLive</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">RightLive</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="cm">/*下在这个空格能成活2*/</span>
+                <span class="p">{</span>
+                    <span class="k">return</span> <span class="mi">60</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">else</span>
+                <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">LeftLive</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">RightLive</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="cm">/*下在这个空格能成死2*/</span>
+                    <span class="p">{</span>
+                        <span class="k">return</span> <span class="mi">10</span><span class="p">;</span>
+                    <span class="p">}</span>
+                    <span class="k">else</span><span class="cm">/*下在这个空格能成半活2*/</span>
+                    <span class="p">{</span>
+                        <span class="k">return</span> <span class="mi">40</span><span class="p">;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span><span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">LeftLive</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">RightLive</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="cm">/*下在这个空格能成活3*/</span>
+                <span class="p">{</span>
+                    <span class="k">return</span> <span class="mi">950</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">else</span>
+                <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">LeftLive</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">RightLive</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="cm">/*下在这个空格能成死3*/</span>
+                    <span class="p">{</span>
+                        <span class="k">return</span> <span class="mi">100</span><span class="p">;</span><span class="cm">/*下在这个空格能成死3*/</span>
+                    <span class="p">}</span>
+                    <span class="k">else</span><span class="cm">/*下在这个空格能成半活3*/</span>
+                    <span class="p">{</span>
+                       <span class="k">return</span> <span class="mi">900</span><span class="p">;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span><span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">LeftLive</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">RightLive</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="cm">/*下在这个空格能成活4*/</span>
+                <span class="p">{</span>
+                    <span class="k">return</span> <span class="mi">6000</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">else</span>
+                <span class="p">{</span>
+                   <span class="k">if</span> <span class="p">(</span><span class="n">LeftLive</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">RightLive</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="cm">/*下在这个空格能成死4*/</span>
+                   <span class="p">{</span>
+                       <span class="k">return</span> <span class="mi">3600</span><span class="p">;</span>
+                   <span class="p">}</span>
+                   <span class="k">else</span><span class="cm">/*下在这个空格能成半活4*/</span>
+                   <span class="p">{</span>
+                      <span class="k">return</span> <span class="mi">5000</span><span class="p">;</span>
+                   <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span><span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="p">{</span>
+                 <span class="k">if</span> <span class="p">(</span><span class="n">LeftLive</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">RightLive</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="cm">/*下在这个空格能成活5*/</span>
+                 <span class="p">{</span>
+                     <span class="k">return</span> <span class="mi">20000</span><span class="p">;</span>
+                 <span class="p">}</span>
+                 <span class="k">else</span>
+                 <span class="p">{</span>
+                     <span class="k">if</span> <span class="p">(</span><span class="n">LeftLive</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">RightLive</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="cm">/*下在这个空格能成死5*/</span>
+                     <span class="p">{</span>
+                         <span class="k">return</span> <span class="mi">20000</span><span class="p">;</span>
+                     <span class="p">}</span>
+                     <span class="k">else</span>
+                     <span class="p">{</span>
+                         <span class="k">return</span> <span class="mi">20000</span><span class="p">;</span>
+                     <span class="p">}</span>
+                 <span class="p">}</span>
+            <span class="p">}</span><span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">xx</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">yy</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">LeftLive</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">RightLive</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">CountLeft</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">CountRight</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">ComputeHeng</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">R_or_W</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">LeftLive</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">RightLive</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">CountLeft</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">CountRight</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">xx</span> <span class="o">=</span> <span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">yy</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">==</span> <span class="n">R_or_W</span> <span class="o">&amp;&amp;</span> <span class="n">xx</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">CountLeft</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">xx</span> <span class="o">=</span> <span class="n">xx</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">LeftLive</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">LeftLive</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">xx</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">yy</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">==</span> <span class="n">R_or_W</span> <span class="o">&amp;&amp;</span> <span class="n">xx</span> <span class="o">&lt;=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">CountRight</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">xx</span> <span class="o">=</span> <span class="n">xx</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">RightLive</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">RightLive</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">ScoreReturn</span><span class="p">(</span><span class="n">CountLeft</span><span class="p">,</span><span class="n">CountRight</span><span class="p">,</span><span class="n">LeftLive</span><span class="p">,</span><span class="n">RightLive</span><span class="p">,</span><span class="n">R_or_W</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">ComputeShu</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">R_or_W</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">LeftLive</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">RightLive</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">CountLeft</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">CountRight</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">xx</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="n">yy</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">==</span> <span class="n">R_or_W</span> <span class="o">&amp;&amp;</span> <span class="n">yy</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span><span class="cm">/*计算左右的己方棋子个数以及判断是 活/死*/</span>
+    <span class="p">{</span>
+        <span class="n">CountLeft</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">yy</span><span class="o">--</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">LeftLive</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">LeftLive</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">yy</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">==</span> <span class="n">R_or_W</span> <span class="o">&amp;&amp;</span> <span class="n">yy</span> <span class="o">&lt;=</span> <span class="mi">14</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">CountRight</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">yy</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">RightLive</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">RightLive</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">ScoreReturn</span><span class="p">(</span><span class="n">CountLeft</span><span class="p">,</span><span class="n">CountRight</span><span class="p">,</span><span class="n">LeftLive</span><span class="p">,</span><span class="n">RightLive</span><span class="p">,</span><span class="n">R_or_W</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">ComputeZuoXie</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">R_or_W</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">LeftLive</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">RightLive</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">CountLeft</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">CountRight</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">xx</span> <span class="o">=</span> <span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">yy</span> <span class="o">=</span> <span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">==</span> <span class="n">R_or_W</span> <span class="o">&amp;&amp;</span> <span class="n">xx</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">yy</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">CountLeft</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">xx</span> <span class="o">=</span> <span class="n">xx</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="n">yy</span> <span class="o">=</span> <span class="n">yy</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">LeftLive</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">LeftLive</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">xx</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">yy</span> <span class="o">=</span> <span class="n">y</span><span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">==</span> <span class="n">R_or_W</span> <span class="o">&amp;&amp;</span> <span class="n">xx</span> <span class="o">&lt;=</span> <span class="mi">14</span> <span class="o">&amp;&amp;</span> <span class="n">yy</span> <span class="o">&lt;=</span> <span class="mi">14</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">CountRight</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">xx</span> <span class="o">=</span> <span class="n">xx</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="n">yy</span> <span class="o">=</span> <span class="n">yy</span><span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">RightLive</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">RightLive</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">ScoreReturn</span><span class="p">(</span><span class="n">CountLeft</span><span class="p">,</span><span class="n">CountRight</span><span class="p">,</span><span class="n">LeftLive</span><span class="p">,</span><span class="n">RightLive</span><span class="p">,</span><span class="n">R_or_W</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">ComputeYouXie</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">R_or_W</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">LeftLive</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">RightLive</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">CountLeft</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">CountRight</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">xx</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">yy</span> <span class="o">=</span> <span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">==</span> <span class="n">R_or_W</span> <span class="o">&amp;&amp;</span> <span class="n">xx</span> <span class="o">&lt;=</span> <span class="mi">14</span> <span class="o">&amp;&amp;</span> <span class="n">yy</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">CountLeft</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">xx</span> <span class="o">=</span> <span class="n">xx</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="n">yy</span> <span class="o">=</span> <span class="n">yy</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">LeftLive</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">LeftLive</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">xx</span> <span class="o">=</span> <span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">yy</span> <span class="o">=</span> <span class="n">y</span><span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">==</span> <span class="n">R_or_W</span> <span class="o">&amp;&amp;</span> <span class="n">xx</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">yy</span> <span class="o">&lt;=</span> <span class="mi">14</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">CountRight</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">xx</span> <span class="o">=</span> <span class="n">xx</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="n">yy</span> <span class="o">=</span> <span class="n">yy</span><span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">RightLive</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">RightLive</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">ScoreReturn</span><span class="p">(</span><span class="n">CountLeft</span><span class="p">,</span><span class="n">CountRight</span><span class="p">,</span><span class="n">LeftLive</span><span class="p">,</span><span class="n">RightLive</span><span class="p">,</span><span class="n">R_or_W</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">ChessActionWhite</span><span class="p">(</span><span class="kt">int</span> <span class="n">key</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">setcolor</span><span class="p">(</span><span class="n">BLACK</span><span class="p">);</span>
+    <span class="n">line</span><span class="p">(</span><span class="n">ChessRedLocalX</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="p">,</span><span class="n">ChessRedLocalX</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="p">);</span>
+    <span class="n">line</span><span class="p">(</span><span class="n">ChessRedLocalX</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="n">ChessRedLocalX</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="o">+</span><span class="mi">5</span><span class="p">);</span>
+    <span class="n">setcolor</span><span class="p">(</span><span class="n">GREEN</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">220</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="s">"White,please put your chess! "</span><span class="p">);</span>
+    <span class="k">do</span>
+    <span class="p">{</span>
+         <span class="n">DrawChessR_W</span><span class="p">(</span><span class="n">ChessWhiteLocalX</span><span class="p">,</span><span class="n">ChessWhiteLocalY</span><span class="p">,</span><span class="n">WHITE</span><span class="p">);</span>
+         <span class="n">ChessNowLocal</span><span class="p">(</span><span class="n">ChessWhiteLocalX</span><span class="p">,</span><span class="n">ChessWhiteLocalY</span><span class="p">);</span>
+         <span class="n">ChessLocalBoxX</span> <span class="o">=</span> <span class="p">(</span><span class="n">ChessWhiteLocalX</span> <span class="o">-</span> <span class="mi">170</span><span class="p">)</span> <span class="o">/</span> <span class="mi">20</span><span class="p">;</span>
+         <span class="n">ChessLocalBoxY</span> <span class="o">=</span> <span class="p">(</span><span class="n">ChessWhiteLocalY</span> <span class="o">-</span> <span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="mi">20</span><span class="p">;</span>
+         <span class="n">flag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+         <span class="k">switch</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+         <span class="p">{</span>  
+            <span class="k">case</span> <span class="n">Player2_up</span>     <span class="p">:</span> <span class="n">ChessWhiteLocalY</span> <span class="o">=</span> <span class="n">ChessWhiteLocalY</span> <span class="o">-</span> <span class="mi">20</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="n">Player2_down</span>   <span class="p">:</span> <span class="n">ChessWhiteLocalY</span> <span class="o">=</span> <span class="n">ChessWhiteLocalY</span> <span class="o">+</span> <span class="mi">20</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="n">Player2_left</span>   <span class="p">:</span> <span class="n">ChessWhiteLocalX</span> <span class="o">=</span> <span class="n">ChessWhiteLocalX</span> <span class="o">-</span> <span class="mi">20</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="n">Player2_right</span>  <span class="p">:</span> <span class="n">ChessWhiteLocalX</span> <span class="o">=</span> <span class="n">ChessWhiteLocalX</span> <span class="o">+</span> <span class="mi">20</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="n">Player2_do</span>     <span class="p">:</span>
+            <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">ChessLocalBoxX</span><span class="p">][</span><span class="n">ChessLocalBoxY</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">flag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                    <span class="n">setcolor</span><span class="p">(</span><span class="n">GREEN</span><span class="p">);</span>
+                    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">180</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="s">"White,you can not put your chess here! "</span><span class="p">);</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+                    <span class="n">Chess</span><span class="p">[</span><span class="n">ChessLocalBoxX</span><span class="p">][</span><span class="n">ChessLocalBoxY</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+                    <span class="n">JudgeHeng</span><span class="p">(</span><span class="n">ChessLocalBoxX</span><span class="p">,</span><span class="n">ChessLocalBoxY</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+                    <span class="n">cleardevice</span><span class="p">();</span>
+                    <span class="n">DrawChessBox</span><span class="p">();</span>
+                    <span class="n">PrintfChess</span><span class="p">();</span>
+                    <span class="n">DrawStandForRed</span><span class="p">();</span>
+                    <span class="n">setcolor</span><span class="p">(</span><span class="n">GREEN</span><span class="p">);</span>
+                    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">220</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="s">"Red,please put your chess!"</span><span class="p">);</span>
+
+                    <span class="n">DrawChessR_W</span><span class="p">(</span><span class="n">ChessRedLocalX</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="p">,</span><span class="n">RED</span><span class="p">);</span>
+                    <span class="n">ChessNowLocal</span><span class="p">(</span><span class="n">ChessRedLocalX</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="p">);</span>
+                    <span class="n">setcolor</span><span class="p">(</span><span class="n">BLACK</span><span class="p">);</span>
+                    <span class="n">line</span><span class="p">(</span><span class="n">ChessWhiteLocalX</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="n">ChessWhiteLocalY</span><span class="p">,</span><span class="n">ChessWhiteLocalX</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span><span class="n">ChessWhiteLocalY</span><span class="p">);</span>
+                    <span class="n">line</span><span class="p">(</span><span class="n">ChessWhiteLocalX</span><span class="p">,</span><span class="n">ChessWhiteLocalY</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="n">ChessWhiteLocalX</span><span class="p">,</span><span class="n">ChessWhiteLocalY</span><span class="o">+</span><span class="mi">5</span><span class="p">);</span>
+                    <span class="k">while</span><span class="p">(</span><span class="n">bioskey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+                    <span class="n">key</span> <span class="o">=</span> <span class="n">bioskey</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">!=</span> <span class="n">Esc</span><span class="p">)</span><span class="cm">/*得到当前白方输入的 key 进行调用，若是输入ESC则退出游戏*/</span>
+                    <span class="p">{</span>
+                        <span class="n">ChessActionRed</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+                    <span class="p">}</span>
+                    <span class="k">else</span>
+                    <span class="p">{</span>
+                        <span class="n">Exit</span><span class="p">();</span>
+                    <span class="p">}</span>
+
+            <span class="p">}</span><span class="k">break</span><span class="p">;</span>
+            <span class="k">default</span> <span class="o">:</span> <span class="k">break</span><span class="p">;</span>
+         <span class="p">}</span>
+         <span class="k">if</span> <span class="p">(</span><span class="n">ChessWhiteLocalX</span> <span class="o">&gt;=</span> <span class="mi">170</span> <span class="o">&amp;&amp;</span> <span class="n">ChessWhiteLocalX</span> <span class="o">&lt;=</span> <span class="mi">450</span> <span class="o">&amp;&amp;</span> <span class="n">ChessWhiteLocalY</span> <span class="o">&gt;=</span> <span class="mi">100</span> <span class="o">&amp;&amp;</span> <span class="n">ChessWhiteLocalY</span> <span class="o">&lt;=</span> <span class="mi">380</span> <span class="o">&amp;&amp;</span> <span class="n">key</span> <span class="o">!=</span> <span class="n">Player2_do</span><span class="p">)</span>
+         <span class="p">{</span>
+             <span class="n">cleardevice</span><span class="p">();</span>
+             <span class="n">DrawChessBox</span><span class="p">();</span>
+             <span class="n">PrintfChess</span><span class="p">();</span>
+             <span class="n">DrawChessR_W</span><span class="p">(</span><span class="n">ChessWhiteLocalX</span><span class="p">,</span><span class="n">ChessWhiteLocalY</span><span class="p">,</span><span class="n">WHITE</span><span class="p">);</span>
+             <span class="n">ChessNowLocal</span><span class="p">(</span><span class="n">ChessWhiteLocalX</span><span class="p">,</span><span class="n">ChessWhiteLocalY</span><span class="p">);</span>
+             <span class="n">DrawStandForWhite</span><span class="p">();</span>
+             <span class="n">setcolor</span><span class="p">(</span><span class="n">BLACK</span><span class="p">);</span>
+             <span class="n">line</span><span class="p">(</span><span class="n">ChessRedLocalX</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="p">,</span><span class="n">ChessRedLocalX</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="p">);</span>
+             <span class="n">line</span><span class="p">(</span><span class="n">ChessRedLocalX</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="n">ChessRedLocalX</span><span class="p">,</span><span class="n">ChessRedLocalY</span><span class="o">+</span><span class="mi">5</span><span class="p">);</span>
+             <span class="n">setcolor</span><span class="p">(</span><span class="n">GREEN</span><span class="p">);</span>
+             <span class="n">outtextxy</span><span class="p">(</span><span class="mi">220</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="s">"White,please put your chess! "</span><span class="p">);</span>
+             <span class="n">outtextxy</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="s">"press Esc to exit!"</span><span class="p">);</span>
+         <span class="p">}</span>
+         <span class="k">else</span>
+         <span class="p">{</span>
+            <span class="k">switch</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">case</span> <span class="n">Player2_up</span>     <span class="p">:</span> <span class="n">ChessWhiteLocalY</span> <span class="o">=</span> <span class="n">ChessWhiteLocalY</span> <span class="o">+</span> <span class="mi">20</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+                <span class="k">case</span> <span class="n">Player2_down</span>   <span class="p">:</span> <span class="n">ChessWhiteLocalY</span> <span class="o">=</span> <span class="n">ChessWhiteLocalY</span> <span class="o">-</span> <span class="mi">20</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+                <span class="k">case</span> <span class="n">Player2_left</span>   <span class="p">:</span> <span class="n">ChessWhiteLocalX</span> <span class="o">=</span> <span class="n">ChessWhiteLocalX</span> <span class="o">+</span> <span class="mi">20</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+                <span class="k">case</span> <span class="n">Player2_right</span>  <span class="p">:</span> <span class="n">ChessWhiteLocalX</span> <span class="o">=</span> <span class="n">ChessWhiteLocalX</span> <span class="o">-</span> <span class="mi">20</span><span class="p">;</span><span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+         <span class="p">}</span>
+         <span class="k">while</span><span class="p">(</span><span class="n">bioskey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+         <span class="n">key</span> <span class="o">=</span> <span class="n">bioskey</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+         <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="n">Esc</span><span class="p">)</span>
+         <span class="p">{</span>
+              <span class="n">Exit</span><span class="p">();</span>
+         <span class="p">}</span>
+      <span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">PrintfChess</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+     <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+     <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">DrawChessR_W</span><span class="p">(</span><span class="mi">170</span> <span class="o">+</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">i</span><span class="p">,</span><span class="mi">100</span> <span class="o">+</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">j</span><span class="p">,</span><span class="n">RED</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">DrawChessR_W</span><span class="p">(</span><span class="mi">170</span> <span class="o">+</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">i</span><span class="p">,</span><span class="mi">100</span> <span class="o">+</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">j</span><span class="p">,</span><span class="n">WHITE</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+     <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">JudgeHeng</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">R_or_W</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">CountNumber</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">JudgeX</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">JudgeY</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+    <span class="n">LineX1</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="n">LineX2</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="n">LineY1</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+    <span class="n">LineY2</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">JudgeX</span><span class="p">][</span><span class="n">JudgeY</span><span class="p">]</span> <span class="o">==</span> <span class="n">R_or_W</span> <span class="o">&amp;&amp;</span> <span class="n">JudgeX</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">LineX1</span> <span class="o">=</span> <span class="n">JudgeX</span><span class="p">;</span>
+        <span class="n">LineY1</span> <span class="o">=</span> <span class="n">JudgeY</span><span class="p">;</span>
+        <span class="n">CountNumber</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">JudgeX</span><span class="o">--</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">JudgeX</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">JudgeX</span><span class="p">][</span><span class="n">JudgeY</span><span class="p">]</span> <span class="o">==</span> <span class="n">R_or_W</span> <span class="o">&amp;&amp;</span> <span class="n">JudgeX</span> <span class="o">&lt;=</span> <span class="mi">14</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">LineX2</span> <span class="o">=</span> <span class="n">JudgeX</span><span class="p">;</span>
+        <span class="n">LineY2</span> <span class="o">=</span> <span class="n">JudgeY</span><span class="p">;</span>
+        <span class="n">CountNumber</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">JudgeX</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">CountNumber</span> <span class="o">&gt;=</span> <span class="mi">5</span> <span class="o">&amp;&amp;</span> <span class="n">R_or_W</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">setcolor</span><span class="p">(</span><span class="n">WHITE</span><span class="p">);</span>
+        <span class="n">line</span> <span class="p">(</span><span class="n">LineX1</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">170</span><span class="p">,</span><span class="n">LineY1</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">100</span><span class="p">,</span><span class="n">LineX2</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">170</span><span class="p">,</span><span class="n">LineY2</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">100</span><span class="p">);</span>
+        <span class="n">RedWin</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">CountNumber</span> <span class="o">&gt;=</span> <span class="mi">5</span> <span class="o">&amp;&amp;</span> <span class="n">R_or_W</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">setcolor</span><span class="p">(</span><span class="n">RED</span><span class="p">);</span>
+        <span class="n">line</span> <span class="p">(</span><span class="n">LineX1</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">170</span><span class="p">,</span><span class="n">LineY1</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">100</span><span class="p">,</span><span class="n">LineX2</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">170</span><span class="p">,</span><span class="n">LineY2</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">100</span><span class="p">);</span>
+        <span class="n">WhiteWin</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="n">JudgeShu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">R_or_W</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">JudgeShu</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">R_or_W</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">CountNumber</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">JudgeX</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="n">JudgeY</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">LineX1</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="n">LineX2</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="n">LineY1</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+    <span class="n">LineY2</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">JudgeX</span><span class="p">][</span><span class="n">JudgeY</span><span class="p">]</span> <span class="o">==</span> <span class="n">R_or_W</span> <span class="o">&amp;&amp;</span> <span class="n">JudgeY</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">LineX1</span> <span class="o">=</span> <span class="n">JudgeX</span><span class="p">;</span>
+        <span class="n">LineY1</span> <span class="o">=</span> <span class="n">JudgeY</span><span class="p">;</span>
+        <span class="n">CountNumber</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">JudgeY</span><span class="o">--</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">JudgeY</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">JudgeX</span><span class="p">][</span><span class="n">JudgeY</span><span class="p">]</span> <span class="o">==</span> <span class="n">R_or_W</span> <span class="o">&amp;&amp;</span> <span class="n">JudgeY</span> <span class="o">&lt;=</span> <span class="mi">14</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">LineX2</span> <span class="o">=</span> <span class="n">JudgeX</span><span class="p">;</span>
+        <span class="n">LineY2</span> <span class="o">=</span> <span class="n">JudgeY</span><span class="p">;</span>
+        <span class="n">CountNumber</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">JudgeY</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">CountNumber</span> <span class="o">&gt;=</span> <span class="mi">5</span> <span class="o">&amp;&amp;</span> <span class="n">R_or_W</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">setcolor</span><span class="p">(</span><span class="n">WHITE</span><span class="p">);</span>
+        <span class="n">line</span> <span class="p">(</span><span class="n">LineX1</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">170</span><span class="p">,</span><span class="n">LineY1</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">100</span><span class="p">,</span><span class="n">LineX2</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">170</span><span class="p">,</span><span class="n">LineY2</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">100</span><span class="p">);</span>
+        <span class="n">RedWin</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">CountNumber</span> <span class="o">&gt;=</span> <span class="mi">5</span> <span class="o">&amp;&amp;</span> <span class="n">R_or_W</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">setcolor</span><span class="p">(</span><span class="n">RED</span><span class="p">);</span>
+        <span class="n">line</span> <span class="p">(</span><span class="n">LineX1</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">170</span><span class="p">,</span><span class="n">LineY1</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">100</span><span class="p">,</span><span class="n">LineX2</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">170</span><span class="p">,</span><span class="n">LineY2</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">100</span><span class="p">);</span>
+        <span class="n">WhiteWin</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="n">JudgeZuoXie</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">R_or_W</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">JudgeZuoXie</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">R_or_W</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">CountNumber</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">JudgeX</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">JudgeY</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">LineX1</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="n">LineX2</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="n">LineY1</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+    <span class="n">LineY2</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">JudgeX</span><span class="p">][</span><span class="n">JudgeY</span><span class="p">]</span> <span class="o">==</span> <span class="n">R_or_W</span> <span class="o">&amp;&amp;</span> <span class="n">JudgeY</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">JudgeX</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">LineX1</span> <span class="o">=</span> <span class="n">JudgeX</span><span class="p">;</span>
+        <span class="n">LineY1</span> <span class="o">=</span> <span class="n">JudgeY</span><span class="p">;</span>
+        <span class="n">CountNumber</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">JudgeX</span><span class="o">--</span><span class="p">;</span>
+        <span class="n">JudgeY</span><span class="o">--</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">JudgeX</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">JudgeY</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">JudgeX</span><span class="p">][</span><span class="n">JudgeY</span><span class="p">]</span> <span class="o">==</span> <span class="n">R_or_W</span> <span class="o">&amp;&amp;</span> <span class="n">JudgeY</span> <span class="o">&lt;=</span> <span class="mi">14</span> <span class="o">&amp;&amp;</span> <span class="n">JudgeX</span> <span class="o">&lt;=</span> <span class="mi">14</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">LineX2</span> <span class="o">=</span> <span class="n">JudgeX</span><span class="p">;</span>
+        <span class="n">LineY2</span> <span class="o">=</span> <span class="n">JudgeY</span><span class="p">;</span>
+        <span class="n">CountNumber</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">JudgeX</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">JudgeY</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">CountNumber</span> <span class="o">&gt;=</span> <span class="mi">5</span> <span class="o">&amp;&amp;</span> <span class="n">R_or_W</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">setcolor</span><span class="p">(</span><span class="n">WHITE</span><span class="p">);</span>
+        <span class="n">line</span> <span class="p">(</span><span class="n">LineX1</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">170</span><span class="p">,</span><span class="n">LineY1</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">100</span><span class="p">,</span><span class="n">LineX2</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">170</span><span class="p">,</span><span class="n">LineY2</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">100</span><span class="p">);</span>
+        <span class="n">RedWin</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">CountNumber</span> <span class="o">&gt;=</span> <span class="mi">5</span> <span class="o">&amp;&amp;</span> <span class="n">R_or_W</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">setcolor</span><span class="p">(</span><span class="n">RED</span><span class="p">);</span>
+        <span class="n">line</span> <span class="p">(</span><span class="n">LineX1</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">170</span><span class="p">,</span><span class="n">LineY1</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">100</span><span class="p">,</span><span class="n">LineX2</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">170</span><span class="p">,</span><span class="n">LineY2</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">100</span><span class="p">);</span>
+        <span class="n">WhiteWin</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="n">JudgeYouXie</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">R_or_W</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">JudgeYouXie</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">R_or_W</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">CountNumber</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">JudgeX</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">JudgeY</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">LineX1</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="n">LineX2</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="n">LineY1</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+    <span class="n">LineY2</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">JudgeX</span><span class="p">][</span><span class="n">JudgeY</span><span class="p">]</span> <span class="o">==</span> <span class="n">R_or_W</span> <span class="o">&amp;&amp;</span> <span class="n">JudgeY</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">JudgeX</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">LineX1</span> <span class="o">=</span> <span class="n">JudgeX</span><span class="p">;</span>
+        <span class="n">LineY1</span> <span class="o">=</span> <span class="n">JudgeY</span><span class="p">;</span>
+        <span class="n">CountNumber</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">JudgeX</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">JudgeY</span><span class="o">--</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">JudgeX</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">JudgeY</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">Chess</span><span class="p">[</span><span class="n">JudgeX</span><span class="p">][</span><span class="n">JudgeY</span><span class="p">]</span> <span class="o">==</span> <span class="n">R_or_W</span> <span class="o">&amp;&amp;</span> <span class="n">JudgeY</span> <span class="o">&lt;=</span> <span class="mi">14</span> <span class="o">&amp;&amp;</span> <span class="n">JudgeX</span> <span class="o">&lt;=</span> <span class="mi">14</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">LineX2</span> <span class="o">=</span> <span class="n">JudgeX</span><span class="p">;</span>
+        <span class="n">LineY2</span> <span class="o">=</span> <span class="n">JudgeY</span><span class="p">;</span>
+        <span class="n">CountNumber</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">JudgeX</span><span class="o">--</span><span class="p">;</span>
+        <span class="n">JudgeY</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">CountNumber</span> <span class="o">&gt;=</span> <span class="mi">5</span> <span class="o">&amp;&amp;</span> <span class="n">R_or_W</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">setcolor</span><span class="p">(</span><span class="n">WHITE</span><span class="p">);</span>
+        <span class="n">line</span> <span class="p">(</span><span class="n">LineX1</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">170</span><span class="p">,</span><span class="n">LineY1</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">100</span><span class="p">,</span><span class="n">LineX2</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">170</span><span class="p">,</span><span class="n">LineY2</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">100</span><span class="p">);</span>
+        <span class="n">RedWin</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">CountNumber</span> <span class="o">&gt;=</span> <span class="mi">5</span> <span class="o">&amp;&amp;</span> <span class="n">R_or_W</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">setcolor</span><span class="p">(</span><span class="n">RED</span><span class="p">);</span>
+        <span class="n">line</span> <span class="p">(</span><span class="n">LineX1</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">170</span><span class="p">,</span><span class="n">LineY1</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">100</span><span class="p">,</span><span class="n">LineX2</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">170</span><span class="p">,</span><span class="n">LineY2</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">100</span><span class="p">);</span>
+        <span class="n">WhiteWin</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="kt">void</span> <span class="nf">RedWin</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">setcolor</span><span class="p">(</span><span class="n">RED</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">470</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="s">"******************"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">470</span><span class="p">,</span><span class="mi">170</span><span class="p">,</span><span class="s">"*                *"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">470</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="s">"*                *"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">470</span><span class="p">,</span><span class="mi">190</span><span class="p">,</span><span class="s">"    Player:RED    "</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">470</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="s">"      Win         "</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">470</span><span class="p">,</span><span class="mi">210</span><span class="p">,</span><span class="s">"*                *"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">470</span><span class="p">,</span><span class="mi">220</span><span class="p">,</span><span class="s">"*                *"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">470</span><span class="p">,</span><span class="mi">230</span><span class="p">,</span><span class="s">"******************"</span><span class="p">);</span>
+    <span class="n">getch</span><span class="p">();</span>
+    <span class="n">Exit</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">WhiteWin</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">setcolor</span><span class="p">(</span><span class="n">WHITE</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="s">"******************"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">170</span><span class="p">,</span><span class="s">"*                *"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="s">"*                *"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">190</span><span class="p">,</span><span class="s">"   Player:White   "</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="s">"      Win         "</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">210</span><span class="p">,</span><span class="s">"*                *"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">220</span><span class="p">,</span><span class="s">"*                *"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">230</span><span class="p">,</span><span class="s">"******************"</span><span class="p">);</span>
+    <span class="n">getch</span><span class="p">();</span>
+    <span class="n">Exit</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">ChessNowLocal</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">)</span><span class="cm">/* 光标显示当前棋子位置 */</span>
+<span class="p">{</span>
+    <span class="n">setcolor</span><span class="p">(</span><span class="n">BLACK</span><span class="p">);</span>
+    <span class="n">outtextxy</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="n">y</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="s">"&gt;"</span><span class="p">);</span>
+    <span class="n">outtextxy</span> <span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">15</span><span class="p">,</span><span class="n">y</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="s">"&lt;"</span><span class="p">);</span>
+    <span class="n">outtextxy</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="n">y</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="s">"v"</span><span class="p">);</span>
+    <span class="n">outtextxy</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="n">y</span><span class="o">+</span><span class="mi">15</span><span class="p">,</span><span class="s">"^"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">Welcome</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="cm">/*欢迎界面*/</span>
+<span class="p">{</span>
+    <span class="n">setbkcolor</span><span class="p">(</span><span class="n">YELLOW</span><span class="p">);</span>
+    <span class="n">setcolor</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="s">"welcome to Wuziqi Game!"</span><span class="p">);</span>
+    <span class="n">setcolor</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="s">"Mode Choose:"</span><span class="p">);</span>
+    <span class="n">setcolor</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+    <span class="n">rectangle</span><span class="p">(</span><span class="n">XiaoQiPanX1</span><span class="p">,</span><span class="n">XiaoQiPanY1</span><span class="p">,</span><span class="n">XiaoQiPanX2</span><span class="p">,</span><span class="n">XiaoQiPanY2</span><span class="p">);</span><span class="cm">/*Welcome界面中的小棋盘*/</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">line</span><span class="p">(</span><span class="n">XiaoQiPanX1</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span><span class="n">XiaoQiPanY1</span><span class="p">,</span><span class="n">XiaoQiPanX1</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span><span class="n">XiaoQiPanY2</span><span class="p">);</span>
+        <span class="n">line</span><span class="p">(</span><span class="n">XiaoQiPanX1</span><span class="p">,</span><span class="n">XiaoQiPanY1</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span><span class="n">XiaoQiPanX2</span><span class="p">,</span><span class="n">XiaoQiPanY1</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">DrawStandForRed</span><span class="p">();</span><span class="cm">/*代表红方的圆*/</span>
+    <span class="n">DrawStandForWhite</span><span class="p">();</span><span class="cm">/*代表白方的圆*/</span>
+    <span class="n">setcolor</span><span class="p">(</span><span class="n">GREEN</span><span class="p">);</span> <span class="cm">/*红方与白方的操作按键*/</span>
+    <span class="n">rectangle</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">245</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">375</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span><span class="mi">235</span><span class="p">,</span><span class="s">"Player:Red "</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">55</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="s">"UP----up"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">55</span><span class="p">,</span><span class="mi">265</span><span class="p">,</span><span class="s">"DOWN--down"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">55</span><span class="p">,</span><span class="mi">275</span><span class="p">,</span><span class="s">"LEFT--left"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">55</span><span class="p">,</span><span class="mi">285</span><span class="p">,</span><span class="s">"RIGHT-right"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">55</span><span class="p">,</span><span class="mi">295</span><span class="p">,</span><span class="s">"DO----enter"</span><span class="p">);</span>
+    <span class="n">rectangle</span><span class="p">(</span><span class="mi">460</span><span class="p">,</span><span class="mi">245</span><span class="p">,</span><span class="mi">550</span><span class="p">,</span><span class="mi">375</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">470</span><span class="p">,</span><span class="mi">235</span><span class="p">,</span><span class="s">"Plyaer:White"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">465</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="s">"UP----w"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">465</span><span class="p">,</span><span class="mi">265</span><span class="p">,</span><span class="s">"DOWN--s"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">465</span><span class="p">,</span><span class="mi">275</span><span class="p">,</span><span class="s">"LEFT--a"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">465</span><span class="p">,</span><span class="mi">285</span><span class="p">,</span><span class="s">"RIGHT-d"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">465</span><span class="p">,</span><span class="mi">295</span><span class="p">,</span><span class="s">"DO----space"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">ModeChoose</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="cm">/*模式选择*/</span>
+<span class="p">{</span>
+    <span class="n">PlayMode</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">do</span>
+    <span class="p">{</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">bioskey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">bioskey</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="n">Player1_up</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">cleardevice</span><span class="p">();</span>
+            <span class="n">Welcome</span><span class="p">();</span>
+            <span class="n">outtextxy</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span><span class="s">"player1 vs player2"</span><span class="p">);</span>
+            <span class="n">outtextxy</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="s">"player vs computer"</span><span class="p">);</span>
+            <span class="n">DrawChessR_W</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span><span class="n">BLUE</span><span class="p">);</span>
+            <span class="n">PlayMode</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="cm">/* player1 VS player2*/</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="n">Player1_down</span><span class="p">)</span>
+        <span class="p">{</span>
+             <span class="n">cleardevice</span><span class="p">();</span>
+             <span class="n">Welcome</span><span class="p">();</span>
+             <span class="n">outtextxy</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span><span class="s">"player1 vs player2"</span><span class="p">);</span>
+             <span class="n">outtextxy</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="s">"player vs computer"</span><span class="p">);</span>
+             <span class="n">DrawChessR_W</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="n">BLUE</span><span class="p">);</span>
+             <span class="n">PlayMode</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="cm">/* player VS computer*/</span>
+        <span class="p">}</span>
+    <span class="p">}</span><span class="k">while</span> <span class="p">(</span><span class="n">key</span> <span class="o">!=</span> <span class="n">Player1_do</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">DrawChessBox</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="cm">/*棋盘*/</span>
+<span class="p">{</span>
+    <span class="n">cleardevice</span><span class="p">();</span>
+    <span class="n">setbkcolor</span><span class="p">(</span><span class="n">BLUE</span><span class="p">);</span>
+    <span class="n">setcolor</span><span class="p">(</span><span class="n">DARKGRAY</span><span class="p">);</span>
+    <span class="n">rectangle</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">-</span> <span class="mi">20</span><span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">-</span> <span class="mi">20</span><span class="p">,</span><span class="n">DaQiPanX2</span> <span class="o">+</span> <span class="mi">20</span><span class="p">,</span><span class="n">DaQiPanY2</span> <span class="o">+</span> <span class="mi">20</span><span class="p">);</span> <span class="cm">/*棋盘外框*/</span>
+    <span class="n">setfillstyle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">CYAN</span><span class="p">);</span>
+    <span class="n">floodfill</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span><span class="n">DARKGRAY</span><span class="p">);</span>
+    <span class="n">setcolor</span><span class="p">(</span><span class="n">CYAN</span><span class="p">);</span>
+    <span class="n">rectangle</span><span class="p">(</span><span class="n">DaQiPanX1</span><span class="p">,</span><span class="n">DaQiPanY1</span><span class="p">,</span><span class="n">DaQiPanX2</span><span class="p">,</span><span class="n">DaQiPanY2</span><span class="p">);</span> <span class="cm">/*棋盘内框*/</span>
+    <span class="n">setfillstyle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">CYAN</span><span class="p">);</span>
+    <span class="n">floodfill</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">+</span> <span class="mi">10</span><span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">+</span> <span class="mi">10</span><span class="p">,</span><span class="n">DARKGRAY</span><span class="p">);</span>
+    <span class="n">setcolor</span><span class="p">(</span><span class="n">BLACK</span><span class="p">);</span>
+    <span class="n">rectangle</span><span class="p">(</span><span class="n">DaQiPanX1</span><span class="p">,</span><span class="n">DaQiPanY1</span><span class="p">,</span><span class="n">DaQiPanX2</span><span class="p">,</span><span class="n">DaQiPanY2</span><span class="p">);</span>  <span class="cm">/*棋盘中间的线*/</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">line</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">20</span><span class="p">,</span><span class="n">DaQiPanY1</span><span class="p">,</span><span class="n">DaQiPanX1</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">20</span><span class="p">,</span><span class="n">DaQiPanY2</span><span class="p">);</span>
+        <span class="n">line</span><span class="p">(</span><span class="n">DaQiPanX1</span><span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">20</span><span class="p">,</span><span class="n">DaQiPanX2</span><span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">20</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">circle</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span><span class="cm">/*棋盘中那5个小圆*/</span>
+    <span class="n">circle</span><span class="p">(</span><span class="mi">390</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+    <span class="n">circle</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span><span class="mi">320</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+    <span class="n">circle</span><span class="p">(</span><span class="mi">390</span><span class="p">,</span><span class="mi">320</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+    <span class="n">circle</span><span class="p">(</span><span class="mi">310</span><span class="p">,</span><span class="mi">240</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">+</span> <span class="mi">0</span>  <span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span><span class="s">"A"</span><span class="p">);</span> <span class="cm">/*棋盘边的字母和数字*/</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">+</span> <span class="mi">20</span> <span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span><span class="s">"B"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">+</span> <span class="mi">40</span> <span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span><span class="s">"C"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">+</span> <span class="mi">60</span> <span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span><span class="s">"D"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">+</span> <span class="mi">80</span> <span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span><span class="s">"E"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">+</span> <span class="mi">100</span><span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span><span class="s">"F"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">+</span> <span class="mi">120</span><span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span><span class="s">"G"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">+</span> <span class="mi">140</span><span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span><span class="s">"H"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">+</span> <span class="mi">160</span><span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span><span class="s">"I"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">+</span> <span class="mi">180</span><span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span><span class="s">"J"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">+</span> <span class="mi">200</span><span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span><span class="s">"K"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">+</span> <span class="mi">220</span><span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span><span class="s">"L"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">+</span> <span class="mi">240</span><span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span><span class="s">"M"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">+</span> <span class="mi">260</span><span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span><span class="s">"N"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">+</span> <span class="mi">280</span><span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span><span class="s">"O"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">-</span> <span class="mi">15</span> <span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">-</span> <span class="mi">0</span> <span class="p">,</span><span class="s">"1"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">-</span> <span class="mi">15</span> <span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">+</span> <span class="mi">20</span><span class="p">,</span><span class="s">"2"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">-</span> <span class="mi">15</span> <span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">+</span> <span class="mi">40</span><span class="p">,</span><span class="s">"3"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">-</span> <span class="mi">15</span> <span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">+</span> <span class="mi">60</span><span class="p">,</span><span class="s">"4"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">-</span> <span class="mi">15</span> <span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">+</span> <span class="mi">80</span><span class="p">,</span><span class="s">"5"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">-</span> <span class="mi">15</span> <span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">+</span> <span class="mi">100</span><span class="p">,</span><span class="s">"6"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">-</span> <span class="mi">15</span> <span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">+</span> <span class="mi">120</span><span class="p">,</span><span class="s">"7"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">-</span> <span class="mi">15</span> <span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">+</span> <span class="mi">140</span><span class="p">,</span><span class="s">"8"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">-</span> <span class="mi">15</span> <span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">+</span> <span class="mi">160</span><span class="p">,</span><span class="s">"9"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">-</span> <span class="mi">15</span> <span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">+</span> <span class="mi">180</span><span class="p">,</span><span class="s">"10"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">-</span> <span class="mi">15</span> <span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">+</span> <span class="mi">200</span><span class="p">,</span><span class="s">"11"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">-</span> <span class="mi">15</span> <span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">+</span> <span class="mi">220</span><span class="p">,</span><span class="s">"12"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">-</span> <span class="mi">15</span> <span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">+</span> <span class="mi">240</span><span class="p">,</span><span class="s">"13"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">-</span> <span class="mi">15</span> <span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">+</span> <span class="mi">260</span><span class="p">,</span><span class="s">"14"</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="n">DaQiPanX1</span> <span class="o">-</span> <span class="mi">15</span> <span class="p">,</span><span class="n">DaQiPanY1</span> <span class="o">+</span> <span class="mi">280</span><span class="p">,</span><span class="s">"15"</span><span class="p">);</span>
+    <span class="n">setcolor</span><span class="p">(</span><span class="n">GREEN</span><span class="p">);</span>
+    <span class="n">rectangle</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">540</span><span class="p">,</span><span class="mi">70</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">260</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="s">"MessageBox"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">ChooseFirst_Or_Second</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="cm">/*先手后手的选择*/</span>
+<span class="p">{</span>
+    <span class="n">RedXianhou</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">setcolor</span><span class="p">(</span><span class="n">GREEN</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">PlayMode</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">outtextxy</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="s">"player1 use Red   chess!"</span><span class="p">);</span>
+        <span class="n">outtextxy</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="s">"player2 use White chess!"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">outtextxy</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="s">"player   use Red   chess!"</span><span class="p">);</span>
+        <span class="n">outtextxy</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="s">"computer use White chess!"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="s">"Red first? (letf/right) to change,(enter)to make sure"</span><span class="p">);</span>
+    <span class="n">DrawStandForRed</span><span class="p">();</span>
+    <span class="k">do</span>
+    <span class="p">{</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">bioskey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">bioskey</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="n">Player1_left</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">cleardevice</span><span class="p">();</span>
+            <span class="n">DrawChessBox</span><span class="p">();</span>
+            <span class="n">outtextxy</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="s">"Red first? (letf/right) to change,(enter)to make sure"</span><span class="p">);</span>
+            <span class="n">DrawStandForRed</span><span class="p">();</span>
+            <span class="n">RedXianhou</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="n">Player1_right</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">cleardevice</span><span class="p">();</span>
+            <span class="n">DrawChessBox</span><span class="p">();</span>
+            <span class="n">outtextxy</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="s">"White first? (letf/right) to change,(enter)to make sure"</span><span class="p">);</span>
+            <span class="n">DrawStandForWhite</span><span class="p">();</span>
+            <span class="n">RedXianhou</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">setcolor</span><span class="p">(</span><span class="n">GREEN</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">PlayMode</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">{</span>
+           <span class="n">outtextxy</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="s">"player1 use Red   chess!"</span><span class="p">);</span>
+           <span class="n">outtextxy</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="s">"player2 use White chess!"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+           <span class="n">outtextxy</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="s">"player   use Red   chess!"</span><span class="p">);</span>
+           <span class="n">outtextxy</span><span class="p">(</span><span class="mi">230</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="s">"computer use White chess!"</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="n">Player1_do</span> <span class="o">!=</span> <span class="n">key</span><span class="p">);</span>
+    <span class="n">cleardevice</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">DrawChessR_W</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="kt">int</span> <span class="n">y</span><span class="p">,</span><span class="kt">int</span> <span class="n">color</span><span class="p">)</span><span class="cm">/*画棋盘上的红子和白子*/</span>
+<span class="p">{</span>
+    <span class="n">setcolor</span><span class="p">(</span><span class="n">color</span><span class="p">);</span>
+    <span class="n">circle</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>
+    <span class="n">setfillstyle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">color</span><span class="p">);</span>
+    <span class="n">floodfill</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span><span class="n">y</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span><span class="n">color</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">DrawStandForRed</span><span class="p">()</span><span class="cm">/*代表红方的圆*/</span>
+<span class="p">{</span>
+    <span class="n">setcolor</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>
+    <span class="n">circle</span><span class="p">(</span><span class="n">XiaoYuanX1</span><span class="p">,</span><span class="n">XiaoYuanY1</span><span class="p">,</span><span class="n">YuanR</span><span class="p">);</span>
+    <span class="n">setfillstyle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">RED</span><span class="p">);</span>
+    <span class="n">floodfill</span><span class="p">(</span><span class="n">XiaoYuanX1</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span><span class="n">XiaoYuanY1</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">DrawStandForWhite</span><span class="p">()</span><span class="cm">/*代表白方的圆*/</span>
+<span class="p">{</span>
+    <span class="n">setcolor</span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
+    <span class="n">circle</span><span class="p">(</span><span class="n">XiaoYuanX2</span><span class="p">,</span><span class="n">XiaoYuanY2</span><span class="p">,</span><span class="n">YuanR</span><span class="p">);</span>
+    <span class="n">setfillstyle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">WHITE</span><span class="p">);</span>
+    <span class="n">floodfill</span><span class="p">(</span><span class="n">XiaoYuanX2</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span><span class="n">XiaoYuanY2</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span><span class="mi">15</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">Exit</span><span class="p">()</span><span class="cm">/*退出游戏*/</span>
+<span class="p">{</span>
+    <span class="n">cleardevice</span><span class="p">();</span>
+    <span class="n">setbkcolor</span><span class="p">(</span><span class="n">BLACK</span><span class="p">);</span>
+    <span class="n">setcolor</span><span class="p">(</span><span class="n">GREEN</span><span class="p">);</span>
+    <span class="n">outtextxy</span><span class="p">(</span><span class="mi">280</span><span class="p">,</span><span class="mi">350</span><span class="p">,</span><span class="s">"goodbye!"</span><span class="p">);</span>
+    <span class="n">getch</span><span class="p">();</span>
+    <span class="n">closegraph</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+:ET

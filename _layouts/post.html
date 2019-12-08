@@ -8,156 +8,193 @@ layout: default
 
 <!-- Post Header -->
 <style type="text/css">
-  header.intro-header{
-    position: relative;
-    background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')
-  }
+    header.intro-header{
+      position: relative;
+      background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')
+    }
 
-{% if page.header-mask %}
-  header.intro-header .header-mask{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background: rgba(0,0,0, {{ page.header-mask }});
-  }
-{% endif %}
+    {% if page.header-mask %}
+        header.intro-header .header-mask{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background: rgba(0,0,0, {{ page.header-mask }});
+        }
+    {% endif %}
 </style>
 
-<!-- header -->
+<!-- post header -->
 <header class="intro-header" >
-  <div class="header-mask"></div>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="post-heading">
-          <div class="tags">
-            {% for tag in page.tags %}
-              <a class="tag" href="{{ site.baseurl }}/tags/#{{ tag }}" title="{{ tag }}">{{ tag }}</a>
-            {% endfor %}
-          </div>
-          <h1>{{ page.title }}</h1>
-          {% comment %} always create a h2 for keeping the margin , Hux {% endcomment %}
-          {% comment %} if page.subtitle {% endcomment %}
-          <h2 class="subheading">{{ page.subtitle }}</h2>
-          {% comment %} endif {% endcomment %}
-          <span class="meta">
-            {% if page.author %}
-              {{ page.author }}
-            {% else %}
-              {{ site.title }}
-            {% endif %} 
-            发布于 {{ page.date | date: "%Y-%m-%d" }}
-            ，
-            {% if site.plugin-busuanzi-use %}
-              <span id="busuanzi_container_page_pv">
-                本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-              </span>
-            {% endif %}
-          </span>
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <!-- show this post's categories and tags -->
+                    <div class="tags">
+                        {% for cat in page.categories %}
+                            <a class="tag" href="{{ site.baseurl }}/categories/#{{ cat }}" title="{{ cat }}">{{ cat }}</a>
+                        {% endfor %}
+                        {% for tag in page.tags %}
+                            <a class="tag" href="{{ site.baseurl }}/tag/#{{ tag }}" title="{{ tag }}">{{ tag }}</a>
+                        {% endfor %}
+                    </div>
+                    <!-- title -->
+                    <h1>{{ page.title }}</h1>
+                    <!-- subtitle -->
+                    {% comment %} always create a h2 for keeping the margin , Hux {% endcomment %}
+                    <h2 class="subheading">{{ page.subtitle }}</h2>
+                    <!-- post info -->
+                    <span class="meta">
+                        post by
+                        {% if page.author %}
+                            {{ page.author }}
+                        {% else %}
+                            {{ site.title }}
+                        {% endif %} 
+                        at 
+                        {{ page.date | date: "%Y-%m-%d" }}
+
+                        {% if site.plugin-mycounter-use %}
+                          ,last visit at <span id="lastVisitTime"></span>
+                        {% endif %}
+                        {% comment %}
+                        {% if site.plugin-busuanzi-use %}
+                            <span id="busuanzi_container_page_pv">
+                                ,本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+                            </span>
+                        {% endif %}
+                        {% endcomment %}
+                    </span>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </header>
 
 <!-- post content -->
 <article>
-  <div class="container">
-    <div class="row">
-      <!-- Post Container -->
-      <div class="
-        col-lg-8 col-lg-offset-2
-        col-md-10 col-md-offset-1
-        post-container">
-        <!-- Multi-Lingual 多语言 -->
-        {% if page.multilingual %}
-          <!-- Language Selector -->
-          <select class="sel-lang" onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
-            <option value="0" selected> 中文 Chinese </option>
-            <option value="1"> 英文 English </option>
-          </select>
-        {% endif %}
-        <div id="myToc"></div>
-        {{ content }}
-        <hr style="visibility: hidden;">
-        <ul class="pager">
-          {% if page.previous.url %}
-            <li class="previous">
-              <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}"
-                data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">
-                更早的文章<br>
-                <span>{{page.previous.title}}</span>
-              </a>
-            </li>
-          {% endif %}
-          {% if page.next.url %}
-            <li class="next">
-              <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}"
-                data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">
-                更新的文章<br>
-                <span>{{page.next.title}}</span>
-              </a>
-            </li>
-          {% endif %}
-        </ul>
-        {% if site.plugin-gitalk-use %}
-            {% include plugins/gitalk.html %}
-        {% endif %}
-      </div>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-      <!-- Side Catalog Container -->
-      {% if page.catalog %}
-        <div class="
-          col-lg-2 col-lg-offset-0
-          visible-lg-block
-          sidebar-container
-          catalog-container">
-          <div class="side-catalog">
-          <hr class="hidden-sm hidden-xs">
-            <h5>
-              <a class="catalog-toggle" href="#">CATALOG</a>
-            </h5>
-            <ul class="catalog-body"></ul>
-          </div>
-        </div>
-      {% endif %}
-
-      <!-- Sidebar Container -->
-      <div class="
-        col-lg-8 col-lg-offset-2
-        col-md-10 col-md-offset-1
-        sidebar-container">
-        <!-- Featured Tags -->
-        {% if site.featured-tags %}
-          <section>
-            <hr class="hidden-sm hidden-xs">
-            <h5><a href="/tags/">推荐标签</a></h5>
-            <div class="tags">
-              {% for tag in site.tags %}
-                {% if tag[1].size > site.featured-condition-size %}
-                <a href="/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
-                  {{ tag[0] }}
-                </a>
+                <!-- Multi-Lingual 多语言 -->
+                {% if page.multilingual %}
+                    <select class="sel-lang" onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
+                        <option value="0" selected> 中文 Chinese </option>
+                        <option value="1"> 英文 English </option>
+                    </select>
                 {% endif %}
-              {% endfor %}
-            </div>
-          </section>
-        {% endif %}
 
-        <!-- Friends Blog 
-        {% if site.friends %}
-          <hr>
-          <h5>FRIENDS</h5>
-          <ul class="list-inline">
-            {% for friend in site.friends %}
-              <li><a href="{{friend.href}}">{{friend.title}}</a></li>
-            {% endfor %}
-          /ul>
-        {% endif %}
-        -->
-      </div>
+                <!-- relative tags -->
+                {% if page.relative-tags %}
+                    <!-- <h2 id="相关文章">相关文章</h2>-->
+                    <ul>
+                        <li>相关文章
+                            <ul>
+                              {% for rtag in page.relative-tags %}
+                                  <li>{{ rtag }}
+                                      <ul>
+                                          {% for tag in site.tags[rtag] %}
+                                            <li><a target="_blank" href="{{ tag.url | prepend: site.baseurl }}">{{ tag.title }}</a></li>
+                                          {% endfor %}
+                                      </ul>
+                                  </li>
+                              {% endfor %}
+                          </ul>
+                      </li>
+                  </ul>
+                {% endif %}
+                
+                <!-- post content -->
+                {{ content }}
+                <hr style="visibility: hidden;">
+
+                <!-- previous page and nex page 
+                     think useless, so remove it
+                -->
+                {% comment %}
+                <ul class="pager">
+                    {% if page.previous.url %}
+                        <li class="previous">
+                            <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}"
+                                data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">
+                                更早的文章<br>
+                                <span>{{page.previous.title}}</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if page.next.url %}
+                        <li class="next">
+                            <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}"
+                              data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">
+                              更新的文章<br>
+                                <span>{{page.next.title}}</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+                {% endcomment %}
+            </div>
+
+            <!-- Side Catalog Container -->
+            {% if page.catalog %}
+                <div class="
+                    col-lg-2 col-lg-offset-0
+                    visible-lg-block
+                    sidebar-container
+                    catalog-container">
+                    <div class="side-catalog">
+                        <hr class="hidden-sm hidden-xs">
+                        <h5>
+                            <a class="catalog-toggle" href="#">目录</a>
+                        </h5>
+                        <ul class="catalog-body"></ul>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                {% if site.featured-tags %}
+                  <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">推荐标签</a></h5>
+                    <div class="tags">
+                      {% for tag in site.tags %}
+                        {% if tag[1].size > site.featured-condition-size %}
+                        <a href="/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
+                          {{ tag[0] }}
+                        </a>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  </section>
+                {% endif %}
+                
+                <!-- Friends Blog -->
+                {% if site.friends %}
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        {% for friend in site.friends %}
+                            <li><a href="{{friend.href}}">{{friend.title}}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                
+            </div>
+        </div>
     </div>
-  </div>
 </article>
 
 {% if site.anchorjs %}
@@ -195,34 +232,3 @@ layout: default
         }
     </style>
 {% endif %}
-
-<script type="text/javascript">
-  function addToc(name, markid, level) {
-    if (name === '') {
-      return;
-    }
-    var title = "";
-    for (var i = 0; i < level; i++) {
-      title += "&nbsp;&nbsp;&nbsp;&nbsp;";
-    }
-    title += "<a href='#" + markid + "'>" + name + "</a></br>";
-    $("#myToc").append(title);
-  }
-  
-  var interval = setInterval(function() {
-    if (typeof $ == 'function') {
-      clearInterval(interval);
-      $(document).ready(function() {
-        $("div.post-container").children().each(function(index, element) {
-          var tagName = $(this).get(0).tagName;
-          if (tagName.substr(0, 1).toUpperCase() == "H") {
-            var contentH=$(this).text();
-            var markId = $(this).attr("id");
-            var nLevel = tagName.substr(1, 1);
-            addToc(contentH, markId, nLevel);
-          }
-        });
-      });
-    }
-  }, 100);
-</script>
