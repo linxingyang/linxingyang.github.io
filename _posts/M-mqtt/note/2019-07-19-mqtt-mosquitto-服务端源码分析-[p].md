@@ -11,8 +11,7 @@ catalog: true
 author: 林兴洋
 ---
 
-* content
-{:toc}
+* content {:toc}
 
 最近看了一下mosquitt源码，整体感觉就是有很多过长的代码块不利于维护阅读吧。而且代码有点乱，src目录中的代码调用lib目录中的代码，lib中代码反过来也有调用到src目录中的代码。
 
