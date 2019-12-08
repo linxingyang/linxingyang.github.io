@@ -2,7 +2,7 @@
 layout: post
 permalink: /:year/8a9603c61757413992fba38c907efd5f
 title: 2014-01-01-codeblock-无法运行
-categories: [工具]
+categories: [codeblock]
 tags: [codeblock]
 excerpt: codeblock,codeblock无法运行
 description: coldeblock无法运行
