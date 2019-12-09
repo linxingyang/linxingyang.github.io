@@ -1,10 +1,10 @@
 ---
 layout: post
 permalink: /:year/a8807ae72c0245579facd2f572b2e229
-title: 2014-03-03-ue-快速编译运行
+title: 2014-03-03-ultraedit-快速编译运行
 categories: [ultraedit]
 tags: [ultraedit]
-excerpt: ue,快速编译运行,注册激活
+excerpt: ue,ultraedit,快速编译运行,注册激活
 description: ue快速编译运行注册激活
 catalog: true
 author: 林兴洋
