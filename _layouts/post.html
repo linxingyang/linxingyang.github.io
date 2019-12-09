@@ -43,14 +43,16 @@ layout: default
                     <h1>{{ page.title }}</h1>
                     <!-- subtitle -->
                     {% comment %} always create a h2 for keeping the margin , Hux {% endcomment %}
-                    <h2 class="subheading">{{ page.subtitle }}</h2>
+                    <h2 class="subheading" style="text-align: center">{{ site.moto }}</h2>
                     <!-- post info -->
-                    <span class="meta">
+                    <span class="meta">                        
+                        {% comment %}
+                        
                         post by
                         {% if page.author %}
                             {{ page.author }}
                         {% else %}
-                            {{ site.title }}
+                            {{ site.author }}
                         {% endif %} 
                         at 
                         {{ page.date | date: "%Y-%m-%d" }}
@@ -58,12 +60,12 @@ layout: default
                         {% if site.plugin-mycounter-use %}
                           ,last visit at <span id="lastVisitTime"></span>
                         {% endif %}
-                        {% comment %}
                         {% if site.plugin-busuanzi-use %}
                             <span id="busuanzi_container_page_pv">
                                 ,本文总阅读量<span id="busuanzi_value_page_pv"></span>次
                             </span>
                         {% endif %}
+                        
                         {% endcomment %}
                     </span>
                 </div>
@@ -76,6 +78,7 @@ layout: default
 <article>
     <div class="container">
         <div class="row">
+        
             <!-- Post Container -->
             <div class="
                 col-lg-8 col-lg-offset-2
@@ -90,9 +93,12 @@ layout: default
                     </select>
                 {% endif %}
 
+                <!-- post content -->
+                {{ content }}
+                <hr style="visibility: hidden;">
+
                 <!-- relative tags -->
                 {% if page.relative-tags %}
-                    <!-- <h2 id="相关文章">相关文章</h2>-->
                     <ul>
                         <li>相关文章
                             <ul>
@@ -100,7 +106,9 @@ layout: default
                                   <li>{{ rtag }}
                                       <ul>
                                           {% for tag in site.tags[rtag] %}
-                                            <li><a target="_blank" href="{{ tag.url | prepend: site.baseurl }}">{{ tag.title }}</a></li>
+                                              <li><a target="_blank" href="{{ tag.url | prepend: site.baseurl }}">
+                                                  {{ tag.title }}</a>
+                                              </li>
                                           {% endfor %}
                                       </ul>
                                   </li>
@@ -110,13 +118,7 @@ layout: default
                   </ul>
                 {% endif %}
                 
-                <!-- post content -->
-                {{ content }}
-                <hr style="visibility: hidden;">
-
-                <!-- previous page and nex page 
-                     think useless, so remove it
-                -->
+                <!-- previous page and next page. think useless, so remove it -->
                 {% comment %}
                 <ul class="pager">
                     {% if page.previous.url %}
@@ -191,10 +193,10 @@ layout: default
                         {% endfor %}
                     </ul>
                 {% endif %}
+                
                 <!-- gitalk -->
                 {% if site.plugin-gitalk-use %}
-                  <hr>
-                  {% include plugins/gitalk.html %}
+                    {% include plugins/gitalk.html %}
                 {% endif %}
               </div>
             </div>

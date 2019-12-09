@@ -8,9 +8,11 @@ keyword: "林兴洋, 林兴洋的主页, 林兴洋的博客"
 url: "http://linxingyang.net"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
+author: 林兴洋
+moto: XingYangLin<br/> 1994 - 2019 <br/> if (2019 != thisYear) {  print("我挂了"); }
+
 # Publish posts or collection documents with a future date.
 future: true
-
 
 # SNS settings
 RSS: true
