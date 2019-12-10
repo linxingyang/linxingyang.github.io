@@ -26,7 +26,7 @@ form.render();
 
 如下页面，支付类型中，"未现付"虽然是selected，但是在其后跟随的div中，layui-this的样式仍然在"现付"选项上
 
-![图1](http://image.linxingyang.net/image/L-layer/layui/image/2018-07-03/01.png)
+![图1](http://image.linxingyang.net/image/L-layer/image/2018-07-03/01.png)
 
 
 为什么select中已经选择了“未现付”并且也已经调用了form.render()了,但结果不是期望的。
@@ -53,11 +53,11 @@ setTimeout(function() {
 
 更改成如上代码之后，在form.render()之前，是对的
 
-![图2](http://image.linxingyang.net/image/L-layer/layui/image/2018-07-03/02.png)
+![图2](http://image.linxingyang.net/image/L-layer/image/2018-07-03/02.png)
 
 而在2秒后触发setTimeout中的form.render()之后
 
-![图3](http://image.linxingyang.net/image/L-layer/layui/image/2018-07-03/03.png)
+![图3](http://image.linxingyang.net/image/L-layer/image/2018-07-03/03.png)
 
 反而变成错的了。
 
@@ -110,4 +110,4 @@ $("#payType").val(model.payType);
 但有个小问题，虽然正确的显示的“未现付”，但是select中“未现付”那个option并没有selected属性，如下图
 
 
-![图4](http://image.linxingyang.net/image/L-layer/layui/image/2018-07-03/04.png)
+![图4](http://image.linxingyang.net/image/L-layer/image/2018-07-03/04.png)
