@@ -29,7 +29,7 @@ github_username:    linxingyang
 highlighter: rouge
 permalink: pretty
 paginate: 10
-include: ["_posts", "_layouts", "_includes"]
+include: [_posts, _layouts, _includes]
 exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md"]
 anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
 # If you have timezone issue (e.g. #68) in China, uncomment to use this:
