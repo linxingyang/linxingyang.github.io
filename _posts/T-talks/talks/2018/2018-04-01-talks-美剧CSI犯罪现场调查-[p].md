@@ -5,7 +5,6 @@ title: 2018-04-01-talks-美剧CSI犯罪现场调查
 categories: [talks]
 tags: [影视]
 relative-tags: [影视]
-header-img: "img/home/bg-talks.jpg"
 ---
 
 ![图](http://image.linxingyang.net/image/T-talks/image/2018/2018-04-01/CSI.jpg)
