@@ -77,10 +77,18 @@ layout: default
 
       <!-- Sidebar Container -->
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 sidebar-container">
+        <hr>
+        <center>
+          {% if site.sidebar-avatar %} <img src="{{ site.sidebar-avatar }}" /> {% endif %}
+          {% if site.sidebar-about-description %}
+            <p>{{site.sidebar-about-description}}</p>
+          {% endif %}
+        </center>
+      
         {% if site.featured-tags %} <!-- Featured Tags -->
           <section>
-            <hr class="hidden-sm hidden-xs">
-            <h5><a href="/tags/">推荐标签</a></h5>
+            <!-- <hr class="hidden-sm hidden-xs">
+            <h5><a href="/tags/">推荐标签</a></h5>-->
             <div class="tags">
               {% for tag in site.tags %}
                 {% if tag[1].size > site.featured-condition-size %}
@@ -92,7 +100,7 @@ layout: default
             </div>
           </section>
         {% endif %}
-
+        
         {% if site.friends %} <!-- Friends Blog -->
           <hr>
           <h5>FRIENDS</h5>
@@ -106,6 +114,7 @@ layout: default
         {% if site.plugin-gitalk-use %} <!-- gitalk comments -->
           {% include plugins/gitalk.html %}
         {% endif %}
+        
       </div>
     </div>
   </div>
