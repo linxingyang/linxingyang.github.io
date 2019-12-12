@@ -18,7 +18,7 @@ future: true
 
 # SNS settings
 RSS: true
-# weibo_username:     huxpro
+# weibo_username:     linxingyang
 # zhihu_username:     huxpro
 github_username:    linxingyang
 # twitter_username:   huxpro
