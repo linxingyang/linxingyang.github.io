@@ -3,7 +3,7 @@ layout: post
 permalink: /:year/271c83f318834c3eae3a63d39a4b9d91
 title: 2019-09-24-c-cmake-安装INSTALL
 categories: [c]
-tags: [cmake系列,cmake]
+tags: [c,c++,cmake系列,cmake]
 relative-tags: [cmake系列]
 excerpt: c,c++,cmake,install
 description: cmake-依赖库

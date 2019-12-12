@@ -3,7 +3,7 @@ layout: post
 permalink: /:year/287f64ea1c5f4a53bc12cc9787cc32cf
 title: 2019-09-25-c-cmake-OPTION和IF
 categories: [c]
-tags: [cmake系列,cmake]
+tags: [c,c++,cmake系列,cmake]
 relative-tags: [cmake系列]
 excerpt: c,c++,cmake,OPTION,IF
 description: cmake-OPTION和IF
