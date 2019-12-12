@@ -8,7 +8,6 @@ relative-tags: [cmake系列]
 excerpt: c,c++,cmake,OPTION,IF
 description: cmake-OPTION和IF
 catalog: true
-author: 林兴洋
 ---
 
 # CMake
