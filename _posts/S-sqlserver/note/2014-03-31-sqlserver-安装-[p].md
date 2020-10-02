@@ -16,11 +16,11 @@ author: 林兴洋
 
 ## 2.点击安装
 
-![图](http://image.linxingyang.net/image/S-sqlserver/image/2014-03-31/01.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-sqlserver/image/2014-03-31/01.png)
 
 ## 3.下一步
 
-![图](http://image.linxingyang.net/image/S-sqlserver/image/2014-03-31/02.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-sqlserver/image/2014-03-31/02.png)
 
 ## 4.下一步
 
@@ -29,13 +29,13 @@ author: 林兴洋
 
 新手啥的，不知道用啥就全勾选了。我是全部勾选了，
 
-![图](http://image.linxingyang.net/image/S-sqlserver/image/2014-03-31/03.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-sqlserver/image/2014-03-31/03.png)
 
 ## 5 设置账号
 
 点击“对所有Sql server服务使用相同的账户”，在下拉框中选择  “NT AUTHORITY\SYSTEM”，点击下一步
 
-![图](http://image.linxingyang.net/image/S-sqlserver/image/2014-03-31/04.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-sqlserver/image/2014-03-31/04.png)
 
 ## 6 添加当前用户
 
@@ -43,42 +43,42 @@ author: 林兴洋
 
 点击 “添加当前用户”  点击下一步
 
-![图](http://image.linxingyang.net/image/S-sqlserver/image/2014-03-31/05.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-sqlserver/image/2014-03-31/05.png)
 
 ## 7 下一步
 
 点击 “添加当前用户”  点击下一步
 
-![图](http://image.linxingyang.net/image/S-sqlserver/image/2014-03-31/06.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-sqlserver/image/2014-03-31/06.png)
 
 ## 8 下一步
 
 点击下一步
 
-![图](http://image.linxingyang.net/image/S-sqlserver/image/2014-03-31/07.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-sqlserver/image/2014-03-31/07.png)
 
 ## 9 下一步
 
 点击下一步
 
-![图](http://image.linxingyang.net/image/S-sqlserver/image/2014-03-31/08.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-sqlserver/image/2014-03-31/08.png)
 
 ## 10 下一步
 
 点击下一步
 
-![图](http://image.linxingyang.net/image/S-sqlserver/image/2014-03-31/09.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-sqlserver/image/2014-03-31/09.png)
 
 ## 11 下一步
 
 点击安装
 
-![图](http://image.linxingyang.net/image/S-sqlserver/image/2014-03-31/10.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-sqlserver/image/2014-03-31/10.png)
 
 ## 12 下一步
 
 等待安装完成，点击关闭即可
 
-![图](http://image.linxingyang.net/image/S-sqlserver/image/2014-03-31/11.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-sqlserver/image/2014-03-31/11.png)
 
-![图](http://image.linxingyang.net/image/S-sqlserver/image/2014-03-31/12.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-sqlserver/image/2014-03-31/12.png)

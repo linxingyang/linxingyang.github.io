@@ -19,17 +19,17 @@ author: 林兴洋
 下载了一个  SqlServer2008R2，安装的时候，勾选了那个服务，安装完后就有了
 或者也可以直接往SqlServer2008添加功能
 
-![图](http://image.linxingyang.net/image/S-sqlserver/image/2014-03-24/01.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-sqlserver/image/2014-03-24/01.png)
 
-![图](http://image.linxingyang.net/image/S-sqlserver/image/2014-03-24/02.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-sqlserver/image/2014-03-24/02.png)
 
-![图](http://image.linxingyang.net/image/S-sqlserver/image/2014-03-24/03.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-sqlserver/image/2014-03-24/03.png)
 
 ## 问题二：新建 Integration Services项目，点击确定后报错，无法保存包，加载类型库/DLL 出错
 
-![图](http://image.linxingyang.net/image/S-sqlserver/image/2014-03-24/04.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-sqlserver/image/2014-03-24/04.png)
 
-![图](http://image.linxingyang.net/image/S-sqlserver/image/2014-03-24/05.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-sqlserver/image/2014-03-24/05.png)
 
 ### 解决方法
 
@@ -57,7 +57,7 @@ for %1 in (%windir%\system32\*.dll) do regsvr32.exe /s %1
 
 ## 问题三：进入项目后，发现SSIS包时打叉的（如图）
 
-![图](http://image.linxingyang.net/image/S-sqlserver/image/2014-03-24/06.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-sqlserver/image/2014-03-24/06.png)
 
 ### 解决方法
 
@@ -73,9 +73,9 @@ for %1 in (%windir%\system32\*.dll) do regsvr32.exe /s %1
 
 新建一个 Integration Services Project ，添加  数据流任务  控件后，点击保存，提示无法保存保存数据流工具，无法保存包。
 
-![图](http://image.linxingyang.net/image/S-sqlserver/image/2014-03-24/07.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-sqlserver/image/2014-03-24/07.png)
 
-![图](http://image.linxingyang.net/image/S-sqlserver/image/2014-03-24/08.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-sqlserver/image/2014-03-24/08.png)
 
 ### 解决方法
 

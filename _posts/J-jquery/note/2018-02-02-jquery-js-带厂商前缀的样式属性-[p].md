@@ -12,7 +12,7 @@ author: 林兴洋
 
 经常在页面调试的时候看到指定浏览器才有的样式。
 
-![http://image.linxingyang.net/image/J-jquery/image/2018-02-02/01.png](http://image.linxingyang.net/image/J-jquery/image/2018-02-02/01.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-jquery/image/2018-02-02/01.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-jquery/image/2018-02-02/01.png)
 
 ### 带厂商前缀的样式属性
 

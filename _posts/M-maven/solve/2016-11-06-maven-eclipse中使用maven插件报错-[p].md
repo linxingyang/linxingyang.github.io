@@ -12,6 +12,6 @@ author: 林兴洋
 
 -Dmaven.multiModuleProjectDirectory system propery is not set. Check $M2_HOME environment variable and mvn script match.
 
-![图](http://image.linxingyang.net/image/M-maven/image/2016-11-06/1.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-maven/image/2016-11-06/1.png)
 
-![图](http://image.linxingyang.net/image/M-maven/image/2016-11-06/2.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-maven/image/2016-11-06/2.png)

@@ -14,7 +14,7 @@ authro: 林兴洋
 
 顶层有个Strhope对象 ，这个对象中有这些东西。
 
-![图](http://image.linxingyang.net/image/S-strophe/image/2018-03-24/01.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-strophe/image/2018-03-24/01.png)
 
 * Builder
 * Handler

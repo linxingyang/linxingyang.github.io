@@ -42,16 +42,16 @@ BOSH提供了一个HTTP轮询的替代来进行从web页面到远程服务端的
 这是访问一个页面的HTTP请求，可以看到整个过程：建立TCP连接，然后HTTP请求响应，中间红色报文是要求Keep-Alive，但是经过一段时间后，还是断开TCP连接
 
 
-![图](http://image.linxingyang.net/image/W-websocket/image/2016-06-30/01.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/W-websocket/image/2016-06-30/01.png)
 
 WebSocket连接服务器报文如下，整个过程：
 TCP建立连接，然后WebSocket通过HTTP进行握手。（TCP连接并没有断开）
 
-![图](http://image.linxingyang.net/image/W-websocket/image/2016-06-30/02.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/W-websocket/image/2016-06-30/02.png)
 
 在调用WebSocket对象的onclose()方法与服务器断开连接的时候，TCP断开连接
 
-![图](http://image.linxingyang.net/image/W-websocket/image/2016-06-30/03.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/W-websocket/image/2016-06-30/03.png)
 
 根据上面的报文，TCP连接成功，WebSocket通过HTTP握手成功后，这个TCP就作为WebSocket的通信通道了，WebSocket没有开启一个新的TCP连接。
 
@@ -217,7 +217,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 ### 结果
 
-![图](http://image.linxingyang.net/image/W-websocket/image/2016-06-30/04.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/W-websocket/image/2016-06-30/04.png)
 
 ## C#中使用Websocket
 
@@ -225,11 +225,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 要添加SuperWebSocket，（服务器用的）。右键项目
 
-![图](http://image.linxingyang.net/image/W-websocket/image/2016-06-30/05.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/W-websocket/image/2016-06-30/05.png)
 
 安装第二个，第一次安装过程比较久，后面要用就比较方便了。
 
-![图](http://image.linxingyang.net/image/W-websocket/image/2016-06-30/06.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/W-websocket/image/2016-06-30/06.png)
 
 ### 服务器
 
@@ -459,4 +459,4 @@ namespace ConsoleApplication1
 
 ### 结果
 
-![图](http://image.linxingyang.net/image/W-websocket/image/2016-06-30/07.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/W-websocket/image/2016-06-30/07.png)

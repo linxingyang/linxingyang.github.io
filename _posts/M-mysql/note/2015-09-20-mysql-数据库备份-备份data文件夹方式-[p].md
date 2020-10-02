@@ -19,13 +19,13 @@ author: 林兴洋
 * data 文件夹中就是数据库中的数据
 * my.ini 是配置文件
 
-![图](http://image.linxingyang.net/image/M-mysql/image/2015-09-20/01.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mysql/image/2015-09-20/01.png)
 
 # 2
 
 打开my.in ，其中  datadir指示的是数据的目录。可以通过更改该路径切换数据库。。。
 
-![图](http://image.linxingyang.net/image/M-mysql/image/2015-09-20/02.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mysql/image/2015-09-20/02.png)
 
 # 3
 

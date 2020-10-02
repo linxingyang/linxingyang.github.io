@@ -5,10 +5,9 @@ title: 2018-04-01-talks-美剧CSI犯罪现场调查
 categories: [talks]
 tags: [影视]
 relative-tags: [影视]
-header-img: "img/home/bg-talks.jpg"
 ---
 
-![图](http://image.linxingyang.net/image/T-talks/image/2018/2018-04-01/CSI.jpg)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-talks/image/2018/2018-04-01/CSI.jpg)
 
 应该是2017年04月左右吧，开始看这部美剧。
 
@@ -28,17 +27,17 @@ header-img: "img/home/bg-talks.jpg"
 看到第八季最后Warrick死了= =，哎，震惊啊，也很痛心。。。不过也很真实吧~~
 
 
-![图](http://image.linxingyang.net/image/T-talks/image/2018/2018-04-01/Warrick.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-talks/image/2018/2018-04-01/Warrick.png)
 截图来自CSI S01E01
 
 
 再到后面，一个一个熟悉的人离开团队，最舍不得就是Grissom离开的时候。都有点不想追这个剧了。因为
 我最熟悉/喜欢的就是他了。S01-S16,Grissom从大叔变成大爷了。。。
 
-![图](http://image.linxingyang.net/image/T-talks/image/2018/2018-04-01/Grissom1.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-talks/image/2018/2018-04-01/Grissom1.png)
 截图来自CSI S01E01
 
-![图](http://image.linxingyang.net/image/T-talks/image/2018/2018-04-01/Grissom2.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-talks/image/2018/2018-04-01/Grissom2.png)
 截图来自CSI S16 THE Series Finale
 
 
@@ -51,7 +50,7 @@ header-img: "img/home/bg-talks.jpg"
 Grissom走了，D.B.Russell来了（这名字，好像剧里也说过，是开玩笑的么D.B ~ Dead Body），
 一开始还不太适应，不过看了几集适应了以后，也还OK。
 
-![图](http://image.linxingyang.net/image/T-talks/image/2018/2018-04-01/CSI2.jpg)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-talks/image/2018/2018-04-01/CSI2.jpg)
 
 
 
@@ -60,10 +59,10 @@ Grissom走了，D.B.Russell来了（这名字，好像剧里也说过，是开�
 看这部剧，看着Nick从一个小青年到成熟大叔，哈哈。
 
 
-![图](http://image.linxingyang.net/image/T-talks/image/2018/2018-04-01/nick1.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-talks/image/2018/2018-04-01/nick1.png)
 截图来自CSI S01E01
 
-![图](http://image.linxingyang.net/image/T-talks/image/2018/2018-04-01/nick2.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-talks/image/2018/2018-04-01/nick2.png)
 截图来自CSI S15E18
 
 
@@ -77,49 +76,49 @@ Grissom走了，D.B.Russell来了（这名字，好像剧里也说过，是开�
 
 中间有段时间Catherine代替Grissom当领导，哈哈，还有点不习惯，也是没想到吧。
 
-![图](http://image.linxingyang.net/image/T-talks/image/2018/2018-04-01/Catherine.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-talks/image/2018/2018-04-01/Catherine.png)
 截图来自CSI S01E01
 
 
-![图](http://image.linxingyang.net/image/T-talks/image/2018/2018-04-01/Catherine2.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-talks/image/2018/2018-04-01/Catherine2.png)
 截图来自CSI S16 THE Series Finale
 
 
 Sala也是来了又走，走了又回来~~。
 
-![图](http://image.linxingyang.net/image/T-talks/image/2018/2018-04-01/Sala.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-talks/image/2018/2018-04-01/Sala.png)
 截图来自CSI S01E02
 
-![图](http://image.linxingyang.net/image/T-talks/image/2018/2018-04-01/Sala2.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-talks/image/2018/2018-04-01/Sala2.png)
 截图来自CSI S16 THE Series Finale
 
 
 觉得Greg帅~。
 
-![图](http://image.linxingyang.net/image/T-talks/image/2018/2018-04-01/Greg.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-talks/image/2018/2018-04-01/Greg.png)
 截图来自CSI S01E04
 
 
 Hodges,比较有印象就是模型杀手那几集，他帮Grissom研究模型找到了bleach（漂白水）这条线索，这个逗比
 
-![图](http://image.linxingyang.net/image/T-talks/image/2018/2018-04-01/Hodges.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-talks/image/2018/2018-04-01/Hodges.png)
 截图来自CSI S07
 
 
 他和Mindy的虐恋~，分开的时候好不舍得啊。另外我觉得Mindy好漂亮~哈哈。
 
-![图](http://image.linxingyang.net/image/T-talks/image/2018/2018-04-01/Mindy.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-talks/image/2018/2018-04-01/Mindy.png)
 截图来自CSI S08E08
 
 
 Henry也是个逗比啊~
 
-![图](http://image.linxingyang.net/image/T-talks/image/2018/2018-04-01/Henry.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-talks/image/2018/2018-04-01/Henry.png)
 
 
 验尸官Robbins，没想到，现实中医生真是个残疾人，记得有一集他脱下假肢时我有点惊讶。。。
 
-![图](http://image.linxingyang.net/image/T-talks/image/2018/2018-04-01/Robbins.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-talks/image/2018/2018-04-01/Robbins.png)
 
 
 ~~~~~~~

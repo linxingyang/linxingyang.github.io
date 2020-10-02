@@ -1,39 +1,28 @@
 ---
 layout: page
-description: stop waste your time
+description: STOP WASTE YOUR TIME
 ---
-<!-- content -->
-{% for post in paginator.posts %}
+
+{% for post in paginator.posts %} <!-- content -->
   <div class="post-preview">
     <a href="{{ post.url | prepend: site.baseurl }}">
-      <h2 class="post-title">
-        {{ post.title }}
-      </h2>
+      <h2 class="post-title">{{ post.title }}</h2>
       {% if post.subtitle %}
-        <h3 class="post-subtitle">
-          {{ post.subtitle }}
-        </h3>
+        <h3 class="post-subtitle">{{ post.subtitle }}</h3>
       {% endif %}
       <div class="post-content-preview">
         {{ post.content | strip_html | truncate:200 }}
       </div>
     </a>
     <p class="post-meta">
-      post by
-      {% if post.author %}
-          {{ post.author }}
-      {% else %}
-          {{ site.auhtor }}
-      {% endif %}
-      at
-      {{ post.date | date: "%Y-%m-%d" }}
+      post by {% if post.author %} {{ post.author }} {% else %} {{ site.author }} {% endif %}
+      at {{ post.date | date: "%Y-%m-%d" }}
     </p>
   </div>
   <hr>
 {% endfor %}
 
-<!-- pager -->
-{% if paginator.total_pages > 1 %}
+{% if paginator.total_pages > 1 %} <!-- pager -->
   <ul class="pager">
     {% if paginator.previous_page %}
       <li class="previous">
@@ -48,8 +37,6 @@ description: stop waste your time
   </ul>
 {% endif %}
 
-<!-- gitalk -->
-{% if site.plugin-gitalk-use %}
-  <hr>
+{% if site.plugin-gitalk-use %} <!-- gitalk -->
   {% include plugins/gitalk.html %}
 {% endif %}

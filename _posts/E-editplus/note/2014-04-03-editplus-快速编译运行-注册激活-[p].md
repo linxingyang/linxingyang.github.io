@@ -18,25 +18,25 @@ author: 林兴洋
 
 ### 2. java的bin目录如下：
 
-![图](http://image.linxingyang.net/image/E-editplus/image/2014-04-03/02.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/E-editplus/image/2014-04-03/02.png)
 
 ### 3. 配置javac命令
 
 其中命令中选中的是java\bin目录下的javac.exe
 
-![图](http://image.linxingyang.net/image/E-editplus/image/2014-04-03/01.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/E-editplus/image/2014-04-03/01.png)
 
 ### 4. 配置java命令
 
 其中命令中选中的是java\bin目录下的javac.exe
 
-![图](http://image.linxingyang.net/image/E-editplus/image/2014-04-03/03.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/E-editplus/image/2014-04-03/03.png)
 
 ### 5.
 
 在java 运行这边个人推荐还是 不要捕获，因为捕获了当有 System.in 的时候就无法交互了，还是弹出DOS窗口的好。
 
-![图](http://image.linxingyang.net/image/E-editplus/image/2014-04-03/04.jpg)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/E-editplus/image/2014-04-03/04.jpg)
 
 ## 注册
 

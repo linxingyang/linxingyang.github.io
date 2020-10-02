@@ -73,7 +73,10 @@ openssl x509 -req -in client.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out c
 ```
 
 
-我的过程
+
+### 过程
+
+#### 生成CA认证中心的ca.key和ca.crt
 
 首先创建ca.key和ca.crt，注意这里有个坑，倒2行的Common Name，等等服务端和客户端设置过程中也有这个，ca的Common Name 的值不能和客户端和服务端的Common Name值一样，否则无效
 
@@ -119,11 +122,11 @@ drwxr-xr-x 3 root root 4096 Nov 11 17:26 ../
 -rw-r--r-- 1 root root 1834 Nov 11 17:27 ca.key
 ```
 
+#### 生成服务端使用的证书
 
-服务端
+##### 生成server.key
 
 ```
-
 root@ubuntu:/etc/mosquitto/ca# openssl genrsa -des3 -out server.key 2048         
 Generating RSA private key, 2048 bit long modulus
 .........+++
@@ -132,9 +135,11 @@ e is 65537 (0x10001)
 # 注意，这里设置的就是服务端的密码，启动mosquitto服务要用到
 Enter pass phrase for server.key: 
 Verifying - Enter pass phrase for server.key:
+```
 
+##### 生成server.csr
 
-
+```
 root@ubuntu:/etc/mosquitto/ca# openssl req -out server.csr -key server.key -new
 Enter pass phrase for server.key:
 You are about to be asked to enter information that will be incorporated
@@ -157,15 +162,16 @@ Please enter the following 'extra' attributes
 to be sent with your certificate request
 A challenge password []:lxy128server
 An optional company name []:.
+```
 
+##### 生成server.crt
 
-
+```
 root@ubuntu:/etc/mosquitto/ca# openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 365
 Signature ok
 subject=/C=cn/ST=fj/L=fz/O=wecon/OU=r3/CN=192.168.193.128
 Getting CA Private Key
 Enter pass phrase for ca.key:
-
 ```
 
 这步走完ca目录下有这些文件
@@ -185,7 +191,9 @@ drwxr-xr-x 4 root root 4096 Nov  9 23:06 ../
 
 ```
 
-客户端
+#### 生成客户端使用的证书
+
+##### 生成key
 
 ```
 root@ubuntu:/etc/mosquitto/ca# openssl genrsa -des3 -out client.key 2048
@@ -196,8 +204,11 @@ e is 65537 (0x10001)
 # 注意，这里设置的是客户端sub/pub的时候需要的密码
 Enter pass phrase for client.key:
 Verifying - Enter pass phrase for client.key:
+```
 
+##### 生成client.csr
 
+```
 root@ubuntu:/etc/mosquitto/ca# openssl req -out client.csr -key client.key -new
 Enter pass phrase for client.key:
 You are about to be asked to enter information that will be incorporated
@@ -219,9 +230,11 @@ Please enter the following 'extra' attributes
 to be sent with your certificate request
 A challenge password []:lxy128client
 An optional company name []:.
+```
 
+##### 生成client.crt
 
-
+```
 root@ubuntu:/etc/mosquitto/ca# openssl x509 -req -in client.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out client.crt -days 365
 Signature ok
 subject=/C=cn/ST=fj/L=fz/O=wecon/OU=r3/CN=192.168.193.128
@@ -229,6 +242,7 @@ Getting CA Private Key
 Enter pass phrase for ca.key:
 
 ```
+
 
 
 打完这一套，就有下面这些个文件
@@ -251,6 +265,7 @@ drwxr-xr-x 4 root root 4096 Nov  9 23:06 ../
 ```
 
 
+
 ## 双向认证配置
 
 到mosquitto.conf中进行配置，注意我这里直接修改默认的listener，然后修改端口为8883
@@ -267,35 +282,29 @@ cafile /etc/mosquitto/ca/ca.crt
 keyfile /etc/mosquitto/ca/server.key
 certfile /etc/mosquitto/ca/server.crt
 tls_version tlsv1
+# 将要求双向认证设置为为true
 require_certificate true
 # 因为我后面有配置密码文件，所以需要用账号密码登录
 # password_file /etc/mosquitto/pwfile.conf
 use_identity_as_username false
-
 ```
 
 
-配置完准备重启，这里踩了一个坑~，
-
-该坑如下，极其熟练的加了参数 -d，后台运行
+配置完准备重启，这里踩了一个坑~，该坑如下，极其熟练的加了参数 -d，后台运行
 
 ```
-
 mosquitto -c /etc/mosquitto/mosquitto.conf -d
-
 ```
 
 然后日志中报了一个错
 
 ```
-
 1541833572: mosquitto version 1.5.3 starting
 1541833572: Config loaded from /etc/mosquitto/mosquitto.conf.
 1541833572: Opening ipv4 listen socket on port 8883.
 1541833572: Opening ipv6 listen socket on port 8883.
 1541833572: Error: Unable to load server key file "/etc/mosquitto/ca/server.key". Check keyfile.
 1541833572: Error: Invalid argument
-
 ```
 
 首先以为是路径错了，确认确认再确认，没问题
@@ -323,42 +332,36 @@ mosquitto作者Roger Light说该bug mosquitto1.4分支已修复。
 忽然想起来，好像哪里说过不能后台启动，把 -d 去了，提示输入密码，输入前面设置的服务端的密码
 
 ```
-
 root@ubuntu:/etc/mosquitto/ca# mosquitto -c /etc/mosquitto/mosquitto.conf
 Enter PEM pass phrase:
-
 ```
 
 看到日志没有报错，成功了。 
 
 ```
-
 1541842331: mosquitto version 1.5.3 starting
 1541842331: Config loaded from /etc/mosquitto/mosquitto.conf.
 1541842331: Opening ipv4 listen socket on port 8883.
 1541842331: Opening ipv6 listen socket on port 8883.
 1541842337: Warning: Mosquitto should not be run as root/administrator.
-
 ```
 
 只因为多加了一个 -d ，绕地球一圈找解决方案~
 
+
+
 ## 双向认证测试
 
-启动成功，测测
-
-
-订阅
+启动成功，来，测测订阅
 
 ```
-
 root@ubuntu:/etc/mosquitto/certs# mosquitto_sub -h 192.168.193.128 -p 8883 -t "ssl/topic/#" --tls-version tlsv1 --cafile /etc/mosquitto/ca/ca.crt --cert /etc/mosquitto/ca/client.crt --key /etc/mosquitto/ca/client.key -u lxy128 -P lxy128
 Enter PEM pass phrase:
-
+```
 
 没想到要打这么长一段，回车后输入的是前面设置的证书客户端的密码
 
-
+```
 -h 主机
 -p 端口
 -t 话题，订阅 ssl/topic/下的所有话题
@@ -371,11 +374,9 @@ Enter PEM pass phrase:
 这项 use_identity_as_username设为 true，那就不用了
 -u lxy128 账号
 -P lxy128 密码
-
 ```
 
-
-后台日志
+后台日志显示客户端连接成功：
 
 ```
 1541842539: New connection from 192.168.193.128 on port 8883.
@@ -383,52 +384,44 @@ Enter PEM pass phrase:
 ```
 
 
-发布，也是老长了
+
+发布，也是老长了，配置项基本和订阅一样，也是需要密码
 
 ```
 root@ubuntu:/etc/mosquitto/db# mosquitto_pub -h 192.168.193.128 -p 8883 -t "ssl/topic/128" --tls-version tlsv1 --cafile /etc/mosquitto/ca/ca.crt --cert /etc/mosquitto/ca/client.crt --key /etc/mosquitto/ca/client.key -m "i'm 128, msg to 128, port 8883" -u lxy128 -P lxy128
 Enter PEM pass phrase:
-
-配置项基本和订阅一样，也是需要密码
-
 ```
 
 监听端收到消息了
 
 ```
-
 root@ubuntu:/etc/mosquitto/certs# mosquitto_sub -h 192.168.193.128 -p 8883 -t "ssl/topic/#" --tls-version tlsv1 --cafile /etc/mosquitto/ca/ca.crt --cert /etc/mosquitto/ca/client.crt --key /etc/mosquitto/ca/client.key -u lxy128 -P lxy128
 Enter PEM pass phrase:
 i'm 128, msg to 128, port 8883
-
 ```
 
 截个图，看看加密后的效果
 
-![图](http://image.linxingyang.net/image/note/2018-11-09-mosquitto/31.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/31.png)
 
 
 下一步准备桥接的TLS玩一下
 
 
 
-
-
 ## 单向认证配置
 
-我自己测试的时候都是用的双向认证，后面发现公司用的版本是单向认证。
-
-所以又搞了一下。
+我自己测试的时候都是用的双向认证，后面发现公司用的版本是单向认证，所以又搞了一下。
 
 
 
-双向认证，发布和订阅都需要带上客户端自己的crt,key还有ca.crt。因为服务端和客户端需要互相认证。
+双向认证，发布和订阅都需要带上客户端自己的crt,key还有ca.crt，因为服务端和客户端需要互相认证。
 
-单向认证只需要客户端认证服务端即可。所以客户端发布订阅的时候只要有ca.crt就可以了。
+单向认证只需要客户端认证服务端即可，所以客户端发布订阅的时候只要有ca.crt就可以了。
 
 
 
-单向认证的服务端配置
+单向认证的服务端配置，好像没差0.0
 
 ```
 listener 9883
@@ -436,29 +429,23 @@ protocol mqtt
 cafile /etc/mosquitto/ca.crt
 certfile /etc/mosquitto/server.crt
 keyfile /etc/mosquitto/server.key
+# 将双向认证设置为false
+require_certificate false
 ```
-
-
-
-双向配置
-
-```
-
-```
-
-
-
-
-
-
 
 
 
 ## 单向认证测试
 
-
-
 只需要指定`--cafile`，ca证书即可。
+
+订阅
+
+```
+[root@localhost ~]# mosquitto_sub -h 192.168.45.190 -p 9883 -t "test" --cafile ca.crt --insecure  -u test -P test
+```
+
+发布
 
 ```
 [root@localhost mosquitto-cmd]# mosquitto_pub -h 192.168.45.190  -p 9883 -t "test" -m "wtf" --cafile ca.crt --insecure -u test -P test
@@ -466,14 +453,18 @@ keyfile /etc/mosquitto/server.key
 
 
 
-```
-[root@localhost ~]# mosquitto_sub -h 192.168.45.190 -p 9883 -t "test" --cafile ca.crt --insecure  -u test -P test
-```
-
-不指定`--insecure`会出现 A TLS 错误。暂时不知道为啥
+不指定`--insecure`会出现 A TLS 错误：
 
 ```
 [root@localhost mosquitto-cmd]# mosquitto_pub -h 192.168.45.190  -p 9883 -t "test" -m "wtf" --cafile /usr/local/mosquitto-1.6/mosquitto-1.6.3/mosquitto-cmd/test-conf/ssl/ca.crt -u admin -P password 
 Error: A TLS error occurred.
 ```
 
+看一下insecure选项说的，不要检查服务器证书主机名是否与远程主机名匹配。使用此选项意味着您不能确定远程主机是您希望连接到的服务器，因此是不安全的。不要在生产环境中使用此选项（懒得翻译，来自有道翻译）。证书主机名我在创建ca.crt的时候都没有设置，当然会不同。
+
+```
+ --insecure : do not check that the server certificate hostname matches the remote
+              hostname. Using this option means that you cannot be sure that the
+              remote host is the server you wish to connect to and so is insecure.
+              Do not use this option in a production environment.
+```

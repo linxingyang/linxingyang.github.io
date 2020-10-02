@@ -14,7 +14,7 @@ author: 林兴洋
 
 例子是这样的。下图是修改图书界面。然后有一堆图书标签，
 
-![图](http://image.linxingyang.net/image/J-javascript/image/2018-06-22/01.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-javascript/image/2018-06-22/01.png)
 
 界面操作：点击一个已经勾选的标签，就是要去掉这个标签，该例中去掉一个id为31的标签。
 
@@ -45,7 +45,7 @@ form.on("checkbox(checkbox)", function(data){
 
 可以看到控制台打印的结果如下：
 
-![图](http://image.linxingyang.net/image/J-javascript/image/2018-06-22/03.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-javascript/image/2018-06-22/03.png)
 
 1处，index打印出来的值是-1，所以编号31的标签不会从集合中被移除掉。
 

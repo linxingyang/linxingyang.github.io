@@ -16,13 +16,13 @@ author: 林兴洋
 
 一台计算机先把消息放到队列中
 
-![http://image.linxingyang.net/image/C-csharp/image/2015-05-22/15.png](http://image.linxingyang.net/image/C-csharp/image/2015-05-22/15.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/15.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/15.png)
 
 其它机器可以将这个信息从队列中取出。
 
-![http://image.linxingyang.net/image/C-csharp/image/2015-05-22/16.png](http://image.linxingyang.net/image/C-csharp/image/2015-05-22/16.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/16.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/16.png)
 
-![http://image.linxingyang.net/image/C-csharp/image/2015-05-22/17.png](http://image.linxingyang.net/image/C-csharp/image/2015-05-22/17.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/17.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/17.png)
 
 # 2，使用C#操作消息队列前的设置 
 
@@ -31,22 +31,22 @@ author: 林兴洋
 “控制面板”—》“程序” —》 “程序和功能”中的 “打开或关闭Windows功能”
 勾选 MSMQ，点击确定。
 
-![http://image.linxingyang.net/image/C-csharp/image/2015-05-22/01.png](http://image.linxingyang.net/image/C-csharp/image/2015-05-22/01.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/01.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/01.png)
 
 ## 在新建winForm项目中引用 System.Messaging
 
 新建一个 winForm项目 
 如下图，选择添加引用
 
-![http://image.linxingyang.net/image/C-csharp/image/2015-05-22/02.png](http://image.linxingyang.net/image/C-csharp/image/2015-05-22/02.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/02.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/02.png)
 
 选中 “System.Messageing” 点击确定
 
-![http://image.linxingyang.net/image/C-csharp/image/2015-05-22/03.png](http://image.linxingyang.net/image/C-csharp/image/2015-05-22/03.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/03.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/03.png)
 
 并且  “using System.Messaging”
 
-![http://image.linxingyang.net/image/C-csharp/image/2015-05-22/04.png](http://image.linxingyang.net/image/C-csharp/image/2015-05-22/04.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/04.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/04.png)
 
 
 # MSMQ如何创建队列（两种方式）
@@ -55,15 +55,15 @@ author: 林兴洋
 
 右键“计算机” —> “管理” —》 “服务和应用程序” —》“消息队列” 
 
-![http://image.linxingyang.net/image/C-csharp/image/2015-05-22/05.png](http://image.linxingyang.net/image/C-csharp/image/2015-05-22/053.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/05.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/053.png)
 
-![http://image.linxingyang.net/image/C-csharp/image/2015-05-22/06.png](http://image.linxingyang.net/image/C-csharp/image/2015-05-22/06.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/06.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/06.png)
 
-![http://image.linxingyang.net/image/C-csharp/image/2015-05-22/07.png](http://image.linxingyang.net/image/C-csharp/image/2015-05-22/07.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/07.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/07.png)
 
 ## 第二种：代码创建
 
-![http://image.linxingyang.net/image/C-csharp/image/2015-05-22/08.png](http://image.linxingyang.net/image/C-csharp/image/2015-05-22/08.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/08.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/08.png)
 
 ```c#
 private void btnSend_Click(object sender, EventArgs e)
@@ -91,7 +91,7 @@ private void createQueue()
 
 用第一种方法创建队列的时候，如下图，有一个事务性的勾选框
 
-![http://image.linxingyang.net/image/C-csharp/image/2015-05-22/09.png](http://image.linxingyang.net/image/C-csharp/image/2015-05-22/09.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/09.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/09.png)
 
 这里的事务性和非事务性和数据库的事务处理是一个道理的，大致用在同时传多个消息到队列中的时候，有时必须保证必须全部传到消息队列（比如一个比较大的文件分段了，百度上说MSMQ队列单个消息最大4MB），要是有一个失败这几个的消息都不会入队列。（我做实验的时候都是用非事务性队列的）。事务性的队列在用代码创建队列时与非事务性有区别，在发送接收消息时也有区别。
 
@@ -99,11 +99,11 @@ private void createQueue()
 
 用上面两种方法创建队列后，右键单击队列进入属性
 
-![http://image.linxingyang.net/image/C-csharp/image/2015-05-22/10.png](http://image.linxingyang.net/image/C-csharp/image/2015-05-22/10.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/10.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/10.png)
 
 如图，默认有2个组（一个everyone,一个ANONYOUS LOGON(匿名)组），1个用户（本机）
 
-![http://image.linxingyang.net/image/C-csharp/image/2015-05-22/11.png](http://image.linxingyang.net/image/C-csharp/image/2015-05-22/11.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/11.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/11.png)
 
 默认情况下，这两个组的权限的复选框只有几个勾选的，但是没有接受消息的权限。
 
@@ -117,11 +117,11 @@ private void createQueue()
 
 ### 2, 是在代码中设置
 
-![http://image.linxingyang.net/image/C-csharp/image/2015-05-22/12.png](http://image.linxingyang.net/image/C-csharp/image/2015-05-22/12.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/12.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/12.png)
 
 这里可以根据需要给远程的机器赋予权限，为了方便，我这里设置了.FullControl 即全部权限，这里权限很多，不一一列出，和使用方法1设置权限是对应的。
 
-![http://image.linxingyang.net/image/C-csharp/image/2015-05-22/13.png](http://image.linxingyang.net/image/C-csharp/image/2015-05-22/13.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/13.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/13.png)
 
 ```c#
 private void createQueue()
@@ -167,7 +167,7 @@ MessageQueue 支持两种消息类型，同步和异步，
 * body 消息的内容
 * 消息的优先级，如下图，其中 Highest > VeryHigh
 
-![http://image.linxingyang.net/image/C-csharp/image/2015-05-22/14.png](http://image.linxingyang.net/image/C-csharp/image/2015-05-22/14.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/14.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/14.png)
 
 ```
 这里优先级的概念是：假设用 0 1 2 3 4 5 6 7 表示优先级从小到大
@@ -288,7 +288,7 @@ namespace MSMQsend_5_18
 
 #### 当发送一个消息后，刷新队列，会出现一个消息。
 
-![http://image.linxingyang.net/image/C-csharp/image/2015-05-22/18.png](http://image.linxingyang.net/image/C-csharp/image/2015-05-22/18.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/18.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-05-22/18.png)
 
 ### 接收端
 

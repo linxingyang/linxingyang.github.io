@@ -29,11 +29,9 @@ password_file /etc/mosquitto/pwfile.conf
 对于passworf_file，可以复制一份模板，或者创建一个空文件
 
 ```
-
 touch /etc/mosquitto/pwfile.conf
 # 使用mosquitto_passwd命令创建用户，第一个lxy是用户名，第二个lxy是密码
 mosquitto_passwd -b /etc/mosquitto/pwfile.conf lxy lxy
-
 ```
 
 重启mosquitto
@@ -54,12 +52,10 @@ notifications131 1
 发布消息也需要用密码
 
 ```
-
 root@ubuntu:/etc/mosquitto# mosquitto_pub -t "topic/128" -m "i'm 128, msg to 128"
 Connection Refused: not authorised.
 Error: The connection was refused.
 root@ubuntu:/etc/mosquitto# mosquitto_pub -t "topic/128" -m "i'm 128, msg to 128" -u lxy -P lxy
-
 ```
 
 

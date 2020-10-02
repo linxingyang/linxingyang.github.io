@@ -27,7 +27,7 @@ author: 林兴洋
 >
 > 这并不是说使用传统的IO模型无法移动大量数据，当然可以：只要坚持使用基于数组的read()和write()方法，这些方法与底层操作系统调用相当接近，尽管必须保留一份缓存区拷贝
 
-![图](http://image.linxingyang.net/image/J-java/image/2018/2018-07-15/02.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-java/image/2018/2018-07-15/02.png)
 
 
 下面进行一个测试，读取文件（该文件 c.txt 大约2M）
@@ -244,7 +244,7 @@ sc.read(ByteBuffer src); // 通道中内容读到ByteBuffer中
 
 ## 有很多Buffer
 
-![图片](http://image.linxingyang.net/image/J-java/image/2018/2018-07-15/03.png)
+![图片](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-java/image/2018/2018-07-15/03.png)
 
 
 CharBuffer、IntBuffer...可以根据数据不同类型使用不同的Buffer，常用的就是ByteBuffer~下面就用常用的ByteBuffer为例子看一下
@@ -272,7 +272,7 @@ public static ByteBuffer wrap(byte[] array, int offset, int length) // 给定字
 为什么要提供两种方式呢？这与Java的内存使用机制有关。第一种分配方式产生的内存开销是在JVM中的，而另外一种的分配方式产生的开销在JVM之外，也就是系统级的内存分配。当Java程序接收到外部传来的数据时，首先是被系统内存所获取，然后在由系统内存复制复制到JVM内存中供Java程序使用。所以在另外一种分配方式中，能够省去复制这一步操作，效率上会有所提高。可是系统级内存的分配比起JVM内存的分配要耗时得多，所以并非不论什么时候allocateDirect的操作效率都是最高的。以下是一个不同容量情况下两种分配方式的操作时间对照： 
 
 
-![图片](http://image.linxingyang.net/image/J-java/image/2018/2018-07-15/01.png)
+![图片](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-java/image/2018/2018-07-15/01.png)
 
 由图能够看出，当操作数据量非常小时，两种分配方式操作使用时间基本是同样的，第一种方式有时可能会更快，可是当数据量非常大时，另外一种方式会远远大于第一种的分配方式。
 

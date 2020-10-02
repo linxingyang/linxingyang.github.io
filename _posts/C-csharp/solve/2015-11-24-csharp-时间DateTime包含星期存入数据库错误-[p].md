@@ -16,7 +16,7 @@ author: 林兴洋
 
 发现我要存到数据库中的时间DateTime中间多了星期 ，即 （2015/11/24 星期二 21:48:54 ）这种格式的时间，mysql报错说格式时间不正确。
 
-![图](http://image.linxingyang.net/image/C-csharp/image/2015-11-24/01.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-11-24/01.png)
 
 我用如下方法，弹出来的时间都带着日期，
 
@@ -39,15 +39,15 @@ MessageBox.Show(DateTime.Now().ToString("yyyy/MM/dd hh:mm:ss"));
 MessageBox.Show((Convert.ToDateTime(dt1.Date.ToString("yyyy/MM/dd hh:mm:ss")).ToString()));
 ```
 
-![图](http://image.linxingyang.net/image/C-csharp/image/2015-11-24/02.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-11-24/02.png)
 
 ## 原因
 
 后来我发现，原来我的时间我之前设置的时候把星期给带上了，所以这边会一直弹出时间。
 
-![图](http://image.linxingyang.net/image/C-csharp/image/2015-11-24/03.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-11-24/03.png)
 
-![图](http://image.linxingyang.net/image/C-csharp/image/2015-11-24/04.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-11-24/04.png)
 
 ## 问题解决
 
@@ -55,13 +55,13 @@ MessageBox.Show((Convert.ToDateTime(dt1.Date.ToString("yyyy/MM/dd hh:mm:ss")).To
 
 将这里的时间格式改成如下格式，则时间不带星期了。
 
-![图](http://image.linxingyang.net/image/C-csharp/image/2015-11-24/05.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-11-24/05.png)
 
-![图](http://image.linxingyang.net/image/C-csharp/image/2015-11-24/06.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-11-24/06.png)
 
 下面这个方法也只能，更改时间，而不能更改系统显示时间的格式
 
-![图](http://image.linxingyang.net/image/C-csharp/image/2015-11-24/07.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-11-24/07.png)
 
 ### 解决方法二
 
@@ -69,7 +69,7 @@ MessageBox.Show((Convert.ToDateTime(dt1.Date.ToString("yyyy/MM/dd hh:mm:ss")).To
 这个方法的思路是一开始进来就设置系统时间的格式，将系统时间设置成我们想要的格式。
 通过修改注册表中的   `HKEY_CURRENT_USER → Control Panel → International`
 
-![图](http://image.linxingyang.net/image/C-csharp/image/2015-11-24/08.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/C-csharp/image/2015-11-24/08.png)
 
 ```csharp
  //通过注册表修改当前的系统日期格式

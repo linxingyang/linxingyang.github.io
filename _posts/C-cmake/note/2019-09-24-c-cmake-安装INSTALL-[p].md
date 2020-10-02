@@ -3,7 +3,7 @@ layout: post
 permalink: /:year/271c83f318834c3eae3a63d39a4b9d91
 title: 2019-09-24-c-cmake-安装INSTALL
 categories: [c]
-tags: [cmake系列,cmake]
+tags: [c,c++,cmake系列,cmake]
 relative-tags: [cmake系列]
 excerpt: c,c++,cmake,install
 description: cmake-依赖库
@@ -61,7 +61,8 @@ test08# tree
 老套路来看看各文件的内容
 
 `test08/CMakeLists.txt`文件最后新增一句设置CMAKE_INSTALL_PREFIX（安装路径前缀）。
-```
+
+```cmake
 test08# cat CMakeLists.txt 
 # cmake最低版本
 CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
@@ -78,7 +79,8 @@ SET (CMAKE_INSTALL_PREFIX /tmp/c/2019-09-12-cmaketest/middleware)
 ```
 
 `test08/src/CMakeLists.txt`文件的内容，新增了INSTALL命令
-```
+
+```cmake
 test08# cat src/CMakeLists.txt 
 # 添加动态库与静态库
 ADD_LIBRARY (conversion_static STATIC conversion.cpp)
@@ -101,7 +103,7 @@ INSTALL (FILES conversion.h
 ```
 
 `test08/src/conversion.h`的内容，就是一个米转厘米的函数
-```
+```c++
 test08# cat src/conversion.h 
 #ifndef CONVERSION_H__20191103
 #define CONVERSION_H__20191103
@@ -117,7 +119,7 @@ double meterToCentimeter(double dMeter);
 ```
 
 `test08/src/conversion.cpp`的内容
-```
+```c++
 test08# cat src/conversion.cpp 
 
 #include "conversion.h"
@@ -204,11 +206,11 @@ middleware# tree -F
 ### make install 命令
 
 根据配置文件中INSTALL命令指定的信息，将一些文件安装到指定位置。
- 
-### 配置文件`test08/CMakeLists.txt`
+
+### `test08/CMakeLists.txt`解析
 
 其它都是之前讲过的，就最后一句的CMAKE_INSTALL_PREFIX
-```
+```cmake
 test08# cat CMakeLists.txt 
 # cmake最低版本
 CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
@@ -235,10 +237,10 @@ SET (CMAKE_INSTALL_PREFIX /tmp/c/2019-09-12-cmaketest/middleware)
 
 注意这个命令需要在项目下的`test08/CMakeLists.txt`文件中配置，尝试配置在`test08/src/CMakeLists.txt`文件中配置无效。
 
-### 配置文件`test08/src/CMakeLists.txt`
+### `test08/src/CMakeLists.txt`解析
 
 该文件中新增了INSTALL命令
-```
+```cmake
 test08# cat src/CMakeLists.txt 
 # 添加动态库与静态库
 ADD_LIBRARY (conversion_static STATIC conversion.cpp)
@@ -271,7 +273,7 @@ INSTALL 指令用于定义安装规则，安装的内容可以包括目标二进
 
 目标类型也就相对应的有三种，ARCHIVE 特指静态库，LIBRARY 特指动态库，RUNTIME 特指可执行目标二进制。
 
-```
+```cmake
 INSTALL(TARGETS targets...
   [[ARCHIVE|LIBRARY|RUNTIME]
   [DESTINATION <dir>]
@@ -288,7 +290,7 @@ CMAKE_INSTALL_PREFIX 其实就无效了。如果你希望使用 CMAKE_INSTALL_PR
 
 
 举个简单的例子：
-```
+```cmake
 INSTALL(TARGETS myrun mylib mystaticlib
   RUNTIME DESTINATION bin
   LIBRARY DESTINATION lib
@@ -299,9 +301,9 @@ INSTALL(TARGETS myrun mylib mystaticlib
 
 特别注意的是你不需要关心 TARGETS 具体生成的路径，只需要写上 TARGETS 名称就可以 了。
 
-
 此处我们用到的命令就是将动态库和静态库安装到以CMAKE_INSTALL_PREFIX为前缀的lib目录下，即
 `/tmp/c/2019-09-12-cmaketest/middleware/lib`
+
 ```
 INSTALL (TARGETS conversion conversion_static
   LIBRARY DESTINATION lib
@@ -310,11 +312,12 @@ INSTALL (TARGETS conversion conversion_static
 ```
 
 注意其中有一项CONFIGURATIONS，
-CONFIGURATIONS指定了的Debug和Release，是根据当前是Debug还是Release模式来设置的
-```
+CONFIGURATIONS指定了的Debug和Release，是根据当前是Debug还是Release模式来设置的.
+
+```cmake
 INSTALL (TARGETS conversion conversion_static
-  LIBRARY DESTINATION lib CONFIGURATIONS Release
-  ARCHIVE DESTINATION lib CONFIGURATIONS Release
+  LIBRARY DESTINATION lib CONFIGURATIONS Release # 只在release模式生效
+  ARCHIVE DESTINATION lib CONFIGURATIONS Release # 只在release模式生效
 )
 ```
 
@@ -333,7 +336,7 @@ Install the project...
 ```
 SET (CMAKE_BUILD_TYPE "Release")
 ```
-那么将会安装静态库和动态库
+从打印的信息中可以看出安装了静态库和动态库
 ```
 test08/build# make install
 [ 50%] Built target conversion_static
@@ -349,7 +352,7 @@ Install the project...
 
 ##### 安装普通文件（如文本，帮助文档之类）
 
-```
+```cmake
 INSTALL(FILES files... DESTINATION <dir>
   [PERMISSIONS permissions...]
   [CONFIGURATIONS [Debug|Release|...]]
@@ -413,3 +416,6 @@ INSTALL(DIRECTORY icons scripts/ DESTINATION share/myproj
 * cmake practice
 * [为何要使用cmake中文翻译参考](https://www.cnblogs.com/liu3yuan/p/6895419.html)
 * [cmake变量](https://cmake.org/cmake/help/latest/manual/cmake-variables.7.html#variables-that-change-behavior)
+* [更多命令与脚本参考cmake官网](https://cmake.org/cmake/help/v3.16/manual/cmake-commands.7.html)
+
+

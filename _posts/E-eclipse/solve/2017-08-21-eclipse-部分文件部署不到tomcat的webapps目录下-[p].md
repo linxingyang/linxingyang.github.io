@@ -18,4 +18,4 @@ author: 林兴洋
 
 在这里进行配置项目目录与部署目录。使用add目录可以增加条目
 
-![图](http://image.linxingyang.net/image/E-eclipse/image/2017-08-21/01.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/E-eclipse/image/2017-08-21/01.png)

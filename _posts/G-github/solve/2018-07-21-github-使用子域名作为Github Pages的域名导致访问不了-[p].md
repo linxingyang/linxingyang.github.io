@@ -37,11 +37,11 @@ author: 林兴洋
 看到这我想起我用的是A record，即ip形式（192.168.1.1这样的）。然后屁颠屁颠跑到阿里云控制台，
 进去把这条记录改成CNAME record ，如下图
 
-![图](http://image.linxingyang.net/image/G-github/image/2018-07-21/01.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/G-github/image/2018-07-21/01.png)
 
 从类似上面的A record（记录值为ip形式），改成下面的CNAME（记录值为域名形式）
 
 
 过了一会，再刷新linxingyang.github.io的settings页面，原先的警告已经不在了，变成了如下红框内的提示。接着访问了一下blog.linxingyang.net，哎呀，可以了~~~。
 
-![图](http://image.linxingyang.net/image/G-github/image/2018-07-21/02.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/G-github/image/2018-07-21/02.png)

@@ -29,9 +29,9 @@ author: 林兴洋
 
 直接像下面这样复制就不会有错了。
 
-![图](http://image.linxingyang.net/image/J-java/image/2014/2014-03-28/01.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-java/image/2014/2014-03-28/01.png)
 
-![图](http://image.linxingyang.net/image/J-java/image/2014/2014-03-28/02.jpeg)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-java/image/2014/2014-03-28/02.jpeg)
 
 ## 3.往 path变量中添加JAVA_HOME
 
@@ -50,8 +50,8 @@ author: 林兴洋
 
 * 测试java命令
 
-![图](http://image.linxingyang.net/image/J-java/image/2014/2014-03-28/04.jpeg)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-java/image/2014/2014-03-28/04.jpeg)
 
 * 测试javac命令
 
-![图](http://image.linxingyang.net/image/J-java/image/2014/2014-03-28/05.jpeg)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-java/image/2014/2014-03-28/05.jpeg)

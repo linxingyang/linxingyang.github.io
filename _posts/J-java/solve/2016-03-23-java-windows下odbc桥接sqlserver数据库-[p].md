@@ -16,47 +16,47 @@ author: 林兴洋
 
 如果你是64位系统，你需要在如下路径找到  odbcad32.exe
 
-![图](http://image.linxingyang.net/image/J-java/image/2016/2016-03-23/01.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-java/image/2016/2016-03-23/01.png)
 
 如果你是32位系统，就在如下路径找
 
-![图](http://image.linxingyang.net/image/J-java/image/2016/2016-03-23/02.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-java/image/2016/2016-03-23/02.png)
 
 ## 选择“系统 DSN”
 
-![图](http://image.linxingyang.net/image/J-java/image/2016/2016-03-23/03.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-java/image/2016/2016-03-23/03.png)
 
 ## 点击    “添加”，后选择 “SQL Server”
 
-![图](http://image.linxingyang.net/image/J-java/image/2016/2016-03-23/04.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-java/image/2016/2016-03-23/04.png)
 
 如下：名称（这里只是一个别名而已，但在jsp中，需要用这个别名访问真实的数据库）
 描述（这个可以不填）
 服务器（选择你的Sqlserver服务器）
 
-![图](http://image.linxingyang.net/image/J-java/image/2016/2016-03-23/06.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-java/image/2016/2016-03-23/06.png)
 
 ## 第一种是windows身份验证登录。
 
 我是使用第二种方式，使用用户名密码登录，并且输入“登录ID”和“密码”
 
-![图](http://image.linxingyang.net/image/J-java/image/2016/2016-03-23/07.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-java/image/2016/2016-03-23/07.png)
 
 ## 勾选“更改默认的数据库为”，选择你要连接的数据库。
 
-![图](http://image.linxingyang.net/image/J-java/image/2016/2016-03-23/08.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-java/image/2016/2016-03-23/08.png)
 
 ## 这里默认设置
 
-![图](http://image.linxingyang.net/image/J-java/image/2016/2016-03-23/09.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-java/image/2016/2016-03-23/09.png)
 
 ## 配置完成，点击“测试数据源”，结果为“测试成功”即可
 
-![图](http://image.linxingyang.net/image/J-java/image/2016/2016-03-23/10.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-java/image/2016/2016-03-23/10.png)
 
 ## 如下，Tmssql 已经添加到了列表上
 
-![图](http://image.linxingyang.net/image/J-java/image/2016/2016-03-23/11.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-java/image/2016/2016-03-23/11.png)
 
 ## 附
 
@@ -109,4 +109,4 @@ JSP中访问代码如下。
 
 测试访问结果如下：
 
-![图](http://image.linxingyang.net/image/J-java/image/2016/2016-03-23/12.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-java/image/2016/2016-03-23/12.png)

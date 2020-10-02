@@ -159,7 +159,7 @@ kill [对应的PID]
 
 第一种方式只需要在我内网的电脑上装一个ss客户端即可，配置上该服务器的IP，密码，端口，加密等方式就可以连上了。
 
-![图](http://image.linxingyang.net/image/S-shadowsocks/image/2019-03-18/04.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-shadowsocks/image/2019-03-18/04.png)
 
 
 第二种方式，利用了sslocal可以设置local_address为"0.0.0.0"从而接受所有客户端的socks5连接，我在国内服务器上启动一个sslocal
@@ -180,7 +180,7 @@ kill [对应的PID]
 
 这个时候，我就能在支持socks5代理的微信上配置网络代理，地址填的是国内服务器的IP，端口填的是1082。（另外说一下，如果我们使用了第一种方法shadowsocks，那我们也可以在这里填写地址127.0.0.1以及端口1080，因为第一种的本质也是启动一个shadowsocks的客户端，并且它默认127.0.0.1的1080端口，你看上面的第一种配置方式，里面有个代理端口1080）
 
-![图](http://image.linxingyang.net/image/S-shadowsocks/image/2019-03-18/05.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-shadowsocks/image/2019-03-18/05.png)
 
 当然，第二种方法，如果别人知道你的服务器IP以及你开放的端口，就可以来蹭你流量了。
 
@@ -242,13 +242,13 @@ do you see the brilliant here?
 
 配置内网和外网的socks5代理
 
-![图](http://image.linxingyang.net/image/S-shadowsocks/image/2019-03-18/01.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-shadowsocks/image/2019-03-18/01.png)
 
-![图](http://image.linxingyang.net/image/S-shadowsocks/image/2019-03-18/02.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-shadowsocks/image/2019-03-18/02.png)
 
 在谷歌浏览器的右上角进行切换，直接连接默认是内网，国内用来访问百度，国外的用来科学上网。
 
-![图](http://image.linxingyang.net/image/S-shadowsocks/image/2019-03-18/03.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-shadowsocks/image/2019-03-18/03.png)
 
 ## proxychains
 
@@ -288,7 +288,7 @@ sudo proxychains apt-get xxxx
 
 在手机中选择当前连接的笔记本的wifi，进行设置，如下配置即可
 
-![图](http://image.linxingyang.net/image/S-shadowsocks/image/2019-03-18/06.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-shadowsocks/image/2019-03-18/06.png)
 
 ## 参考 
 

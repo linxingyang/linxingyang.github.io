@@ -209,11 +209,11 @@ bridge_tls_version tlsv1
 
 当我只配置一个的时候，如下是开发1883端口，注释8883端口。注册的情况是这样的
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/42.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/42.png)
 
 当我发送消息的时候，是这样的
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/43.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/43.png)
 
 截取的报文也是符合这样的。
 
@@ -221,14 +221,14 @@ bridge_tls_version tlsv1
 
 然后128作为桥接中心，向130，131这两个订阅者发送该消息
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/44.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/44.png)
 
 
 
 
 当把两个注释都放开，就是和129主机的1883和8883端口都配置了桥接，那么现在注册的情况如下
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/45.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/45.png)
 
 
 
@@ -251,7 +251,7 @@ mosquitto_pub -t "topic/nossl/129" -m "xxxx"
 所以，130和131是能够收到消息的，但同时因为8883端口也是订阅所有话题的，（mosquitto知道给它发送消息的是1883端口，并且不会再向1883端口发送这个消息，这个我们从前面只配置1883端口的时候截取的报文也可以知道），但它会向8883端口发送该消息， 如下绿色那条msg
 
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/46.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/46.png)
 
 
 
@@ -260,7 +260,7 @@ mosquitto_pub -t "topic/nossl/129" -m "xxxx"
 注意，此时129发送该绿色msg（我把颜色改成了蓝色，和原来发送红色消息路径一样）， 最后128又会有一条msg（紫色表示）发送给129
 
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/47.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/47.png)
 
 然后就死循环了（欢乐吧~）
 
@@ -352,7 +352,7 @@ bridge_tls_version tlsv1
 
 这是一幅草稿图~哇哈哈
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/49.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/49.png)
 
 
 128中的桥接配置
@@ -393,7 +393,7 @@ topic # both 0
 然后也出现了死循环
 
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/48.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/48.png)
 
 
 

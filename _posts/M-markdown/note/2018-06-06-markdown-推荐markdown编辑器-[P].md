@@ -11,10 +11,11 @@ catalog: true
 author: 林兴洋
 ---
 
-2019-09-27更新了一把，现在markdown编辑器越来越多了，自己主要用vscode和typora，没怎么去挖掘其它的。
+2019-09-27更新了一把
+
+现在markdown编辑器越来越多了，自己主要用vscode和typora，没怎么去挖掘其它的。当初为了找一款喜欢好用的markdown编辑器，也是翻来覆去的找啊。对markdown编辑器的要求就是要有固定的目录（TOC）展示的地方，字数多的时候不能卡。
 
 
-当初为了找一款喜欢好用的markdown编辑器，也是翻来覆去的找啊。对markdown编辑器的要求就是要有固定的目录（TOC）展示的地方，字数多的时候不能卡。
 
 # 推荐的markdown
 
@@ -29,14 +30,14 @@ author: 林兴洋
   * 支持文件夹下所有文件的搜索
   * 各种markdown插件支持
 
-![图](http://image.linxingyang.net/image/M-markdown/image/2018-06-06/07.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-markdown/image/2018-06-06/07.png)
 
 ## typora
 
 * 目录（大纲）模式
 * 集合输入界面和预览界面于一体，不用左边输入右边预览，既扩大了输入区域，写的时候也不用特地去看右边的效果了。对于我这台14寸的笔记本，感觉是福音，不喜欢看代码的时候由于代码过长，要拉动下面的滚动条才能去看后面被挡住的部分。
 
-![图](http://image.linxingyang.net/image/M-markdown/image/2018-06-06/03.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-markdown/image/2018-06-06/03.png)
 
 ## HBuilderX
 
@@ -44,13 +45,13 @@ author: 林兴洋
 
 它基本和vscode一样，支持的功能差不多。但是有个不爽的地方，打开另一个markdown文件就要重新打开一次toc，`alt + w`这里快捷键不知道是否冲突，也没起作用；
 
-![图](http://image.linxingyang.net/image/M-markdown/image/2018-06-06/05.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-markdown/image/2018-06-06/05.png)
 
 ## haroopad
 
 韩国人开发的这款还不错。可以设置vim模式输入，这点挺喜欢的。
 
-![图](http://image.linxingyang.net/image/M-markdown/image/2018-06-06/02.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-markdown/image/2018-06-06/02.png)
 
 但是它没有目录模式，图示的目录效果固定在右边是写css来设置的。
 ```
@@ -67,7 +68,7 @@ cuteMarkdownEd挺不错的
   * 字数一多也有点卡。
   * 同时左侧的目录有时候会失灵，点击了无效或者定位到了错误的位置。除了这两点其他还是不错的。
 
-![图](http://image.linxingyang.net/image/M-markdown/image/2018-06-06/01.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-markdown/image/2018-06-06/01.png)
 
 # 其他
 

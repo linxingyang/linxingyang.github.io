@@ -22,7 +22,7 @@ author: 林兴洋
 
 ### 4.1 类图结构 ###
 
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/loggerstruct.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/loggerstruct.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/loggerstruct.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/loggerstruct.png)
 
 ### 4.2 AppenderAttachable 接口 ###
 

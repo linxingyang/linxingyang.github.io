@@ -210,7 +210,7 @@ PSK
 
 如图让128主机作为桥接中心
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/mosquitto.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/mosquitto.png)
 
 
 在128主机上配置mosquitto.conf
@@ -246,22 +246,22 @@ topic # both 0
 
 128给自己和129各发送一条
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/05.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/05.png)
 
 130给自己和128各发送一条
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/06.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/06.png)
 
 
 各个主机收到消息的情况
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/01.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/01.png)
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/02.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/02.png)
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/03.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/03.png)
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/04.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/04.png)
 
 
 
@@ -298,25 +298,25 @@ topic # both 0
 
 128，129，130，131订阅所有话题
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/14.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/14.png)
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/15.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/15.png)
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/16.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/16.png)
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/17.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/17.png)
 
 128中发送一条到本地
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/11.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/11.png)
 
 130发送一条到本地，一条到128
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/12.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/12.png)
 
 131中发送一条到本地
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/13.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/13.png)
 
 
 现在一切正常~
@@ -345,30 +345,30 @@ topic topic/# both 0
 
 在 128主机上发送两条信息，一条给 topic/128，一条给private/128
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/21.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/21.png)
 
 在130主机上也和128主机上一样， 发送两条， 一条给 topic/130，一条给private/130
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/22.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/22.png)
 
 在131上发送一条给 private/131
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/23.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/23.png)
 
 
 结果如图
 
 128主机收到了所有消息
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/24.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/24.png)
 
 129正常，因为我们期望就是只会收到话题 topic/# 的消息
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/25.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/25.png)
 
 130正常，因为private/130就是发送到本地的
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/27.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/27.png)
 
 131也是正常的
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/26.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/26.png)
 
 
 
@@ -382,7 +382,7 @@ topic topic/# both 0
 
 根据我的理解，自己画了个图
 
-![图](http://image.linxingyang.net/image/M-mqtt/image/2018-11-09/mosquitto2.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2018-11-09/mosquitto2.png)
 
 
 有两个解决方法，

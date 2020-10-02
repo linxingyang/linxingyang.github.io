@@ -41,4 +41,4 @@ console.log($('#greeting').html());
 
 其中`Hellox from ts` 是 `div#greeting`中的html。
 
-![http://image.linxingyang.net/image/note/2018-03-06/01.png](http://image.linxingyang.net/image/note/2018-03-06/01.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-typescript/image/2018-03-06/01.png)

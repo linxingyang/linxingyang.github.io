@@ -25,38 +25,38 @@ author: 林兴洋
 
 ### 新建一个目录，将你的项目移到这个文件夹下。
 
-![http://image.linxingyang.net/image/T-tomcat/image/2017-03-23/01.png](http://image.linxingyang.net/image/T-tomcat/image/2017-03-23/01.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-tomcat/image/2017-03-23/01.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-tomcat/image/2017-03-23/01.png)
 
 ### 改变myclipse的工作空间到上面的路径
 
-![http://image.linxingyang.net/image/T-tomcat/image/2017-03-23/02.png](http://image.linxingyang.net/image/T-tomcat/image/2017-03-23/02.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-tomcat/image/2017-03-23/02.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-tomcat/image/2017-03-23/02.png)
 
 ### 使用Import导入项目LYB
 
-![http://image.linxingyang.net/image/T-tomcat/image/2017-03-23/03.png](http://image.linxingyang.net/image/T-tomcat/image/2017-03-23/03.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-tomcat/image/2017-03-23/03.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-tomcat/image/2017-03-23/03.png)
 
-![http://image.linxingyang.net/image/T-tomcat/image/2017-03-23/04.png](http://image.linxingyang.net/image/T-tomcat/image/2017-03-23/04.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-tomcat/image/2017-03-23/04.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-tomcat/image/2017-03-23/04.png)
 
-![http://image.linxingyang.net/image/T-tomcat/image/2017-03-23/05.png](http://image.linxingyang.net/image/T-tomcat/image/2017-03-23/05.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-tomcat/image/2017-03-23/05.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-tomcat/image/2017-03-23/05.png)
 
 ###  配置Tomcat 6.x，也可以使用Myeclipse自带的tomcat，配置过程省略。
 
-![http://image.linxingyang.net/image/T-tomcat/image/2017-03-23/06.png](http://image.linxingyang.net/image/T-tomcat/image/2017-03-23/06.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-tomcat/image/2017-03-23/06.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-tomcat/image/2017-03-23/06.png)
 
 ### 点击最左边的这个按钮进入部署
 
-![http://image.linxingyang.net/image/T-tomcat/image/2017-03-23/07.png](http://image.linxingyang.net/image/T-tomcat/image/2017-03-23/07.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-tomcat/image/2017-03-23/07.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-tomcat/image/2017-03-23/07.png)
 
 ### 选择要部署的项目，点击Add，选中 Tomcat 6.x，点Finish退出
 
-![http://image.linxingyang.net/image/T-tomcat/image/2017-03-23/08.png](http://image.linxingyang.net/image/T-tomcat/image/2017-03-23/08.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-tomcat/image/2017-03-23/08.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-tomcat/image/2017-03-23/08.png)
 
-![http://image.linxingyang.net/image/T-tomcat/image/2017-03-23/09.png](http://image.linxingyang.net/image/T-tomcat/image/2017-03-23/09.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-tomcat/image/2017-03-23/09.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-tomcat/image/2017-03-23/09.png)
 
-![http://image.linxingyang.net/image/T-tomcat/image/2017-03-23/10.png](http://image.linxingyang.net/image/T-tomcat/image/2017-03-23/10.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-tomcat/image/2017-03-23/10.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-tomcat/image/2017-03-23/10.png)
 
 ### 此时myeclipse就会将你的项目发到Tomcat目录下。
 
-![http://image.linxingyang.net/image/T-tomcat/image/2017-03-23/11.png](http://image.linxingyang.net/image/T-tomcat/image/2017-03-23/11.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-tomcat/image/2017-03-23/11.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/T-tomcat/image/2017-03-23/11.png)
 
 ### 然后启动服务就可以访问到了

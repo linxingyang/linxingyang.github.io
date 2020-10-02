@@ -18,19 +18,19 @@ author: 林兴洋
 
 从外面看，MQTT代理/服务端(broker)既可以和普通的客户端通信，也可以和其它MQTT代理通信。
 
-![MQTT订阅发布模式](http://image.linxingyang.net/image/M-mqtt/image/2019-07-19/01.png)
+![MQTT订阅发布模式](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2019-07-19/01.png)
 
 
 
 从消息上来看
 
-![MQTT交互简图](http://image.linxingyang.net/image/M-mqtt/image/2019-07-19/02.png)
+![MQTT交互简图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2019-07-19/02.png)
 
 
 
 内部主流程的简略类图。主要三条线，第一条处理链接，第二条处理各种收到的消息，第三条处理发送消息。
 
-![简单类图](http://image.linxingyang.net/image/M-mqtt/image/2019-07-19/34.png)
+![简单类图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2019-07-19/34.png)
 
 
 
@@ -38,7 +38,7 @@ author: 林兴洋
 
 # 1 main()主流程
 
-![简单主流程](http://image.linxingyang.net/image/M-mqtt/image/2019-07-19/05.png)
+![简单主流程](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2019-07-19/05.png)
 
 - 1，main()使用命令 mosquiitto -c /etc/mosquiito/mosquitto.conf 启动mosquitto服务。
 - 2，config\_\_init() 初始化配置config（struct mosquitto_config<sup>注1</sup>）。
@@ -90,7 +90,7 @@ signal(SIGUSR2, handle_sigusr2);
 
 ## 1.1 mosquitto_main_loop()
 
-![简单主流程](http://image.linxingyang.net/image/M-mqtt/image/2019-07-19/06.png)
+![简单主流程](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2019-07-19/06.png)
 
 主要关注三个方法：db\_\_message_write()发送数据，net\_\_socket_accept()接受新客户端连接， loop\_\_handel_reads_write()处理接收的数据包。
 
@@ -201,7 +201,7 @@ kill -s SIGUSR2	[mosquitto PID]
 
 虽然db\_\_message_write()先于loop_handle_reads_writes()被调用，但是loop_handle_reads_writes()是处理收到的消息，db\_\_message_write()是处理发送的消息，所以先介绍loop_handle_reads_writes()。
 
-![简单主流程](http://image.linxingyang.net/image/M-mqtt/image/2019-07-19/07.png)
+![简单主流程](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2019-07-19/07.png)
 
 * 1，loop_handle_reads_writes()。
 
@@ -235,7 +235,7 @@ kill -s SIGUSR2	[mosquitto PID]
 
 前面mosquitto_main_loop()中的net__socket_accept()那个是接受客户端，创建fd句柄并为其初始化一个context。这里是真正处理连接的一些东西，认证，用户名密码等等。
 
-![主流程](http://image.linxingyang.net/image/M-mqtt/image/2019-07-19/08.png)
+![主流程](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2019-07-19/08.png)
 
 * 1，handle__connect()，在这里做多客户端登录处理，协议判断，处理连接协议版本，内容，用户名，密码，遗嘱，生成客户端ID，CA认证等等协议中定义的东西。
 
@@ -256,7 +256,7 @@ kill -s SIGUSR2	[mosquitto PID]
 
 #### 1.1.1.2 handle__disconnect() 处理断开连接
 
-![流程](http://image.linxingyang.net/image/M-mqtt/image/2019-07-19/09.png)
+![流程](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2019-07-19/09.png)
 
 * 1, handle__disconnect()。
 
@@ -284,7 +284,7 @@ kill -s SIGUSR2	[mosquitto PID]
 
 #### 1.1.1.3 handle__subscribe() 处理订阅
 
-![流程](http://image.linxingyang.net/image/M-mqtt/image/2019-07-19/30.png)
+![流程](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2019-07-19/30.png)
 
 主要做两件事：1，将订阅加入订阅层次中(mosquitto\_\_subhier<sup>注6</sup> )(db->subs)； 2，将所有订阅同一个主题的客户端放入一个链表中(mosquitto\_\_subleaf<sup>注7</sup>)（db->subs->subs）。
 
@@ -321,7 +321,7 @@ kill -s SIGUSR2	[mosquitto PID]
 
 当运行mosquitto服务端之后，在1 main() 主流程中的第4步db_opne()会构建$SYS主题，以及空字符串主题。
 
-![流程](http://image.linxingyang.net/image/M-mqtt/image/2019-07-19/17.png)
+![流程](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2019-07-19/17.png)
 
 
 在本例中的第4步，对于\$share,\$sys,订阅主题的处理
@@ -361,7 +361,7 @@ kill -s SIGUSR2	[mosquitto PID]
 kill -s SIGUSR2 [mosquitto PID]
 ```
 
-![流程](http://image.linxingyang.net/image/M-mqtt/image/2019-07-19/18.png)
+![流程](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2019-07-19/18.png)
 
 
 在本例的第7步，遍历创建主题部分。对于订阅主题 `a/b/c/d`来说
@@ -378,13 +378,13 @@ kill -s SIGUSR2 [mosquitto PID]
 
 在本例的第11步中，sub__add_leaf()将该客户端context引用保存到"d"(db->subs->subs)这个部分中 （d主题保存了ClientA客户端的引用）
 
-![流程](http://image.linxingyang.net/image/M-mqtt/image/2019-07-19/21.png)
+![流程](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2019-07-19/21.png)
 
 
 #### 1.1.1.4 handle__unsubscribe() 处理取消订阅
 
 
-![流程](http://image.linxingyang.net/image/M-mqtt/image/2019-07-19/11.png)
+![流程](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2019-07-19/11.png)
 
 * 1， handle__unsubscribe()。
 
@@ -431,7 +431,7 @@ kill -s SIGUSR2 [mosquitto PID]
 "d" 该主题中包含客户端，将该客户端在主题d的subs中移除，并且将该客户端中subs保存的主题d移除
 ```
 
-![流程](http://image.linxingyang.net/image/M-mqtt/image/2019-07-19/24.png)
+![流程](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2019-07-19/24.png)
 
 由于当前只有一个客户端订阅了`a/b/c/d`然后退出迭代调用的时候。
 
@@ -443,7 +443,7 @@ kill -s SIGUSR2 [mosquitto PID]
 ""  该主题不移除
 ```
 
-![流程](http://image.linxingyang.net/image/M-mqtt/image/2019-07-19/28.png)
+![流程](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2019-07-19/28.png)
 
 
 情况2：ClientA订阅了 `a/b/c/d`，ClientB订阅了 `a/b`。
@@ -458,11 +458,11 @@ kill -s SIGUSR2 [mosquitto PID]
 ""  该主题不移除
 ```
 
-![流程](http://image.linxingyang.net/image/M-mqtt/image/2019-07-19/29.png)
+![流程](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2019-07-19/29.png)
 
 #### 1.1.1.5 handle__publish() 处理发布
 
-![流程](http://image.linxingyang.net/image/M-mqtt/image/2019-07-19/12.png)
+![流程](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2019-07-19/12.png)
 
 * 1，handle__publish()，一些基本的东西获取，比如qos，retain，dup等等。
 
@@ -547,7 +547,7 @@ ClientD2 发送一条消息到主题 a/b/c/d
 
 此时订阅树如下
 
-![流程](http://image.linxingyang.net/image/M-mqtt/image/2019-07-19/31.png)
+![流程](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2019-07-19/31.png)
 
 
 ClientD1发送的消息到主题`none/exists/topic`在第10步会被分解成
@@ -642,13 +642,13 @@ ClientC3 订阅 a/b/c/d/#
 
 按顺序标号如下：
 
-![流程](http://image.linxingyang.net/image/M-mqtt/image/2019-07-19/32.png)
+![流程](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2019-07-19/32.png)
 
 
 
 #### 1.1.1.6 handle__pubrec() 处理收到receive
 
-![流程](http://image.linxingyang.net/image/M-mqtt/image/2019-07-19/13.png)
+![流程](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2019-07-19/13.png)
 
 这个是服务端向其它客户端/代理发送(publish)QoS2的消息的时候会收到的回复(receive)，修改消息的状态并发送release包。
 
@@ -661,7 +661,7 @@ ClientC3 订阅 a/b/c/d/#
 
 #### 1.1.1.7 handle__pubrel() 处理收到release
 
-![流程](http://image.linxingyang.net/image/M-mqtt/image/2019-07-19/14.png)
+![流程](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2019-07-19/14.png)
 
 这是其他服务端/客户端向本服务器发送(publish)QoS2消息时，本服务器响应receive之后，对方又发送过来release，在这一步对于QoS2的消息来说，就已经是算是“收到”了该消息，所以可以进行处理了。
 
@@ -680,7 +680,7 @@ ClientC3 订阅 a/b/c/d/#
 
 #### 1.1.1.8 handle__pubackcomp()处理complete
 
-![流程](http://image.linxingyang.net/image/M-mqtt/image/2019-07-19/15.png)
+![流程](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2019-07-19/15.png)
 
 服务器发送QoS2 release之后，收到对方回复complete。
 
@@ -695,7 +695,7 @@ ClientC3 订阅 a/b/c/d/#
 
 ### 1.1.2 db__message_write()
 
-![流程](http://image.linxingyang.net/image/M-mqtt/image/2019-07-19/16.png)
+![流程](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/M-mqtt/image/2019-07-19/16.png)
 
 处理发送消息。
 

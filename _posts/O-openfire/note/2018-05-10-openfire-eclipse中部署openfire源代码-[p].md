@@ -31,7 +31,7 @@ rename project .project
 
 如图
 
-![http://image.linxingyang.net/image/O-openfire/image/2018-05-10/02.png](http://image.linxingyang.net/image/O-openfire/image/2018-05-10/02.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/O-openfire/image/2018-05-10/02.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/O-openfire/image/2018-05-10/02.png)
 
 
 ### （3）将Openfire项目导入eclipse中。 
@@ -39,11 +39,11 @@ rename project .project
 导入后，发现报错提示有些
 lib不见了，直接remove掉。
 
-![http://image.linxingyang.net/image/O-openfire/image/2018-05-10/03.png](http://image.linxingyang.net/image/O-openfire/image/2018-05-10/03.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/O-openfire/image/2018-05-10/03.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/O-openfire/image/2018-05-10/03.png)
 
 ### （4）将项目中build/lib文件夹下及其子文件夹中所有的包都导入到项目中。  
 
-![http://image.linxingyang.net/image/O-openfire/image/2018-05-10/04.png](http://image.linxingyang.net/image/O-openfire/image/2018-05-10/04.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/O-openfire/image/2018-05-10/04.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/O-openfire/image/2018-05-10/04.png)
 
 ### （5）添加路径
 
@@ -55,7 +55,7 @@ resources/jar、
 文件夹添加到 Source 中，
 如图：
 
-![http://image.linxingyang.net/image/O-openfire/image/2018-05-10/05.png](http://image.linxingyang.net/image/O-openfire/image/2018-05-10/05.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/O-openfire/image/2018-05-10/05.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/O-openfire/image/2018-05-10/05.png)
 
 ### （6）运行调试配置
 
@@ -72,7 +72,7 @@ resources/jar、
 Main class中填入：org.jivesoftware.openfire.starter.ServerStarter
 ```
 
-![http://image.linxingyang.net/image/O-openfire/image/2018-05-10/08.png](http://image.linxingyang.net/image/O-openfire/image/2018-05-10/08.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/O-openfire/image/2018-05-10/08.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/O-openfire/image/2018-05-10/08.png)
 
 ```
 在Arguments选项卡中
@@ -82,18 +82,18 @@ Main class中填入：org.jivesoftware.openfire.starter.ServerStarter
 注意其中的 openfire_src，这个是openfire的项目名称，如果不一样要改。
 ```
 
-![http://image.linxingyang.net/image/O-openfire/image/2018-05-10/07.png](http://image.linxingyang.net/image/O-openfire/image/2018-05-10/07.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/O-openfire/image/2018-05-10/07.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/O-openfire/image/2018-05-10/07.png)
 
 在Common选项卡中勾选Debug和Run。然后点击Apply运用该配置，点击close关闭。
 
-![http://image.linxingyang.net/image/O-openfire/image/2018-05-10/09.png](http://image.linxingyang.net/image/O-openfire/image/2018-05-10/09.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/O-openfire/image/2018-05-10/09.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/O-openfire/image/2018-05-10/09.png)
 
 ### （7）使用ant build 
 
 配置完后，需要将工程用ant编译一遍。如图，展开项目的build目录->`右键build.xml`文件->`run as`->`ant build...` -> 在targets选项卡中如图勾选openfire->`点击apply`->`点击run`。
 至此部署完成，最后控制台输出 Build Success说明部署成功。
 
-![http://image.linxingyang.net/image/O-openfire/image/2018-05-10/10.png](http://image.linxingyang.net/image/O-openfire/image/2018-05-10/10.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/O-openfire/image/2018-05-10/10.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/O-openfire/image/2018-05-10/10.png)
 
 ### （8）部署成功后，运行该服务器。
 

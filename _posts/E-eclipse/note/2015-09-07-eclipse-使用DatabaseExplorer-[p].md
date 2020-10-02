@@ -16,16 +16,16 @@ author: 林兴洋
 
 ## 打开 Myeclipse DataBase Explorer
 
-![图](http://image.linxingyang.net/image/E-eclipse/image/2015-09-07/showview.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/E-eclipse/image/2015-09-07/showview.png)
 
 ## 刚开始的时候，没有任何连接，要新建一个
 
-![图](http://image.linxingyang.net/image/E-eclipse/image/2015-09-07/clipboard.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/E-eclipse/image/2015-09-07/clipboard.png)
 
 ## 创建查询， New Sql Editor。 此处可以看到还可以查看数据库信息，创建数据库。
 
-![图](http://image.linxingyang.net/image/E-eclipse/image/2015-09-07/createSqlEditor.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/E-eclipse/image/2015-09-07/createSqlEditor.png)
 
 ## 使用
 
-![图](http://image.linxingyang.net/image/E-eclipse/image/2015-09-07/use.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/E-eclipse/image/2015-09-07/use.png)

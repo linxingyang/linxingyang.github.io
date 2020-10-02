@@ -24,7 +24,7 @@ Appender是用来指定输出目标的类，你可以叫它目的地。上面我
 
 ### 6.1 类图 ###
 
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/appenderClassDiagram.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/appenderClassDiagram.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/appenderClassDiagram.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/appenderClassDiagram.png)
 
 
 ### 6.2 Appender ###
@@ -291,7 +291,7 @@ public class Test1 {
 
 结果：虽然System.out.println()已经被重定向到了文件中，但是发现Log4j日志打印的还是在控制台中。
 
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/consoleAppenderFollowResult1.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/consoleAppenderFollowResult1.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/consoleAppenderFollowResult1.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/consoleAppenderFollowResult1.png)
 
 
 这个follow属性就是用来设置如果更改了System.out的输出终端，是否“跟随”变化。
@@ -338,7 +338,7 @@ public class Test1 {
 
 结果，可以看到设置了follow=true后，日志也重定向了。
 
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/consoleAppenderFollowResult2.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/consoleAppenderFollowResult2.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/consoleAppenderFollowResult2.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/consoleAppenderFollowResult2.png)
 
 
 实现原理，如下是ConsoleAppender中的激活配置方法。可以看到，如果follow为false的时候，直接使用的是System.out和System.err，这个时候System.out和System.err只是一个引用，假设指向A对象，所以赋予writer只是一个引用，指向了A对象。当我们使用System.setOut()或者System.setErr()重定向控制台/控制台错误的输出终端时，是将System.out和System.err指向另一个对象，假设B对象，此时writer还是指向了A对象，所以对writer来说，他还是向A对象输出，而非新定义的B对象。
@@ -641,7 +641,7 @@ public class Test1 {
 
 测试结果，最多存在3个备份文件，每个备份文件1KB。
 
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/RollFileAppenderResult1.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/RollFileAppenderResult1.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/RollFileAppenderResult1.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/RollFileAppenderResult1.png)
 
 
 ### 6.11 ExternallyRolledFileAppender ###
@@ -780,7 +780,7 @@ public class Roller {
 
 现在先运行 Test1代码。稍微等几秒钟。调用Roller中的main方法。再过一会，再调用一次。 可以发现，生成了两个备份文件。
 
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/ExternallyRolledFileAppenderResult.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/ExternallyRolledFileAppenderResult.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/ExternallyRolledFileAppenderResult.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/ExternallyRolledFileAppenderResult.png)
 
 
 
@@ -850,7 +850,7 @@ public class Test1 {
 
 结果如图：2分钟20秒，会生成两个备份文件，
 
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/dailyRollResult1.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/dailyRollResult1.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/dailyRollResult1.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/dailyRollResult1.png)
 
 
 ### 6.13 SMTPAppender 发送邮件Appender ###
@@ -952,18 +952,18 @@ public class Test1 {
 
 第一封：说明遇到error/fatal就会发送邮件
 
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/smtpResult1.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/smtpResult1.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/smtpResult1.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/smtpResult1.png)
 
 第二封 ： 每个框框中都是10条 logging event。因为 `log4j.appender.smpt.bufferSize=30`该项配置了30条，所以当需要发送邮件时，会获取bufferSize条（即30条）日志事件来发送。
 
 同时我们可以看到，第一封邮件的数字是6，而第二封是从68开始的，说明中间多余的debug/info/warn消息都被忽略了。发送的是从当前error/fatal往前数30条记录。
 
 
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/smtpResult2.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/smtpResult2.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/smtpResult2.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/smtpResult2.png)
 
 第三封 : 发送的是最后一条error消息。
 
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/smtpResult3.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/smtpResult3.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/smtpResult3.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/smtpResult3.png)
 
 
 ### 6.14 JDBCAppender 输出到数据库 ###
@@ -1091,7 +1091,7 @@ public class Test1 {
 
 结果，从log_time上大致可以看出，前5条差不多是同时打印，6-10条也差不多同时打印。 看log_detail可以很明显看出最后两条的和前面10条不同，这是因为bufferSize=5，前10条分两次插入数据库，而最后两条，在程序结束时还是在缓存中，我们调用类LogManager.shutdown();才让其得以插入数据库。所以其显示的信息才是xxx.shutdown而不是xxx.main。
 
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/jdbcAppenderResult.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/jdbcAppenderResult.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/jdbcAppenderResult.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/jdbcAppenderResult.png)
 
 ### 6.15 NullAppender ###
 
@@ -1239,7 +1239,7 @@ public class Test1 {
 
 启动Test1，控制台会切换到当前运行的程序，如图在切回到SimpleSocketServer。可以看到已经接收到日志了。
 
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/SimpleSocketServerResult.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/SimpleSocketServerResult.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/SimpleSocketServerResult.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/SimpleSocketServerResult.png)
 
 
 #### 使用SocketServer进行测试 ####
@@ -1527,7 +1527,7 @@ chainSaw是基于Swing的界面日志查看器，从Socket接口接收日志，�
 注意，此时log4j.properties文件中要清空，因为这个Main类也会在如log4j.properties中的配置。
 
 启动chainSaw
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/socketAppender.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/socketAppender.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/socketAppender.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/socketAppender.png)
 
 
 在log4j.properties中增加xml配置
@@ -1574,7 +1574,7 @@ public class Test1 {
 
 运行Test1。结果如图，收到了日志。我们可以在这个界面上，根据提供的功能进行筛选等操作。
 
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/chainSawResult1.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/chainSawResult1.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/chainSawResult1.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/chainSawResult1.png)
 
 
 ### 6.17 SocketHubAppender  ###
@@ -1583,11 +1583,11 @@ SocketHubAppender和SocketAppender很相似，而且大部分都是参考ScoketA
 
 唯一的不同是：在 SocketAppender中，我们给定一个远程的服务器Ip以及端口，SocketAppender负责将日志发送到该服务器的指定端口。
 
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/socketHubAppender.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/socketHubAppender.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/socketHubAppender.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/socketHubAppender.png)
 
 而在SocketHubAppedner中，它是将日志发送到指定的本机端口，多个远程服务器可以连接到本机该端口，这样，本机发送一条日志，可能会有多个远程服务器收到并且做处理。
 
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/socketHubAppender2.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/socketHubAppender2.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/socketHubAppender2.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/socketHubAppender2.png)
 
 
 和SocketAppender相同的，SocketHubAppender 依赖于tcp协议保证数据包的正确传递。
@@ -1787,11 +1787,11 @@ public class Test1 {
 
 在 Visual Syslog Sever 中要先设置好和你日志对应的端口号。
 
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/syslogAppender.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/syslogAppender.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/syslogAppender.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/syslogAppender.png)
 
 结果，可以看到对应的信息展示了出来
 
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/syslogAppender3.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/syslogAppender3.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/syslogAppender3.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/syslogAppender3.png)
 
 
 ### 6.19 TelnetAppender 输出到telnet ###
@@ -1858,7 +1858,7 @@ telnet 127.0.0.1 23
 
 ```
 
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/telnetAppenderResult.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/telnetAppenderResult.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/telnetAppenderResult.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/telnetAppenderResult.png)
 
 
 ### 6.20 JMSAppender ###
@@ -1922,7 +1922,7 @@ public class Test1 {
 
 测试结果，打开控制面板->管理工具（小图标的视图下）->事件查看器->Windows日志->应用程序
 
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/NTEventAppender.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/NTEventAppender.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/NTEventAppender.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/NTEventAppender.png)
 
 
 ### 6.22 RewriteAppender ###

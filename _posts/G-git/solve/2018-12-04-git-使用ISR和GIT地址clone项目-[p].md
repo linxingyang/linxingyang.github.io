@@ -18,7 +18,7 @@ author: 林兴洋
 
 直接克隆要密码，没让输入用户名，怪了。
 
-![图](http://image.linxingyang.net/image/G-git/image/2018-12-04/02.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/G-git/image/2018-12-04/02.png)
 
 
 百度了一下，发现说确实有两种方式，一种是通过账号密码， 一种是设置SSH key公钥私钥。这么一百度， 想起来，我好像用过 Github for windows，这个当时好像就是用的公钥私钥。。。几百年没配都忘了。。
@@ -30,14 +30,14 @@ author: 林兴洋
 
 windows中，要安装 [git for bash](https://gitforwindows.org/) ,
 
-![图](http://image.linxingyang.net/image/G-git/image/2018-12-04/01.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/G-git/image/2018-12-04/01.png)
 
 
 
 
 安装好后，到 .ssh文件夹中，把公司给你的ISR丢到这里（如图我的就是id_rsa.linxingyang），然后创建一个config文件，填入如下内容，
 
-![图](http://image.linxingyang.net/image/G-git/image/2018-12-04/03.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/G-git/image/2018-12-04/03.png)
 
 
 config文件中内容：
@@ -66,23 +66,23 @@ IdentityFile和config在同一个目录
 
 也是安装一个tortoiseGit。由于使用的是SSH的key。所以这里需要转换一下。
 
-![图](http://image.linxingyang.net/image/G-git/image/2018-12-04/04.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/G-git/image/2018-12-04/04.png)
 
 
 打开这个，点击Load Private Key，加载那个ISR文件，然后点击save private key，生成一个后缀名为ppk的文件
 
-![图](http://image.linxingyang.net/image/G-git/image/2018-12-04/05.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/G-git/image/2018-12-04/05.png)
 
 
 然后再加载生成的ppk文件
 
-![图](http://image.linxingyang.net/image/G-git/image/2018-12-04/06.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/G-git/image/2018-12-04/06.png)
 
 
 最后在你想要导出项目的文件夹中右键 git clone
 
-![图](http://image.linxingyang.net/image/G-git/image/2018-12-04/07.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/G-git/image/2018-12-04/07.png)
 
 如图导出即可。
 
-![图](http://image.linxingyang.net/image/G-git/image/2018-12-04/08.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/G-git/image/2018-12-04/08.png)

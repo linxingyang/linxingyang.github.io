@@ -27,6 +27,6 @@ Xxx.focus(function() {
 })
 ```
 
-![图](http://image.linxingyang.net/image/J-javascript/image/2017-03-19/01.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-javascript/image/2017-03-19/01.png)
 
-![图](http://image.linxingyang.net/image/J-javascript/image/2017-03-19/02.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-javascript/image/2017-03-19/02.png)

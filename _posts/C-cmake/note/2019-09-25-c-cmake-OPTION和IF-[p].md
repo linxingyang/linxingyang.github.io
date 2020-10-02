@@ -3,12 +3,11 @@ layout: post
 permalink: /:year/287f64ea1c5f4a53bc12cc9787cc32cf
 title: 2019-09-25-c-cmake-OPTION和IF
 categories: [c]
-tags: [cmake系列,cmake]
+tags: [c,c++,cmake系列,cmake]
 relative-tags: [cmake系列]
 excerpt: c,c++,cmake,OPTION,IF
 description: cmake-OPTION和IF
 catalog: true
-author: 林兴洋
 ---
 
 # CMake
@@ -347,3 +346,4 @@ ENDIF ()
 * cmake practice
 * [为何要使用cmake中文翻译参考](https://www.cnblogs.com/liu3yuan/p/6895419.html)
 * [cmake变量](https://cmake.org/cmake/help/latest/manual/cmake-variables.7.html#variables-that-change-behavior)
+* [更多命令与脚本参考cmake官网](https://cmake.org/cmake/help/v3.16/manual/cmake-commands.7.html)

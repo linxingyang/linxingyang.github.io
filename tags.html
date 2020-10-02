@@ -1,21 +1,21 @@
 ---
 layout: default
 description: 李白《将进酒》下<br/>君不见，黄河之水天上来，奔流到海不复回。<br/>君不见，高堂明镜悲白发，朝如青丝暮成雪。<br/>人生得意须尽欢，莫使金樽空对月。<br/>天生我材必有用，千金散尽还复来。<br/>烹羊宰牛且为乐，会须一饮三百杯。<br/>岑夫子，丹丘生，将进酒，杯莫停。<br/>与君歌一曲，请君为我倾耳听。<br/>钟鼓馔玉不足贵，但愿长醉不复醒。<br/>古来圣贤皆寂寞，惟有饮者留其名。<br/>陈王昔时宴平乐，斗酒十千恣欢谑。<br/>主人何为言少钱，径须沽取对君酌。<br/>五花马，千金裘，呼儿将出换美酒，与尔同销万古愁
-header-img: "img/home/bg-tags.jpg"
+header-img: "img/home/bg-categroies.jpg"
 ---
 
 <!-- Page Header -->
 <header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading" id="tag-heading">
-                    <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
-                    <span class="subheading">{{ page.description }}</span>
-                </div>
-            </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="site-heading" id="tag-heading">
+          <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
+          <span class="subheading">{{ page.description }}</span>
         </div>
+      </div>
     </div>
+  </div>
 </header>
 
 <!-- Main Content -->
@@ -25,8 +25,7 @@ header-img: "img/home/bg-tags.jpg"
       <!-- 标签云 -->
       <div id='tag_cloud' class="tags">
         {% for tag in site.tags %}
-          <a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
-            {{ tag[0] }}({{ tag[1].size }})</a>
+          <a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}({{ tag[1].size }})</a>
         {% endfor %}
       </div>
       <!-- 标签列表 -->
@@ -36,20 +35,20 @@ header-img: "img/home/bg-tags.jpg"
             <span class="tag-text">{{ tag[0] }}</span>
           </span>
           {% for post in tag[1] %}
-          <div class="post-preview">
-            <a href="{{ post.url | prepend: site.baseurl }}">
-              <h2 class="post-title">
-                {{ post.title }}
-              </h2>
-              {% if post.subtitle %}
-              <h3 class="post-subtitle">
-                {{ post.subtitle }}
-              </h3>
-              {% endif %}
-            </a>
-            <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-          </div>
-          <hr>
+            <div class="post-preview">
+              <a href="{{ post.url | prepend: site.baseurl }}">
+                <h2 class="post-title">
+                  {{ post.title }}
+                </h2>
+                {% if post.subtitle %}
+                  <h3 class="post-subtitle">
+                    {{ post.subtitle }}
+                  </h3>
+                {% endif %}
+              </a>
+              <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+            </div>
+            <hr>
           {% endfor %}
         </div>
       {% endfor %}

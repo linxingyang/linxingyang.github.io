@@ -25,7 +25,7 @@ author: 林兴洋
 
 ### 7.0 类图 ###
 
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/01.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/01.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/01.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/01.png)
 
 
 

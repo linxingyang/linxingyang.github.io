@@ -20,7 +20,7 @@ author: 林兴洋
 
 ### 5.1 类图结构 ###
 
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/layoutclassdiagram.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/layoutclassdiagram.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/layoutclassdiagram.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/layoutclassdiagram.png)
 
 
 ### 5.2 OptionHandler 接口 ###
@@ -1329,7 +1329,7 @@ Log session start time Thu Dec 07 11:28:33 CST 2017<br>
 
 红框圈起来之处是  locationInfo=true的效果。
 
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/htmllayout.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/htmllayout.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/htmllayout.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/htmllayout.png)
 
 ### 5.8 XMLLayout ###
 
@@ -1405,7 +1405,7 @@ public class Test1 {
 
 ```
 
-![http://image.linxingyang.net/image/L-log4j/image/2017-08-05/xmllayout.png](http://image.linxingyang.net/image/L-log4j/image/2017-08-05/xmllayout.png)
+![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/xmllayout.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/xmllayout.png)
 
 ### 5.9 DateLayout ###
 
