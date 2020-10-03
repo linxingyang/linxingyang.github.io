@@ -4,8 +4,9 @@
 
 ## change list
 
-* Add [busuanzi visit counter](http://busuanzi.ibruce.info/).
-* Add [gitalk comment](https://github.com/gitalk).
+* Add[busuanzi visit counter](http://busuanzi.ibruce.info/).
+* ~~Add[gitalk comment](https://github.com/gitalk).~~ discard becase loading too slow, just contact me by email.
+* Add[baidu tongji](https://tongji.baidu.com/web/welcome/login). 
 
 ## Thanks
 
