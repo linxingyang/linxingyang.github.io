@@ -38,7 +38,7 @@ header-img: "img/home/bg-categroies.jpg"
           </span>
           {% for post in tag[1] %}
             <div class="post-preview">
-              <a href="{{ post.url | prepend: site.baseurl }}">
+              <a href="{{ post.url | prepend: site.baseurl | remove: "/index" }}">
                 <h2 class="post-title">
                   {{ post.title }}
                 </h2>

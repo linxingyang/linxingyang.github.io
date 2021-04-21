@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/c4c4b74b65c44a6e96f9cb3be35d4ffb
+permalink: /:year/c4c4b74b65c44a6e96f9cb3be35d4ffb/index
 title: 2020-01-31-snagit-推荐的截图工具-snagit
 categories: [snagit]
 tags: [snagit,推荐工具系列]

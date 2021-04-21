@@ -1,12 +1,12 @@
 ---
 layout: post
-permalink: /:year/22c11cc145be47b5b439cd5e039c0488
+permalink: /:year/22c11cc145be47b5b439cd5e039c0488/index
 title: 2020-06-06-c++-vs2015-关于legacy_stdio_definitions库
 categories: [c++]
 tags: [c,c++,关于legacy_stdio_definitions库]
 excerpt: c++,c,关于legacy_stdio_definitions库,vs2015
 description: vs2015-关于legacy_stdio_definitions库
-category: false
+catalog: false
 ---
 
 

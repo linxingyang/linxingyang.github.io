@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/ba1167a5b8c04160bb012c9cf79a3591
+permalink: /:year/ba1167a5b8c04160bb012c9cf79a3591/index
 title: 2020-01-26-fileLocatorPro-推荐的文件搜索工具
 categories: [fileLocatorPro]
 tags: [fileLocatorPro,推荐工具系列]

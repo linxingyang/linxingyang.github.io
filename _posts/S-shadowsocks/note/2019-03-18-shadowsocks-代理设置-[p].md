@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/bc31285213a44799bf9772ff27af7a42
+permalink: /:year/bc31285213a44799bf9772ff27af7a42/index
 title: 2019-03-18-shadowsocks-代理设置
 categories: [shadowsocks]
 tags: [shadowsocks]
@@ -123,14 +123,14 @@ ps -ef|grep shadowsocks
 kill [对应的PID]
 ```
 
-## 我的情况
+## 情况
 
-我的情况是这样的
+如有以下情况
 * 国外服务器，可科学上网
 * 国内服务器，可百度
 * 公司内网，内网被禁，但是可以访问国内服务器，不可访问国外服务器。
 
-我想要即可访问国内百度，又可科学上网。
+想要即可访问国内百度，又可科学上网。
 
 先通过上面的方式，在国外服务器和国内服务器安装上ss。
 

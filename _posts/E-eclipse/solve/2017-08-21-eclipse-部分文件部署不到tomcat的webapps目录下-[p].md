@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/6f6178430d6848e19e2ab9720c1c616a
+permalink: /:year/6f6178430d6848e19e2ab9720c1c616a/index
 title: 2017-08-21-eclipse-没有部署文件到tomcat的webapps目录下
 categories: [eclipse]
 tags: [java,jsp,tomcat,eclipse]

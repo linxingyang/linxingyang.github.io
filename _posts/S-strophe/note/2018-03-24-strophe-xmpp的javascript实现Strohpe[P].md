@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/4cxx9988502743b68622d47e6587b2d0
+permalink: /:year/4cxx9988502743b68622d47e6587b2d0/index
 title: 2018-03-24-strophe-xmpp的javascript实现Strohpe
 categories: [strophe]
 tags: [javascript,strophe,xmpp,协议]
@@ -9,6 +9,8 @@ description: strophe,api
 catalog: true
 authro: 林兴洋
 ---
+
+
 
 # Strohpe1.2.7.API的介绍
 
@@ -415,7 +417,7 @@ JID因为它的格式，其中包含/和@符号，在有些地方可能不能直
  这个对象提供了一个和JQuery很像的接口，但是构建DOM元素更容易和快速，
  所有的函数返回值都是对象类型的，除了 toString()和tree()，
  所以可以链式调用，这里是一个使用$iq()构建者的例子
- 
+
 方法
 
 * Builder(name, attrs)  构造函数，两个参数：该节名称，节的属性

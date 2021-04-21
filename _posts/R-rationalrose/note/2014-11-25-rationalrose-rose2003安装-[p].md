@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/6c0b81367bf34f7993411edf108929ae
+permalink: /:year/6c0b81367bf34f7993411edf108929ae/index
 title: 2014-11-25-rationalrose-rose2003安装
 categories: [rationalrose]
 tags: [rationalrose]

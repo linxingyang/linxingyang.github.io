@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/aly7ggg2a1mv49c23333444cab4d2aqw
+permalink: /:year/aly7ggg2a1mv49c23333444cab4d2aqw/index
 title: 2016-11-06-maven-eclipse中使用maven插件报错
 categories: [maven]
 tags: [eclipse,maven]

@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/38cf615d41584865ab54999a75656dbd
+permalink: /:year/38cf615d41584865ab54999a75656dbd/index
 title: 2020-04-17-openvpn-openvpn在windows中编译
 categories: [openvpn]
 tags: [openvpn,编译,windows]
@@ -12,18 +12,46 @@ catalog: true
 
 # openvpn
 
-## 准备
-
-当前基于 openvpn 2.4.7 版本进行编译
+## 1、准备
 
 ### 编译环境
-* [Perl](http://strawberryperl.com/) 用于编译 openssl
-* [nasm](https://www.nasm.us/) 用于编译openssl
-* VS2015
 
-### 添加VS环境变量
+#### Perl
 
-新建环境变量VS_HOME，值为vs2015的目录，如当前vs2015所在目录`D:\install_software\vs2015`。
+下载安装[Perl](http://strawberryperl.com/) ，用于编译 openssl。
+
+#### nasm
+
+下载安装[nasm](https://www.nasm.us/) 用于编译openss。
+
+##### 添加nasm环境变量
+
+创建系统环境变量NASM_HOME，值为name的目录，如当前nasm安装路径`D:\install_software\nasm`。
+
+```
+NASM_HOME
+D:\install_software\nasm
+```
+
+然后修改path环境变量，在最后添加
+
+```
+;%NASM_HOME%\VC\bin\
+```
+
+输入如下命令输出nasm帮助信息说明设置正确
+
+```
+nasm -h
+```
+
+#### VS2015 or VS2013
+
+VS安装不赘述。
+
+##### 添加VS环境变量
+
+新建系统环境变量VS_HOME，值为VS2015的目录，如当前VS2015所在目录`D:\install_software\vs2015`。
 
 ```
 VS_HOME
@@ -36,7 +64,7 @@ D:\install_software\vs2015
 ```
 
 输入nmake到如下提示说明设置正确
-```
+```bat
 >nmake
 
 Microsoft (R) 程序维护实用工具 14.00.24210.0 版
@@ -46,25 +74,6 @@ NMAKE : fatal error U1064: 未找到 MAKEFILE 并且未指定目标
 Stop.
 ```
 
-### 添加nasm环境变量
-
-创建环境变量NASM_HOME，值为name的目录，
-如当前nasm安装路径`D:\install_software\nasm`。
-
-```
-NASM_HOME
-D:\install_software\nasm
-```
-
-然后修改path环境变量，在最后添加
-```
-;%NASM_HOME%\VC\bin\
-```
-
-输入如下命令输出nasm帮助信息说明设置正确
-```
-nasm -h
-```
 
 
 ### 下载源码包
@@ -76,7 +85,7 @@ nasm -h
 
 * [openvpn](https://github.com/OpenVPN/openvpn/archive/master.tar.gz) 注意下载openvpn源码直接通过这个链接下载，下载release包的里面的vs项目解决方案是VS2010的，通过这个链接下载是VS2015的。
 
-### middelware统一存放目录
+### middleware统一存放目录
 
 为了统一，这里使用U:\applications\2019-11-04-openvpn\middleware做为所有生成的库、头文件存放目录，目录结构（后续middleware目录即指`U:\applications\2019-11-04-openvpn\middleware\`）：
 
@@ -94,14 +103,14 @@ U:\applications\2019-11-04-openvpn\middleware\
 
 
 
-## openssl编译
+## 2、openssl编译
 
-当前openssl目录`Z:\applications\2019-11-04-openvpn\code\openssl`
+当前openssl路径`U:\applications\2019-11-04-openvpn\code\openssl`
 
 ### 32位
 
 
-```
+```bat
 // 进入VS目录
 pushd D:\install_software\vs2015\VC\bin
 
@@ -131,10 +140,7 @@ nmake install
 
 ### 64位
 
-
-和32位大同小异
-
-```
+```bat
 // 进入VS amd64目录
 pushd D:\install_software\vs2015\VC\bin\amd64\
 
@@ -162,7 +168,7 @@ nmake install
 
 ### 产生libeay32.lib和ssleay32.lib
 
-一直不知道这两个怎么来的，原来是直接复制上面32或64位生成的两个lib。在 `middleware\x86-vs2015\lib`和`middleware\x64-vs2015\lib`目录中。
+直接复制上面32位或64位生成的两个lib，如我的操作，在 `middleware\x86-vs2015\lib`和`middleware\x64-vs2015\lib`目录中：
 
 ```
 libcrypto.lib ==> libeay32.lib //  复制一份libcrypto.lib改名为libeay32.lib
@@ -175,35 +181,39 @@ libssl.lib ==> ssleay32.lib    // 复制一份libssl.lib改名为ssleay32.lib
 
 #### 不存在vcvar32.bat或vcvar64.bat或vcvarall.bat
 
-这个是因为visual studio c++ 没有装好，在vs2015中去创建一个C++项目，会提示让你下载相关的一些库等等，下载即可。
+这个是因为visual studio c++ 没有装好，在VS2015中去创建一个C++项目，会提示让你下载相关的一些库等等，下载即可。
 
 #### 模块计算机类型 x64和目标计算机类型x86冲突
 
-crypto\aes\aesni-mb-x86_64.obj : fatal error LNK1112: 模块计算机类型“x64”与目
-标计算机类型“X86”冲突
+crypto\aes\aesni-mb-x86_64.obj : fatal error LNK1112: 模块计算机类型“x64”与目标计算机类型“X86”冲突。
 
-编译64位的时候需要先执行
+编译64位的时候需要先执行：
 ```
 D:\install_software\vs2015\VC\bin\amd64\vcvars64.bat
 ```
 
-
+#### e_os.h(13): 'limits.h': No such file or directory
 
 ```
 e_os.h(13): 'limits.h': No such file or directory
 ```
 
-这个问题也可能是上面的脚本没有执行的问题，如果不行就执行这段
-```
-D:\install_software\vs2015\VC\vcvarsall.bat
-```
+这个问题可能是这段脚本没有执行：
 
-然后还要执行对应编译版本的脚本。
 ```
 D:\install_software\vs2015\VC\bin\amd64\vcvars64.bat
 ```
 
+如果还不行就执行这段：
 
+```
+D:\install_software\vs2015\VC\vcvarsall.bat
+```
+
+然后再执行对应编译版本的脚本：
+```
+D:\install_software\vs2015\VC\bin\amd64\vcvars64.bat
+```
 
 #### 执行命令ms\do_nasm提示不是内部命令
 
@@ -214,12 +224,12 @@ D:\install_software\vs2015\VC\bin\amd64\vcvars64.bat
 
 
 
-## lzo编译
+## 3、lzo编译
 
 当前lzo路径`U:\applications\2019-11-04-openvpn\code\lzo-2.10`
 ### 32位
 
-```
+```bat
 // 进入该目录
 pushd D:\install_software\vs2015\VC\bin
 
@@ -246,7 +256,7 @@ B\clean.bat
 
 ### 64位
 
-```
+```bat
 // 进入该目录
 pushd D:\install_software\vs2015\VC\bin\amd64
 
@@ -270,13 +280,13 @@ B\clean.bat
 
 
 
-## pkcs11-helper-1.22编译
+## 4、pkcs11-helper-1.22编译
 
 当前pcks11-helper路径`U:\applications\2019-11-04-openvpn\code\pkcs11-helper-1.22`
 
 ### 32位
 
-```
+```bat
 // 进入该目录
 pushd D:\install_software\vs2015\VC\bin
 
@@ -300,7 +310,7 @@ nmake -f Makefile.w32-vc clean
 
 ### 64位
 
-```
+```bat
 // 进入该目录
 pushd D:\install_software\vs2015\VC\bin\amd64
 
@@ -325,15 +335,13 @@ nmake -f Makefile.w32-vc clean
 
 
 
-## tap-windows6
+## 5、tap-windows6
 
+当前tap-windows6路径`U:\applications\2019-11-04-openvpn\code\tap-windows6-master\`
 
+这个解压后无需编译，把头文件tap-windows.h复制到
 
-tao-windows6目录`U:\applications\2019-11-04-openvpn\code\tap-windows6-master\`
-
-这个解压后，无需编译，把头文件tap-windows.h复制到
-
-```
+```bat
 // 进入src目录
 pushd U:\applications\2019-11-04-openvpn\code\tap-windows6-master\src
 
@@ -345,11 +353,11 @@ xcopy tap-windows.h U:\applications\2019-11-04-openvpn\middleware\x64-vs2013\inc
 
 
 
-## 此时x86-vs2015目录结构 
+## 6、此时x86-vs2015目录结构 
 
-删了一些不重要的目录后：
+删了一些不重要的目录后如下：
 
-```
+```shell
 /middleware# tree x86-vs2015 -L 2 -F
 x86-vs2015
 ├── bin/
@@ -380,9 +388,9 @@ x86-vs2015
 
 
 
-## openvpn编译
+## 7、openvpn编译
 
-当前OpenVPN源码目录`U:\applications\2019-11-04-openvpn\code\openvpn-master-2015`
+当前OpenVPN源码路径`U:\applications\2019-11-04-openvpn\code\openvpn-master-2015`
 
 按照OpenVPN建议的，要使用VS2019配合windows SDK 10.0 版本进行编译。但是目前使用的电脑装的是 VS2015，且windows SDK是 8.1版本，需要做一些处理。
 
@@ -405,27 +413,39 @@ tapctl.vcxproj
 msvc-generate.vcxproj
 ```
 
-处理1：修改SDK版本，把每个文件的
+##### 处理1：修改SDK版本
+
+把每个文件的
 
 ```
 <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+```
+
 改成
+
+```
 <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
 ```
 
-处理2：修改平台版本（当前使用的是140，不是142），将
+##### 处理2：修改平台版本
+
+当前使用的是140，不是142，将
 
 ```
 <PlatformToolset>v142</PlatformToolset>
+```
+
 改成
+
+```
 <PlatformToolset>v140</PlatformToolset>
 ```
 
-
+**注：如果不知道你自己的版本，就用你当前的VS创建一个空项目，然后打开该项目的vcxproj，里面可以看到。**
 
 ### 指定头文件目录/库目录
 
-每次编译前，根据是32位还是64位指定头文件目录/库目录。打开`src\compat\PropertySheet.props`文件
+每次编译前，根据是要编译的目标是32位还是64位指定头文件目录/库目录。打开`src\compat\PropertySheet.props`文件
 
 #### 32位
 
@@ -448,7 +468,7 @@ msvc-generate.vcxproj
 
 ##### 32位-release
 
-```
+```bat
 // 进入目录
 pushd D:\install_software\vs2015\VC\bin
 
@@ -489,9 +509,7 @@ openvpn --help
 
 ##### 64位-release
 
-打开cmd命令行。
-
-```
+```bat
 // 进入目录
 pushd D:\install_software\vs2015\VC\bin\amd64
 
@@ -511,7 +529,7 @@ msbuild openvpn.sln /p:Platform=x64 /p:Configuration=Release
 U:\applications\2019-11-04-openvpn\code\openvpn-master-2015\x64-Output\Release
 ```
 
-此时不能直接运行openvpn.exe程序，会提示缺少dll。将`U:\applications\2019-11-04-openvpn\middleware\x64-vs2015\bin`中的四个dll拷贝一份到上面这个目录
+同上将`U:\applications\2019-11-04-openvpn\middleware\x64-vs2015\bin`中的四个dll拷贝一份到上面这个目录
 
 ```
 libcrypto-1_1-x64.dll
@@ -528,11 +546,11 @@ openvpn --help
 
 
 
-#### 用VS2015编译
+#### 用VS2015打开项目进行编译
 
-也可以直接用VS2015打开项目进行编译，这个过程应该都懂，此处省略过程。
+直接用VS2015打开项目进行编译，VS知道项目的依赖所以知道编译顺序，直接在解决方案上右键生成解决方案就可以了。具体过程应该都懂，此处省略过程。
 
-要注意的是，如果要运行，也是要拷贝这4个dll到生成openvpn.exe的目录下。
+再啰嗦一句，如果要运行也是要拷贝这4个dll到生成openvpn.exe的目录下。
 
 ```
 libcrypto-1_1-x64.dll
@@ -545,13 +563,13 @@ libpkcs11-helper-1.dll
 
 ### 在VS2013编译
 
-由于OpenVPN项目中有一些依赖于VS2015的头文件和库，但是只要包含VS2015的头文件目录和库目录，就可以使用VS2013来编译。建议直接使用VS2013打开openvpn项目来编译，这样可以单个编译项目也比较好看哪个项目出错了。
+在VS2013中编译，大致流程和VS2015相同，下面就列一些不同的修改点。
 
-**注意：OpenVPN依赖的前面编译的OpenSSL，lzo等等这几个lib库，因为VS2013和VS2015不能共用，所以需要单独为2013再编一次。**
+**注：OpenVPN依赖的OpenSSL，lzo等等这几个lib库，因为VS2013和VS2015不能共用，所以需要单独为2013再编一次。**
 
 #### 修改openvpn.sln文件
 
-打开openvpn.sln，把前面的这几个改成我当前的vs2013版本的信息。这个信息可以直接从别的VS2013创建的项目中拷过来。
+打开openvpn.sln，把前面的这几个改成当前的vs2013版本的信息。这个信息可以直接从别的VS2013创建的项目中拷过来。
 
 ```
 Microsoft Visual Studio Solution File, Format Version 12.00
@@ -573,15 +591,23 @@ tapctl.vcxproj
 msvc-generate.vcxproj
 ```
 
-处理1：修改SDK版本，把每个文件的
+##### 处理1：修改SDK版本
+
+把每个文件的
 
 ```
 <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+```
+
 改成
+
+```
 <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
 ```
 
-处理2：修改平台版本（当前使用的是v120_xp，不是142），将
+##### 处理2：修改平台版本
+
+当前使用的是v120_xp，不是142，将
 
 ```
 <PlatformToolset>v142</PlatformToolset>
@@ -591,7 +617,9 @@ msvc-generate.vcxproj
 
 #### 修改openvpn.vcxproj
 
-修改1，添加头文件目录，由于缺少versionhelper.h等头文件。找到所有的AdditionalIncludeDirectories，加入
+##### 修改1，添加头文件目录
+
+由于缺少versionhelper.h等头文件，找到所有的AdditionalIncludeDirectories，加入
 
 ```
 C:\Program Files (x86)\Windows Kits\8.1\Include\shared;C:\Program Files (x86)\Windows Kits\8.1\Include\um;
@@ -603,9 +631,9 @@ C:\Program Files (x86)\Windows Kits\8.1\Include\shared;C:\Program Files (x86)\Wi
 <AdditionalIncludeDirectories>C:\Program Files (x86)\Windows Kits\8.1\Include\shared;C:\Program Files (x86)\Windows Kits\8.1\Include\um;..\compat;$(TAP_WINDOWS_HOME)/include;$(OPENSSL_HOME)/include;$(LZO_HOME)/include;$(PKCS11H_HOME)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
 ```
 
+##### 修改2，删除`legacy_stdio_definitions.lib`这个依赖库
 
-
-修改2，删除，找到所有的AdditionalDependencies，删除`legacy_stdio_definitions.lib`这个依赖库。原因看另一篇笔记。
+找到所有的AdditionalDependencies，删除`legacy_stdio_definitions.lib`这个依赖库。原因看另一篇笔记。
 
 ```
 <AdditionalDependencies>Ncrypt.lib;libssl.lib;libcrypto.lib;lzo2.lib;pkcs11-helper.dll.lib;gdi32.lib;ws2_32.lib;wininet.lib;crypt32.lib;iphlpapi.lib;winmm.lib;Fwpuclnt.lib;Rpcrt4.lib;setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -615,13 +643,17 @@ C:\Program Files (x86)\Windows Kits\8.1\Include\shared;C:\Program Files (x86)\Wi
 
 #### 修改openvpnserv.vcxproj
 
-修改1，添加头文件目录：找到所有的AdditionalIncludeDirectories，加入
+##### 修改1，添加头文件目录
+
+找到所有的AdditionalIncludeDirectories，加入
 
 ```
 C:\Program Files (x86)\Windows Kits\8.1\Include\shared;C:\Program Files (x86)\Windows Kits\8.1\Include\um;
 ```
 
-修改2，添加库目录：缺少ntdll.lib。
+##### 修改2，添加库目录：缺少ntdll.lib
+
+32位
 
 ```
 C:\Program Files (x86)\Windows Kits\8.1\Lib\winv6.3\um\x86;
@@ -633,13 +665,17 @@ C:\Program Files (x86)\Windows Kits\8.1\Lib\winv6.3\um\x86;
 C:\Program Files (x86)\Windows Kits\8.1\Lib\winv6.3\um\x64;
 ```
 
-修改3，删库：删除所有`legacy_stdio_definitions.lib`依赖库
+##### 修改3，删除所有`legacy_stdio_definitions.lib`依赖库
 
-修改4，多字节和宽字符的问题
+##### 修改4，多字节和宽字符的问题
 
 ```
 <CharacterSet>Unicode</CharacterSet>
+```
+
 改为
+
+```
 <CharacterSet>MultiByte</CharacterSet>
 ```
 
@@ -723,7 +759,7 @@ C:\Program Files (x86)\Windows Kits\8.1\Lib\winv6.3\um\x64;
 
 #### 修改openvpnmsica.vcxproj
 
-修改1，添加两个头文件目录
+##### 修改1，添加两个头文件目录
 
 ```
 C:\Program Files (x86)\Windows Kits\8.1\Include\um;C:\Program Files (x86)\Windows Kits\8.1\Include\shared;
@@ -731,7 +767,7 @@ C:\Program Files (x86)\Windows Kits\8.1\Include\um;C:\Program Files (x86)\Window
 
 如下
 
-```
+```xml
 <Project>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -772,8 +808,6 @@ C:\Program Files (x86)\Windows Kits\8.1\Include\um;C:\Program Files (x86)\Window
 #include <config-msvc.h> /* 解决报错 ： 在“inline”之后应输入“(” */
 #endif
 ```
-
-
 
 
 
@@ -849,7 +883,7 @@ add_option(struct options *options,
 
 
 
-#### 语法错误
+#### 语法错误:在“inline”之后应输入“(”
 
 ```
 2>  error.c
@@ -873,6 +907,38 @@ add_option(struct options *options,
 ```
 
 
+
+#### error C2440: “初始化”: 无法从“const in6_addr”转换为“UCHAR”	openvpn\route.c	3069
+
+在VS2013编译的时候提示这个问题，进行如下修改：
+
+```c
+static bool
+do_route_ipv6_service(const bool add, const struct route_ipv6 *r, const struct tuntap *tt)
+{
+    bool status;
+    route_message_t msg = {
+        .header = {
+            (add ? msg_add_route : msg_del_route),
+            sizeof(route_message_t),
+            0
+        },
+        .family = AF_INET6,
+		// .prefix.ipv6 = r->network,
+        .prefix_len = r->netbits,
+		// .gateway.ipv6 = r->gateway,
+        .iface = { .index = tt->adapter_index, .name = "" },
+        .metric = ( (r->flags & RT_METRIC_DEFINED) ? r->metric : -1)
+    };
+    /* 移到此处可编译通过 */
+	msg.prefix.ipv6 = r->network;
+	msg.gateway.ipv6 = r->gateway;
+
+    /* 省略 */
+ 
+    return status;
+}
+```
 
 
 

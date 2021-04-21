@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/7d8cf5dda21cexp484a3174ceaec9e85
+permalink: /:year/7d8cf5dda21cexp484a3174ceaec9e85/index
 title: 2017-03-19-javascript-keyup事件输入中文会卡顿
 categories: [javascript]
 tags: [javascript,keyup]
@@ -10,19 +10,21 @@ catalog: false
 author: 林兴洋
 ---
 
-在webim中做到搜索的时候，使用keyup事件，输入英文倒没事，但输入中文将会导致卡顿。
 
-百度后发现可以用  focus + setInterval 配合来解决。
+
+在webim中做到搜索的时候，使用keyup事件，输入英文倒没事，但输入中文将会导致卡顿（一个中文需要打多个字母导致的），可以用  focus + setInterval 配合来解决。
+
+
 
 伪代码如下：
 
 ```javascript
 Xxx.focus(function() {
     var interval = setInterval(function() {
-    Xxx.one('blur', function() {
-        clearInteravl(interval);
-    }
-    // 做事
+        Xxx.one('blur', function() {
+            clearInteravl(interval);
+        }
+        // 做事
     }, 100);
 })
 ```

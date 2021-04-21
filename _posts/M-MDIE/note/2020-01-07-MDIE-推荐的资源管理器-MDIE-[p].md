@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/0e44281d7b7b4c45b56eb5d04cba4328
+permalink: /:year/0e44281d7b7b4c45b56eb5d04cba4328/index
 title: 2020-01-07-MDIE-推荐的资源管理器-MDIE
 categories: [MDIE]
 tags: [MDIE,推荐工具系列]

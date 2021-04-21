@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/1aa51ec7327b4cbf87dff3086c9afc7d
+permalink: /:year/1aa51ec7327b4cbf87dff3086c9afc7d/index
 title: 2017-08-29-java-serialVersionID的作用
 categories: [java]
 tags: [java,serialVersionID]
@@ -10,6 +10,8 @@ catalog: true
 author: 林兴洋
 ---
 
+
+
 # java-serialVersionID的作用
 
 很多代码都有一句
@@ -18,13 +20,13 @@ author: 林兴洋
 private static final long serialVersionUID = 1L
 ```
 
-这句是什么作用呢？看网站上扯了一大堆。。。看多了反而不明白。
+这句是什么作用呢？暂且理解为：在java序列化和反序列化的时候作为判断是否能把这个对象进行反序列化。
 
-暂且理解为，在java序列化和反序列化的时候，需要判断这个对象能否被反序列化，这个serialVersionUID是作为判断的一部分存在吧。
 
-## 一个例子
 
-上代码。定义一个worker，有id,name,age三个属性，当然如果需要序列化，需要实现Serializable接口，下面这个Worker认为是版本1。
+## 聚个栗子
+
+定义一个worker，有id,name,age三个属性，当然如果要序列化需要实现Serializable接口，下面这个Worker认为是版本1。
 
 ```java
 package test;
@@ -33,34 +35,10 @@ import java.io.Serializable;
 
 public class Worker implements Serializable {
 	private static final long serialVersionUID = 1L;
-
 	private Integer id;
 	private String name;
 	private Integer age;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Integer getAge() {
-		return age;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
-	}
+	/* 省略get/set方法 */
 
 	@Override
 	public String toString() {
@@ -68,6 +46,8 @@ public class Worker implements Serializable {
 	}
 }
 ```
+
+
 
 新建两个对象，并保存到文件中
 
@@ -105,7 +85,9 @@ public class App {
 }
 ```
 
-在从文件中读取出这两个对象
+
+
+再从文件中读取出这两个对象
 
 ```java
 package test;
@@ -161,18 +143,16 @@ java.io.InvalidClassException: test.Worker; local class incompatible: stream cla
 	at test.App2.main(App2.java:16)
 ```
 
-根据提示我们知道，这两个冲突了。因为serialVersionUID的不同导致了读出对象失败。可以认为它做的是一个版本是否兼容的功能。
+根据提示我们知道，这两个冲突了，因为serialVersionUID的不同导致了读出对象失败。
+
+* 如果版本1和版本2兼容，即它们之间可以任意序列化反序列化，那么它们的serialVersionUID就应该相同。
+  * 如版本2新增了一个属性，而这个属性不必一定有值。从而版本2的类能够从保存版本1的类的存储中读取版本1的对象，这样版本1和2就可以是兼容的。
+* 如果认为版本1和版本2之间不应该进行任意序列化反序列化，那么就不应该有相同的serialVersionUID。
+  * 如版本2新增了一个属性，而这个属性从数据库/文件/网络中读取后要求必须有值，那么版本2就不能从保存版本1数据库/文件/网络中读取。此时两个版本的代码的serialVersionUID就要设置为不同才行。
 
 
-java中，如果版本1和版本2兼容，即它们之间可以任意序列化反序列化，那么它们的serialVersionUID就应该相同。相反的，如果认为版本1和版本2之间不应该进行任意序列化反序列化，那么就不应该有相同的serialVersionUID。
 
-
-比如版本2新增了一个属性，而这个属性从数据库/文件/网络中读取后要求必须有值，那么版本2就不能从保存版本1数据库/文件/网络中读取。此时两个版本的代码的serialVersionUID就要设置为不同才行。
-
-
-如果版本2新增了一个属性，而这个属性不必一定有值。从而版本2的类能够从保存版本1的类的存储中读取版本1的对象，这样版本1和2就可以是兼容的。
-
-下面新建一个版本3，新增了一个属性gender，去掉了一个属性age。但是serialVersionUID不变，说明版本3兼容版本1，它们之间可以任意序列化反序列化。但是由于属性的不对等，所以会造成数据的缺失。
+下面新建一个版本3，新增了属性gender，去掉了属性age，但是serialVersionUID不变，说明版本3兼容版本1，它们之间可以任意序列化反序列化，但是由于属性的不对等，所以会造成数据的缺失。
 
 ```java
 package test;
@@ -181,48 +161,16 @@ import java.io.Serializable;
 
 public class Worker implements Serializable {
 	private static final long serialVersionUID = 1L;
-
 	private Integer id;
 	private String name;
 	// private Integer age;
 	private String gender;
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
+	/* 省略get/set方法 */
+	
 	@Override
 	public String toString() {
 		return "Worker [id=" + id + ", name=" + name + ", gender=" + gender + "]";
 	}
-
-	// public Integer getAge() {
-	// return age;
-	// }
-	//
-	// public void setAge(Integer age) {
-	// this.age = age;
-	// }
 }
 ```
 
@@ -233,12 +181,14 @@ Worker [id=100, name=alien lin, gender=null]
 Worker [id=60, name=jack ma , gender=null]
 ```
 
-## 那么如果我们不指定serialVersionUID的值，那将会如何？
-
-如果我们不显示指定serialVersionUID的值，那么JVM会根据属性的生成一个serialVersionUID，如果我们更改了属性，添加了非private方法，那么serialVersionUID就不同了，就不能序列化了。
 
 
-定义一个Person，有id,name属性及其get/set方法。注意该对象我们没有设置serialVersionUID的值
+## 如果不指定serialVersionUID的值将如何？
+
+如果我们不显式指定serialVersionUID的值，那么JVM会根据属性的生成一个serialVersionUID，如果我们更改了属性，添加了非private方法，那么serialVersionUID就不同了，就不能序列化了。
+
+
+定义一个Person，有id,name属性及其get/set方法。注意该对象没有设置serialVersionUID的值
 
 ```java
 package test;
@@ -248,18 +198,7 @@ import java.io.Serializable;
 public class Person implements Serializable {
 	private Integer id;
 	private String name;
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+	/* 省略get/set方法 */
 }
 
 ```
@@ -321,7 +260,6 @@ public class Test2 {
 			p = (Person)oi.readObject();
 			System.out.println(p.getId() + " " + p.getName());
 		}
-		
 	}
 }
 ```
@@ -338,29 +276,11 @@ public class Person implements Serializable {
 	private Integer id;
 	private String name;
 	private Integer age;
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Integer getAge() {
-		return age;
-	}
-	public void setAge(Integer age) {
-		this.age = age;
-	}
+	/* 省略get/set方法 */
 }
-
 ```
 
-再运行Test2.发现报错了。发现是的serialVersionUID不同导致的，从这里我们可以知道，如果我们没有指定serialVersionUID，那么将会根据属性得到一个serialVersionUID。
+再运行Test2.发现报错了，是由于自动生成的serialVersionUID不同导致的。
 
 ```
 Exception in thread "main" java.io.InvalidClassException: test.Person; local class incompatible: stream classdesc serialVersionUID = -3988139021726296639, local class serialVersionUID = -2271613962938391343
@@ -385,20 +305,8 @@ public class Person implements Serializable {
 	private Integer id;
 	private String name;
 	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	private void whateverMethod() {
-		
+	/* 省略get/get()方法 */
+	private void whateverMethod() {	
 	}
 }
 ```

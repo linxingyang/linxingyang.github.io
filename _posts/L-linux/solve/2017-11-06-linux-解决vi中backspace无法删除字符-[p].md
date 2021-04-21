@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/627df980b17e475bbed4027db194dc37
+permalink: /:year/627df980b17e475bbed4027db194dc37/index
 title: 2017-11-06-linux-解决vi中backspace无法删除字符
 categories: [linux]
 tags: [vi,linux]

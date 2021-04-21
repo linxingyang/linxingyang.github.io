@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/a7cc6501280544bbbf8063048336423e
+permalink: /:year/a7cc6501280544bbbf8063048336423e/index
 title: 2020-01-15-dexpot-推荐的任务视图-dexpot
 categories: [dexpot]
 tags: [dexpot,推荐工具系列]

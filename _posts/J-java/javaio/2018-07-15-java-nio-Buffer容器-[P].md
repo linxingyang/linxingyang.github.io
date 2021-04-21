@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/04d162bb5639481589d50400087ee7ea
+permalink: /:year/04d162bb5639481589d50400087ee7ea/index
 title: 2018-07-15-java-nio-Buffer容器
 categories: [java]
 tags: [java,io,nio]
@@ -12,8 +12,6 @@ author: 林兴洋
 
 
 # Buffer 容器
-
-想要玩好NIO，必须懂的Buffer，连容器都不会玩，那是玩不好NIO滴~
 
 记得自己刚看的时候，对Buffer的印象：Buffer是个卡车，Channel是一个隧道。卡车可以把东西从隧道中运出来，也可以把东西运到隧道中~
 
@@ -1803,6 +1801,9 @@ capacity :30
 ---------------------
 ```
 
+
+
+## 参考
 
 参考书籍、博客。部分图片来自于这些博客
 

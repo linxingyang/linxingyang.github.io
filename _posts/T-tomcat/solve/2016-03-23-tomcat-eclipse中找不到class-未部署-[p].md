@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/8b072ff2a1da49c2be51643cab4d2agg
+permalink: /:year/8b072ff2a1da49c2be51643cab4d2agg/index
 title: 2016-03-23-tomcat-eclipse中找不到class-未部署
 categories: [tomcat]
 tags: [java,tomcat,eclipse]

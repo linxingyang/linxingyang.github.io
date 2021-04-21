@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/d1763c9f6a3a40288822e763daa2b712
+permalink: /:year/d1763c9f6a3a40288822e763daa2b712/index
 title: 2015-01-03-rationalrose-rose2007安装
 categories: [rationalrose]
 tags: [rationalrose]

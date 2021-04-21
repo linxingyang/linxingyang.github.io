@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/0a4926e9dd684d038e9b9fb5cc22c326
+permalink: /:year/0a4926e9dd684d038e9b9fb5cc22c326/index
 title: 2014-03-06-codeblock-中文乱码
 categories: [codeblock]
 tags: [codeblock,中文乱码]
@@ -10,17 +10,14 @@ catalog: false
 author: 林兴洋
 ---
 
-* 1）
+1. 第一步
 settings -> editor -> General settings
 ->others settings ->   Encoding一项选择 WINDOWS-936
 
-* 2)
+2. 第二步
 settings ->complier settings -> Global compiler settings
 -> Others options 选项卡 中输入以下内容
-
 ```
 -fexec-charset=GBK
 -finput-charset=WINDOWS-936
 ```
-
-

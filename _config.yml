@@ -5,15 +5,11 @@ header-img: img/home/bg-tags.jpg
 email: linxingy@foxmail.com
 description: "林兴洋, 林兴洋的主页, 林兴洋的博客, java"
 keyword: "林兴洋, 林兴洋的主页, 林兴洋的博客"
-# url: "http://linxingyang.net"              # your host, for absolute URL
-url: "https ://linxingyang.gitee.io"
-baseurl: "/linxingyang"                             # for example, '/blog' if your blog hosted on 'host/blog'
-
-
-include: ["_includes", "_layouts", "_posts"]
+url: "http://linxingyang.net"              # your host, for absolute URL
+baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 author: 林兴洋
-moto: 或许是应该从头开始的时候了
+moto: 世间千般好
 icon-img: /img/favicon.ico
 
 # Publish posts or collection documents with a future date.
@@ -62,13 +58,13 @@ kramdown:
   input: GFM                            # use Github Flavored Markdown !important
 
 # git talks https://github.com/gitalk/gitalk
-# stop using since load 50KB+ js/css and so on.
+# more than 50KB+ resources(js/css and so on).
 plugin-gitalk-use: false
 
-# busuanzi web visit counter http://busuanzi.ibruce.info/
+# busuanzi web visit counter http://busuanzi.ibruce.info/.
 plugin-busuanzi-use: true
 
-# my personal web visit counter, just for test, don't use it
+# my personal web visit counter, just for test, don't use it.
 plugin-mycounter-use: false
 
 # Analytics settings

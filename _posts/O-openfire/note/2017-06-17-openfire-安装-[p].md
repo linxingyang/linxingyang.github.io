@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/d1763c9f6a3a40288822e763daa2b7oo
+permalink: /:year/d1763c9f6a3a40288822e763daa2b7oo/index
 title: 2017-06-17-openfire-安装
 categories: [openfire]
 tags: [openfire,xmpp]

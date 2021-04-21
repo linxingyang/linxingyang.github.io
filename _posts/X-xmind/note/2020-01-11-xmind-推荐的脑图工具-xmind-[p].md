@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/2df1d49734c1483aa85666011d2edbf7
+permalink: /:year/2df1d49734c1483aa85666011d2edbf7/index
 title: 2020-01-11-xmind-推荐的脑图工具-xmind
 categories: [xmind]
 tags: [xmind,推荐工具系列]

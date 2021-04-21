@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/9bb1c94043ef44c0a1ff187198ac075e
+permalink: /:year/9bb1c94043ef44c0a1ff187198ac075e/index
 title: 2015-10-17-svn-eclipse中安装及使用svn插件
 categories: [svn]
 tags: [eclipse,svn]
@@ -40,14 +40,14 @@ author: 林兴洋
 
 ![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-svn/image/2015-10-17/clipboard7.png)
 
-## 7,将其检出
+## 7，将其检出
 
 ![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-svn/image/2015-10-17/clipboard6.png)
 
-## 8,检出完成，图标上多了一些东西
+## 8，检出完成，图标上多了一些东西
 
 ![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-svn/image/2015-10-17/clipboard8.png)
 
-## 9,进行更新/提交
+## 9，进行更新/提交
 
 ![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/S-svn/image/2015-10-17/clipboard9.png)

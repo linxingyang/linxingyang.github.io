@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/0ad188c60a2e442ba1ccb824b7cef01e
+permalink: /:year/0ad188c60a2e442ba1ccb824b7cef01e/index
 title: 2020-01-14-duplicateclearn-推荐的重复文件查找-duplicateclearn
 categories: [duplicateclearn]
 tags: [duplicateclearn,推荐工具系列]

@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/8b072ff2a1da49c2be51643cab4d2ttt
+permalink: /:year/8b072ff2a1da49c2be51643cab4d2ttt/index
 title: 2017-08-22-tomcat-dom4j启动报错Premature_end_of_file
 categories: [tomcat]
 tags: [dom4j,java,jsp,tomcat]

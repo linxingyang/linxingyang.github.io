@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/6b2bf602a7bb40b3bc8897a0f845a59a
+permalink: /:year/6b2bf602a7bb40b3bc8897a0f845a59a/index
 title: 2014-09-30-office-word新建模板
 categories: [office]
 tags: [office,word]

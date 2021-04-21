@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/bb97ax6f894d42aaab09bc92c3785fcs
+permalink: /:year/bb97ax6f894d42aaab09bc92c3785fcs/index
 title: 2015-03-25-java-windows下的bat文件快速运行编译java代码
 categories: [java]
 tags: [java,编译]
@@ -10,17 +10,25 @@ catalog: false
 author: 林兴洋
 ---
 
-以下内容 新建一个文本文件后，贴入以下代码，修改文件后缀 txt为 bat； 文件名随便起。
-使用：在txt中写完java代码后，将此txt文件拖入.bat文件中即可编译运行
 
+常用文本编辑器编写Java代码，
+* 编写的都是一个Foo.txt文件，
+* 需要改名为Foo.java，
+* 然后用javac命令编译Foo.java生成Foo.class，
+* 最后用java命令运行Foo.class。
+
+下面直接用一个bat脚本来完成上面步骤，创建一个Compile.bat文件，内容如下：
 ```bat
+@ECHO txt -> java
 @copy %~n1.txt %~n1.java
-@ECHO 编译 .java文件...
+@ECHO java -> class
 @javac %~n1.java
-@ECHO 运行 .class文件...
+@ECHO run class
 @ECHO --------------------------------------------------
 @java %~n1
 @ECHO --------------------------------------------------
 pause
 ```
-将 Test.txt 拖入 java编译运行.bat即可
+
+这样在编写完Foo.txt之后，直接拖入到Compile.bat文件中就可以完成上面步骤了。
+

@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/4c589988502743b68622d47e6587b2d0
+permalink: /:year/4c589988502743b68622d47e6587b2d0/index
 title: 2018-03-06-typescript-ts中引入使用jquery插件
 categories: [typescript]
 tags: [javascript,typescript,jquery]
@@ -9,6 +9,8 @@ description: typescript中引入jquery插件
 catalog: false
 author: 林兴洋
 ---
+
+
 
 命令行输入：
 
@@ -26,6 +28,8 @@ install typings
 // 这步过后，在typings/globals文件夹中就可以看到jquery了
 typings install dt~jquery --global --save
 ```
+
+
 
 然后在你的ts文件中引用
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/8b072ff2a1da49c2be51444cab4d2aqw
+permalink: /:year/8b072ff2a1da49c2be51444cab4d2aqw/index
 title: 2017-01-04-maven-eclipse中控制台中文乱码
 categories: [maven]
 tags: [eclipse,maven]

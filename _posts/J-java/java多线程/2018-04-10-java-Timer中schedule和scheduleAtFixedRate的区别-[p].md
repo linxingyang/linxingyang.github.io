@@ -1,59 +1,62 @@
 ---
 layout: post
-permalink: /:year/4cxx9xxxx0274vsc8622d47e6587bdsd
+permalink: /:year/4cxx9xxxx0274vsc8622d47e6587bdsd/index
 title: 2018-04-10-java-Timer中schedule和scheduleAtFixedRate的区别
 categories: [java]
 tags: [java,timer,schedule,scheduleAtFixedRate]
-excerpt:  java,Timer,schedule,scheduleAtFixedRate,区别
+excerpt: java,Timer,schedule,scheduleAtFixedRate,区别
 description: Timer中schedule和scheduleAtFixedRate的区别
 catalog: true
 author: 林兴洋
 ---
 
-schedule属于固定延迟的，scheduleAtFixedRate属于固定速率的
 
-一个T代表执行Task中1秒，一个W表示空闲1秒
 
-`TTWWWTTWWWTTWWW`  
+# schedule和scheduleAtFixedRate的区别
 
-好看一点： `TTWWW` `TTWWW` `TTWWW`
+## 固定延迟和固定速率
 
-那么这一段就代表，一个任务会执行2秒，它的period是5秒（因为从开始执行到下个任务开始执行，有两个T，3个W，5秒一轮回）。
+**schedule属于固定延迟的，scheduleAtFixedRate属于固定速率的。**
 
-如果其中出现了GC，使用G表示GC回收执行了1秒。
 
-# schedule
+
+下面用T、W、G来演示这二者的区别
+
+* 一个T代表执行Task1秒
+* 一个W表示空闲1秒
+* 一个G表示GC回收执行1秒
+
+如`TTWWWTTWWWTTWWW`  好看一点： `TTWWW` `TTWWW` `TTWWW`， 那么这一段就代表一个任务执行耗时2秒，它的period被设置为5秒，因为从开始执行到下个任务开始执行，有2个T，3个W，5秒一轮回。
+
+
 
 > In fixed-delay execution, each execution is scheduled relative to the actual execution time of the previous execution. If an execution is delayed for any reason (such as garbage collection or other background activity), subsequent executions will be delayed as well.
 
-那么在schedule中，因为固定延迟，任务二因为GC被推迟了2秒开始执行，那么任务三是参考的是任务二开始的时间+5秒的延迟。它会是这样的
+在schedule中，因为固定延迟，若任务二因为GC被推迟了2秒开始执行，那么任务三是参考任务二开始的时间+5秒的延迟。
 
-`TTWWWGGTTWWWTTWWW`
+它是这样的： `TTWWW` `GG` `TTWWW` `TTWWW`
 
-好看一点 ： `TTWWW` `GG` `TTWWW` `TTWWW`
 
-# scheduleAtFixedRate
 
 > In fixed-rate execution, each execution is scheduled relative to the scheduled execution time of the initial execution. If an execution is delayed for any reason (such as garbage collection or other background activity), two or more executions will occur in rapid succession to "catch up."
 
-在scheduleAtFixRate中，因为固定速率，他的速率是参照第一个，所以当其中一个任务因为任何原因被延迟了，后续的任务会进行追赶。它是这样的
+在scheduleAtFixRate中，因为固定速率，他的速率是参照第一个，所以当其中一个任务因为任何原因被延迟了，后续的任务会进行追赶。
 
-`TTWWWGGTTWTTWWW`
-
-好看一点 ： `TTWWW` `GG` `TTW` `TTWWW`
+它是这样的： `TTWWW` `GG` `TTW` `TTWWW`
 
 
-上面情况都是在任务的period周期 > 任务所需要执行的时间。 （任务周期为5S，运行需要1S）
 
-如果任务的周期 < 任务所需要执行的时间（任务周期为5S，运行需要10S）
+从上面举的例子可以很清晰的看出二者区别。
 
-周期本来是2秒，但是任务运行却需要3秒，这个时候schedule和scheduleAtFixedRate的表现都是一样的，都是上个任务执行完马上执行下个任务（下个任务因为上个任务运行过长已经被延迟了），因为根本没多余的时间来赶。
+上面情况都是在任务的period周期 > 任务所需要执行的时间，如任务周期为5S，运行需要2S。
 
-`TTT` `TTT` `TTT` 
+如果任务的周期 < 任务所需要执行的时间，如任务周期为2S，运行需要5S，这个时候schedule和scheduleAtFixedRate（对于固定速率的任务来说根本没多余的时间来赶）的表现都是一样的，都是上个任务执行完马上执行下个任务。
 
-还有由于scheduleAtFixedRate具有追赶性，如果一个任务的firstTime（第一次执行时间）在程序运行时间之前，那么它也会开始追赶
+它是这样的：`TTTTT` `TTTTT` `TTTTT` 
 
-如下：任务执行需要1秒，周期为5秒，并把任务开始时间设置在程序运行的1分钟之前。
+
+
+还有由于scheduleAtFixedRate具有追赶性，如果一个任务的firstTime（第一次执行时间）被设置在程序运行时间之前，那么它也会开始追赶。如下demo：任务执行需要1秒，周期为5秒，把任务开始时间设置在程序运行的1分钟之前：
 
 ```java
 import java.text.SimpleDateFormat;
@@ -143,14 +146,10 @@ Timer-0:任务0开始时间:20时02分08秒
 Timer-0:任务0结束时间:20时02分09秒
 Timer-0:任务0开始时间:20时02分13秒
 Timer-0:任务0结束时间:20时02分14秒
-...
-
-    
+...    
 ```
 
-scheduleAtFixedRate，为了追赶中间这1分钟的差距,它会在上个任务执行完马上执行下个任务。
-
-原来周期为5S，那么差了1分钟，为了追上，要多执行12次（60S / 5S = 12）
+scheduleAtFixedRate为了追赶这1分钟的差距，它会在上个任务执行完马上执行下个任务。任务周期为5S，由于任务开始时间时在1分钟之前，所以很容易算出为了追上要多执行12次（60S / 5S = 12次）。
 
 
 程序从20时01分43秒启动，周期为5S，实际任务中只运行1S（因为线程只sleep 1秒），那么剩余的4S（周期5S-运行1S）可以用来追赶前面1分钟的那12次，那12次任务，每个需要1S。
@@ -164,7 +163,7 @@ scheduleAtFixedRate，为了追赶中间这1分钟的差距,它会在上个任�
 当15秒执行完毕时时，发现已经能追赶上了（12个全部追赶完毕），所以第16秒开始就正常执行，不追赶了。
 
 
-这里如果我们使用schedule而不是scheduleAtFixedRate，那么是不会去追赶前面少掉的次数的。使用schedule的结果
+如果我们使用schedule而不是scheduleAtFixedRate，那么是不会去追赶前面少掉的次数的。使用schedule的结果如下：
 
 ```java
 程序启动时间:20时23分03秒
@@ -180,10 +179,16 @@ Timer-0:任务0开始时间:20时23分23秒
 ```
 
 
-个人理解：
+
+总结：
 
 * 在不需要追赶的情况下，schedule和scheduleAtFixedRate的表现一样。
-* 在需要追赶的情况下，如果任务执行的时间超过period，二者的表现也是一样的，因为scheduleAtFixedRated没有多余的时间去追赶。
+* 在需要追赶的情况下
+  * 如果任务执行的时间没有超过任务周期，那么scheduleAtFixedRate会去追赶任务，schedule不会追赶。
+  * 如果任务执行的时间超过任务周期，二者的表现也是一样的，因为scheduleAtFixedRated没有多余的时间去追赶。
 
-参考：[What is the difference between schedule and scheduleAtFixedRate?
-](https://stackoverflow.com/questions/22486997/what-is-the-difference-between-schedule-and-scheduleatfixedrate)
+
+
+## 参考
+
+* [What is the difference between schedule and scheduleAtFixedRate?](https://stackoverflow.com/questions/22486997/what-is-the-difference-between-schedule-and-scheduleatfixedrate)

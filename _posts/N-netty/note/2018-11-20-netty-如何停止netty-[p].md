@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/4aa3fd336b664d13876e758915c1d776
+permalink: /:year/4aa3fd336b664d13876e758915c1d776/index
 title: 2018-11-20-netty-如何停止netty
 categories: [netty]
 tags: [java,netty]
@@ -10,13 +10,11 @@ catalog: false
 author: 林兴洋
 ---
 
-这次任务是开发一个日志服务器，让所有项目的日志都发送这个日志服务器中。
 
-久闻netty大名而不得见啊，这次做这个就决定用netty做底层通信框架。
 
-接口啥的都挺友好的，做着做着，突然发现一个问题：怎么停止netty。
+这次任务是开发一个日志服务器，让所有项目的日志都发送这个日志服务器中，决定用netty做底层通信框架。接口啥的都挺友好的，做着做着，突然发现一个问题：怎么停止netty。
 
-```
+```java
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.LineBasedFrameDecoder;
@@ -31,8 +29,6 @@ import java.nio.charset.Charset;
 import java.util.*;
 
 public class Log4j2ServerBootStrap {
-    
-    
     private final EventLoopGroup group = new NioEventLoopGroup();
     private final EventLoopGroup worker = new NioEventLoopGroup();
     
@@ -88,15 +84,17 @@ public class Log4j2ServerBootStrap {
 
 突然间的困惑,下面的代码会一直阻塞着直到channel()被关闭，那如何主动的去关闭？
 
-```
+```java
 bindFuture.channel().closeFuture().sync();
 ```
 
-可以借鉴SocketChannel那个时候用的方法一样，一旦收到客户端发送的 exit或者quit字符，那就关闭channel。
 
-那在netty中，也可以做这样的事，定义一个类继承ChannelInBoundHandlerAdapter，然后实现ChannelRead()方法，当读到 exit 或者 quit就关闭  
 
-```
+考虑可以借鉴SocketChannel那个时候用的方法一样，一旦收到客户端发送的 exit或者quit字符，那就关闭channel。
+
+在netty中也可以做这样的事，定义一个类继承ChannelInBoundHandlerAdapter，然后实现ChannelRead()方法，当读到 exit 或者 quit就关闭  
+
+```java
 @Override
 public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
     // 根据msg信息关闭channel
@@ -104,28 +102,28 @@ public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception 
 }
 ```
 
-使得 bindFuture.channel().closeFuture().sync(); 
-跳出阻塞继续往下运行。然后在finally中关闭资源。
+使得 `bindFuture.channel().closeFuture().sync(); `跳出阻塞继续往下运行，然后在finally中关闭资源。
 
-```
+```java
 group.shutdownGracefully().sync();
 worker.shutdownGracefully().sync();
 ```
 
 而项目的情况是
 
-接收日志：接收的是JSON格式的日志，直接使用log4j2提供的SocketAppender，不想定制自己的客户端。这就导致了我没有办法给服务端发送类似 quit或者exit。（当然也可以变通的通过lo4j2发送exit）
-
-所以就考虑通过启动停止流程来控制
-
-启动停止流程：通过启动tomcat，让配置在web.xml中的Servlet被初始化， 然后调用该Servlet的init()方法(netty启动)。通过停止tomcat，触发Servlet的destory()方法(netty停止)
+接收日志：接收的是JSON格式的日志，直接使用log4j2提供的SocketAppender，不想定制自己的客户端。这就导致了我没有办法给服务端发送类似 quit或者exit（当然也可以变通的通过lo4j2发送exit）。
 
 
-```
+
+所以就考虑通过启动/停止流程来控制。
+
+启动/停止流程：通过启动tomcat，让配置在web.xml中的Servlet被初始化， 调用该Servlet的init()方法(netty启动)，通过停止tomcat，触发Servlet的destory()方法(netty停止)：
+
+
+```java
 public class StartLog4j2Servlet extends HttpServlet {
    @Override
     public void init() throws ServletException {
-
         // 要重新启动一个线程
         // 如果不启动新线程，那么netty因为阻塞在下面这句代码，导致tomcat整个就卡在那里。
         // bindFuture.channel().closeFuture().sync();
@@ -157,7 +155,7 @@ public class StartLog4j2Servlet extends HttpServlet {
 
 当tomcat停止的时候调用Servlet的destory()方法，destory()去调用shutdown()方法去释放资源
 
-```
+```java
 public class Log4j2ServerBootStrap {
     public void shutdown() {
         try {
@@ -179,10 +177,12 @@ public class Log4j2ServerBootStrap {
 回过头来看，关闭也就这样，当时自己脑子是不是抽抽了。因为当时很疑惑，我要如何触发关闭？关闭时需要释放哪些资源？做了一遍就豁然开朗。
 
 
-题外话
 
-这次做的过程中，参考了李林峰的netty权威指南，还有何品 译 norman maurer的netty in action。   
+## 参考
+
+* 李林峰《netty权威指南》
+* 何品 译 norman maurer的《netty in action》
 
 
-李林峰的netty权威指南用的是全新的netty5，但是很遗憾啊，我到github上面一看netty5停止了，还是在维护netty4，所以选用netty4，主要参考的 netty in action 一书。 两本书都学到了一些东西。
+李林峰的netty权威指南用的是全新的netty5，但是很遗憾啊，我到github上面一看netty5停止了（大家都很忙，netty4也没啥大问题），还是在维护netty4，所以选用netty4，主要参考的《netty in action》 一书。
 

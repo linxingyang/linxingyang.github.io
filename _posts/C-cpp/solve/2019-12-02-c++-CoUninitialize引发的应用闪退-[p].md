@@ -1,13 +1,13 @@
 ---
 layout: post
-permalink: /:year/8b072ff2a1da49c2be51643cab191202
+permalink: /:year/8b072ff2a1da49c2be51643cab191202/index
 title: 2019-12-02-c++-CoUninitialize引发的应用闪退
 categories: [c]
 tags: [c,c++,com组件,问题解决]
 relative-tags: [问题解决]
 excerpt: c++,com,组件,注销,闪退
 description: c++的com组件注销引发的应用闪退
-category: false
+catalog: false
 ---
 
 情况是这么个情况。在部分win10上，右键我们的OPC服务端工具的托盘栏图标的时候，会出现闪退。

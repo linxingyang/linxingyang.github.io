@@ -1,12 +1,12 @@
 ---
 layout: post
-permalink: /:year/4cf65ddff70a4cf6bb5a03abfcf681fa
+permalink: /:year/4cf65ddff70a4cf6bb5a03abfcf681fa/index
 title: 2019-12-17-tinyxml-打印XMLElement
 categories: [tinyxml]
 tags: [tinyxml,c,c++]
 excerpt: c++,tinyxml,xmlelemnt
 description: c++的tinyxml库打印XMLElement
-category: false
+catalog: false
 ---
 
 使用tinyxml打印某个XMLElement元素的内容

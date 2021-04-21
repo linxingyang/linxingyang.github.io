@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/8b07ggg2a1mv49c2be51444cab4d2aqw
+permalink: /:year/8b07ggg2a1mv49c2be51444cab4d2aqw/index
 title: 2017-03-27-maven-报错不支持的java版本
 categories: [maven]
 tags: [java,jdk,eclipse,maven]

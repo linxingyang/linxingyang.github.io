@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/5c22b13a5acc446ca87263a6643455aa
+permalink: /:year/5c22b13a5acc446ca87263a6643455aa/index
 title: 2015-09-07-eclipse-使用DatabaseExplorer
 categories: [eclipse]
 tags: [eclipse,myclipse,DatabaseExplorer]

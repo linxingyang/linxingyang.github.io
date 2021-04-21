@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/aly7ggg2a1mv49c2be51444cab4d2aqw
+permalink: /:year/aly7ggg2a1mv49c2be51444cab4d2aqw/index
 title: 2017-01-22-maven-阿里云的一个镜像mirror
 categories: [maven]
 tags: [maven]
@@ -10,9 +10,8 @@ catalog: false
 author: 林兴洋
 ---
 
-使用阿里云的镜像，体验飞一般的下载速度哈哈，和原来的那个不一样的感觉啊。
+使用阿里云的镜像，体验飞一般的下载速度哈哈，和原来的那个不一样的感觉啊。在maven的settings.xml中，找到其中的<mirrors/>标签，加入下面阿里云的镜像：
 
-在maven的settings.xml中，找到其中的<mirrors/>标签，加入下面阿里云的镜像
 ```xml
 <mirrors>
     <mirror>

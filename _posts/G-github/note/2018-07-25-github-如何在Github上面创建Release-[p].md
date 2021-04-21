@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/905257ae2c16434bae326d58aae9e81f
+permalink: /:year/905257ae2c16434bae326d58aae9e81f/index
 title: 2018-07-25-github-如何在Github上面创建Release
 categories: [github]
 tags: [github,git]
@@ -10,41 +10,51 @@ catalog: false
 author: 林兴洋
 ---
 
-自己的个人网站要发布1.1版本，看别的Github项目都有一条类似timeline(时间线)的版本列表，如下
+
+
+看别的Github项目都有一条类似timeline(时间线)的版本列表，如下图，所以在Github上面摸索了一下，弄好了记录一下。
 
 ![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/G-github/image/2018-07-25/15.png)
 
-所以在Github上面摸索了一下，弄好了记录一下。
 
+
+## 从当前项目创建一个Release
 
 在项目的页面，如下当前有6个文件，点击release
 
 ![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/G-github/image/2018-07-25/01.png)
+
+
 
 点击右侧创建一个release
 
 ![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/G-github/image/2018-07-25/02.png)
 
 
-填写一些内容，为了方便介绍，我这里写了TestBefore作为Release版本，通常我们使用v1.1、v2这样的版本号。最后点击publish release发布版本
+
+填写一些内容，为了方便介绍，这里写了TestBefore作为Release版本，最后点击publish release发布版本。
 
 ![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/G-github/image/2018-07-25/03.png)
 
 
-然后我本地提交一个新文件上去
+
+## 提交一个文件后再创建一个Release
+
+然后本地提交一个新文件上去
 
 ![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/G-github/image/2018-07-25/04.png)
 
 
-此时可以看到后面那个新上传的文件，然后再进入release界面
+此时可以看到后面那个新上传的文件，再进入release界面
 
 ![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/G-github/image/2018-07-25/05.png)
 
 
 
-然后我们再创建一个新release
+再创建一个新release
 
 ![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/G-github/image/2018-07-25/06.png)
+
 
 
 新release版本号为TestAfter
@@ -56,7 +66,10 @@ author: 林兴洋
 ![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/G-github/image/2018-07-25/08.png)
 
 
-然后我们下载TestBefore和TestAfter的source Code
+
+## 下载测试
+
+下载TestBefore和TestAfter的source Code
 
 ![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/G-github/image/2018-07-25/09.png)
 
@@ -67,17 +80,22 @@ author: 林兴洋
 
 
 
+
+
+## 不要随便更新过去版本的Release
+
 切记，不能去更新过往版本的release，否则会被更新成最新的内容。
 
 ![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/G-github/image/2018-07-25/11.png)
 
 
-比如我把after.txt和text.txt删去。
+比如把after.txt和text.txt删去
 
 ![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/G-github/image/2018-07-25/14.png)
 
 
-然后我把TestBefore改成TestBefore2
+
+然后把TestBefore改成TestBefore2
 
 ![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/G-github/image/2018-07-25/12.png)
 

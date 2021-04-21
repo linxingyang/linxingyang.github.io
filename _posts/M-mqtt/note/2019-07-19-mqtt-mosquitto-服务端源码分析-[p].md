@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/bc5a8c01c1664643be595e8c828c3bd8
+permalink: /:year/bc5a8c01c1664643be595e8c828c3bd8/index
 title: 2019-07-19-mqtt-mosquitto-服务端源码分析
 categories: [mqtt]
 tags: [c,c++,mqtt,mosquitto,mosquitto系列]

@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/bb97a16f8945544aab09bc92c3785ccf
+permalink: /:year/bb97a16f8945544aab09bc92c3785ccf/index
 title: 2017-08-08-log4j-layout布局
 categories: [log4j]
 tags: [java,log4j,log4j系列]
@@ -34,9 +34,7 @@ author: 林兴洋
 Layout接口，这个接口中最重要的一个抽象方法就是这个format，格式化日志事件成指定的格式并返回字符创。
 
 ```
-
 abstract public String format(LoggingEvent event);
-
 ```
 
 ### 5.4 SimpleLayout 简单布局 ###
@@ -47,30 +45,24 @@ abstract public String format(LoggingEvent event);
 
 配置
 
-```xml
-
+```properties
 log4j.rootLogger=debug,console
 
 log4j.appender.console=org.apache.log4j.ConsoleAppender
 log4j.appender.console.layout=org.apache.log4j.SimpleLayout
-
 ```
 
 代码中使用
 
 
 ```java
-
 log.debug("hello world");
-
 ```
 
 输出结果
 
 ```
-
 DEBUG - hellow world
-
 ```
 
 ### 5.5 PatterLayout 格式化输出布局 ###
@@ -90,18 +82,14 @@ DEBUG - hellow world
 
 配置
 
-```xml
-
+```properties
 log4j.appender.console.layout.ConversionPattern=%c | %c{1} | %c{2} | %c{3} | %c{4}
-
 ```
 
 结果：%c{1}只输出类名，%c{2}输出了类名以及上一级包名，%c{3}输出了类名以及前两级包名。
 
 ```
-
 com.linxingyang.Test1 | Test1 | linxingyang.Test1 | com.linxingyang.Test1 | com.linxingyang.Test1
-
 ```
 
 ####  %C %C{数字} 输出调用者的名称 ####
@@ -113,17 +101,14 @@ com.linxingyang.Test1 | Test1 | linxingyang.Test1 | com.linxingyang.Test1 | com.
 
 配置如下，注意第一个c是小写的，后面c都是大写的
 
-```xml
-
+```properties
 log4j.appender.console.layout=org.apache.log4j.PatternLayout
 log4j.appender.console.layout.ConversionPattern=%c | %C | %C{1} | %C{2} | %C{3} | %C{4}
-
 ```
 
 测试代码，`com.linxingyang.a.Test2`类中使用`com.linxingyang.Test1`这个类的class作为获取日志器的key。
 
 ```java
-
 package com.linxingyang.a;
 
 import org.apache.log4j.Logger;
@@ -135,15 +120,12 @@ public class Test2 {
 		log.debug("message  from Test2 ");
 	}
 }
-
 ```
 
 从结果可以看出，第一个c打印结果为 com.linxingyang.Test1 ，其后大写的C打印的都是Test2.另外C{数字}和c{数字}的作用是一样的。
 
 ```
-
 com.linxingyang.Test1 | com.linxingyang.a.Test2 | Test2 | a.Test2 | linxingyang.a.Test2 | com.linxingyang.a.Test2
-
 ```
 
 #### %d 输出打印日志的日期时间 ####
@@ -168,17 +150,14 @@ log4j自己本身也有实现几个日志格式
 
 配置
 
-```xml
-
+```properties
 log4j.appender.console.layout=org.apache.log4j.PatternLayout
 log4j.appender.console.layout.ConversionPattern=[%%d][%d] --- [%%d{ABSOLUTE}][%d{ABSOLUTE}] --- [%%d{ISO8601}][%d{ISO8601}] --- [%%d{DATE}][%d{DATE}]
-
 ```
 
 代码
 
 ```java
-
 package com.linxingyang;
 
 import org.apache.log4j.Logger;
@@ -189,16 +168,12 @@ public class Test1 {
 		log.debug("message  from Test1 ");
 	}
 }
-
 ```
 
 测试结果，可以看到%d和%d{ISO8601}结果是一样的。
 
 ```
-
-
 [%d][2017-12-06 20:52:50,157] --- [%d{ABSOLUTE}][20:52:50,157] --- [%d{ISO8601}][2017-12-06 20:52:50,157] --- [%d{DATE}][06 十二月 2017 20:52:50,157]
-
 ```
 
 ##### 使用适用于SimpleDateFormat的格式 #####
@@ -206,28 +181,22 @@ public class Test1 {
 在%d后面可以跟和SimpleDateFormat中可以解析的日期格式串，例如%d{HH:mm:ss, SSS}，只要能够同样用SimpleDateFormat进行初始化的就行。
 
 ```java
-
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
 ```
 
 ###### 测试代码 ######
 
 配置
 
-```xml
-
+```properties
 log4j.appender.console.layout=org.apache.log4j.PatternLayout
 log4j.appender.console.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss}
-
 ```
 
 结果
 
 ```
-
 2017-12-06 21:51:19
-
 ```
 
 #### %F 输出文件名 ####
@@ -237,15 +206,12 @@ log4j.appender.console.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss}
 
 ##### 测试代码 #####
 
-```xml
-
+```properties
 log4j.appender.console.layout=org.apache.log4j.PatternLayout
 log4j.appender.console.layout.ConversionPattern=%F
-
 ```
 
 ```java
-
 package com.linxingyang.a;
 
 import org.apache.log4j.Logger;
@@ -258,18 +224,15 @@ public class Test2 {
 		log.debug("message  from Test2 ");
 	}
 }
-
 ```
 
 输出
 
 ```
-
 Test2.java
-
 ```
 
-#### %l 打印出打印日志类的详细信息 ####
+#### %l 打印出打印志类的详细信息 ####
 
 打印出全限定名以及行号。这个很有用但是同样的，如果应用比较在乎速度，不要使用这个。
 
@@ -278,20 +241,17 @@ Test2.java
 
 配置
 
-```xml
-
+```properties
 log4j.rootLogger=debug,console
 
 log4j.appender.console=org.apache.log4j.ConsoleAppender
 log4j.appender.console.layout=org.apache.log4j.PatternLayout
 log4j.appender.console.layout.ConversionPattern=%l
-
 ```
 
 java代码
 
 ```java
-
 package com.linxingyang;
 
 import org.apache.log4j.Logger;
@@ -302,15 +262,12 @@ public class Test1 {
 		log.debug("message  from Test1 ");
 	}
 }
-
 ```
 
 结果
 
 ```
-
 com.linxingyang.a.Test2.main(Test2.java:10)
-
 ```
 
 #### %L 输出行号 ####
@@ -319,18 +276,15 @@ com.linxingyang.a.Test2.main(Test2.java:10)
 
 ##### 测试代码 #####
 
-```xml
-
+```properties
 log4j.rootLogger=debug,console
 
 log4j.appender.console=org.apache.log4j.ConsoleAppender
 log4j.appender.console.layout=org.apache.log4j.PatternLayout
 log4j.appender.console.layout.ConversionPattern=%L
-
 ```
 
 ```java
-
 package com.linxingyang;
 
 import org.apache.log4j.Logger;
@@ -341,15 +295,12 @@ public class Test1 {
 		log.debug("message  from Test1 ");
 	}
 }
-
 ```
 
 输出
 
 ```
-
 8
-
 ```
 
 #### %n 换行 ####
@@ -362,20 +313,17 @@ public class Test1 {
 
 配置
 
-```xml
-
+```properties
 log4j.rootLogger=debug,console
 
 log4j.appender.console=org.apache.log4j.ConsoleAppender
 log4j.appender.console.layout=org.apache.log4j.PatternLayout
 log4j.appender.console.layout.ConversionPattern=%m
-
 ```
 
 java代码
 
 ```java
-
 package com.linxingyang;
 
 import org.apache.log4j.Logger;
@@ -397,38 +345,30 @@ public class Test1 {
 		log.debug("message  from Test1 ");
 	}
 }
-	
-
 ```
 
 输出结果
 
 ```
-
 message  from Test1 message  from Test1 message  from Test1
-
 ```
 
 发现输出结果都记在一行里面，下面使用 %n
 
-```xml
-
+```properties
 log4j.rootLogger=debug,console
 
 log4j.appender.console=org.apache.log4j.ConsoleAppender
 log4j.appender.console.layout=org.apache.log4j.PatternLayout
 log4j.appender.console.layout.ConversionPattern=%m %n
-
 ```
 
 输出结果，%n使之换行了。
 
 ```
-
 message  from Test1  
 message  from Test1  
 message  from Test1  
-
 ```
 
 #### %M 输出日志的方法名 ####
@@ -439,20 +379,17 @@ message  from Test1
 
 配置
 
-```xml
-
+```properties
 log4j.rootLogger=debug,console
 
 log4j.appender.console=org.apache.log4j.ConsoleAppender
 log4j.appender.console.layout=org.apache.log4j.PatternLayout
 log4j.appender.console.layout.ConversionPattern=%M %m %n
-
 ```
 
 java代码
 
 ```java
-
 package com.linxingyang;
 
 import org.apache.log4j.Logger;
@@ -474,38 +411,31 @@ public class Test1 {
 		log.debug("message  from Test1 ");
 	}
 }
-	
-
 ```
 
 输出结果，可以看到，打印出了输出日志的方法名。
 
 ```
-
 main message  from Test1  
 method1 message  from Test1  
 method2 message  from Test1  
-
 ```
 
 #### %p 输出日志的优先级/等级 ####
 
 因为Level继承类 Priority，所以说优先级等同于等级。
 
-```xml
-
+```properties
 log4j.rootLogger=debug,console
 
 log4j.appender.console=org.apache.log4j.ConsoleAppender
 log4j.appender.console.layout=org.apache.log4j.PatternLayout
 log4j.appender.console.layout.ConversionPattern=%p %n
-
 ```
 
 java代码
 
 ```java
-
 package com.linxingyang;
 
 import org.apache.log4j.Logger;
@@ -527,17 +457,14 @@ public class Test1 {
 		log.error("message  from Test1 ");
 	}
 }
-
 ```
 
 输出结果
 
 ```
-
 DEBUG 
 INFO 
 ERROR 
-
 ```
 
 #### %r Layout创建到日志输出的时间 ####
@@ -548,20 +475,17 @@ ERROR
 
 配置
 
-```xml
-
+```properties
 log4j.rootLogger=debug,console
 
 log4j.appender.console=org.apache.log4j.ConsoleAppender
 log4j.appender.console.layout=org.apache.log4j.PatternLayout
 log4j.appender.console.layout.ConversionPattern=%r %n
-
 ```
 
 java代码
 
 ```java
-
 package com.linxingyang;
 
 import org.apache.log4j.Logger;
@@ -592,18 +516,14 @@ public class Test1 {
 		log.error("message  from Test1 ");
 	}
 }
-	
-    
 ```
 
 测试结果，可以看出，第一个日志马上打印，第二个日志隔了2秒，第三个隔了3秒（第二个日志的两秒+自己的1秒=3秒）。
 
 ```language
-
 0 
 2000 
 3000 
-
 ```
 
 
@@ -614,20 +534,17 @@ public class Test1 {
 
 配置
 
-```xml
-
+```properties
 log4j.rootLogger=debug,console
 
 log4j.appender.console=org.apache.log4j.ConsoleAppender
 log4j.appender.console.layout=org.apache.log4j.PatternLayout
 log4j.appender.console.layout.ConversionPattern=%t %n
-
 ```
 
 测试代码
 
 ```java
-
 package com.linxingyang;
 
 import org.apache.log4j.Logger;
@@ -660,17 +577,14 @@ public class Test1 {
 		log.error("message  from Test1 ");
 	}
 }
-	
 ```
 
 结果
 
 ```language
-
 main 
 Thread-0 
 Thread-1 
-
 ```
 
 #### %x NDC ####
@@ -682,20 +596,17 @@ x是为NDC准备的。 注意，如果没有NDC，但是还是用了%x，将会�
 
 配置
 
-```xml
-
+```properties
 log4j.rootLogger=debug,console
 
 log4j.appender.console=org.apache.log4j.ConsoleAppender
 log4j.appender.console.layout=org.apache.log4j.EnhancedPatternLayout
 log4j.appender.console.layout.ConversionPattern=%x - %m%n
-
 ```
 
 java代码
 
 ```java
-
 package com.linxingyang;
 
 import org.apache.log4j.Logger;
@@ -737,13 +648,11 @@ public class Test1 {
 		}).start();
 	}
 }
-
 ```
 
 测试结果
 
 ```
-
 cline_c - 333
 cline_c - 333
 3333调用pop结果是cline_c
@@ -754,7 +663,6 @@ client_b - 222
 cline_a - 111
 cline_a - 111
 111调用pop结果是cline_a
-
 ```
 
 #### %X MDC ####
@@ -765,20 +673,17 @@ X是为MDC准备的
 
 配置，直接使用 %X
 
-```xml
-
+```properties
 log4j.rootLogger=debug,console
 
 log4j.appender.console=org.apache.log4j.ConsoleAppender
 log4j.appender.console.layout=org.apache.log4j.EnhancedPatternLayout
 log4j.appender.console.layout.ConversionPattern=%X - %m%n
-
 ```
 
 测试代码
 
 ```java
-
 package com.linxingyang;
 
 import org.apache.log4j.Logger;
@@ -816,46 +721,39 @@ public class Test1 {
 		}).start();
 	}
 }
-
 ```
 
 测试结果
 
 ```
-
 {{a,obja}} - 111
 {{a,obja}} - 111
 {{c,objc}} - 333
 {{c,objc}} - 333
 {{b,objb}} - 222
 {{b,objb}} - 222
-
 ```
 
 
 配置，也可以%X{key}，
 
-```xml
-
+```properties
 log4j.rootLogger=debug,console
 
 log4j.appender.console=org.apache.log4j.ConsoleAppender
 log4j.appender.console.layout=org.apache.log4j.EnhancedPatternLayout
 log4j.appender.console.layout.ConversionPattern=%X{b} - %m%n
-
 ```
 
 java代码同上，测试结果,发现其他日志也有输出，但是key为b的日志输出了其value，增加辨识度。
 
 ```
-
 objb - 222
  - 333
  - 111
  - 333
 objb - 222
  - 111
-
 ```
 
 
@@ -873,20 +771,17 @@ objb - 222
 
 配置
 
-```xml
-
+```properties
 log4j.rootLogger=debug,console
 
 log4j.appender.console=org.apache.log4j.ConsoleAppender
 log4j.appender.console.layout=org.apache.log4j.PatternLayout
 log4j.appender.console.layout.ConversionPattern=[%20m] [%-20m] %n
-
 ```
 
 测试代码
 
 ```java
-
 package com.linxingyang;
 
 import org.apache.log4j.Logger;
@@ -897,35 +792,29 @@ public class Test1 {
 		log.debug("123456789");
 	}
 }
-
 ```
 
 输出结果，可以看到第一个输出左边填充。 第二个输出右边填充。
 
 ```
-
 [                     123456789] [123456789                     ]
-
 ```
 
 ##### 测试最大宽度，左右填充 #####
 
 配置
 
-```xml
-
+```properties
 log4j.rootLogger=debug,console
 
 log4j.appender.console=org.apache.log4j.ConsoleAppender
 log4j.appender.console.layout=org.apache.log4j.PatternLayout
 log4j.appender.console.layout.ConversionPattern=[%5.5m] [%-5.5m] %n
-
 ```
 
 测试代码
 
 ```java
-
 package com.linxingyang;
 
 import org.apache.log4j.Logger;
@@ -937,16 +826,13 @@ public class Test1 {
 		log.debug("123456789");
 	}
 }
-
 ```
 
 测试结果，可以看出，超过长度，从字符串开头开始截取。
 
 ```
-
 [ 1234] [1234 ] 
-[56789] [56789] 
-
+[56789] [56789]
 ```
 
 ### 5.6 EnhancedPatternLayout ###
@@ -960,7 +846,6 @@ EnhancedPatternLayout大部分内容与PatternLayout相同，但有些地方不�
 %c{数字}， 数字部分现在支持不同了。提供的是命名省略模式，如下示例：
 
 ```
-
 日志器名称：com.linxingyang.Test1
 
 %c{2} 从输出后面两个元素 -->  linxingyang.Test1
@@ -970,7 +855,6 @@ EnhancedPatternLayout大部分内容与PatternLayout相同，但有些地方不�
 %c{3.} --> com.lin.Test1
 %c{3.1} --> com.l.Test1
 %c{1.3} --> c.lin.Test1
-
 ```
 
 #### %C ####
@@ -991,7 +875,6 @@ EnhancedPatternLayout大部分内容与PatternLayout相同，但有些地方不�
 配置，配置说明，因为RewriteAppender只能使用xml配置方式。这里有3个console,都是向控制台输出，不同点是，console1输出 [%%X]，是MDC， console2输出全部属性 %properties, console3输出指定属性 %properties{name}
 
 ```xml
-
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
@@ -1024,13 +907,11 @@ EnhancedPatternLayout大部分内容与PatternLayout相同，但有些地方不�
 		<appender-ref ref="rewrite"/>
 	</root>
 </log4j:configuration>
-
 ```
 
 java代码，测试代码比较简单，就是输出两个日志。
 
 ```java
-
 package com.linxingyang;
 
 import java.io.FileNotFoundException;
@@ -1050,14 +931,11 @@ public class Test1 {
 		LogManager.shutdown();
 	}
 }
-	
-
 ```
 
 结果，可以看到  %X，%properties 输出了全部属性，%properties{name}输出类指定属性。
 
 ```
-
 console1 -- [%X]{age,24}{name,linxingyang}{from,fuding}} 2017-12-14 11:22:30name debug message  0 
 console2 -- [%properties]{age,24}{name,linxingyang}{from,fuding}} 2017-12-14 11:22:30name debug message  0 
 console3 -- [%properties{name}]linxingyang 2017-12-14 11:22:30name debug message  0 
@@ -1071,13 +949,11 @@ console3 -- [%properties{name}]linxingyang 2017-12-14 11:22:30fatal message  1
 这个PatternLayout是不支持的。如果我们的日志带了一个throwable，例如
 
 ```java
-
 try {
-				throw new NullPointerException("空指针了");
-			} catch(NullPointerException e) {
-				log.error("空指针错误", e);
-			}
-            
+    throw new NullPointerException("空指针了");
+} catch(NullPointerException e) {
+    log.error("空指针错误", e);
+}
 ```
 
 %throwable 可以让我们对这里的 e 输出的堆栈信息进行控制。
@@ -1095,20 +971,17 @@ try {
 
 配置， 不显示错误堆栈
 
-```xml
-
+```properties
 log4j.rootLogger=debug,console
 
 log4j.appender.console=org.apache.log4j.ConsoleAppender
 log4j.appender.console.layout=org.apache.log4j.EnhancedPatternLayout
 log4j.appender.console.layout.ConversionPattern=%throwable{none} %m%n
-
 ```
 
 java代码
 
 ```java
-
 package com.linxingyang;
 
 import org.apache.log4j.Logger;
@@ -1133,30 +1006,23 @@ public class Test1 {
 			}
 		}
 	}
-	
 }
-	
-    
 ```
 
 结果 
 
 ```
-
 空指针错误
- 
 ```
 
 修改配置成，输出全部错误信息
 
-```xml
-
+```properties
 log4j.rootLogger=debug,console
 
 log4j.appender.console=org.apache.log4j.ConsoleAppender
 log4j.appender.console.layout=org.apache.log4j.EnhancedPatternLayout
 log4j.appender.console.layout.ConversionPattern=%throwable %m%n
-
 ```
 
 结果 ,显示错误信息及堆栈信息
@@ -1183,28 +1049,23 @@ java.lang.NullPointerException: 空指针了
 
 修改配置成，输出5行错误信息
 
-```xml
-
+```properties
 log4j.rootLogger=debug,console
 
 log4j.appender.console=org.apache.log4j.ConsoleAppender
 log4j.appender.console.layout=org.apache.log4j.EnhancedPatternLayout
 log4j.appender.console.layout.ConversionPattern=%throwable{5} %m%n
-
 ```
 
 结果，输出五行堆栈信息
 
 ```
-
 java.lang.NullPointerException: 空指针了
 	at com.linxingyang.Test1.m1(Test1.java:19)
 	at com.linxingyang.Test1.m1(Test1.java:16)
 	at com.linxingyang.Test1.m1(Test1.java:16)
 	at com.linxingyang.Test1.m1(Test1.java:16)
  空指针错误
-
-
 ```
 
 ### 5.7 HTMLLayout ####
@@ -1219,21 +1080,18 @@ java.lang.NullPointerException: 空指针了
 
 配置
 
-```xml
-
+```properties
 log4j.rootLogger=debug,console
 
 log4j.appender.console=org.apache.log4j.ConsoleAppender
 log4j.appender.console.layout=org.apache.log4j.HTMLLayout
 log4j.appender.console.layout.title=hello HtmlLayout
 log4j.appender.console.layout.locationInfo=true
-
 ```
 
 测试 
 
 ```java
-
 package com.linxingyang;
 
 import org.apache.log4j.Logger;
@@ -1248,13 +1106,11 @@ public class Test1 {
 		log.fatal("111");
 	}
 }
-	
 ```
 
 结果  其中title为我们设定的title
 
 ```html
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -1324,7 +1180,6 @@ Log session start time Thu Dec 07 11:28:33 CST 2017<br>
 <td>Test1.java:12</td>
 <td title="Message">111</td>
 </tr>
-
 ```
 
 红框圈起来之处是  locationInfo=true的效果。
@@ -1342,20 +1197,17 @@ XML布局。
 
 配置
 
-```xml
-
+```properties
 log4j.rootLogger=debug,console
 
 log4j.appender.console=org.apache.log4j.ConsoleAppender
 log4j.appender.console.layout=org.apache.log4j.xml.XMLLayout
 log4j.appender.console.layout.locationInfo=true
-
 ```
 
 测试代码 
 
 ```java
-
 package com.linxingyang;
 
 import org.apache.log4j.Logger;
@@ -1370,13 +1222,11 @@ public class Test1 {
 		log.fatal("111");
 	}
 }
-
 ```
 
 结果，对结果进行预览。
 
 ```xml
-
 <log4j:event logger="com.linxingyang.Test1" timestamp="1512618193134" level="DEBUG" thread="main">
 <log4j:message><![CDATA[111]]></log4j:message>
 <log4j:locationInfo class="com.linxingyang.Test1" method="main" file="Test1.java" line="8"/>
@@ -1401,8 +1251,6 @@ public class Test1 {
 <log4j:message><![CDATA[111]]></log4j:message>
 <log4j:locationInfo class="com.linxingyang.Test1" method="main" file="Test1.java" line="12"/>
 </log4j:event>
-
-
 ```
 
 ![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/xmllayout.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/xmllayout.png)
@@ -1416,7 +1264,6 @@ public class Test1 {
 时区，可以用这段代码打印出所有可用的timeZone
 
 ```java
-
 package com.linxingyang;
 
 import java.util.Calendar;
@@ -1434,7 +1281,6 @@ public class Test1 {
         }  
 	}
 }
-	
 ```
 
 #### dateFormat 日期格式（是个DateFormat类） ####
@@ -1442,7 +1288,6 @@ public class Test1 {
 DateFormat属性应该是  
 
 ```
-
 SimpleDateFormat的一个参数，或者以下字符串之一
 
 "NULL",  -- 不打印时间
@@ -1451,7 +1296,6 @@ SimpleDateFormat的一个参数，或者以下字符串之一
 "ABSOLUTE", 
 "DATE"  
 "ISO8601"
-
 ```
 
 #### dateFormatOption（不可配置） 日期格式 ####
@@ -1476,20 +1320,17 @@ TTCC 由  time, thread, category 和 ndc 组成，所以得名  ttcc。
 
 配置，配置的比较少，仅指定时间格式，其他都有默认值，时间格式没有默认值。如果不设置将不会打印时间。
 
-```xml
-
+```properties
 log4j.rootLogger=debug,console
 
 log4j.appender.console=org.apache.log4j.ConsoleAppender
 log4j.appender.console.layout=org.apache.log4j.TTCCLayout
 log4j.appender.console.layout.dateFormat=ISO8601
-
 ```
 
 测试代码
 
 ```java
-
 package com.linxingyang;
 
 import org.apache.log4j.Logger;
@@ -1504,26 +1345,22 @@ public class Test1 {
 		log.fatal("111");
 	}
 }
-
 ```
 
 测试结果
 
 ```language
-
 2017-12-08 11:03:14,529 [main] DEBUG com.linxingyang.Test1 - 111
 2017-12-08 11:03:14,530 [main] INFO com.linxingyang.Test1 - 111
 2017-12-08 11:03:14,530 [main] WARN com.linxingyang.Test1 - 111
 2017-12-08 11:03:14,530 [main] ERROR com.linxingyang.Test1 - 111
 2017-12-08 11:03:14,530 [main] FATAL com.linxingyang.Test1 - 111
-
 ```
 
 
 配置,时间格式还是ISO8601，不打印线程名称，不打印日志器名称，不打印NDC的内容。时区选择  欧洲 柏林
 
-```xml
-
+```properties
 log4j.appender.console=org.apache.log4j.ConsoleAppender
 log4j.appender.console.layout=org.apache.log4j.TTCCLayout
 log4j.appender.console.layout.dateFormat=ISO8601
@@ -1534,17 +1371,17 @@ log4j.appender.console.layout.contextPrinting=false
 #log4j.appender.console.layout.timeZone=Asia/Tokyo
 #log4j.appender.console.layout.timeZone=Asia/ShangHai
 log4j.appender.console.layout.timeZone=Europe/Berlin
-
 ```
 
 结果 ，当前时间为2017-12-08 11:06，下面打印的是柏林时间
 
 ```
-
 2017-12-08 04:04:58,001 DEBUG - 111
 2017-12-08 04:04:58,001 INFO - 111
 2017-12-08 04:04:58,001 WARN - 111
 2017-12-08 04:04:58,001 ERROR - 111
 2017-12-08 04:04:58,001 FATAL - 111
-
 ```
+
+
+

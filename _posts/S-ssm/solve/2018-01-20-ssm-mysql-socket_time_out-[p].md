@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/4c58xxvv202743b68622d47e6587b2d0
+permalink: /:year/4c58xxvv202743b68622d47e6587b2d0/index
 title: 2018-01-20-ssm-mysql-socket_time_out
 categories: [ssm]
 tags: [java,mysql,ssm]

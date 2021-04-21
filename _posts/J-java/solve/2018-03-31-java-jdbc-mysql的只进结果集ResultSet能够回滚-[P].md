@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/4cxx9xxxx0274vxv8622d47e6587bdsd
+permalink: /:year/4cxx9xxxx0274vxv8622d47e6587bdsd/index
 title: 2018-03-31-java-jdbc-mysql的只进结果集ResultSet能够回滚
 categories: [java]
 tags: [java,mysql,jdbc,RsultSet]
@@ -10,11 +10,13 @@ catalog: false
 author: 林兴洋
 ---
 
-使用mysql数据库的连接，使用只进结果集，在后面调用beforeFirst()方法，让指针回到第一条数据之前。
 
-设想应该是报错，结果没有报错。
 
-```
+
+
+使用mysql数据库的连接，使用只进结果集，在后面调用beforeFirst()方法，让指针回到第一条数据之前。设想应该是报错，结果没有报错。
+
+```java
 package test.use;
 
 import java.sql.Connection;
@@ -29,7 +31,6 @@ public class JDBC1 {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		test1();
 	}
-
 
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
 	private static final String URL = "jdbc:mysql://localhost:3306/test"; 
@@ -61,9 +62,11 @@ public class JDBC1 {
 }
 ```
 
+
+
 同一段代码，使用sqlserver数据库，结果报错了。
 
-```
+```java
 package test.use;
 
 import java.sql.Connection;
@@ -109,10 +112,11 @@ public class JDBC1 {
 }
 ```
 
+
+
 会抛出异常 
 
-```
-
+```java
 ...
 // 正常数据
 ...
@@ -125,9 +129,11 @@ Exception in thread "main" com.microsoft.sqlserver.jdbc.SQLServerException: 只�
 	at test.use.JDBC1.main(JDBC1.java:15)
 ```
 
-稍微看了下mysql-connector的源码，它没有完全按照java.sql.ResultSet中对于接口的规定来实现：当只进结果集调用prevous(),beforeFirst()等方法时应该抛出异常。而mysql-connector却没有。
 
-```
+
+稍微看了下mysql-connector的源码，它没有完全按照java.sql.ResultSet中对于接口的规定来实现：当只进结果集调用prevous(),beforeFirst()等方法时应该抛出异常。
+
+```java
     /**
      * Moves the cursor to the front of
      * this <code>ResultSet</code> object, just before the
@@ -142,3 +148,4 @@ Exception in thread "main" com.microsoft.sqlserver.jdbc.SQLServerException: 只�
      */
     void beforeFirst() throws SQLException;
 ```
+

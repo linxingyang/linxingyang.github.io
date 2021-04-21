@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/2df1d49734c1483aa85666011d2edbf7
+permalink: /:year/2df1d49734c1483aa85666011d2edbf7/index
 title: 2019-12-24-zoomit-推荐画板截图工具-zoomit
 categories: [zoomit]
 tags: [zoomit,推荐工具系列]

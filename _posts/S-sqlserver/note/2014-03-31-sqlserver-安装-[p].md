@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/bb97a16f894d42aaab09bc92c3785f33
+permalink: /:year/bb97a16f894d42aaab09bc92c3785f33/index
 title: 2014-03-31-sqlserver-2008安装
 categories: [sqlserver]
 tags: [数据库,sqlserver,sql]

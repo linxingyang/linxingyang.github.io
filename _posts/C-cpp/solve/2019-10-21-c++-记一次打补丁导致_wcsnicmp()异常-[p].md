@@ -1,13 +1,13 @@
 ---
 layout: post
-permalink: /:year/8b072ff2a1da49c2be51643cab191021
+permalink: /:year/8b072ff2a1da49c2be51643cab191021/index
 title: 2019-10-21-c++-记一次打补丁导致_wcsnicmp()异常
 categories: [c]
 tags: [c,c++,windows,打补丁,lightopc,问题解决]
 relative-tags: [问题解决]
 excerpt: _wcsnicmp,打补丁,lightopc
 description: 记一次windows打补丁导致_wcsnicmp()异常
-category: false
+catelog: false
 ---
 
 前方来报，在windows打完windows系统补丁之后，OPC客户端便无法从我们的OPC服务器获取数据了。

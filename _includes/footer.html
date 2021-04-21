@@ -91,13 +91,13 @@
             本站访问量<span id="totalVisit"></span>次
           {% endif %}
           {% if site.plugin-busuanzi-use %}
-            <span id="busuanzi_container_site_pv">本站访问量<span id="busuanzi_value_site_pv"></span>次</span>
-            <span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人次</span>
+            <!-- <span id="busuanzi_container_site_pv">本站访问量<span id="busuanzi_value_site_pv"></span>次</span> -->
+            <span id="busuanzi_container_site_uv">您是第[<span id="busuanzi_value_site_uv"></span>]位地球客</span>
             <!--<span id="busuanzi_container_page_pv">本页面访问量<span id="busuanzi_value_page_pv"></span>次</span>-->
           {% endif %}
-          <br/>Copyright &copy; {{ site.title }} {{ site.time | date: '%Y' }}
-          <br/><a target="_blank" href="http://www.beian.miit.gov.cn">闽ICP备17030053号-1</a>
-          <br/>Theme by <a href="http://huangxuan.me">Hux</a> 
+          <br/>Copyright &copy; 2014-{{ site.time | date: '%Y' }} {{ site.title }} 
+          <br/>Theme by <a href="http://huangxuan.me">Hux</a> & Host by <a href="https://help.aliyun.com/product/31815.html">阿里OSS<a/>
+		  <br/><a target="_blank" href="http://www.beian.miit.gov.cn">闽ICP备17030053号-1</a>
           <!-- |
           <iframe
             style="margin-left: 2px; margin-bottom:-5px;"

@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/bb97a16f894321aaab09bc92c3785ccf
+permalink: /:year/bb97a16f894321aaab09bc92c3785ccf/index
 title: 2017-08-07-log4j-Logger日志器
 categories: [log4j]
 tags: [java,log4j,log4j系列]
@@ -38,18 +38,12 @@ author: 林兴洋
 这个类是Logger的父类，官方文档不建议使用这个Category。估计Category是之前命名不好的坑，所以使用Logger来使得命名更加清晰，在log4j1.2中仍然支持但不推荐使用Category，比如我们就可以在log4j.properties中
 
 ```xml
-
 log4j.rootLogger=debug,console
 # 改成如下，log4j内部也是有处理的。
 log4j.rootCategory=debug,console
-
 ```
 
-
-
-### additivity
-
-
+#### additivity
 
 additivity表示着当前的日志器是否要利用父亲的appender进行输出。
 
@@ -58,66 +52,40 @@ additivity=true表示是
 additivity=false表示否。
 ```
 
-例如现在有两个日志器 ：rootLogger以及自己定义的 logtest.LogTest
-他们各有两个输出的appender，都是一个console一个file。
+例如现在有两个日志器 ：rootLogger以及自己定义的 logtest.LogTest，他们各有两个输出的appender，都是一个console一个file。
 
 现在如果没有配置这一行
 
 ```
-
 log4j.additivity.logtest.LogTest=false
-
 ```
 
 log4j.logger.logtest.LogTest的父日志器log4j.rootLogger也会打印其要打印的内容。
 
-
-
 ```properties
 log4j.rootLogger=debug, c1, A1
-
 log4j.appender.c1=org.apache.log4j.ConsoleAppender
-
 log4j.appender.c1.layout=org.apache.log4j.PatternLayout
-
 log4j.appender.c1.layout.ConversionPattern=[${clientId}]%d{yyyy-MM-dd HH\:mm\:ss} [%p] %m [%t] %c [%l]%n
-
 log4j.appender.A1=org.apache.log4j.FileAppender
-
 log4j.appender.A1.File=log.txt
-
 log4j.appender.A1.Append=true
-
 log4j.appender.A1.layout=org.apache.log4j.SimpleLayout
-
 ```
 
 如果配置了这一行，则其父不会打印。
 
-
-
 ```properties
 log4j.logger.logtest.LogTest=error, c2, A2
-
 log4j.additivity.logtest.LogTest=false
-
 log4j.appender.c2=org.apache.log4j.ConsoleAppender
-
 log4j.appender.c2.layout=org.apache.log4j.PatternLayout
-
 log4j.appender.c2.layout.ConversionPattern=[${clientId}]%d{yyyy-MM-dd HH\:mm\:ss} [%p] %m [%t] %c [%l]%n
-
 log4j.appender.A2=org.apache.log4j.FileAppender
-
 log4j.appender.A2.File=log222.txt
-
 log4j.appender.A2.Append=true
-
 log4j.appender.A2.layout=org.apache.log4j.SimpleLayout
-
 ```
-
-
 
 
 
@@ -156,28 +124,20 @@ Logger类是log4j的中心类，除了解析配置，大多数日志操作是通
 例如我们在com.linxingyang.Test1.java中，定义了日志器
 
 ```java
-
 Test1 {
 	private static Logger log = Logger.getLogger(Test1.class);
 }
-
 ```
 
 这个操作会创建一个日志器。这个日志器的名称就是  com.linxingyang.Test1，（log4j内部是通过class.getName()获取日志器名称的）。
 
-那么这个日志器的父亲就是com.linxingyang, 
-
-com.linxingyang的父亲就是com,
-
-那com的父亲是谁？就是根日志器了。类似于Object是所有类的祖先一样，根日志器是所有日志器的祖先。
+那么这个日志器的父亲就是com.linxingyang,       com.linxingyang的父亲就是com,      那com的父亲是谁？就是根日志器了。类似于Object是所有类的祖先一样，根日志器是所有日志器的祖先。
 
 #### 为什么要使用继承的结构？ ####
 想想java为什么要有继承，前面也说过，为了复用。复用父类的Appender,Level等。
 
-```
-
+```properties
 log4j.rootLogger=debug,console
-
 ```
 
 我们在根日志器中定义的Level和这个console（Appender），都可以被rootLogger的子类复用。这就是为什么要有根日志器的存在。
@@ -202,27 +162,24 @@ log4j.rootLogger=debug,console
 
 不必，可以配置 additivity=false ，这样就不会使用父类的Appender。
 
-同样，如果设置了自己的Level，也不会使用父类的Leven。
+同样，如果设置了自己的Level，也不会使用父类的Level。
 
 
 #### 测试代码 ####
 
 如下，没有配置根日志器，只配置了一个com日志器。
 
-```xml
-
+```properties
 log4j.logger.com=debug, console
 log4j.additivity.com=false
 log4j.appender.console=org.apache.log4j.ConsoleAppender
 log4j.appender.console.layout=org.apache.log4j.PatternLayout
 log4j.appender.console.layout.ConversionPattern=abcd%d{yyyy-MM-dd HH\:mm\:ss} [%p] %m [%t] %c [%l]%n
-
 ```
 
 进行测试，打印一句话。
 
 ```java
-
 package com.linxingyang;
 
 import org.apache.log4j.Logger;
@@ -233,15 +190,12 @@ public class Test1 {
 		log.debug("message  from Test1 ");
 	}
 }
-
 ```
 
 测试结果，看到是可以正常打日志的。
 
 ```xml
-
 abcd2017-12-06 12:31:22 [DEBUG] message  from Test1  [main] com.linxingyang.Test1 [com.linxingyang.Test1.main(Test1.java:8)]
-
 ```
 
 ### 4.6 NOPLogger ###

@@ -1,13 +1,13 @@
 ---
 layout: post
-permalink: /:year/5b849418e8ce4e3785cb179f21b53ce9
+permalink: /:year/5b849418e8ce4e3785cb179f21b53ce9/index
 title: 2019-12-21-c++-windows中调用system报错命令不存在
 categories: [c++]
 tags: [c,c++,windows,c问题解决]
 relative-tags: [c问题解决]
 excerpt: c++,com,system,命令不存在
 description: c++在windows中调用system报错命令不存在
-category: false
+catalog: false
 ---
 
 在windows中，调用system去执行命令，但是因为命令中包含空格

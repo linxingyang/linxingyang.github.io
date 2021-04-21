@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/4cxx5353vv0sssssc8622d47e658vxdbb
+permalink: /:year/4cxx5353vv0sssssc8622d47e658vxdbb/index
 title: 2018-06-22-javascript-关于数组中使用indexOf碰到的一个问题
 categories: [javascript]
 tags: [javascript]
@@ -10,9 +10,11 @@ catalog: false
 author: 林兴洋
 ---
 
-今天碰到一个bug，测试后知道了，indexOf()使用的是严格的 === 比较。
 
-例子是这样的。下图是修改图书界面。然后有一堆图书标签，
+
+今天碰到一个bug，测试后知道indexOf()使用的是严格的 === 比较。
+
+例子是这样的，下图是修改图书界面，然后有一堆图书标签：
 
 ![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-javascript/image/2018-06-22/01.png)
 
@@ -60,9 +62,9 @@ alert(typeof globals.configIds[i]);  // number
 alert(typeof data.value); // string
 ```
 
-这下知道原因（indexOf()中使用严格===，而这两个数据很明显类型不同，所以indeOf()返回-1）了就很好解决了。下面两种方式都可以。
+这下知道原因，indexOf()中使用严格===，而这两个数据很明显类型不同，所以indeOf()返回-1，知道原因就很好解决了。下面两种方式都可以：
 
-* 1，改变判断方式，不使用indexOf()，直接在for循环内判断。如下
+* 1、改变判断方式，不使用indexOf()，直接在for循环内判断。如下
 
 ```js
 form.on("checkbox(checkbox)", function(data){
@@ -87,7 +89,7 @@ form.on("checkbox(checkbox)", function(data){
 });
 ```
 
-* 2，强转类型，把string改为number
+* 2、强转类型，把string改为number
 
 ```js
 console.log("init:" + globals.configIds);

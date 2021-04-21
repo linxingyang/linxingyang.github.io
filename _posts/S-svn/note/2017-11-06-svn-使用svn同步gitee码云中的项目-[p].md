@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/4c2a681fcb4e4114be84d1f5a774f494
+permalink: /:year/4c2a681fcb4e4114be84d1f5a774f494/index
 title: 2017-11-06-svn-使用svn同步gitee码云中的项目
 categories: [svn]
 tags: [svn,gitee]

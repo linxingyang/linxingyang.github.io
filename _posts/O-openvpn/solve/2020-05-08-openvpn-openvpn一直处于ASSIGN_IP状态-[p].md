@@ -1,13 +1,13 @@
 ---
 layout: post
-permalink: /:year/7ee1888d047f4edebd44d7e23a4d34cd
+permalink: /:year/7ee1888d047f4edebd44d7e23a4d34cd/index
 title: 2020-05-08-openvpn-openvpn一直处于ASSIGN_IP状态
 categories: [openvpn]
 tags: [openvpn]
 relative-tags: [openvpn]
 excerpt: openvpn,ASSIGN_IP
 description: openvpn一直处于ASSIGN_IP状态
-category: false
+catalog: false
 ---
 
 在一台win10 64位专业版的windows上出现了openvpn启动后一直处于ASSIGN_IP的状态。

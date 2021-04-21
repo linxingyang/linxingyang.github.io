@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/8b072ff2a1da49c2be51643cab4d2aee
+permalink: /:year/8b072ff2a1da49c2be51643cab4d2aee/index
 title: 2016-03-23-java-windows下odbc桥接sqlserver数据库
 categories: [java]
 tags: [java,sqlserver,odbc]
@@ -58,7 +58,7 @@ author: 林兴洋
 
 ![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/J-java/image/2016/2016-03-23/11.png)
 
-## 附
+## 附JSP代码
 
 JSP中访问代码如下。
 

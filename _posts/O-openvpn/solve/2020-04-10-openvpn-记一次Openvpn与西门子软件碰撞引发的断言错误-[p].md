@@ -1,13 +1,13 @@
 ---
 layout: post
-permalink: /:year/e1dd8005822b4f539d9842044a3f47e2
+permalink: /:year/e1dd8005822b4f539d9842044a3f47e2/index
 title: 2020-04-10-openvpn-记一次Openvpn与西门子软件碰撞引发的断言错误
 categories: [openvpn]
 tags: [openvpn,断言错误,西门子]
 relative-tags: [openvpn]
 excerpt: openvpn,西门子,断言错误
 description: 记一次Openvpn与西门子软件碰撞引发的断言错误
-category: false
+catalog: false
 ---
 
 

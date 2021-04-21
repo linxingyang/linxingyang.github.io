@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/a000318540b7457fa23cc20a3acdfcb6
+permalink: /:year/a000318540b7457fa23cc20a3acdfcb6/index
 title: 2014-03-24-sqlserver-SSIS问题
 categories: [sqlserver]
 tags: [数据库,sqlserver,sql]
@@ -40,7 +40,7 @@ regsvr32 scrrun.dll
 regsvr32 jscript.dll 
 regsvr32 vbscript.dll
 ```
- 
+
 如果上述方法仍然不行可尝试下面方法 
 
 #### 方法二：重新注册系统中所有dll文件 
@@ -53,7 +53,7 @@ regsvr32 vbscript.dll
 for %1 in (%windir%\system32\*.dll) do regsvr32.exe /s %1
 ```
 
-引用自 [http://blog.csdn.net/qianqianstd/article/details/50083231](http://blog.csdn.net/qianqianstd/article/details/50083231)
+[参考文章](http://blog.csdn.net/qianqianstd/article/details/50083231)
 
 ## 问题三：进入项目后，发现SSIS包时打叉的（如图）
 
@@ -67,7 +67,7 @@ for %1 in (%windir%\system32\*.dll) do regsvr32.exe /s %1
 4. 选择安全，将启动和激活权限、访问权限、配置权限全部选择自定义，之后编辑，添加everyone用户，给它所有的权限
 5. 点击确定。
 
-引用自：[http://blog.csdn.net/naujuw/article/details/5591621](http://blog.csdn.net/naujuw/article/details/5591621)
+[参考文章](http://blog.csdn.net/naujuw/article/details/5591621)
 
 ## 问题四：无法保存包，无法保存数据流对象
 
@@ -79,9 +79,12 @@ for %1 in (%windir%\system32\*.dll) do regsvr32.exe /s %1
 
 ### 解决方法
 
-安装  MSXML4.0[https://www.microsoft.com/zh-cn/download/details.aspx?id=19662 ](https://www.microsoft.com/zh-cn/download/details.aspx?id=19662 )，安装完就可保存了。后面也不出错了。
+安装  MSXML4.0 [下载地址](https://www.microsoft.com/zh-cn/download/details.aspx?id=19662 )，安装完就可保存了，后面也不出错了。
 
 说明：
 MSXML4.0是微软的xml语言解析器，用来解释xml语言。就好像html文本下载到本地，浏览器会检查html的语法，解释html文本然后显示出来一样。要使用xml文件就一定要用到xml parser。不过不仅仅微软有，像ibm,sun都有自己的xml parser。
 
-引用自：[http://blog.csdn.net/qianqianstd/article/details/50090557](http://blog.csdn.net/qianqianstd/article/details/50090557)
+[参考文章](http://blog.csdn.net/qianqianstd/article/details/50090557)
+
+
+

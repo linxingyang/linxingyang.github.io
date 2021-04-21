@@ -5,7 +5,7 @@ description: STOP WASTE YOUR TIME
 
 {% for post in paginator.posts %} <!-- content -->
   <div class="post-preview">
-    <a href="{{ post.url | prepend: site.baseurl }}">
+    <a href="{{ post.url | prepend: site.baseurl | remove: "/index" }}">
       <h2 class="post-title">{{ post.title }}</h2>
       {% if post.subtitle %}
         <h3 class="post-subtitle">{{ post.subtitle }}</h3>
@@ -13,8 +13,8 @@ description: STOP WASTE YOUR TIME
       <div class="post-content-preview">
         {{ post.content | strip_html | truncate:200 }}
       </div>
-    </a>
     <p class="post-meta">
+    </a>
       post by {% if post.author %} {{ post.author }} {% else %} {{ site.author }} {% endif %}
       at {{ post.date | date: "%Y-%m-%d" }}
     </p>

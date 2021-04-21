@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/d702789dd6a84ac7a09165d1d7b9dd35
+permalink: /:year/d702789dd6a84ac7a09165d1d7b9dd35/index
 title: 2015-09-08-eclipse-破解时run.bat窗口一闪而过
 categories: [eclipse]
 tags: [eclipse,破解]

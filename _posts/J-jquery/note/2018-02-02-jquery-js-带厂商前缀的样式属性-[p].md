@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/4c58xxvv502743b68622d47e6587b2d0
+permalink: /:year/4c58xxvv502743b68622d47e6587b2d0/index
 title: 2018-02-02-jquery-js-带厂商前缀的样式属性
 categories: [jquery]
 tags: [jquery,javascript]

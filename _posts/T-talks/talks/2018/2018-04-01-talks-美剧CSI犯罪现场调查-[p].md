@@ -1,6 +1,6 @@
 ---
 layout: post
-permalink: /:year/73ed7841b61e4389926377116d548b52
+permalink: /:year/73ed7841b61e4389926377116d548b52/index
 title: 2018-04-01-talks-美剧CSI犯罪现场调查
 categories: [talks]
 tags: [影视]
