@@ -41,6 +41,19 @@ export CXX=/opt/toolchain/arm9/bin/arm-nuvoton-linux-uclibceabi-g++
 ./configure --prefix=./__install_arm9
 ```
 
+交叉编译linux-RK3308
+
+```
+export CC=/opt/toolchain/rk3308/bin/arm-linux-gnueabihf-gcc
+export CXX=/opt/toolchain/rk3308/bin/arm-linux-gnueabihf-g++
+./configure --prefix=./__install_rk3308
+make && make install
+```
+
+
+
+
+
 ## windows
 
 需要安装cmake，安装完之后操作如下：
