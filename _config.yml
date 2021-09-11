@@ -59,7 +59,8 @@ kramdown:
 
 # git talks https://github.com/gitalk/gitalk
 # more than 50KB+ resources(js/css and so on).
-plugin-gitalk-use: false
+plugin-gitalk-use: true
+
 
 # busuanzi web visit counter http://busuanzi.ibruce.info/.
 plugin-busuanzi-use: true
