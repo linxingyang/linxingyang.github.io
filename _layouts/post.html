@@ -23,14 +23,44 @@ layout: default
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="post-heading">
-          <div class="tags">
-            {% for tag in page.tags %}
-              <a class="tag" href="{{ site.baseurl }}/tags/#{{ tag }}" title="{{ tag }}">{{ tag }}</a>
-            {% endfor %}
-          </div>
+   
+
+
+
+
           <h1>{{ page.title }}</h1>
           {% comment %} always create a h2 for keeping the margin , Hux {% endcomment %}
           <h2 class="subheading" style="text-align: center">{{ site.moto }}</h2>
+
+          <div class="tags">
+
+            {% comment %}
+            {% for tag in page.tags %}
+              <a class="tag" href="{{ site.baseurl }}/tags/#{{ tag }}" title="{{ tag }}">{{ tag }}</a>
+            {% endfor %}
+            {% endcomment %}
+
+                {% if page.relative-tags %}
+                系列
+                {% for rel in page.relative-tags %}
+                    <a class="tag" href="{{ site.baseurl }}/tags/#{{ tag }}" title="{{ rel }}">{{ rel }}</a>
+                {% endfor %}
+            {% endif %}
+            <br/>
+
+            分类
+            {% for cat in page.categories %}
+            <a class="tag" href="{{ site.baseurl }}/categories/#{{ cat }}" title="{{ cat }}">{{ cat }}</a>
+            {% endfor %}
+
+            <br/>
+            标签
+            {% for tag in page.tags %}
+            <a class="tag" href="{{ site.baseurl }}/tags/#{{ tag }}" title="{{ tag }}">{{ tag }}</a>
+            {% endfor %}
+
+          </div>
+
         </div>
       </div>
     </div>
@@ -39,9 +69,16 @@ layout: default
 <!-- Post Content -->
 <article>
   <div class="container">
+
+
+
+
     <div class="row">
       <!-- Post Container -->
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
+      <!--<div class="col-lg-10 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">-->
+        <div class="col-lg-12 col-md-12 post-container">
+
+
         {% if page.multilingual %} <!-- Multi-Lingual -->
           <select class="sel-lang" onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
             <option value="0" selected> 中文 Chinese </option>
@@ -49,11 +86,62 @@ layout: default
           </select>
         {% endif %}
 
+
         {{ content }} <!-- post content -->
+
+        <div class="sidebar-container" style="padding-right: 0%;">
+
+            {% comment %}
+        <div class="tags">
+            {% if page.relative-tags %}
+                系列
+                {% for rel in page.relative-tags %}
+                    <a class="tag" href="{{ site.baseurl }}/tags/#{{ tag }}" title="{{ rel }}">{{ rel }}</a>
+                {% endfor %}
+            {% endif %}
+            <br/>
+
+            分类
+            {% for cat in page.categories %}
+              <a class="tag" href="{{ site.baseurl }}/categories/#{{ cat }}" title="{{ cat }}">{{ cat }}</a>
+            {% endfor %}
+
+            <br/>
+            标签
+            {% for tag in page.tags %}
+              <a class="tag" href="{{ site.baseurl }}/tags/#{{ tag }}" title="{{ tag }}">{{ tag }}</a>
+            {% endfor %}
+          </div>
+
+          {% endcomment %}
+        <p class="post-meta" style="text-align: right;">
+            发布于
+            {{ page.date | date: "%Y-%m-%d %H:%M:%S" }}
+            <br>
+            {% if page.editdate %} 
+                修改于
+                {{ page.editdate | date: "%Y-%m-%d %H:%M:%S" }} 
+                <br/>
+            {% endif %}
+            
+            {% if page.editplace %} 
+                {{ page.editplace }}
+            {% else %} 
+                {{ site.editplace }} 
+            {% endif %}
+            
+        </p>
+       
+
+        {% if site.plugin-gitalk-use %} <!-- gitalk comments -->
+            {% include plugins/gitalk.html %}
+        {% endif %}
+    </div>
         <hr style="visibility: hidden;">
         
-
-
+    
+        {% comment %}
+        
         {% if page.relative-tags %} <!-- relative tags -->
           <ul><li>相关文章<ul>
             {% for rtag in page.relative-tags %}
@@ -66,10 +154,13 @@ layout: default
           </ul></li></ul>
         {% endif %}
         
+        {% endcomment %}
+
       </div>
 
       {% if page.catalog %} <!-- Side Catalog Container -->
-        <div class="col-lg-2 col-lg-offset-0 visible-lg-block sidebar-container catalog-container">
+        <!-- <div class="col-lg-2 col-lg-offset-0 visible-lg-block sidebar-container catalog-container">-->
+        <div class="col-lg-4 col-lg-offset-10 visible-lg-block sidebar-container catalog-container">
           <div class="side-catalog">
             <hr class="hidden-sm hidden-xs">
             <h5><a class="catalog-toggle" href="#">目录</a></h5>
@@ -79,6 +170,7 @@ layout: default
       {% endif %}
 	  
       <!-- Sidebar Container -->
+      {% comment %}
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 sidebar-container">
         <hr>
         <center>
@@ -90,8 +182,8 @@ layout: default
       
         {% if site.featured-tags %} <!-- Featured Tags -->
           <section>
-            <!-- <hr class="hidden-sm hidden-xs">
-            <h5><a href="/tags/">推荐标签</a></h5>-->
+            <hr class="hidden-sm hidden-xs">
+            <h5><a href="/tags/">推荐标签</a></h5>
             <div class="tags">
               {% for tag in site.tags %}
                 {% if tag[1].size > site.featured-condition-size %}
@@ -103,7 +195,9 @@ layout: default
             </div>
           </section>
         {% endif %}
-        
+ 
+
+
         {% if site.friends %} <!-- Friends Blog -->
           <hr>
           <h5>FRIENDS</h5>
@@ -114,12 +208,9 @@ layout: default
           </ul>
         {% endif %}
 
-        {% if site.plugin-gitalk-use %} <!-- gitalk comments -->
-          {% include plugins/gitalk.html %}
-        {% endif %}
-        
       </div>
     </div>
+    {% endcomment %}
   </div>
 </article>
 

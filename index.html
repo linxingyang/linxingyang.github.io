@@ -21,19 +21,16 @@ description: be happy
         </a>
         <p class="post-meta">
             发布于
-            {{ post.date | date: "%Y-%m-%d %H:%M:%S" }} 
-            <!-- 
-            {% if post.author %} 
-                {{ post.author }} 
+            {{ post.date | date: "%Y-%m-%d %H:%M:%S" }}
+            {% if post.editplace %} 
+                {{ post.editplace }}
             {% else %} 
-                {{ site.author }} 
-            {% endif %} 
-            &nbsp;
-            -->
-            {% if post.place %} 
-                {{ post.place }}
-            {% else %} 
-                {{ site.place }} 
+                {{ site.editplace }} 
+            {% endif %}
+            <br/>
+            {% if post.editdate %} 
+                最后修改于
+                {{ post.editdate | date: "%Y-%m-%d %H:%M:%S" }} 
             {% endif %}
         </p>
     </div>
