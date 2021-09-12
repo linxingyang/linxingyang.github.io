@@ -1,42 +1,60 @@
 ---
 layout: page
-description: STOP WASTE YOUR TIME
+description: be happy 
 ---
 
 {% for post in paginator.posts %} <!-- content -->
-  <div class="post-preview">
-    <a href="{{ post.url | prepend: site.baseurl | remove: "/index" }}">
-      <h2 class="post-title">{{ post.title }}</h2>
-      {% if post.subtitle %}
-        <h3 class="post-subtitle">{{ post.subtitle }}</h3>
-      {% endif %}
-      <div class="post-content-preview">
-        {{ post.content | strip_html | truncate:200 }}
-      </div>
-    <p class="post-meta">
-    </a>
-      post by {% if post.author %} {{ post.author }} {% else %} {{ site.author }} {% endif %}
-      at {{ post.date | date: "%Y-%m-%d" }}
-    </p>
-  </div>
-  <hr>
+    <div class="post-preview">
+        <a href="{{ post.url | prepend: site.baseurl | remove: "/index" }}">
+            <h2 class="post-title">{{ post.title }}</h2>
+            {% if post.subtitle %}
+                <h3 class="post-subtitle">{{ post.subtitle }}</h3>
+            {% endif %}
+            <!--
+            {% if post.image %}
+                <img src="{{ post.image }}" style="display: block; width: 100%; height: auto; " />
+            {% endif %}
+            -->
+            <div class="post-content-preview">
+                {{ post.content | strip_html | truncate:300 }}
+            </div>
+        </a>
+        <p class="post-meta">
+            发布于
+            {{ post.date | date: "%Y-%m-%d %H:%M:%S" }} 
+            <!-- 
+            {% if post.author %} 
+                {{ post.author }} 
+            {% else %} 
+                {{ site.author }} 
+            {% endif %} 
+            &nbsp;
+            -->
+            {% if post.place %} 
+                {{ post.place }}
+            {% else %} 
+                {{ site.place }} 
+            {% endif %}
+        </p>
+    </div>
+    <hr>
 {% endfor %}
 
 {% if paginator.total_pages > 1 %} <!-- pager -->
-  <ul class="pager">
-    {% if paginator.previous_page %}
-      <li class="previous">
-        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; 上一页</a>
-      </li>
-    {% endif %}
-    {% if paginator.next_page %}
-    <li class="next">
-      <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">下一页 &rarr;</a>
-    </li>
-    {% endif %}
-  </ul>
+    <ul class="pager">
+        {% if paginator.previous_page %}
+            <li class="previous">
+                <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; 上一页</a>
+            </li>
+        {% endif %}
+        {% if paginator.next_page %}
+        <li class="next">
+            <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">下一页 &rarr;</a>
+        </li>
+        {% endif %}
+    </ul>
 {% endif %}
 
 {% if site.plugin-gitalk-use %} <!-- gitalk -->
-  {% include plugins/gitalk.html %}
+    {% include plugins/gitalk.html %}
 {% endif %}
