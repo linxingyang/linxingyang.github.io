@@ -1,7 +1,7 @@
 ---
-title: 系列
+title: 归档
 layout: default
-description: 苏轼《水调歌头·明月几时有》<br/> 明月几时有？把酒问青天。<br/>不知天上宫阙，今夕是何年。<br/>我欲乘风归去，又恐琼楼玉宇，高处不胜寒。<br/>起舞弄清影，何似在人间。<br/>转朱阁，低绮户，照无眠。<br/>不应有恨，何事长向别时圆？<br/>人有悲欢离合，月有阴晴圆缺，此事古难全。<br/>但愿人长久，千里共婵娟。
+description: 李白《静夜思》<br/> 床前明月光，疑是地上霜。<br/>举头望明月，低头思故乡。<br/>
 header-img: "img/home/bg-categroies.jpg"
 ---
 
@@ -23,37 +23,54 @@ header-img: "img/home/bg-categroies.jpg"
 <div class="container">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <!-- 标签云 -->
-      <div id='tag_cloud' class="tags">
-        {% for tag in site.relative-tags %}
-          <a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
-            {{ tag[0] }}({{ tag[1].size }})</a>
-        {% endfor %}
-      </div>
-      <!-- 标签列表 -->
-      {% for tag in site.relative-tags %}
-        <div class="one-tag-list">
-          <span class="fa fa-tag listing-seperator" id="{{ tag[0] }}">
-            <span class="tag-text">{{ tag[0] }}</span>
-          </span>
-          {% for post in tag[1] %}
-            <div class="post-preview">
-              <a href="{{ post.url | prepend: site.baseurl | remove: "/index" }}">
-                <h2 class="post-title">
-                  {{ post.title }}
-                </h2>
-                {% if post.subtitle %}
-                  <h3 class="post-subtitle">
-                    {{ post.subtitle }}
-                  </h3>
+
+        <!-- 标签云 -->
+        <div id='tag_cloud' class="tags">
+
+            {% assign post_year_string = ""  %}
+            {% for post in site.posts %}
+                {% assign currentdate = post.date | date: "%Y" %}
+                {% if currentdate != date %}
+                    <a href="#{{ currentdate | plus: 1 }}" title="{{ currentdate | plus: 1 }}" rel="{{ post_number }}">{{ currentdate | plus: 1 }}({{ post_number }})</a>
+                    {% assign date = currentdate %}
+                    {% assign post_number = 0 %}
+                    {% assign post_year_string = post_year_string | append: currentdate | append: ',' %}
                 {% endif %}
-              </a>
-              <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-            </div>
-            <hr>
-          {% endfor %}
+                {% assign post_number = post_number | plus: 1 %}
+                <!-- {% if forloop.last %}</ul>{% endif %}-->
+            {% endfor %}
+            <a href="#{{ currentdate }}" title="{{ currentdate }}" rel="{{ post_number }}">{{ currentdate }}({{ post_number }})</a>
         </div>
-      {% endfor %}
+
+        <!-- 标签列表 -->
+        {% assign post_year_string = post_year_string | split: "," %}
+        {% for tag in post_year_string %}
+            <div class="one-tag-list">
+            <span class="fa fa-tag listing-seperator" id="{{ tag }}">
+                <span class="tag-text">{{ tag }}</span>
+            </span>
+
+            {% for post in site.posts %}
+                {% assign currentdate = post.date | date: "%Y" %}
+                {% if currentdate == tag %}
+                    <div class="post-preview">
+                    <a href="{{ post.url | prepend: site.baseurl | remove: "/index" }}">
+                        <h2 class="post-title">
+                        {{ post.title }}
+                        </h2>
+                        {% if post.subtitle %}
+                        <h3 class="post-subtitle">
+                            {{ post.subtitle }}
+                        </h3>
+                        {% endif %}
+                    </a>
+                    </div>
+                    <hr>
+                {% endif %}
+            {% endfor %}
+            </div>
+        {% endfor %}
+
     </div>
   </div>
 </div>

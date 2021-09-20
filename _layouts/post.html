@@ -70,14 +70,10 @@ layout: default
 <article>
   <div class="container">
 
-
-
-
     <div class="row">
       <!-- Post Container -->
       <!--<div class="col-lg-10 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">-->
         <div class="col-lg-12 col-md-12 post-container">
-
 
         {% if page.multilingual %} <!-- Multi-Lingual -->
           <select class="sel-lang" onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
@@ -85,7 +81,6 @@ layout: default
             <option value="1"> 英文 English </option>
           </select>
         {% endif %}
-
 
         {{ content }} <!-- post content -->
 

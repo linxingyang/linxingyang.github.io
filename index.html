@@ -19,18 +19,23 @@ description: be happy
                 {{ post.content | strip_html | truncate:300 }}
             </div>
         </a>
-        <p class="post-meta">
+        <p class="post-meta" style="text-align: right;">
             发布于
             {{ post.date | date: "%Y-%m-%d %H:%M:%S" }}
+            {% if post.place %} 
+                {{ post.place }}
+            {% else %} 
+                {{ site.place }} 
+            {% endif %}
+            <br/>
+            {% if post.editdate %} 
+                修改于
+                {{ post.editdate | date: "%Y-%m-%d %H:%M:%S" }} 
+            {% endif %}
             {% if post.editplace %} 
                 {{ post.editplace }}
             {% else %} 
                 {{ site.editplace }} 
-            {% endif %}
-            <br/>
-            {% if post.editdate %} 
-                最后修改于
-                {{ post.editdate | date: "%Y-%m-%d %H:%M:%S" }} 
             {% endif %}
         </p>
     </div>

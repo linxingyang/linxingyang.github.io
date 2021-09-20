@@ -66,6 +66,29 @@ layout: default
         {% if site.featured-tags %} <!-- Categories -->
           <section>
             <hr class="hidden-sm hidden-xs">
+            <h5><a href="{{'/serial/' | prepend: site.baseurl }}">归档</a></h5>
+            <div class="tags">
+
+                {% assign post_year_string = ""  %}
+                {% for post in site.posts %}
+                    {% assign currentdate = post.date | date: "%Y" %}
+                    {% if currentdate != date %}
+                        <a href="{{ site.baseurl }}/serial/#{{ currentdate | plus: 1 }}" title="{{ currentdate | plus: 1 }}" rel="{{ post_number }}">{{ currentdate | plus: 1 }}({{ post_number }})</a>
+                        {% assign date = currentdate %}
+                        {% assign post_number = 0 %}
+                        {% assign post_year_string = post_year_string | append: currentdate | append: ',' %}
+                    {% endif %}
+                    {% assign post_number = post_number | plus: 1 %}
+                    <!-- {% if forloop.last %}</ul>{% endif %}-->
+                {% endfor %}
+                <a href="{{ site.baseurl }}/serial/#{{ currentdate }}" title="#{{ currentdate }}" rel="{{ post_number }}">{{ currentdate }}({{ post_number }})</a>
+            </div>
+          </section>
+        {% endif %}
+
+        {% if site.featured-tags %} <!-- Categories -->
+          <section>
+            <hr class="hidden-sm hidden-xs">
             <h5><a href="{{'/categories/' | prepend: site.baseurl }}">所有分类</a></h5>
             <div class="tags">
               {% for category in site.categories %}
@@ -77,6 +100,7 @@ layout: default
             </div>
           </section>
         {% endif %}
+
         {% if site.featured-tags %} <!-- Featured Tags -->
           <section>
             <hr class="hidden-sm hidden-xs">
