@@ -1,225 +1,41 @@
 ---
 layout: default
+# The page layout
 ---
 
-<!-- page header -->
-<header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-        <div class="site-heading">
-          <h1>
-            {% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}
-          </h1>
-          <!-- <hr class="small"> -->
-          <span class="subheading">
-            {{ page.description }}
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
-<!-- main content -->
-<div class="container">
-  <div class="row">
-    {% if site.sidebar == false %} <!-- NO SIDEBAR -->
-      <!-- main container -->
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 postlist-container">
+<div class="row">
+  <div class="col-12 col-lg-11 col-xl-8">
+    <div id="page" class="post pb-5 pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4 mb-md-4">
+    {% if page.dynamic_title %}
+      <h1 class="dynamic-title">
+        {% if page.collection == 'tabs' %}
+          {%- capture tab_key -%}{{ page.url | split: '/' }}{%- endcapture -%}
+          {{- site.data.locales[lang].tabs[tab_key] | default: page.title -}}
+        {% else %}
+          {{- page.title -}}
+        {% endif %}
+      </h1>
+      <div class="post-content">
         {{ content }}
       </div>
-      <!-- bottom container -->
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 sidebar-container">
-        {% if site.featured-tags %}
-          <section>
-            <!-- no hr -->
-            <h5><a href="{{'/tags/' | prepend: site.baseurl }}">推荐标签</a></h5>
-            <div class="tags">
-              {% for tag in site.tags %}
-                {% if tag[1].size > site.featured-condition-size %}
-                  <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}"
-                      rel="{{ tag[1].size }}">
-                    {{ tag[0] }}
-                  </a>
-                {% endif %}
-              {% endfor %}
-            </div>
-          </section>
-        {% endif %}
-        {% if site.friends %} <!-- Friends Blog -->
-          <hr>
-          <h5>FRIENDS</h5>
-          <ul class="list-inline">
-            {% for friend in site.friends %}
-              <li><a href="{{friend.href}}">{{friend.title}}</a></li>
-            {% endfor %}
-          </ul>
-        {% endif %}
-      </div>
-    {% else %} <!-- USE SIDEBAR -->
-      <!-- main container -->
-      <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12 postlist-container">
-        {{ content }}
-      </div>
-      <!-- sidebar container -->
-      <div class="col-lg-3 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-12 col-xs-12 sidebar-container">
-        {% if site.featured-tags %} <!-- Categories -->
-          <section>
-            <hr class="hidden-sm hidden-xs">
-            <h5><a href="{{'/serial/' | prepend: site.baseurl }}">归档</a></h5>
-            <div class="tags">
-
-                {% assign post_year_string = ""  %}
-                {% for post in site.posts %}
-                    {% assign currentdate = post.date | date: "%Y" %}
-                    {% if currentdate != date %}
-                        <a href="{{ site.baseurl }}/serial/#{{ currentdate | plus: 1 }}" title="{{ currentdate | plus: 1 }}" rel="{{ post_number }}">{{ currentdate | plus: 1 }}({{ post_number }})</a>
-                        {% assign date = currentdate %}
-                        {% assign post_number = 0 %}
-                        {% assign post_year_string = post_year_string | append: currentdate | append: ',' %}
-                    {% endif %}
-                    {% assign post_number = post_number | plus: 1 %}
-                    <!-- {% if forloop.last %}</ul>{% endif %}-->
-                {% endfor %}
-                <a href="{{ site.baseurl }}/serial/#{{ currentdate }}" title="#{{ currentdate }}" rel="{{ post_number }}">{{ currentdate }}({{ post_number }})</a>
-            </div>
-          </section>
-        {% endif %}
-
-        {% if site.featured-tags %} <!-- Categories -->
-          <section>
-            <hr class="hidden-sm hidden-xs">
-            <h5><a href="{{'/categories/' | prepend: site.baseurl }}">所有分类</a></h5>
-            <div class="tags">
-              {% for category in site.categories %}
-                <a href="{{ site.baseurl }}/categories/#{{ category[0] }}" title="{{ category[0] }}"
-                  rel="{{ category[1].size }}">
-                  {{ category[0] }} ({{ category[1].size }})
-                </a>
-              {% endfor %}
-            </div>
-          </section>
-        {% endif %}
-
-        {% if site.featured-tags %} <!-- Featured Tags -->
-          <section>
-            <hr class="hidden-sm hidden-xs">
-            <h5><a href="{{'/tags/' | prepend: site.baseurl }}">推荐标签</a></h5>
-            <div class="tags">
-              {% for tag in site.tags %}
-                {% if tag[1].size > site.featured-condition-size %}
-                  <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}"
-                      rel="{{ tag[1].size }}">
-                    {{ tag[0] }}({{ tag[1].size }})
-                  </a>
-                {% endif %}
-              {% endfor %}
-            </div>
-          </section>
-        {% endif %}
-        <!-- Short About Me -->
-        <section class="visible-md visible-lg">
-          <hr><h5><a href="{{'/about/' | prepend: site.baseurl }}">关于我</a></h5>
-          <div class="short-about">
-            {% if site.sidebar-avatar %} <img src="{{ site.sidebar-avatar }}" /> {% endif %}
-            {% if site.sidebar-about-description %}
-              <p>{{site.sidebar-about-description}}</p>
-            {% endif %}
-            <ul class="list-inline">
-              {% if site.email %}
-                <li>
-                  <a href="mailto:{{ site.email}}">
-                    <span class="fa-stack fa-lg">
-                      <i class="fa fa-circle fa-stack-2x"></i>
-                      <i class="fa fa-envelope-o fa-fw fa-stack-1x fa-inverse"></i>
-                    </span>
-                  </a>
-                </li>
-              {% endif %}
-              {% if site.RSS %}
-                <li>
-                  <a target="_blank" href="{{ "/feed.xml" | prepend: site.baseurl }}">
-                    <span class="fa-stack fa-lg">
-                      <i class="fa fa-circle fa-stack-2x"></i>
-                      <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-                    </span>
-                  </a>
-                </li>
-              {% endif %}
-              {% if site.twitter_username %}
-                <li>
-                  <a href="https://twitter.com/{{ site.twitter_username }}">
-                    <span class="fa-stack fa-lg">
-                      <i class="fa fa-circle fa-stack-2x"></i>
-                      <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                    </span>
-                  </a>
-                </li>
-              {% endif %}
-              {% if site.zhihu_username %}
-                <li>
-                  <a target="_blank" href="https://www.zhihu.com/people/{{ site.zhihu_username }}">
-                    <span class="fa-stack fa-lg">
-                      <i class="fa fa-circle fa-stack-2x"></i>
-                      <i class="fa  fa-stack-1x fa-inverse">知</i>
-                    </span>
-                  </a>
-                </li>
-              {% endif %}
-              {% if site.weibo_username %}
-                <li>
-                  <a target="_blank" href="http://weibo.com/{{ site.weibo_username }}">
-                    <span class="fa-stack fa-lg">
-                      <i class="fa fa-circle fa-stack-2x"></i>
-                      <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                    </span>
-                  </a>
-                </li>
-              {% endif %}
-              {% if site.facebook_username %}
-                <li>
-                  <a target="_blank" href="https://www.facebook.com/{{ site.facebook_username }}">
-                    <span class="fa-stack fa-lg">
-                      <i class="fa fa-circle fa-stack-2x"></i>
-                      <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                    </span>
-                  </a>
-                </li>
-              {% endif %}
-              {% if site.github_username %}
-                <li>
-                  <a target="_blank" href="https://github.com/{{ site.github_username }}">
-                    <span class="fa-stack fa-lg">
-                      <i class="fa fa-circle fa-stack-2x"></i>
-                      <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                    </span>
-                  </a>
-                </li>
-              {% endif %}
-              {% if site.linkedin_username %}
-                <li>
-                  <a target="_blank" href="https://www.linkedin.com/in/{{ site.linkedin_username }}">
-                    <span class="fa-stack fa-lg">
-                      <i class="fa fa-circle fa-stack-2x"></i>
-                      <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                    </span>
-                  </a>
-                </li>
-              {% endif %}
-            </ul>
-          </div>
-        </section>
-
-        {% if site.friends %} <!-- Friends Blog-->
-          <hr>
-          <h5>FRIENDS</h5>
-          <ul class="list-inline">
-            {% for friend in site.friends %}
-              <li><a href="{{friend.href}}">{{friend.title}}</a></li>
-            {% endfor %}
-          </ul>
-        {% endif %}
-      </div>
+    {% else %}
+      {{ content }}
     {% endif %}
-  </div>
+    </div> <!-- #page -->
+  </div><!-- .col-12 -->
+
+  {% include panel.html %}
+
 </div>
+
+{% if site.disqus.comments and page.comments %}
+<div class="row">
+  <div class="col-12 col-lg-11 col-xl-8">
+    <div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
+
+    {% include disqus.html %}
+
+    </div> <!-- .pl-1 pr-1 -->
+  </div> <!-- .col-12 -->
+</div> <!-- .row -->
+{% endif %}

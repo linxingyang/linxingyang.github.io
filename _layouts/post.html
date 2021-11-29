@@ -1,245 +1,159 @@
 ---
 layout: default
+# The posts' layout
 ---
 
-<style type="text/css">
-  header.intro-header {
-    position: relative;
-    background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')
-  }
-  {% if page.header-mask %}
-    header.intro-header .header-mask {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      background: rgba(0,0,0, {{ page.header-mask }});
-    }
-  {% endif %}
-</style>
-<!-- Post Header -->
-<header class="intro-header" >
-  <div class="header-mask"></div>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="post-heading">
-   
+{% include lang.html %}
 
+<div class="row">
 
+  <div id="post-wrapper" class="col-12 col-lg-11 col-xl-8">
 
+    <div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
 
-          <h1>{{ page.title }}</h1>
-          {% comment %} always create a h2 for keeping the margin , Hux {% endcomment %}
-          <h2 class="subheading" style="text-align: center">{{ site.moto }}</h2>
+      <h1 data-toc-skip>{{ page.title }}</h1>
 
-          <div class="tags">
-
-            {% comment %}
-            {% for tag in page.tags %}
-              <a class="tag" href="{{ site.baseurl }}/tags/#{{ tag }}" title="{{ tag }}">{{ tag }}</a>
-            {% endfor %}
-            {% endcomment %}
-
-                {% if page.relative-tags %}
-                系列
-                {% for rel in page.relative-tags %}
-                    <a class="tag" href="{{ site.baseurl }}/tags/#{{ tag }}" title="{{ rel }}">{{ rel }}</a>
-                {% endfor %}
-            {% endif %}
-            <br/>
-
-            分类
-            {% for cat in page.categories %}
-            <a class="tag" href="{{ site.baseurl }}/categories/#{{ cat }}" title="{{ cat }}">{{ cat }}</a>
-            {% endfor %}
-
-            <br/>
-            标签
-            {% for tag in page.tags %}
-            <a class="tag" href="{{ site.baseurl }}/tags/#{{ tag }}" title="{{ tag }}">{{ tag }}</a>
-            {% endfor %}
-
-          </div>
-
+      <div class="post-meta text-muted d-flex flex-column">
+        <!-- Published date and author -->
+        <div>
+          <span class="semi-bold">
+            {{ page.author | default: site.social.name }}
+          </span>
+          {% capture _preposition %}{{ site.data.locales[lang].post.published }}{% endcapture %}
+          {% include timeago.html date=page.date tooltip=true preposition=_preposition %}
+          {% if page.place %}
+		    {{ page.place }}
+		  {% endif %}  
         </div>
-      </div>
-    </div>
-  </div>
-</header>
-<!-- Post Content -->
-<article>
-  <div class="container">
 
-    <div class="row">
-      <!-- Post Container -->
-      <!--<div class="col-lg-10 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">-->
-        <div class="col-lg-12 col-md-12 post-container">
-
-        {% if page.multilingual %} <!-- Multi-Lingual -->
-          <select class="sel-lang" onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
-            <option value="0" selected> 中文 Chinese </option>
-            <option value="1"> 英文 English </option>
-          </select>
-        {% endif %}
-
-        {{ content }} <!-- post content -->
-
-        <div class="sidebar-container" style="padding-right: 0%;">
-
-            {% comment %}
-        <div class="tags">
-            {% if page.relative-tags %}
-                系列
-                {% for rel in page.relative-tags %}
-                    <a class="tag" href="{{ site.baseurl }}/tags/#{{ tag }}" title="{{ rel }}">{{ rel }}</a>
-                {% endfor %}
-            {% endif %}
-            <br/>
-
-            分类
-            {% for cat in page.categories %}
-              <a class="tag" href="{{ site.baseurl }}/categories/#{{ cat }}" title="{{ cat }}">{{ cat }}</a>
-            {% endfor %}
-
-            <br/>
-            标签
-            {% for tag in page.tags %}
-              <a class="tag" href="{{ site.baseurl }}/tags/#{{ tag }}" title="{{ tag }}">{{ tag }}</a>
-            {% endfor %}
-          </div>
-
-          {% endcomment %}
-        <p class="post-meta" style="text-align: right;">
-            发布于
-            {{ page.date | date: "%Y-%m-%d %H:%M:%S" }}
-            <br>
-            {% if page.editdate %} 
-                修改于
-                {{ page.editdate | date: "%Y-%m-%d %H:%M:%S" }} 
-                <br/>
-            {% endif %}
-            
-            {% if page.editplace %} 
-                {{ page.editplace }}
-            {% else %} 
-                {{ site.editplace }} 
-            {% endif %}
-            
-        </p>
-       
-
-        {% if site.plugin-gitalk-use %} <!-- gitalk comments -->
-            {% include plugins/gitalk.html %}
-        {% endif %}
-    </div>
-        <hr style="visibility: hidden;">
-        
-    
-        {% comment %}
-        
-        {% if page.relative-tags %} <!-- relative tags -->
-          <ul><li>相关文章<ul>
-            {% for rtag in page.relative-tags %}
-              <li>{{ rtag }}<ul>
-                {% for tag in site.tags[rtag] %}
-                  <li><a target="_blank" href="{{ tag.url | prepend: site.baseurl  | remove: "/index" }}">{{ tag.title }}</a></li>
-                {% endfor %}
-              </ul></li>
-            {% endfor %}
-          </ul></li></ul>
-        {% endif %}
-        
-        {% endcomment %}
-
-      </div>
-
-      {% if page.catalog %} <!-- Side Catalog Container -->
-        <!-- <div class="col-lg-2 col-lg-offset-0 visible-lg-block sidebar-container catalog-container">-->
-        <div class="col-lg-4 col-lg-offset-10 visible-lg-block sidebar-container catalog-container">
-          <div class="side-catalog">
-            <hr class="hidden-sm hidden-xs">
-            <h5><a class="catalog-toggle" href="#">目录</a></h5>
-            <ul class="catalog-body"></ul>
-          </div>
-        </div>
-      {% endif %}
-	  
-      <!-- Sidebar Container -->
-      {% comment %}
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 sidebar-container">
-        <hr>
-        <center>
-          {% if site.sidebar-avatar %} <img src="{{ site.sidebar-avatar }}" /> {% endif %}
-          {% if site.sidebar-about-description %}
-            <p>{{site.sidebar-about-description}}</p>
+        <div>
+          <!-- lastmod -->
+          {% if page.last_modified_at %}
+          <span>
+            {{ site.data.locales[lang].post.updated }}
+            {% include timeago.html date=page.last_modified_at class="lastmod" tooltip=true %}
+          </span>
           {% endif %}
-        </center>
-      
-        {% if site.featured-tags %} <!-- Featured Tags -->
-          <section>
-            <hr class="hidden-sm hidden-xs">
-            <h5><a href="/tags/">推荐标签</a></h5>
-            <div class="tags">
-              {% for tag in site.tags %}
-                {% if tag[1].size > site.featured-condition-size %}
-                  <a href="/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
-                    {{ tag[0] }}
-                  </a>
-                {% endif %}
-              {% endfor %}
-            </div>
-          </section>
-        {% endif %}
- 
+          {% if page.editdate %}
+          <span>
+            {{ site.data.locales[lang].post.updated }}
+            {% include timeago.html date=page.editdate class="lastmod" tooltip=true %}
+          </span>
+          {% endif %}
+		  {% if page.eidtplace %}
+          	{{ page.eidtplace }}
+		  {% endif %}  
+          <!-- read time -->
+          {% include read-time.html content=content prompt=true %}
 
+          <!-- page views -->
+          {% comment %}
+          {% if site.google_analytics.pv.proxy_endpoint or site.google_analytics.pv.cache_path %}
+          <span id="pv" class="pageviews">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </span>
+          {{ site.data.locales[lang].post.pageview_measure }}
+          {% endif %}
+          {% endcomment %}
+          {% if site.busuanzi.use %}
+          <span id="busuanzi_container_page_pv" class="pageviews"><span id="busuanzi_value_page_pv"></span></span>
+          {{ site.data.locales[lang].post.pageview_measure }}
+          {% endif %}
+        </div>
 
-        {% if site.friends %} <!-- Friends Blog -->
-          <hr>
-          <h5>FRIENDS</h5>
-          <ul class="list-inline">
-            {% for friend in site.friends %}
-              <li><a href="{{friend.href}}">{{friend.title}}</a></li>
-            {% endfor %}
-          </ul>
+      </div> <!-- .post-meta -->
+
+      <div class="post-content">
+
+        {% if page.image.src %}
+          <img src="{{ page.image.src }}"
+            class="preview-img"
+            alt="{{ page.image.alt | default: "Preview Image" }}"
+            {% if page.image.width %}width="{{ page.image.width }}"{% endif %}
+            {% if page.image.height %}height="{{ page.image.height }}"{% endif %}>
         {% endif %}
+
+        {{ content }}
 
       </div>
-    </div>
-    {% endcomment %}
-  </div>
-</article>
 
-{% if site.anchorjs %} <!-- async load function -->
-  <script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-  </script>
-  <!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-  <script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-  </script>
-  <style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-  </style>
-{% endif %}
+      <div class="post-tail-wrapper text-muted">
+
+        <!-- categories -->
+        {% if page.categories.size > 0 %}
+
+        <div class="post-meta mb-3">
+          <i class="far fa-folder-open fa-fw mr-1"></i>
+          {% for category in page.categories %}
+            <a href='{{ site.baseurl }}/categories/{{ category | slugify | url_encode }}/'>{{ category }}</a>
+            {%- unless forloop.last -%}, {%- endunless -%}
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- tags -->
+        {% if page.tags.size > 0 %}
+        <div class="post-tags">
+          <i class="fa fa-tags fa-fw mr-1"></i>
+          {% for tag in page.tags %}
+          <a href="{{ site.baseurl }}/tags/{{ tag | slugify | url_encode }}/"
+            class="post-tag no-text-decoration" >
+            {{- tag -}}
+          </a>
+          {% endfor %}
+          </div>
+        {% endif %}
+
+        <div class="post-tail-bottom
+          d-flex justify-content-between align-items-center mt-3 pt-5 pb-2">
+          <div class="license-wrapper">
+          {% if site.data.locales[lang].copyright.license.template %}
+            {% capture _replacement %}
+            <a href="{{ site.data.locales[lang].copyright.license.link }}">
+              {{ site.data.locales[lang].copyright.license.name }}
+            </a>
+            {% endcapture %}
+            {{ site.data.locales[lang].copyright.license.template | replace: ':LICENSE_NAME', _replacement }}
+          {% endif %}
+          </div>
+
+          {% include post-sharing.html %}
+
+        </div><!-- .post-tail-bottom -->
+
+      </div><!-- div.post-tail -->
+
+    </div> <!-- .post -->
+
+
+  </div> <!-- #post-wrapper -->
+
+  {% assign enable_toc = false %}
+
+  {% if site.toc and page.toc %}
+    {% if content contains '<h2' or content contains '<h3' %}
+      {% assign enable_toc = true %}
+    {% endif %}
+  {% endif %}
+
+  {% include panel.html toc=enable_toc %}
+
+</div> <!-- .row -->
+
+<div class="row">
+  <div class="col-12 col-lg-11 col-xl-8">
+    <div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4">
+
+    {% include related-posts.html %}
+
+    {% include post-nav.html %}
+
+    {% if site.disqus.comments and page.comments %}
+      {% include disqus.html %}
+    {% endif %}
+
+    </div> <!-- #post-extend-wrapper -->
+
+  </div> <!-- .col-* -->
+
+</div> <!-- .row -->
