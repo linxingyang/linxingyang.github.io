@@ -18,7 +18,7 @@
             {%- endif -%}
           {% endcapture %}
           <img src="{{ avatar_url }}" alt="avatar" onerror="this.style.display='none'">
-		  {% endif %}
+        {% endif %}
         {% endcomment %}
 
         {% if site.avatar != '' and site.avatar %}
@@ -31,7 +31,14 @@
     <div class="site-title mt-3">
       <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
     </div>
-    <div class="site-subtitle font-italic">{{ site.tagline }}</div>
+    <div class="site-subtitle font-italic">
+      {% if site.busuanzi.use %}
+        <!-- <span id="busuanzi_container_site_pv">本站访问量<span id="busuanzi_value_site_pv"></span>次</span> -->
+        <span id="busuanzi_container_site_uv">@访客<span id="busuanzi_value_site_uv"></span></span>，
+        <!--<span id="busuanzi_container_page_pv">本页面访问量<span id="busuanzi_value_page_pv"></span>次</span>-->
+        {% endif %}
+      {{ site.tagline }}
+    </div>
 
   </div><!-- .profile-wrapper -->
 
@@ -58,8 +65,8 @@
 
   </ul> <!-- ul.nav.flex-column -->
 
-  <div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center align-items-center">
 
+  <div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center align-items-center">
     {% for entry in site.data.contact %}
       {% capture url %}
         {%- if entry.type == 'github' -%}
@@ -97,15 +104,5 @@
     {% endunless %}
 
   </div> <!-- .sidebar-bottom -->
-
-  <div class="sidebar-bottom flex-wrap justify-content-center align-items-center text-center site-subtitle">
-    {% if site.busuanzi.use %}
-      <!-- <span id="busuanzi_container_site_pv">本站访问量<span id="busuanzi_value_site_pv"></span>次</span> -->
-      <span id="busuanzi_container_site_uv">Hi, No.<span id="busuanzi_value_site_uv"></span> visitors</span>
-      <!--<span id="busuanzi_container_page_pv">本页面访问量<span id="busuanzi_value_page_pv"></span>次</span>-->
-    {% endif %}
-    <br/>
-    <a class="site-subtitle" target="_blank" href="http://www.beian.miit.gov.cn">闽ICP备17030053号-1</a>
-  </div>
 
 </div><!-- #sidebar -->

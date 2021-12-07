@@ -18,9 +18,9 @@ timezone: Asia/Shanghai
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: 林兴洋的空间站                          # the main title
+title: 林兴洋                          # the main title
 
-tagline: 成长与分享，其乐也无穷   # it will display as the sub-title
+tagline: 想学啊你，我教你啊   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
   林兴洋的空间站，成长与分享，其乐也无穷,
@@ -38,7 +38,7 @@ github:
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: 林兴洋的空间站
+  name: 林兴洋
   email: linxingy@foxmail.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
