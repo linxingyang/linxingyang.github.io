@@ -1,39 +1,40 @@
 ---
 layout: post
 permalink: /:year/bb91234f894d42aaab09bc92c3785ccf/index
-title: 2017-08-09-log4j-Appender输出目的地
+title: log4j-Appender输出目的地
 categories: [log4j]
-tags: [java,log4j,log4j系列]
-relative-tags: [log4j系列]
+tags: [post, log4j, java]
+date: 2017-08-09 04:12:02 +8
+place: 新大陆软件园
+editdate: 2021-12-12 04:12:02 +8
+eidtplace: 福州软件园
 excerpt: java,log,log4j,日志,源码,Appender
 description: java,log,log4j,日志,源码,Appender
 catalog: true
 author: 林兴洋
 ---
 
-# LOG4J #
 
-## 6. Appender ##
+# LOG4J
+
+## 6、Appender
 
 Appender是用来指定输出目标的类，前面我们使用的ConsoleAppender就是用来向控制台（指定控制台为输出目标）输出，这篇文章列举了大部分Appender。
 
 常用的输出目标有：
-
 * ConsoleAppender：向控制台输出日志；
 * FileAppender：向文件输出日志
 * DailyRollingFileAppender：向文件输出日志，每天一个日志文件；
 * RollingFileAppender：向文件输出日志，当文件大小达到指定大小后，生成新文件；
 * ...
 
-### 6.1 类图 ###
+### 6.1 类图
 
-![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/appenderClassDiagram.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/appenderClassDiagram.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/appenderClassDiagram.png)
 
-
-### 6.2 Appender ###
+### 6.2 Appender
 
 Appender 接口定义了一些方法。
-
 * doAppend() 打日志方法
 * set/getFilter() 添加删除过滤器方法，后面我们会讨论到过滤器。
 * set/getLayout() 一个Appender用一个Layout.
@@ -57,38 +58,35 @@ Appender 接口定义了一些方法。
     * SocketHubAppender
 * ...
 
-### 6.3 OptionHandler ###
+### 6.3 OptionHandler
 
 前面已经介绍过了，它是用于激活配置的。
 
-### 6.4 AppenderSkeleton ###
+### 6.4 AppenderSkeleton
 
 AppenderSkeleton 日志器的骨架，是个抽象类，该类提供了一些可共用的方法。
 
-#### threshold 阈值 ####
+#### threshold 阈值
 
 其中有这么个属性，设置Appender的日志等级，小于这个等级的日志将不会被打印，这个可以在配置文件进行配置。
 
-### 6.5 AppenderAttachable ###
+### 6.5 AppenderAttachable
 
-#### 在日志那一节中，我们知道AppenderAttachable是日志器中用来处理Appender提供的接口，那么为什么这个接口会出现在Appender自己的类图中呢？ ####
+在日志那一节中，我们知道AppenderAttachable是日志器中用来处理Appender提供的接口，那么为什么这个接口会出现在Appender自己的类图中呢？因为有些Appender，它自己本身不打印东西，它把东西再交给别的Appender去打印，那么它就有必要处理这些Appender，所以就导致了部分Appender类实现了Appender接口。
 
-因为有些Appender，它自己本身不打印东西，它把东西再交给别的Appender去打印，那么它就有必要处理这些Appender，所以就导致了部分Appender类实现了Appender接口。
-
-### 6.6 UnrecognizedElementHandler ###
+### 6.6 UnrecognizedElementHandler
 
 当一个需要被DOMConfigurator解析的对象实现了该类，当解析过程中遇到了无法解析的子元素时，该方法（parseUnrecognizedElement） 将会被调用。
 
 如果日志仓库支持这个接口，那么log4j:configuration中无法解析的子元素将会被转发到日志仓库。
-
 * parseUnrecognizedElement(Element element, Properties props) 通知解析过程中遇到了一个无法解析的子元素
 
 
-### 6.7 WriteAppender ###
+### 6.7 WriteAppender
 
 该类和 AppenderSkeleton 差不多，是写文件，写到控制台的骨架类吧。它本身虽然不是抽象类，但是将其配置在配置文件中进行输出，是不行的。
 
-#### 测试代码 ####
+#### 测试代码
 
 配置
 
@@ -106,13 +104,13 @@ log4j.appender.console.layout.ConversionPattern=%X{b} - %m%n
 log4j:ERROR No output stream or file set for the appender named [console].
 ```
 
-#### encoding 设置编码格式 ####
+#### encoding 设置编码格式
 
 编码格式，如果没有设置，默认使用所在系统的默认编码格式。
 
 因为WriteAppender本身不能用，所以使用ConsoleAppender做例子。如下使用iso-8859-1编码来输出中文，结果是乱码的。
 
-##### 测试代码 #####
+##### 测试代码
 
 ```properties
 log4j.rootLogger=debug,console
@@ -152,7 +150,7 @@ public class Test1 {
  - e
 ```
 
-#### immediateFlush 立即打印 ####
+#### immediateFlush 立即打印
 
 如果为true，那么马上打印日志。如果为false，不会打印日志，如果设置为false，必须要覆盖WriterAppedner中的shouldFlush(LoggingEvent)方法，否则 shouldFlash恒返回false，日志是不会被打印的。
 
@@ -164,7 +162,7 @@ protected boolean shouldFlush(final LoggingEvent event) {
 }
 ```
 
-##### 测试代码 #####
+##### 测试代码
 
 配置如下，这个就不写测试了，结果是没有输出日志。
 
@@ -177,15 +175,15 @@ log4j.appender.console.layout=org.apache.log4j.EnhancedPatternLayout
 log4j.appender.console.layout.ConversionPattern=%X{b} - %m%n
 ```
 
-### 6.8 ConsoleAppender 输出到控制台 ###
+### 6.8 ConsoleAppender 输出到控制台
 
 前面我们测试都是使用的这个ConsoleAppender。输出到 System.out 或者 System.err，默认是System.out.。只能这两个选一个。
 
-#### target ####
+#### target
 
 上面说过，可以输出到System.out或者System.err。默认是System.out通过设置target可以切换到System.err。
 
-##### 测试代码 #####
+##### 测试代码
 
 ```properties
 log4j.rootLogger=debug,console
@@ -227,12 +225,12 @@ d
 e
 ```
 
-#### follow ####
+#### follow
 
 有时候我们可能会想要使用System.setOut()方法重定向System.out的输出终端。
 但是这个时候，日志还是打印在控制台中。测试如下：
 
-##### 测试代码 #####
+##### 测试代码
 
 配置
 
@@ -272,8 +270,7 @@ public class Test1 {
 
 结果：虽然System.out.println()已经被重定向到了文件中，但是发现Log4j日志打印的还是在控制台中。
 
-![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/consoleAppenderFollowResult1.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/consoleAppenderFollowResult1.png)
-
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/consoleAppenderFollowResult1.png)
 
 这个follow属性就是用来设置如果更改了System.out的输出终端，是否“跟随”变化。
 
@@ -314,8 +311,7 @@ public class Test1 {
 
 结果，可以看到设置了follow=true后，日志也重定向了。
 
-![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/consoleAppenderFollowResult2.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/consoleAppenderFollowResult2.png)
-
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/consoleAppenderFollowResult2.png)
 
 实现原理，如下是ConsoleAppender中的激活配置方法。可以看到，如果follow为false的时候，直接使用的是System.out和System.err，这个时候System.out和System.err只是一个引用，假设指向A对象，所以赋予writer只是一个引用，指向了A对象。当我们使用System.setOut()或者System.setErr()重定向控制台/控制台错误的输出终端时，是将System.out和System.err指向另一个对象，假设B对象，此时writer还是指向了A对象，所以对writer来说，他还是向A对象输出，而非新定义的B对象。
 
@@ -369,13 +365,13 @@ private static class SystemOutStream extends OutputStream {
 ```
 
 
-### 6.9 FileAppender 输出到文件 ###
+### 6.9 FileAppender 输出到文件
 
-#### file 文件名 必须设置 ####
+#### file 文件名 必须设置
 
 输出到文件的文件名，可以是绝对路径。可以是相对路径，相对路径以项目根目录开始的。
 
-##### 测试代码 #####
+##### 测试代码
 
 配置，输出到 d:/logs/file1.txt该文件中。
 
@@ -417,7 +413,7 @@ public class Test1 {
 控制台打印  cccc
 ```
 
-#### append ####
+#### append
 
 是否以追加的方式打印日志，默认为true。
 
@@ -474,8 +470,8 @@ public class Test1 {
 ```
 
 
-#### bufferedIO 是否缓冲 ####
-#### bufferedSize 缓冲区大小 ####
+#### bufferedIO 是否缓冲
+#### bufferedSize 缓冲区大小
 
 bufferedIO和bufferedSize是配套使用的。bufferedIO用来设置是否需要是否设置缓冲区，默认为false。bufferedSize用来设置该缓冲区的大小，默认8KB
 
@@ -484,7 +480,7 @@ bufferedIO和bufferedSize是配套使用的。bufferedIO用来设置是否需要
 但是有个问题，如果开启了bufferedIO，要缓冲区满8KB才会进行打印，但是大多数情况下当程序结束的时候，缓冲区存在不足8KB的日志，这些日志没有打印出来，造成丢失。
 
 
-##### 测试代码 #####
+##### 测试代码
 
 配置如下，开启缓冲区。
 
@@ -540,7 +536,7 @@ public class Test1 {
 }
 ```
 
-### 6.10 RollingFileAppender ###
+### 6.10 RollingFileAppender
 
 RollingFileAppender是FileAppender的子类，它的作用是当日志文件大小超出文件大小大限时，会把日志文件转换成备份文件，然后再生成一个新的日志文件。
 
@@ -548,10 +544,10 @@ RollingFileAppender是FileAppender的子类，它的作用是当日志文件大�
 
 还可以设置文件的个数，当设置备份文件的个数为3时，表示最多可以有3个文件。当文件达到3后，再次达到1KB时，那么会删除最后一个文件。例如当前已经存在log.txt、log.txt.1、log.txt.2，这时如果log.txt又达到了1KB时，那么删除log.txt.2，然后把log.txt.1修改成log.txt.2，再把log.txt修改成log.txt.1，然后再创建log.txt文件。
 
-#### MaxFileSize : 指定文件大小上限,单位byte ####
-#### MaxBackupIndex : 文件最多备份个数 ####
+#### MaxFileSize : 指定文件大小上限,单位byte
+#### MaxBackupIndex : 文件最多备份个数
 
-##### 测试代码 #####
+##### 测试代码
 
 配置，文件大小设置为1KB，最多有3个备份文件。
 
@@ -588,10 +584,9 @@ public class Test1 {
 
 测试结果，最多存在3个备份文件，每个备份文件1KB。
 
-![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/RollFileAppenderResult1.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/RollFileAppenderResult1.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/RollFileAppenderResult1.png)
 
-
-### 6.11 ExternallyRolledFileAppender ###
+### 6.11 ExternallyRolledFileAppender
 
 这个扩展的滚动文件Appender，监听一个端口，当收到消息时，日志文件马上滚动备份并且会返回一个确认消息。这种方法触发滚动的好处是 独立于系统，快速，可靠.
 
@@ -599,7 +594,7 @@ public class Test1 {
 
 org.apache.log4j.varia.Roller这个类Roller用于发送滚动备份信息给这个Appender。然这个Appender进行备份，并且返回一个消息
 
-#### 测试代码 ####
+#### 测试代码
 
 ```properties
 log4j.rootLogger=debug,file
@@ -721,13 +716,12 @@ public class Roller {
 
 现在先运行 Test1代码。稍微等几秒钟。调用Roller中的main方法。再过一会，再调用一次。 可以发现，生成了两个备份文件。
 
-![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/ExternallyRolledFileAppenderResult.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/ExternallyRolledFileAppenderResult.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/ExternallyRolledFileAppenderResult.png)
 
 
+### 6.12 DailyRollingFileAppender
 
-### 6.12 DailyRollingFileAppender ###
-
-#### datePattern ####
+#### datePattern
 
 默认按天生成日志
 
@@ -746,7 +740,7 @@ DailyRollingFileAppender会根据设定的时间频率生成备份文件。时�
 在DatePattern配置项中不要使用 “:”，这个符号在URL协议中被解读为另一种意思。
 ```
 
-##### 测试代码 #####
+##### 测试代码
 
 设置为每分钟生成日志文件。
 
@@ -785,36 +779,35 @@ public class Test1 {
 
 结果如图：2分钟20秒，会生成两个备份文件，
 
-![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/dailyRollResult1.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/dailyRollResult1.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/dailyRollResult1.png)
 
-
-### 6.13 SMTPAppender 发送邮件Appender ###
+### 6.13 SMTPAppender 发送邮件Appender
 
 默认的实现是当遇到error,fatal就会马上发送邮件。
 
-#### to 接收者 ####
-#### cc 抄送 ####
-#### bcc 暗抄送 ####
-#### from 发送者账号 ####
-#### replyTo 回复到 ####
-#### subject 主题  ####
-#### SMTPHost 服务器 ####
-#### SMTPPort 端口 ####
-#### SMTPUsername 用户名 ####
-#### SMTPPassword 密码 ####
-#### SMTPProtocol 协议 ####
+#### to 接收者
+#### cc 抄送
+#### bcc 暗抄送
+#### from 发送者账号
+#### replyTo 回复到
+#### subject 主题 
+#### SMTPHost 服务器
+#### SMTPPort 端口
+#### SMTPUsername 用户名
+#### SMTPPassword 密码
+#### SMTPProtocol 协议
 
 为空或者smtps(安全的smtp)
 
-#### locationInfo 发生错误所在位置 ####
+#### locationInfo 发生错误所在位置
 
 这个会影响程序速度。
 
-#### bufferSize logging event事件数。 ####
+#### bufferSize logging event事件数
 
 当发送邮件时，截取从当前要发送的日志事件到前面bufferSize个日志事件。
 
-##### 测试代码 #####
+##### 测试代码
 
 配置
 
@@ -883,26 +876,24 @@ public class Test1 {
 
 第一封：说明遇到error/fatal就会发送邮件
 
-![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/smtpResult1.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/smtpResult1.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/smtpResult1.png)
 
 第二封 ： 每个框框中都是10条 logging event。因为 `log4j.appender.smpt.bufferSize=30`该项配置了30条，所以当需要发送邮件时，会获取bufferSize条（即30条）日志事件来发送。
 
 同时我们可以看到，第一封邮件的数字是6，而第二封是从68开始的，说明中间多余的debug/info/warn消息都被忽略了。发送的是从当前error/fatal往前数30条记录。
 
-
-![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/smtpResult2.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/smtpResult2.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/smtpResult2.png)
 
 第三封 : 发送的是最后一条error消息。
 
-![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/smtpResult3.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/smtpResult3.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/smtpResult3.png)
 
-
-### 6.14 JDBCAppender 输出到数据库 ###
+### 6.14 JDBCAppender 输出到数据库
 
 发送日志事件到数据库中。 警告： 这个版本的JDBCAppender在未来很有可能被完全替代，而且，它不记录异常。打日志事件会被放到ArrayList缓存中，当缓存区满了之后，日志事件将会被sql语句替代并且执行。
 
-#### locationInfo ####
-#### sql ####
+#### locationInfo
+#### sql
 
 sql语句，sql语句中可以使用PatternLayout的符号来显示日志相应的内容，但是要要小心不要放入引号。例如
 
@@ -912,18 +903,16 @@ insert into LogTable (msg) values ("%m")
 insert into LogTable (Thread, Class, Message) values ("%t", "%c", "%m").
 ```
 
-#### user ####
-用户名
-#### password ####
-密码
-#### bufferSize ####
+#### user 用户名
+#### password 密码
+#### bufferSize
 缓冲日志事件的条数。默认为1，即产生一条日志马上插入数据库这样很消耗内存，我们可以适当的调大buffferSize，当积累到一定条数的时候再插入数据库。但是和前面的FileAppender的BufferSize一样，在程序结束前如果缓冲区中还是存在部分日志事件，那么会丢失，同样也是使用关闭日志器来处理。
 
 ```java
 LogManager.shutdown();
 ```
 
-#### driver ####
+#### driver
 
 驱动名称，首先要加一个驱动包（后面测试我使用的是mysql数据库，mysql-connector-java-5.1.25-bin.jar），测试过程中也发现，加入一个驱动包后，不配置driver，也可以正常运行。但是最好显式配置一下，免的忘了。
 
@@ -944,7 +933,7 @@ java.sql.SQLException: No suitable driver found for jdbc:mysql://localhost:3306/
 	at com.linxingyang.Test1.main(Test1.java:14)
 ```
 
-##### 测试代码 #####
+##### 测试代码
 
 首先在mysql数据库建一个表
 
@@ -1009,29 +998,29 @@ public class Test1 {
 
 结果，从log_time上大致可以看出，前5条差不多是同时打印，6-10条也差不多同时打印。 看log_detail可以很明显看出最后两条的和前面10条不同，这是因为bufferSize=5，前10条分两次插入数据库，而最后两条，在程序结束时还是在缓存中，我们调用类LogManager.shutdown();才让其得以插入数据库。所以其显示的信息才是xxx.shutdown而不是xxx.main。
 
-![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/jdbcAppenderResult.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/jdbcAppenderResult.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/jdbcAppenderResult.png)
 
-### 6.15 NullAppender ###
+### 6.15 NullAppender
 
 和 NOPLogger一个性质，不做任何事，就是占个位，让我们在不想输出任何日志的时候，让log4j日志系统能够正常的走流程。
 
 这种空实现的思想也是很好的啊。
 
-### 6.16 SocketAppender ###
+### 6.16 SocketAppender
 
 发送日志事件到远程的日志机器，通常是一个SockentNode 套接字节点。SocketAppender本身不需要Layout，因为它本身不打印日志，而是将日志传送到远方，由远方进行打印。
 
-#### remoteHost ip地址 ####
-#### port 端口 ####
-默认：4560
-#### locationInfo 详细信息 ####
-#### application ####
+#### remoteHost ip地址
+#### port 端口 默认：4560
+#### locationInfo 详细信息
+#### application
 打日志的应用的名称，如果在System.property中已经设置类，就可以不用设置了。
-#### reconnectionDelay 重连间隔时间  ####
+#### reconnectionDelay 重连间隔时间 
+
 默认重连间隔30秒
 
 
-#### 使用 SimpleSocketServer 进行测试 ####
+#### 使用 SimpleSocketServer 进行测试
 
 使用org.apache.log4j.net.SimpleSocketServer进行测试。该类基于SocketNode实现了这个是个简单的服务。前面说了，SocketAppender本身不打印日志，由远端接收了处理，所以SimpleSocketServer这个类收到类日志，需要根据log4j的配置对日志进行打印处理。
 
@@ -1150,10 +1139,9 @@ public class Test1 {
 
 启动Test1，控制台会切换到当前运行的程序，如图在切回到SimpleSocketServer。可以看到已经接收到日志了。
 
-![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/SimpleSocketServerResult.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/SimpleSocketServerResult.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/SimpleSocketServerResult.png)
 
-
-#### 使用SocketServer进行测试 ####
+#### 使用SocketServer进行测试
 
 SocketServer相较于SimpleSocketServer，有些许不同的地方。
 
@@ -1411,14 +1399,14 @@ SocketServer -- 2017-12-12 15:31:19,364 Caught java.io.EOFException closing conn
 ```
 
 
-#### 使用 chainSaw 来接收日志 ####
+#### 使用 chainSaw 来接收日志
 
 chainSaw是基于Swing的界面日志查看器，从Socket接口接收日志，可以进行过滤日志等操作。chainSaw包下有个Main类，根据代码，他默认监听的是4445端口。运行该类main方法，会出来如下窗口。
 
 注意，此时log4j.properties文件中要清空，因为这个Main类也会在如log4j.properties中的配置。
 
 启动chainSaw
-![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/socketAppender.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/socketAppender.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/socketAppender.png)
 
 
 在log4j.properties中增加xml配置
@@ -1461,26 +1449,26 @@ public class Test1 {
 
 运行Test1。结果如图，收到了日志。我们可以在这个界面上，根据提供的功能进行筛选等操作。
 
-![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/chainSawResult1.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/chainSawResult1.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/chainSawResult1.png)
 
 
-### 6.17 SocketHubAppender  ###
+### 6.17 SocketHubAppender
 
 SocketHubAppender和SocketAppender很相似，而且大部分都是参考ScoketAppender的。
 
 唯一的不同是：在 SocketAppender中，我们给定一个远程的服务器Ip以及端口，SocketAppender负责将日志发送到该服务器的指定端口。
 
-![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/socketHubAppender.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/socketHubAppender.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/socketHubAppender.png)
 
 而在SocketHubAppedner中，它是将日志发送到指定的本机端口，多个远程服务器可以连接到本机该端口，这样，本机发送一条日志，可能会有多个远程服务器收到并且做处理。
 
-![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/socketHubAppender2.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/socketHubAppender2.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/socketHubAppender2.png)
 
 
 和SocketAppender相同的，SocketHubAppender 依赖于tcp协议保证数据包的正确传递。
 
 
-#### 测试代码 ####
+#### 测试代码
 
 配置
 
@@ -1579,17 +1567,19 @@ public class Test2 {
 ```
 
 
-### 6.18 SyslogAppender 输出到系统日志 ###
+### 6.18 SyslogAppender 输出到系统日志
 
 发送日志消息到远程的syslog后台线程。
 
-#### header 布尔值，是否显示头信息 ####
+#### header 布尔值，是否显示头信息
+
 默认false，头信息就是时间戳和主机名
 
-#### facilityPrinting 打印设备名称 ####
+#### facilityPrinting 打印设备名称
+
 默认false
 
-#### facility 设备名称 ####
+#### facility 设备名称
 系统日志设备，设备选项有如下这些。大小写不敏感。
 
 ```
@@ -1598,7 +1588,7 @@ KERN, USER, MAIL, DAEMON, AUTH, SYSLOG, LPR, NEWS, UUCP,
      LOCAL5, LOCAL6, LOCAL7.
 ```
 
-#### syslogHost 日志主机，端口 ####
+#### syslogHost 日志主机，端口
 
 主机ip， 可以设置端口例如
 
@@ -1607,7 +1597,7 @@ KERN, USER, MAIL, DAEMON, AUTH, SYSLOG, LPR, NEWS, UUCP,
 ```
 
 
-#### 测试代码 ####
+#### 测试代码
 
 为了查看日志，下载一个Visual Syslog Server。可能需要翻墙[https://sourceforge.net/projects/syslogserverwindows/?source=typ_redirect](https://sourceforge.net/projects/syslogserverwindows/?source=typ_redirect)
 
@@ -1658,20 +1648,18 @@ public class Test1 {
 
 在 Visual Syslog Sever 中要先设置好和你日志对应的端口号。
 
-![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/syslogAppender.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/syslogAppender.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/syslogAppender.png)
 
 结果，可以看到对应的信息展示了出来
 
-![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/syslogAppender3.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/syslogAppender3.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/syslogAppender3.png)
 
 
-### 6.19 TelnetAppender 输出到telnet ###
+### 6.19 TelnetAppender 输出到telnet
 
-输出到telnet
+#### port  端口，默认23
 
-#### port  端口，默认23 ####
-
-#### 测试代码 ####
+#### 测试代码
 
 配置
 
@@ -1715,14 +1703,13 @@ public class Test1 {
 }
 ```
 
-
 结果: 在windows在cmd命令行中，使用如下命令查看日志
 
 ```
 telnet 127.0.0.1 23
 ```
 
-![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/telnetAppenderResult.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/telnetAppenderResult.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/telnetAppenderResult.png)
 
 
 ### 6.20 JMSAppender ###
@@ -1731,13 +1718,13 @@ telnet 127.0.0.1 23
 
 
 
-### 6.21 NTEventLogAppender ###
+### 6.21 NTEventLogAppender
 
 只能使用于windows系统。而且必须要添加 几个dll文件。否则会报错：java.lang.UnsatisfiedLinkError.
 
 我是windows x64 win7 。 在`C:\Windows\SysWOW64`加入`NTEventLogAppender.dll`文件后能够正常打日志。来，这是[dll下载地址](http://www.zhaodll.com/dll/softdown.asp?softid=156272&iz2=2cd42ae73ab38e1a04e0ed884f6bbff1)
 
-#### 测试代码 ####
+#### 测试代码
 
 配置
 
@@ -1782,10 +1769,10 @@ public class Test1 {
 
 测试结果，打开控制面板->管理工具（小图标的视图下）->事件查看器->Windows日志->应用程序
 
-![https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/NTEventAppender.png](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/NTEventAppender.png)
+![图](https://gitee.com/linxingyang/at-2020-10-02-image/raw/master/image/L-log4j/image/2017-08-05/NTEventAppender.png)
 
 
-### 6.22 RewriteAppender ###
+### 6.22 RewriteAppender
 
 参考本篇文章[http://www.luohw.com/notes/appender-of-log4j-6.html](http://www.luohw.com/notes/appender-of-log4j-6.html)
 
@@ -1806,7 +1793,7 @@ Message对象中(要遵守javabean规范)的属性将会被取得，如果Messag
 
 
 
-#### 测试代码  PropertyRewritePolicy ####
+#### 测试代码  PropertyRewritePolicy
 
 配置，配置了三个输出终端，区别只是其中的 %X %properties,%properties[name]。然后配置了PropertyRewritePolicy策略，其中属性设置了 `<param name="properties" value="name=linxingyang,age=24,from=fuding"/>`
 
@@ -1881,7 +1868,7 @@ console3 -- [%properties{name}]linxingyang 2017-12-14 11:22:30fatal message  1
 ```
 
 
-#### 测试代码 MapRewritePolicy ####
+#### 测试代码 MapRewritePolicy
 
 
 先举一例。配置，简单的配置输出到控制台。
@@ -2020,7 +2007,7 @@ public class Test1 {
  -- {time=2017-12-14 12:08:44, age=21, name=lxy}
 ```
 
-#### 测试代码  ReflectionRewritePolicy ####
+#### 测试代码  ReflectionRewritePolicy
 
 使用RefletionRewritePolicy，自定义了两个测试用的javabean
 
@@ -2155,7 +2142,7 @@ public class Test1 {
 ```
 
 
-### 6.23 AsyncAppender ###
+### 6.23 AsyncAppender
 
 AsyncAppender能够让用户异步的打印日志,这个Appender会收集所有发送给它的日志事件，然后分发给所有附加在该Appender上的多个Apedner，
 
@@ -2163,14 +2150,14 @@ AsyncAppender能够让用户异步的打印日志,这个Appender会收集所有�
 
 重要：该日志器只能使用 DMOConfigurator进行配置。
 
-#### bufferSize 缓冲区大小 ，默认128 ####
+#### bufferSize 缓冲区大小 ，默认128
 默认可以存储128条日志事件。
 
-#### blocking 是否阻塞，默认true ####
+#### blocking 是否阻塞，默认true
 
 当存够了bufferSize大小的日志，此时再有日志进来，是否阻塞？如果不阻塞，那么将会简单的丢弃日志事件。如果阻塞，不会丢弃日志事件，但被阻塞的日志肯定是稍微延迟了一些发送。
 
-#### 测试代码 ####
+#### 测试代码
 
 测试代码
 
@@ -2268,11 +2255,6 @@ console1 -- Discarded 3 messages due to full event buffer including: 2017-12-13 
 console2 -- Discarded 3 messages due to full event buffer including: 2017-12-13 23:52:39fatal message  14 
 ```
 
-### 6.24 LF5Appender ###
+### 6.24 LF5Appender
 
-(木有整理)
-
-
-
-
-
+木有整理
