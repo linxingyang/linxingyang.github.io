@@ -1,4 +1,5 @@
 ---
+layout: post
 title: windows-使用junctions实现如linux一样的软连接
 description: 
 published: true
@@ -9,6 +10,8 @@ tags:
 editor: markdown
 dateCreated: 2023-10-01T09:53:06.157Z
 location:
+comments: true
+toc: true
 ---
 
 
