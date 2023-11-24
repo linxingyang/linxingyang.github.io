@@ -16,8 +16,6 @@ toc: true
 ---
 
 
-
-
 在windows，如果对一个文件夹右键创建快捷方式，进入文件夹后，再进入子文件夹就会跳到原路径。
 
 比如`d:\the\real\path\dir1\a.txt`，创建快捷方式`d:\quicklink` 指向 `d:\the\real\path`，进入`d:\quicklink`是没问题的，但再进入`d:\quicklink\path`，就会变成`d:\the\real\path`
