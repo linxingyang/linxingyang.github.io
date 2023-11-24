@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: windows-使用junctions实现如linux一样的软连接
 description: 
 published: true
