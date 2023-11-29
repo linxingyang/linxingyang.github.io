@@ -28,6 +28,7 @@ permalink: /tags/
       {% for post in tag[1] %}
         {% if post.title != null %}
           <li>
+              <time>{{ post.date | date: "%Y-%m-%d" }}</time>
             {% if post.link %}
               <a href="{{ post.link }}">
             {% else %}
@@ -35,7 +36,6 @@ permalink: /tags/
             {% endif %}
                 {{ post.title }}
               </a>
-              <time>{{ post.date | date: "%Y-%m-%d" }}</time>
           </li>
         {% endif %}
       {% endfor %}
