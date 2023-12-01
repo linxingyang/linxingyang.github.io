@@ -1,5 +1,6 @@
 ---
 layout: post
+toc: true
 title: ultraedit-快速编译运行java
 description: 
 published: true
