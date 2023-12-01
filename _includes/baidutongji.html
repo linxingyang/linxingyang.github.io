@@ -1,9 +1,10 @@
 {% if site.baidutongji %}
 <script>
+	var baidutongji_id = '{{ site.baidutongji }}';
 	var _hmt = _hmt || [];
 	(function() {
 	  var hm = document.createElement("script");
-	  hm.src = "https://hm.baidu.com/hm.js?66e6ff00024c8f7cd188a3f238bda260";
+	  hm.src = "https://hm.baidu.com/hm.js?" + baidutongji_id;
 	  var s = document.getElementsByTagName("script")[0]; 
 	  s.parentNode.insertBefore(hm, s);
 	})();

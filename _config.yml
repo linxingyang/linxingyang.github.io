@@ -81,7 +81,7 @@ disqus: linxingyang #shortname
 busuanzi: on
 
 # 百度统计
-baidutongji: on
+baidutongji: 66e6ff00024c8f7cd188a3f238bda260
 
 # 输入Gitalk相关设定，即可添加评论区，具体请看教程
 gitalk:
