@@ -7,8 +7,8 @@
 # 井号后面的文字是说明文档，不会被程序读取。
 
 # 描述/签名
-name: 林兴洋的空间站
-description: 在生活和工作中成长，并且享受这个过程
+name: IT林跑跑
+description: 务实
 
 # 输入你的网站域名（如果你没有添加自己的域名，而是直接用GitHub pages分配的域名的话可以省略）
 url: 
@@ -57,7 +57,7 @@ footer-links:
   email: linxingy@foxmail.com #youremailaddress@mail.com
   facebook: #https://www.facebook.com/<>
   flickr: #https://www.flickr.com/<>
-  github: linxingyang #https://github.com/<>
+  github: #https://github.com/<>
   instagram: #https://instagram.com/<>
   linkedin: #https://www.linkedin.com/in/<>
   pinterest: #https://www.pinterest.com/<>
@@ -68,7 +68,7 @@ footer-links:
   youtube: # channel/<your_long_string> or user/<user-name>
 
 # 站点页脚的文字
-footer-text: Copyright (c) 2023 林兴洋的空间站
+footer-text: Copyright (c) 2024 IT林跑跑
 
 #
 # 评论，注意，请不要同时添加多种不同的评论区
