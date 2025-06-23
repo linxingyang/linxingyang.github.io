@@ -32,5 +32,5 @@ ln -s d:\quicklink d:\the\real\path
 # 参考
 
 * 1、[junction download](https://learn.microsoft.com/zh-cn/sysinternals/downloads/junction)
-* 2、[Creating Symbolic Links (Symlinks) in Windows | Windows OS Hub (woshub.com)](https://woshub.com/create-symlink-windows/)
+* 2、[Creating Symbolic Links (Symlinks) in Windows](https://woshub.com/create-symlink-windows/)
 * 3、[window下实现软连接，像linux一样的软链接_windows有没有像linux一样的软连接-CSDN博客](https://blog.csdn.net/zhanlanmg/article/details/44194103)
