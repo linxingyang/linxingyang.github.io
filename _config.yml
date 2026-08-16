@@ -8,7 +8,7 @@
 
 # 描述/签名
 name: 金锐的博客
-description: 晴朗的日子，应该出去走走
+description: 在这晴朗的日子，应该出去走走
 
 # 输入你的网站域名（如果你没有添加自己的域名，而是直接用GitHub pages分配的域名的话可以省略）
 url: 
@@ -81,7 +81,7 @@ footer-text: Copyright (c) 2026 金锐 JINRUI
 busuanzi: on
 
 # 百度统计
-baidutongji: 66e6ff00024c8f7cd188a3f238bda260
+#baidutongji: 66e6ff00024c8f7cd188a3f238bda260
 
 # 输入Gitalk相关设定，即可添加评论区，具体请看教程
 gitalk:

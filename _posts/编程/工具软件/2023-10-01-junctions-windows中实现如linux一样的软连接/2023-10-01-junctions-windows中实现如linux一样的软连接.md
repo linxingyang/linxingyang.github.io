@@ -1,12 +1,12 @@
 ---
-title: 
-description: 
+title: junctions-windows中实现如linux一样的软连接
+description:
 published: true
 date: 2023-11-22T09:53:06.157Z
 tags:
-  - ZY/技术/windows
+  - 编程/工具软件
 editor: markdown
-dateCreated: 
+dateCreated:
 location:
 ---
 
