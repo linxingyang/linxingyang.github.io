@@ -1,4 +1,5 @@
 ---
+layout: post
 title: junctions-windows中实现如linux一样的软连接
 description:
 published: true
@@ -8,6 +9,10 @@ tags:
 editor: markdown
 dateCreated:
 location:
+---
+
+2026-08-16：用久了发现这种方式，某些软件仍然会识别成链接而不可使用。
+
 ---
 
 在windows，如果对一个文件夹右键创建快捷方式，进入文件夹后，再进入子文件夹就会跳到原路径。比如`d:\the\real\path\dir1\a.txt`
