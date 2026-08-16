@@ -9,17 +9,10 @@ permalink: /archive/
 {% endif %}
 
 <ul class="archive">
-  {% for post in site.posts %}
-    {% unless post.next %}
-      <h2>{{ post.date | date: '%Y' }}</h2>
-    {% else %}
-      {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
-      {% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %}
-      {% if year != nyear %}
-        <h2>{{ post.date | date: '%Y' }}</h2>
-      {% endif %}
-    {% endunless %}
-
+  {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+  {% for year_group in posts_by_year %}
+    <h2>{{ year_group.name }} <span class="year-count">({{ year_group.items.size }})</span></h2>
+    {% for post in year_group.items %}
     <li>
       <time>{{ post.date | date: "%Y-%m-%d" }}</time>
       {% if post.link %}
@@ -30,5 +23,6 @@ permalink: /archive/
         {{ post.title }}
       </a>
     </li>
+    {% endfor %}
   {% endfor %}
 </ul>

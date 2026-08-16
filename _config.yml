@@ -7,8 +7,8 @@
 # 井号后面的文字是说明文档，不会被程序读取。
 
 # 描述/签名
-name: 金锐
-description: 轻舟已过万重山
+name: 金锐的博客
+description: 晴朗的日子，应该出去走走
 
 # 输入你的网站域名（如果你没有添加自己的域名，而是直接用GitHub pages分配的域名的话可以省略）
 url: 
@@ -36,12 +36,12 @@ favicon: /images/sys/favicon.ico
 navigation:
   - name: 首页
     url: /
-  - name: 关于
-    url: /about
-  - name: 归档
-    url: /archive
   - name: 标签
     url: /tags
+  - name: 归档
+    url: /archive
+  - name: 关于
+    url: /about
 
 # 每页的文章数
 paginate: 10
@@ -68,14 +68,14 @@ footer-links:
   youtube: # channel/<your_long_string> or user/<user-name>
 
 # 站点页脚的文字
-footer-text: Copyright (c) 2025 金锐 JINRUI
+footer-text: Copyright (c) 2026 金锐 JINRUI
 
 #
 # 评论，注意，请不要同时添加多种不同的评论区
 #
 
 # 输入Disqus shortname，即可添加评论区，请查阅文档，设置自己的disqus站点，不要继续使用我的站点loffer
-disqus: linxingyang #shortname
+#disqus: linxingyang #shortname
 
 # 卜算子统计
 busuanzi: on
