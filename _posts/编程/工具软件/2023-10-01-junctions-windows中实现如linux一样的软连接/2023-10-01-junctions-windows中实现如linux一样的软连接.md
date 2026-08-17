@@ -1,8 +1,9 @@
 ---
 layout: post
+published: true
+toc: false
 title: junctions-windows中实现如linux一样的软连接
 description:
-published: true
 date: 2023-11-22T09:53:06.157Z
 tags:
   - 编程/工具软件
