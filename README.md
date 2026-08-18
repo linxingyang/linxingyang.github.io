@@ -2,10 +2,17 @@
 # linxingyang.github.io README
 
 
-## 2023-12-01
-* 添加了 [不蒜子](http://ibruce.info/2015/04/04/busuanzi/)
-* 添加了 [百度统计](https://tongji.baidu.com/)
+## 2026-08-17
+- 砍掉一些加载的JS、字体，加快网页加载速度
 
+## 2023-12-01
+- 添加了 [不蒜子](http://ibruce.info/2015/04/04/busuanzi/)
+- 添加了 [百度统计](https://tongji.baidu.com/)
+
+
+
+
+---
 
 # LOFFER README
 
@@ -82,7 +89,6 @@ LOFFER只是容器，你的posts才是博客的核心。
 * [Jekyll](https://github.com/jekyll/jekyll) - 这是本站存在的根基
 * [Kiko-now](<https://github.com/aweekj/kiko-now>) - 我首先是fork这个主题，然后再其上进行修改汉化，才有了LOFFER
 * [Font Awesome](<https://fontawesome.com/>) - 社交网络图标来自FontAwesome的免费开源内容
-
 
 
 ## 帮助这个项目
