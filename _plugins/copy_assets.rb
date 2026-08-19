@@ -31,7 +31,10 @@ copy_incremental = lambda do |src, dest|
       FileUtils.rm_f(target) if File.file?(target)
       copy_incremental.call(item, target)
     else
-      # 文件:直接覆盖拷贝(增量更新);不删除目标里源没有的文件
+      # 内容相同则跳过拷贝。
+      # 若不管内容一律 cp,会更新目标 mtime,触发 watch 检测到变化并重建,
+      # 重建又触发 cp……形成无限循环,还会把 listen 的监听线程拖崩。
+      next if File.exist?(target) && FileUtils.compare_file(item, target)
       FileUtils.cp(item, target)
     end
   end
