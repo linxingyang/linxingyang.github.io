@@ -362,12 +362,12 @@ img {
   .site-avatar {
     margin:0 auto;
     display: block;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
 
     @include mobile {
-      width: 120px;
-      height: 120px;
+      width: 90px;
+      height: 90px;
     }
 
     img {
@@ -726,6 +726,8 @@ footer {
   p {
     font-size: $small-font-size;
     color: $base-lighten-color;
+    margin: 0.3em 0;
+    line-height: 1.4;
   }
 
   .svg-icon {
