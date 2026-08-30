@@ -1,0 +1,603 @@
+/* ==========================================================
+   简历页面样式
+   - 屏幕上模拟一张 A4 纸
+   - 打印时自动铺满 A4，并隐藏侧边栏 / 页脚 / 按钮
+   ========================================================== */
+
+$r-line: $oc-gray-3;
+$r-line-light: $oc-gray-2;
+$r-accent: $oc-teal-7;
+$r-accent-soft: $oc-teal-0;
+$r-muted: $oc-gray-6;
+
+.resume {
+  padding: 30px 0 60px;
+
+  @include mobile {
+    padding: 16px 0 40px;
+  }
+}
+
+/* ---------- 工具条（打印时隐藏） ---------- */
+.resume__toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.resume__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  font-family: inherit;
+  font-size: $small-font-size;
+  color: #fff;
+  background: $r-accent;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background .2s;
+
+  .r-icon {
+    width: 15px;
+    height: 15px;
+  }
+
+  &:hover {
+    background: $oc-teal-8;
+  }
+}
+
+.resume__tip {
+  font-size: $small-font-size;
+  color: $r-muted;
+}
+
+/* ---------- 纸张 ---------- */
+.resume__paper {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 210mm;
+  min-height: 260mm;
+  margin: 0 auto;
+  padding: 14mm 15mm;
+  background: #fff;
+  border: 1px solid $r-line-light;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .08);
+  color: $base-color;
+
+  @include mobile {
+    min-height: 0;
+    padding: 22px 18px;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+/* ---------- 头部 ---------- */
+.resume__header {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid $r-accent;
+
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+.resume__avatar {
+  flex: none;
+  width: 88px;
+  height: 88px;
+  margin: 0;
+  border-radius: 4px;
+  object-fit: cover;
+  border: 1px solid $r-line-light;
+}
+
+.resume__ident {
+  flex: 1;
+  min-width: 0;
+}
+
+.resume__name {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.3;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+.resume__headline {
+  margin: 2px 0 8px;
+  font-size: $small-font-size;
+  color: $r-accent;
+  letter-spacing: 1px;
+}
+
+.resume__contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  margin: 0;
+  font-size: $small-font-size;
+
+  > li:before {
+    content: "";
+  }
+
+  > li {
+    margin: 0;
+  }
+}
+
+.resume__contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: $oc-gray-7;
+
+  .r-icon {
+    width: 13px;
+    height: 13px;
+    color: $r-accent;
+    flex: none;
+  }
+}
+
+/* ---------- 区块 ---------- */
+.r-section {
+  margin-top: 20px;
+  break-inside: auto;
+}
+
+.r-section__title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 10px;
+  padding: 0 0 5px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: $base-color;
+  border-bottom: 1px solid $r-line-light;
+  break-after: avoid;
+
+  .r-icon {
+    width: 16px;
+    height: 16px;
+    color: $r-accent;
+  }
+
+  &:before {
+    content: "";
+    display: inline-block;
+    width: 3px;
+    height: 15px;
+    background: $r-accent;
+    border-radius: 2px;
+  }
+}
+
+.r-summary {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.85;
+  text-align: justify;
+}
+
+/* ---------- 基本信息 / 求职意向 ---------- */
+.r-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px 28px;
+  margin: 0;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+
+  > li:before {
+    content: "";
+  }
+
+  > li {
+    margin: 0;
+    display: flex;
+    font-size: 14px;
+    line-height: 1.9;
+    border-bottom: 1px dashed $r-line-light;
+  }
+}
+
+.r-fact__label {
+  flex: none;
+  width: 76px;
+  color: $r-muted;
+}
+
+.r-fact__value {
+  flex: 1;
+  color: $base-color;
+}
+
+/* ---------- 技能 ---------- */
+.r-skill-group {
+  display: flex;
+  gap: 14px;
+  padding: 5px 0;
+  border-bottom: 1px dashed $r-line-light;
+
+  &:last-of-type {
+    border-bottom: 0;
+  }
+
+  @include mobile {
+    flex-direction: column;
+    gap: 2px;
+  }
+}
+
+.r-skill-group__name {
+  flex: none;
+  width: 84px;
+  font-size: 14px;
+  font-weight: 700;
+  color: $oc-gray-7;
+  line-height: 1.9;
+}
+
+.r-skill-group__items {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 24px;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.r-skill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.9;
+}
+
+.r-skill__name {
+  flex: none;
+  width: 118px;
+  font-size: 14px;
+
+  @include mobile {
+    width: 100px;
+  }
+}
+
+.r-skill__bar {
+  flex: 1;
+  height: 6px;
+  min-width: 40px;
+  background: $oc-gray-1;
+  border-radius: 3px;
+  overflow: hidden;
+
+  i {
+    display: block;
+    height: 100%;
+    background: $r-accent;
+    border-radius: 3px;
+  }
+}
+
+.r-skill__level {
+  flex: none;
+  width: 30px;
+  text-align: right;
+  font-size: $small-font-size;
+  color: $r-muted;
+}
+
+.r-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0 0;
+
+  > li:before {
+    content: "";
+  }
+
+  > li {
+    margin: 0;
+  }
+}
+
+.r-tag {
+  padding: 1px 9px;
+  font-size: $small-font-size;
+  color: $oc-teal-8;
+  background: $r-accent-soft;
+  border-radius: 3px;
+  line-height: 1.7;
+}
+
+/* ---------- 时间线（工作 / 教育） ---------- */
+.r-timeline {
+  padding-left: 16px;
+  border-left: 1px solid $r-line-light;
+}
+
+.r-item {
+  position: relative;
+  padding-bottom: 14px;
+  break-inside: avoid;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: -21px;
+    top: 9px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid $r-accent;
+  }
+}
+
+.r-item__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.r-item__title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
+.r-item__time {
+  flex: none;
+  font-size: $small-font-size;
+  color: $r-muted;
+  white-space: nowrap;
+}
+
+.r-item__sub {
+  margin: 0 0 4px;
+  font-size: $small-font-size;
+  color: $r-accent;
+}
+
+/* ---------- 列表 ---------- */
+.r-list {
+  margin: 2px 0 0;
+
+  > li:before {
+    content: "";
+  }
+
+  > li {
+    margin: 0;
+    padding-left: 14px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.85;
+    text-align: justify;
+
+    &:before {
+      content: "";
+      position: absolute;
+      left: 2px;
+      top: 11px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: $oc-gray-5;
+    }
+  }
+}
+
+.r-list--sub > li:before {
+  background: $oc-gray-4;
+}
+
+/* ---------- 项目 ---------- */
+.r-projects {
+  margin-top: 8px;
+  padding-left: 12px;
+  border-left: 2px solid $oc-gray-1;
+}
+
+.r-project {
+  padding: 4px 0 6px;
+  break-inside: avoid;
+}
+
+.r-project__head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+}
+
+.r-project__name {
+  font-size: 14px;
+  font-weight: 700;
+
+  &:before {
+    content: "▸ ";
+    color: $r-accent;
+  }
+}
+
+.r-project__meta {
+  font-size: $small-font-size;
+  color: $r-muted;
+}
+
+.r-project__desc {
+  margin: 2px 0 0;
+  font-size: $small-font-size;
+  color: $oc-gray-7;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+/* ---------- 证书 ---------- */
+.r-certs {
+  margin: 0;
+
+  > li:before {
+    content: "";
+  }
+
+  > li {
+    margin: 0;
+    display: flex;
+    gap: 14px;
+    font-size: 14px;
+    line-height: 1.9;
+  }
+}
+
+.r-cert__time {
+  flex: none;
+  width: 60px;
+  color: $r-muted;
+}
+
+/* ---------- 正文 Markdown ---------- */
+.r-md {
+  font-size: 14px;
+  line-height: 1.85;
+
+  p {
+    margin: 0.4em 0;
+    font-size: 14px;
+    text-align: justify;
+  }
+
+  h3 {
+    font-size: 15px;
+    margin: 0.8em 0 0.2em;
+  }
+
+  ul > li:before {
+    content: "•";
+    color: $r-accent;
+  }
+}
+
+/* ---------- 页脚 ---------- */
+.r-footer {
+  margin-top: 22px;
+  padding-top: 10px;
+  border-top: 1px solid $r-line-light;
+  font-size: 12px;
+  color: $r-muted;
+  text-align: center;
+}
+
+/* ==========================================================
+   打印：铺满 A4
+   ========================================================== */
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm 13mm;
+  }
+
+  html,
+  body {
+    font-size: 11pt !important;
+    background: #fff !important;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* 隐藏侧边栏、页脚、工具条等无关内容 */
+  .wrapper-sidebar,
+  .wrapper-footer-mobile,
+  .resume__toolbar,
+  .no-print {
+    display: none !important;
+  }
+
+  /* 内容区占满整页 */
+  #main.wrapper-content {
+    float: none !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+  }
+
+  .container {
+    max-width: none !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  /* 纸张在打印时退化为普通文档流 */
+  .resume {
+    padding: 0 !important;
+  }
+
+  .resume__paper {
+    width: auto !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* 分页控制：标题不与内容分离，条目尽量不跨页断开 */
+  .r-section,
+  .r-item,
+  .r-project,
+  .r-skill-group {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .r-section__title {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .r-section__title:first-of-type {
+    margin-top: 0;
+  }
+
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+
+  .r-footer {
+    display: none;
+  }
+}

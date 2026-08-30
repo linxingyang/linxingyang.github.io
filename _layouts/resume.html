@@ -1,0 +1,219 @@
+---
+layout: default
+---
+
+{%- assign r = site.data.resume -%}
+
+<div class="resume">
+
+  <div class="resume__toolbar no-print">
+    <button type="button" class="resume__btn" onclick="window.print()">
+      {% include resume-icon.html icon="printer" %}
+      <span>打印 / 导出 PDF</span>
+    </button>
+    <span class="resume__tip">打印时请在「更多设置」中勾选 <b>背景图形</b>，技能条颜色才会显示</span>
+  </div>
+
+  <article class="resume__paper">
+
+    <!-- ============ 头部 ============ -->
+    <header class="resume__header">
+      {%- if r.profile.avatar -%}
+      <img class="resume__avatar" src="{{ site.baseurl }}{{ r.profile.avatar }}" alt="{{ r.profile.name }}" />
+      {%- endif -%}
+
+      <div class="resume__ident">
+        <h1 class="resume__name">{{ r.profile.name }}</h1>
+        {%- if r.profile.headline -%}
+        <p class="resume__headline">{{ r.profile.headline }}</p>
+        {%- endif -%}
+
+        {%- if r.profile.contacts -%}
+        <ul class="resume__contacts">
+          {%- for c in r.profile.contacts -%}
+          <li class="resume__contact">
+            {% include resume-icon.html icon=c.icon %}
+            {%- if c.href -%}
+            <a href="{{ c.href }}"{% if c.href contains 'http' %} target="_blank" rel="noopener"{% endif %}>{{ c.value }}</a>
+            {%- else -%}
+            <span>{{ c.value }}</span>
+            {%- endif -%}
+          </li>
+          {%- endfor -%}
+        </ul>
+        {%- endif -%}
+      </div>
+    </header>
+
+    <!-- ============ 个人简介 ============ -->
+    {%- if r.profile.summary -%}
+    <section class="r-section">
+      <h2 class="r-section__title">{% include resume-icon.html icon="user" %}<span>个人简介</span></h2>
+      <p class="r-summary">{{ r.profile.summary }}</p>
+    </section>
+    {%- endif -%}
+
+    <!-- ============ 基本信息 ============ -->
+    {%- if r.profile.facts -%}
+    <section class="r-section">
+      <h2 class="r-section__title">{% include resume-icon.html icon="list" %}<span>基本信息</span></h2>
+      <ul class="r-facts">
+        {%- for f in r.profile.facts -%}
+        <li class="r-fact"><span class="r-fact__label">{{ f.label }}</span><span class="r-fact__value">{{ f.value }}</span></li>
+        {%- endfor -%}
+      </ul>
+    </section>
+    {%- endif -%}
+
+    <!-- ============ 求职意向 ============ -->
+    {%- if r.intention -%}
+    <section class="r-section">
+      <h2 class="r-section__title">{% include resume-icon.html icon="target" %}<span>求职意向</span></h2>
+      <ul class="r-facts">
+        {%- for i in r.intention -%}
+        <li class="r-fact"><span class="r-fact__label">{{ i.label }}</span><span class="r-fact__value">{{ i.value }}</span></li>
+        {%- endfor -%}
+      </ul>
+    </section>
+    {%- endif -%}
+
+    <!-- ============ 专业技能 ============ -->
+    {%- if r.skills -%}
+    <section class="r-section">
+      <h2 class="r-section__title">{% include resume-icon.html icon="tool" %}<span>专业技能</span></h2>
+
+      {%- for g in r.skills -%}
+      <div class="r-skill-group">
+        <div class="r-skill-group__name">{{ g.group }}</div>
+        <div class="r-skill-group__items">
+          {%- for s in g.items -%}
+          <div class="r-skill">
+            <span class="r-skill__name">{{ s.name }}</span>
+            <span class="r-skill__bar"><i style="width: {{ s.level | default: 70 }}%"></i></span>
+            {%- if s.desc -%}<span class="r-skill__level">{{ s.desc }}</span>{%- endif -%}
+          </div>
+          {%- endfor -%}
+        </div>
+      </div>
+      {%- endfor -%}
+
+      {%- if r.keywords -%}
+      <ul class="r-tags">
+        {%- for k in r.keywords -%}
+        <li class="r-tag">{{ k }}</li>
+        {%- endfor -%}
+      </ul>
+      {%- endif -%}
+    </section>
+    {%- endif -%}
+
+    <!-- ============ 工作经历 ============ -->
+    {%- if r.experience -%}
+    <section class="r-section">
+      <h2 class="r-section__title">{% include resume-icon.html icon="briefcase" %}<span>工作经历</span></h2>
+
+      <div class="r-timeline">
+        {%- for job in r.experience -%}
+        <div class="r-item">
+          <div class="r-item__head">
+            <h3 class="r-item__title">{{ job.company }}</h3>
+            <span class="r-item__time">{{ job.time }}</span>
+          </div>
+          <p class="r-item__sub">
+            {{ job.position }}{% if job.department %} · {{ job.department }}{% endif %}
+          </p>
+
+          {%- if job.points -%}
+          <ul class="r-list">
+            {%- for p in job.points -%}<li>{{ p }}</li>{%- endfor -%}
+          </ul>
+          {%- endif -%}
+
+          {%- if job.projects -%}
+          <div class="r-projects">
+            {%- for p in job.projects -%}
+            <div class="r-project">
+              <div class="r-project__head">
+                <span class="r-project__name">{{ p.name }}</span>
+                <span class="r-project__meta">{{ p.role }}{% if p.time %} · {{ p.time }}{% endif %}</span>
+              </div>
+              {%- if p.desc -%}<p class="r-project__desc">{{ p.desc }}</p>{%- endif -%}
+              {%- if p.points -%}
+              <ul class="r-list r-list--sub">
+                {%- for sp in p.points -%}<li>{{ sp }}</li>{%- endfor -%}
+              </ul>
+              {%- endif -%}
+            </div>
+            {%- endfor -%}
+          </div>
+          {%- endif -%}
+        </div>
+        {%- endfor -%}
+      </div>
+    </section>
+    {%- endif -%}
+
+    <!-- ============ 教育背景 ============ -->
+    {%- if r.education -%}
+    <section class="r-section">
+      <h2 class="r-section__title">{% include resume-icon.html icon="book" %}<span>教育背景</span></h2>
+
+      <div class="r-timeline">
+        {%- for e in r.education -%}
+        <div class="r-item">
+          <div class="r-item__head">
+            <h3 class="r-item__title">{{ e.school }}</h3>
+            <span class="r-item__time">{{ e.time }}</span>
+          </div>
+          <p class="r-item__sub">
+            {{ e.major }}{% if e.degree %} · {{ e.degree }}{% endif %}
+          </p>
+          {%- if e.points -%}
+          <ul class="r-list">
+            {%- for p in e.points -%}<li>{{ p }}</li>{%- endfor -%}
+          </ul>
+          {%- endif -%}
+        </div>
+        {%- endfor -%}
+      </div>
+    </section>
+    {%- endif -%}
+
+    <!-- ============ 证书 / 荣誉 ============ -->
+    {%- if r.certificates -%}
+    <section class="r-section">
+      <h2 class="r-section__title">{% include resume-icon.html icon="award" %}<span>证书 / 荣誉</span></h2>
+      <ul class="r-certs">
+        {%- for c in r.certificates -%}
+        <li class="r-cert">
+          <span class="r-cert__time">{{ c.time }}</span>
+          <span class="r-cert__name">{{ c.name }}</span>
+        </li>
+        {%- endfor -%}
+      </ul>
+    </section>
+    {%- endif -%}
+
+    <!-- ============ 兴趣爱好 ============ -->
+    {%- if r.hobbies -%}
+    <section class="r-section">
+      <h2 class="r-section__title">{% include resume-icon.html icon="star" %}<span>兴趣爱好</span></h2>
+      <p class="r-summary">{{ r.hobbies }}</p>
+    </section>
+    {%- endif -%}
+
+    <!-- ============ 正文（about.md 中写的 Markdown） ============ -->
+    {%- assign md = content | strip_newlines | strip -%}
+    {%- if md != "" -%}
+    <section class="r-section">
+      <h2 class="r-section__title">{% include resume-icon.html icon="code" %}<span>{{ page.content_title | default: "自我评价" }}</span></h2>
+      <div class="r-md">{{ content }}</div>
+    </section>
+    {%- endif -%}
+
+    <footer class="r-footer">
+      更新日期：{{ site.time | date: "%Y-%m-%d" }}　·　本页面由 Jekyll 生成，可直接打印或另存为 PDF
+    </footer>
+
+  </article>
+</div>

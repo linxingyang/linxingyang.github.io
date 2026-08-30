@@ -1,0 +1,172 @@
+# ============================================================
+# 个人简历数据文件
+# 只改这个文件即可更新 /about/ 页面，不需要动 html / css。
+# 标注 TODO 的地方请替换成你自己的真实信息。
+# 语法提示：
+#   - "键: 值" 冒号后面必须有空格
+#   - 值里若出现冒号 / 井号 / 引号，请用双引号包起来
+#   - 列表项用 "- " 开头，同级缩进必须一致
+# ============================================================
+
+# ---------------- 头部 / 基本信息 ----------------
+profile:
+  name: 林兴洋
+  headline: 嵌入式软件工程师 · Linux / C++ 开发
+  avatar: /images/sys/fd.jpg   # 不需要头像就删掉这一行
+  summary: >-
+    7 年嵌入式与桌面软件开发经验，长期从事工业人机界面（HMI）与上位机软件的研发工作。
+    熟悉 Linux 应用开发、Qt / C++ 桌面开发、多线程与串口 / 网络通信，
+    具备从需求评审、方案设计、编码实现到量产维护的完整项目交付经验，
+    习惯沉淀技术文档，乐于在团队内做知识分享。
+
+  contacts:
+    # - icon: phone
+    #   label: 电话
+    #   value: 138-0000-0000          # TODO
+    #   href: "tel:13800000000"       # TODO
+    - icon: mail
+      label: 邮箱
+      value: linxingy@foxmail.com
+      href: "mailto:linxingy@foxmail.com"
+    - icon: github
+      label: GitHub
+      value: github.com/linxingyang
+      href: "https://github.com/linxingyang"
+    - icon: globe
+      label: 博客
+      value: linxingyang.github.io
+      href: "https://linxingyang.github.io"
+    - icon: map-pin
+      label: 现居
+      value: 福建 · 福州            # TODO
+
+  facts:
+    - label: 性别
+      value: 男                     # TODO
+    - label: 工作年限
+      value: 7 年
+    - label: 最高学历
+      value: 本科                   # TODO
+    - label: 毕业院校
+      value: TODO 学校名称          # TODO
+    - label: 专业
+      value: 计算机科学与技术       # TODO
+    - label: 英语水平
+      value: CET-4                  # TODO
+    - label: 当前状态
+      value: 在职，可一个月内到岗
+    - label: 期望城市
+      value: 福州
+
+# ---------------- 求职意向 ----------------
+intention:
+  - label: 目标职位
+    value: 嵌入式软件工程师 / C++ 软件工程师
+  - label: 期望行业
+    value: 工业自动化 / 物联网 / 智能硬件
+  - label: 期望薪资
+    value: 面议
+  - label: 到岗时间
+    value: 一个月内
+
+# ---------------- 专业技能 ----------------
+# level 为熟练度百分比（0-100），desc 为文字描述，两者都可省略
+skills:
+  - group: 编程语言
+    items:
+      - { name: C / C++, level: 90, desc: 精通 }
+      - { name: Python,  level: 70, desc: 熟练 }
+      - { name: Shell,   level: 75, desc: 熟练 }
+      - { name: Lua,     level: 55, desc: 了解 }
+  - group: 系统与平台
+    items:
+      - { name: Linux 应用开发,    level: 88, desc: 精通 }
+      - { name: 嵌入式 Linux / ARM, level: 80, desc: 熟练 }
+      - { name: 多线程 / 多进程,   level: 82, desc: 熟练 }
+      - { name: RTOS,              level: 65, desc: 了解 }
+  - group: 框架与库
+    items:
+      - { name: Qt / QML,        level: 85, desc: 精通 }
+      - { name: STL / Boost,     level: 78, desc: 熟练 }
+      - { name: Socket / 串口通信, level: 85, desc: 精通 }
+      - { name: SQLite,          level: 70, desc: 熟练 }
+  - group: 工具与工程
+    items:
+      - { name: Git,             level: 85, desc: 精通 }
+      - { name: CMake / Makefile, level: 80, desc: 熟练 }
+      - { name: GDB / 性能调优,  level: 72, desc: 熟练 }
+      - { name: Docker / CI,     level: 65, desc: 了解 }
+
+# 技能关键词标签
+keywords:
+  - 嵌入式 Linux
+  - C++11/14
+  - Qt
+  - 多线程
+  - TCP / UDP
+  - Modbus
+  - 串口通信
+  - 交叉编译
+  - CMake
+  - Git
+  - 性能优化
+  - 技术文档
+
+# ---------------- 工作经历 ----------------
+# projects 为该公司下的项目，可整段删除
+experience:
+  - company: 福建富昌维控电子科技股份有限公司
+    time: 2018.11 - 至今
+    position: 嵌入式软件工程师
+    department: 研发中心
+    points:
+      - 负责工业人机界面（HMI）与组态软件的 Linux 应用层开发，参与 3 代产品从立项到量产的完整周期。
+      - 基于 C++ / Qt 重构上位机组态软件核心模块，界面启动与画面切换性能显著提升（TODO：补充具体数据）。
+      - 设计并实现设备与 PLC 的通信协议栈（Modbus RTU / TCP、串口），已在多条产品线复用。
+      - 搭建交叉编译与自动化构建脚本（CMake + Shell），出包时间由 30 分钟缩短至 5 分钟。
+      - 主导现场疑难问题定位（GDB、coredump、日志追踪），累计输出内部技术文档 20+ 篇。
+      - 指导新人熟悉代码框架与开发流程，承担小组内代码评审工作。
+    projects:
+      - name: HMI 组态软件                 # TODO：换成真实项目名
+        role: 核心开发
+        time: 2021.03 - 至今
+        desc: 面向工业现场的触摸屏组态编辑与运行平台，支持画面编辑、设备通信与脚本扩展。
+        points:
+          - 基于 Qt 实现画面编辑器，支持图元拖拽、属性绑定与撤销 / 重做；
+          - 设计脚本引擎接口，支持 Lua 扩展现场设备逻辑；
+          - 优化渲染与刷新策略，复杂画面帧率提升约 30%（TODO：核实数据）。
+      - name: PLC 编程与下载工具
+        role: 主要负责人
+        time: 2019.05 - 2021.02
+        desc: 面向公司 PLC 产品的上位机编程、下载与在线调试工具。
+        points:
+          - 实现工程编译、语法检查与在线监控；
+          - 通过串口 / 网口完成固件下载与在线调试，下载成功率提升至 99% 以上。
+  - company: 福建新大陆软件公司
+    time: 2017.7 - 2017.12
+    position: 软件开发工程师
+    points:
+      - 参与公司 XXX 系统的功能开发与缺陷修复（TODO：补充具体系统与职责）。
+      - 熟悉企业级开发流程：需求评审、代码规范、单元测试与缺陷跟踪。
+
+# ---------------- 教育背景 ----------------
+education:
+  - school: TODO 学校名称
+    time: 2014.09 - 2018.06        # TODO
+    major: 计算机科学与技术
+    degree: 本科
+    points:
+      - 主修课程：C 语言程序设计、数据结构、操作系统、计算机网络、计算机组成原理。（TODO：按需调整）
+
+# ---------------- 证书 / 荣誉 ----------------
+# 没有就整段删除
+certificates:
+  - time: 2016
+    name: 全国大学英语四级（CET-4）   # TODO
+  - time: 2019
+    name: TODO 证书 / 荣誉名称
+  - time: 2022
+    name: TODO 证书 / 荣誉名称（如公司年度优秀员工）
+
+# ---------------- 兴趣爱好 ----------------
+hobbies: 编程 / 阅读 / 美食
