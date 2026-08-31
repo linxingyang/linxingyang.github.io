@@ -8,37 +8,211 @@ permalink: /tags/
   <h2>No post found</h2>
 {% endif %}
 
-<div class="tags">
-  <ul class="label">
-    {% for tag in site.tags %}
-    <li>
-      <a href="#{{ tag[0] }}">
-        <span>{{ tag[0] }}</span>
-        <span class="count">{{ tag[1] | size }}</span>
-      </a>
-    </li>
-    {% endfor %}
-  </ul>
+{% comment %}
+  构建一级标签（父标签）列表：
+  取每个标签名第一段（/ 之前的部分）作为父标签，去重后按名称排序
+{% endcomment %}
+{% assign parents = "" | split: "," %}
+{% for tag in site.tags %}
+  {% assign parts = tag[0] | split: "/" %}
+  {% assign parent = parts[0] %}
+  {% unless parents contains parent %}
+    {% assign parents = parents | push: parent %}
+  {% endunless %}
+{% endfor %}
+{% assign parents = parents | sort %}
 
-  {% for tag in site.tags %}
-    <h2 id="{{ tag[0] }}">
-      {{ tag[0] }}
-    </h2>
-    <ul class="tag">
-      {% for post in tag[1] %}
-        {% if post.title != null %}
-          <li>
-              <time>{{ post.date | date: "%Y-%m-%d" }}</time>
-            {% if post.link %}
-              <a href="{{ post.link }}">
-            {% else %}
-              <a href="{{ site.baseurl }}{{ post.url }}">
-            {% endif %}
-                {{ post.title }}
-              </a>
-          </li>
-        {% endif %}
+<div class="tags-page">
+  <aside class="tag-tree">
+    <!-- <h2 class="tag-tree-title">标签列表</h2> -->
+    <ul class="tree">
+      {% for parent in parents %}
+        {% assign children = "" | split: "," %}
+        {% assign parent_count = 0 %}
+        {% for tag in site.tags %}
+          {% assign parts = tag[0] | split: "/" %}
+          {% if parts[0] == parent %}
+            {% assign children = children | push: tag %}
+            {% assign parent_count = parent_count | plus: tag[1].size %}
+          {% endif %}
+        {% endfor %}
+        {% assign children = children | sort %}
+        {% assign parent_id = parent | replace: "/", "-" %}
+        <li class="tree-parent">
+          <div class="tree-row">
+            <button type="button" class="tree-toggle" data-target="tree-{{ parent_id }}" aria-label="折叠或展开 {{ parent }}">▾</button>
+            <a href="#{{ parent_id }}" class="tree-link">
+              {{ parent }}
+              <span class="count">{{ parent_count }}</span>
+            </a>
+          </div>
+          <ul class="tree-children" id="tree-{{ parent_id }}">
+            {% for child in children %}
+              {% assign child_name = child[0] | split: "/" | last %}
+              {% assign child_id = child[0] | replace: "/", "-" %}
+              <li class="tree-child">
+                <a href="#{{ child_id }}" class="tree-link">
+                  {{ child_name }}
+                  <span class="count">{{ child[1].size }}</span>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </li>
       {% endfor %}
     </ul>
-  {% endfor %}
+  </aside>
+
+  <div class="tag-posts">
+    {% for parent in parents %}
+      {% assign children = "" | split: "," %}
+      {% assign parent_count = 0 %}
+      {% for tag in site.tags %}
+        {% assign parts = tag[0] | split: "/" %}
+        {% if parts[0] == parent %}
+          {% assign children = children | push: tag %}
+          {% assign parent_count = parent_count | plus: tag[1].size %}
+        {% endif %}
+      {% endfor %}
+      {% assign children = children | sort %}
+      {% assign parent_id = parent | replace: "/", "-" %}
+      <section class="tag-group" id="{{ parent_id }}">
+        <h2>
+          {{ parent }}
+          <span class="count">{{ parent_count }}</span>
+        </h2>
+        {% for child in children %}
+          {% assign child_name = child[0] | split: "/" | last %}
+          {% assign child_id = child[0] | replace: "/", "-" %}
+          <section class="tag-subgroup" id="{{ child_id }}">
+            <h3>
+              {{ child_name }}
+              <span class="count">{{ child[1].size }}</span>
+            </h3>
+            <ul class="tag">
+              {% for post in child[1] %}
+                {% if post.title != null %}
+                  <li>
+                    <time>{{ post.date | date: "%Y-%m-%d" }}</time>
+                    {% if post.link %}
+                      <a href="{{ post.link }}">
+                    {% else %}
+                      <a href="{{ site.baseurl }}{{ post.url }}">
+                    {% endif %}
+                      {{ post.title }}
+                    </a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </section>
+        {% endfor %}
+      </section>
+    {% endfor %}
+  </div>
 </div>
+
+<script>
+(function () {
+  // 左侧树：默认展开，点击箭头折叠 / 展开
+  document.querySelectorAll('.tag-tree .tree-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var group = document.getElementById(btn.getAttribute('data-target'));
+      if (!group) return;
+      var collapsed = group.classList.toggle('collapsed');
+      btn.textContent = collapsed ? '\u25B8' : '\u25BE';
+    });
+  });
+
+  // 点击左侧标签：高亮当前项，并将右侧对应分组滚动到内容页顶部
+  var links = document.querySelectorAll('.tag-tree .tree-link');
+  var posts = document.querySelector('.tag-posts');
+  function clearActive() {
+    links.forEach(function (l) { l.classList.remove('active'); });
+  }
+  function getSpacer() {
+    return document.querySelector('.tag-jump-spacer');
+  }
+  function removeSpacer() {
+    var s = getSpacer();
+    if (s) s.remove();
+  }
+  function jumpTo(id) {
+    var target = document.getElementById(id);
+    if (!target || !posts) return;
+    // 先移除旧的占位，恢复真实页面高度，再判断是否真的需要占位，避免高度突变导致跳动
+    removeSpacer();
+    var vh = window.innerHeight;
+    var dest = target.getBoundingClientRect().top + window.scrollY - 12;
+    dest = Math.max(0, dest);
+    // 移除占位后目标仍无法滚到顶部（内容不足），在右侧列表底部补一段占位
+    if (dest + vh > document.documentElement.scrollHeight) {
+      var spacer = getSpacer();
+      if (!spacer) {
+        spacer = document.createElement('div');
+        spacer.className = 'tag-jump-spacer';
+        posts.appendChild(spacer);
+      }
+      spacer.style.height = vh + 'px';
+    }
+    window.scrollTo({ top: dest, behavior: 'smooth' });
+  }
+  var suppressScrollHighlight = false;
+  links.forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      suppressScrollHighlight = true;
+      clearActive();
+      link.classList.add('active');
+      jumpTo(link.getAttribute('href').slice(1));
+    });
+  });
+
+  // 滚动右侧分组时自动高亮左侧对应标签
+  // 用 scroll + 探测线判断“视口顶部附近的分组”，避免父/子分组同时可见时高亮跑偏
+  var map = {};
+  links.forEach(function (link) {
+    var id = link.getAttribute('href').slice(1);
+    if (document.getElementById(id)) { map[id] = link; }
+  });
+  function updateActiveFromScroll() {
+    var probe = 80;
+    var best = null;
+    var bestTop = -Infinity;
+    Object.keys(map).forEach(function (id) {
+      var top = document.getElementById(id).getBoundingClientRect().top;
+      if (top <= probe && top > bestTop) {
+        bestTop = top;
+        best = map[id];
+      }
+    });
+    if (!best) {
+      Object.keys(map).forEach(function (id) {
+        var top = document.getElementById(id).getBoundingClientRect().top;
+        if (!best || top < bestTop) {
+          bestTop = top;
+          best = map[id];
+        }
+      });
+    }
+    if (best) {
+      clearActive();
+      best.classList.add('active');
+    }
+  }
+  // 用户手动滚动（滚轮/触摸/键盘）时恢复自动高亮
+  ['wheel', 'touchstart', 'keydown'].forEach(function (type) {
+    window.addEventListener(type, function () { suppressScrollHighlight = false; }, { passive: true });
+  });
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (suppressScrollHighlight || ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      ticking = false;
+      if (suppressScrollHighlight) return;
+      updateActiveFromScroll();
+    });
+  }, { passive: true });
+})();
+</script>

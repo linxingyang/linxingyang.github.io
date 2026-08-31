@@ -43,6 +43,10 @@ navigation:
   - name: 关于
     url: /about
 
+# 开关：开启（true）后，将「关于」页作为主页（访问 / 直接渲染简历），并隐藏导航中的「首页」；
+# 关闭（false）则保持原样（主页为文章列表，导航保留「首页」）
+homepage_about: true
+
 # 每页的文章数
 paginate: 10
 

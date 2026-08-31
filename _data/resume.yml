@@ -11,7 +11,7 @@
 # ---------------- 头部 / 基本信息 ----------------
 profile:
   name: 林兴洋
-  headline: 嵌入式软件工程师 · Linux / C++ 开发
+  headline: 服务端开发工程师 · Linux / C++ / Java 开发
   avatar: /images/sys/fd.jpg   # 不需要头像就删掉这一行
   summary: >-
     7 年嵌入式与桌面软件开发经验，长期从事工业人机界面（HMI）与上位机软件的研发工作。
@@ -48,11 +48,11 @@ profile:
     - label: 最高学历
       value: 本科                   # TODO
     - label: 毕业院校
-      value: TODO 学校名称          # TODO
+      value: 福建理工大学          # TODO
     - label: 专业
-      value: 计算机科学与技术       # TODO
+      value: 信息管理与信息系统       # TODO
     - label: 英语水平
-      value: CET-4                  # TODO
+      value: CET-6                  # TODO
     - label: 当前状态
       value: 在职，可一个月内到岗
     - label: 期望城市
@@ -75,8 +75,9 @@ skills:
   - group: 编程语言
     items:
       - { name: C / C++, level: 90, desc: 精通 }
-      - { name: Python,  level: 70, desc: 熟练 }
       - { name: Shell,   level: 75, desc: 熟练 }
+      - { name: Go,  level: 70, desc: 了解 }
+      - { name: Python,  level: 70, desc: 了解 }
       - { name: Lua,     level: 55, desc: 了解 }
   - group: 系统与平台
     items:
@@ -92,10 +93,10 @@ skills:
       - { name: SQLite,          level: 70, desc: 熟练 }
   - group: 工具与工程
     items:
-      - { name: Git,             level: 85, desc: 精通 }
+      - { name: Git,             level: 85, desc: 熟练 }
       - { name: CMake / Makefile, level: 80, desc: 熟练 }
-      - { name: GDB / 性能调优,  level: 72, desc: 熟练 }
-      - { name: Docker / CI,     level: 65, desc: 了解 }
+      - { name: Docker / CI,     level: 80, desc: 熟练 }
+      - { name: GDB / 性能调优,  level: 72, desc: 了解 }
 
 # 技能关键词标签
 keywords:
@@ -151,9 +152,9 @@ experience:
 
 # ---------------- 教育背景 ----------------
 education:
-  - school: TODO 学校名称
-    time: 2014.09 - 2018.06        # TODO
-    major: 计算机科学与技术
+  - school: 福建理工大学（原 福建工程学院）
+    time: 2013.09 - 2017.06        # TODO
+    major: 信息管理与信息技术
     degree: 本科
     points:
       - 主修课程：C 语言程序设计、数据结构、操作系统、计算机网络、计算机组成原理。（TODO：按需调整）
@@ -162,11 +163,13 @@ education:
 # 没有就整段删除
 certificates:
   - time: 2016
-    name: 全国大学英语四级（CET-4）   # TODO
+    name: 全国大学英语四级（CET-6）   # TODO
   - time: 2019
-    name: TODO 证书 / 荣誉名称
+    name: 中级软件设计师
   - time: 2022
-    name: TODO 证书 / 荣誉名称（如公司年度优秀员工）
+    name: 维控科技 - 公司年度优秀员工
+  - time: 2022
+    name: 维控科技 - 高级技术专家
 
 # ---------------- 兴趣爱好 ----------------
 hobbies: 编程 / 阅读 / 美食

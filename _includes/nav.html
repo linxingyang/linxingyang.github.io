@@ -12,6 +12,7 @@
   <div class="navlist">
     <nav>
       {% for nav in site.navigation %}
+      {% if site.homepage_about and nav.url == '/' %}{% continue %}{% endif %}
       {% if nav.url contains 'http://' or nav.url contains 'https://' %}
       <a href="{{ nav.url }}">{{ nav.name }}</a>
       {% else %}

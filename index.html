@@ -2,6 +2,10 @@
 layout: default
 ---
 
+{% if site.homepage_about %}
+  {% assign about_page = site.pages | where: "url", "/about/" | first %}
+  {% include resume-body.html content=about_page.content content_title=about_page.content_title %}
+{% else %}
 {% if site.posts.size == 0 %}
   <h2>No post found</h2>
 {% endif %}
@@ -109,3 +113,4 @@ layout: default
     </span>
   {% endif %}
 </div>
+{% endif %}

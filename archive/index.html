@@ -8,21 +8,141 @@ permalink: /archive/
   <h2>No post found</h2>
 {% endif %}
 
-<ul class="archive">
-  {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
-  {% for year_group in posts_by_year %}
-    <h2>{{ year_group.name }} <span class="year-count">({{ year_group.items.size }})</span></h2>
-    {% for post in year_group.items %}
-    <li>
-      <time>{{ post.date | date: "%Y-%m-%d" }}</time>
-      {% if post.link %}
-      <a href="{{ post.link }}">
-      {% else %}
-      <a href="{{ site.baseurl }}{{ post.url }}">
-      {% endif %}
-        {{ post.title }}
-      </a>
-    </li>
+{% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+
+<div class="tags-page">
+  <aside class="tag-tree">
+    <ul class="tree">
+      {% for year_group in posts_by_year %}
+        <li>
+          <a href="#{{ year_group.name }}" class="tree-link">
+            {{ year_group.name }}
+            <span class="count">{{ year_group.items.size }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </aside>
+
+  <div class="tag-posts">
+    {% for year_group in posts_by_year %}
+      <section class="tag-group" id="{{ year_group.name }}">
+        <h2>
+          {{ year_group.name }}
+          <span class="count">{{ year_group.items.size }}</span>
+        </h2>
+        <ul class="tag">
+          {% for post in year_group.items %}
+            {% if post.title != null %}
+              <li>
+                <time>{{ post.date | date: "%Y-%m-%d" }}</time>
+                {% if post.link %}
+                  <a href="{{ post.link }}">
+                {% else %}
+                  <a href="{{ site.baseurl }}{{ post.url }}">
+                {% endif %}
+                  {{ post.title }}
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </section>
     {% endfor %}
-  {% endfor %}
-</ul>
+  </div>
+</div>
+
+<script>
+(function () {
+  // 点击左侧年份：高亮当前项，并将右侧对应分组滚动到内容页顶部
+  var links = document.querySelectorAll('.tag-tree .tree-link');
+  var posts = document.querySelector('.tag-posts');
+  function clearActive() {
+    links.forEach(function (l) { l.classList.remove('active'); });
+  }
+  function getSpacer() {
+    return document.querySelector('.tag-jump-spacer');
+  }
+  function removeSpacer() {
+    var s = getSpacer();
+    if (s) s.remove();
+  }
+  function jumpTo(id) {
+    var target = document.getElementById(id);
+    if (!target || !posts) return;
+    // 先移除旧的占位，恢复真实页面高度，再判断是否真的需要占位，避免高度突变导致跳动
+    removeSpacer();
+    var vh = window.innerHeight;
+    var dest = target.getBoundingClientRect().top + window.scrollY - 12;
+    dest = Math.max(0, dest);
+    // 移除占位后目标仍无法滚到顶部（内容不足），在右侧列表底部补一段占位
+    if (dest + vh > document.documentElement.scrollHeight) {
+      var spacer = getSpacer();
+      if (!spacer) {
+        spacer = document.createElement('div');
+        spacer.className = 'tag-jump-spacer';
+        posts.appendChild(spacer);
+      }
+      spacer.style.height = vh + 'px';
+    }
+    window.scrollTo({ top: dest, behavior: 'smooth' });
+  }
+  var suppressScrollHighlight = false;
+  links.forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      suppressScrollHighlight = true;
+      clearActive();
+      link.classList.add('active');
+      jumpTo(link.getAttribute('href').slice(1));
+    });
+  });
+
+  // 滚动右侧分组时自动高亮左侧对应年份
+  // 用 scroll + 探测线判断“视口顶部附近的分组”，避免分组同时可见时高亮跑偏
+  var map = {};
+  links.forEach(function (link) {
+    var id = link.getAttribute('href').slice(1);
+    if (document.getElementById(id)) { map[id] = link; }
+  });
+  function updateActiveFromScroll() {
+    var probe = 80;
+    var best = null;
+    var bestTop = -Infinity;
+    Object.keys(map).forEach(function (id) {
+      var top = document.getElementById(id).getBoundingClientRect().top;
+      if (top <= probe && top > bestTop) {
+        bestTop = top;
+        best = map[id];
+      }
+    });
+    if (!best) {
+      Object.keys(map).forEach(function (id) {
+        var top = document.getElementById(id).getBoundingClientRect().top;
+        if (!best || top < bestTop) {
+          bestTop = top;
+          best = map[id];
+        }
+      });
+    }
+    if (best) {
+      clearActive();
+      best.classList.add('active');
+    }
+  }
+  // 用户手动滚动（滚轮/触摸/键盘）时恢复自动高亮
+  ['wheel', 'touchstart', 'keydown'].forEach(function (type) {
+    window.addEventListener(type, function () { suppressScrollHighlight = false; }, { passive: true });
+  });
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (suppressScrollHighlight || ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      ticking = false;
+      if (suppressScrollHighlight) return;
+      updateActiveFromScroll();
+    });
+  }, { passive: true });
+})();
+</script>
