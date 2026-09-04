@@ -33,38 +33,40 @@ $base-font-size: 16px;
 $small-font-size: 14px;
 
 // Colors
-$base-color: $oc-gray-8;
-$base-lighten-color: $oc-gray-6;
-$base-lightener-color: $oc-gray-4;
+// 颜色改为引用 CSS 自定义属性（见 style.scss 中 :root / [data-theme="dark"] 定义），
+// 以便支持「关灯 / 开灯」暗色模式切换。
+$base-color: var(--text);
+$base-lighten-color: var(--text-muted);
+$base-lightener-color: var(--text-faint);
 
-$background-color: $oc-gray-0;
-$background-lighten-color: hsla(210, 17%, 98%, 0.42);
+$background-color: var(--bg);
+$background-lighten-color: var(--bg-hover);
 
-$text-color: $base-color;
-$link-color: $oc-teal-8;
-$link-lighten-color: $oc-teal-6;
-$link-bghv-color: $oc-teal-0;
-$divider-color: $oc-gray-1;
+$text-color: var(--text);
+$link-color: var(--link);
+$link-lighten-color: var(--link-hover);
+$link-bghv-color: var(--link-bg);
+$divider-color: var(--divider);
 
-$error-color:$oc-red-8;
+$error-color: var(--danger);
 
-$table-border-color: $oc-gray-2;
-$table-background-color: $oc-gray-1;
+$table-border-color: var(--table-border);
+$table-background-color: var(--table-stripe);
 
-$blockquote-color: $base-lighten-color;
-$blockquote-border-color: $oc-gray-3;
+$blockquote-color: var(--text-muted);
+$blockquote-border-color: var(--divider-strong);
 
-$footnote-link-border-color: $oc-gray-1;
-$footnote-link-background-over-color: $oc-gray-1;
+$footnote-link-border-color: var(--divider);
+$footnote-link-background-over-color: var(--divider);
 
 // $selection-color: $oc-black;
-$selection-background-color: $oc-gray-3;
+$selection-background-color: var(--selection);
 
-$tag-index-label-background-color: $oc-gray-2;
-$tag-index-count-background-color: hsla(210, 7%, 56%, 0.102);
+$tag-index-label-background-color: var(--tag-bg);
+$tag-index-count-background-color: var(--tag-count-bg);
 
-$footer-border-color: $oc-gray-2;
-$footer-background-color: $oc-gray-0;
+$footer-border-color: var(--divider);
+$footer-background-color: var(--bg);
 
 // List
 $li-bottom-space: 0.4em;

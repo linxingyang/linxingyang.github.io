@@ -110,7 +110,9 @@ permalink: /archive/
     var best = null;
     var bestTop = -Infinity;
     Object.keys(map).forEach(function (id) {
-      var top = document.getElementById(id).getBoundingClientRect().top;
+      var el = document.getElementById(id);
+      if (!el) return;
+      var top = el.getBoundingClientRect().top;
       if (top <= probe && top > bestTop) {
         bestTop = top;
         best = map[id];
@@ -118,7 +120,9 @@ permalink: /archive/
     });
     if (!best) {
       Object.keys(map).forEach(function (id) {
-        var top = document.getElementById(id).getBoundingClientRect().top;
+        var el = document.getElementById(id);
+        if (!el) return;
+        var top = el.getBoundingClientRect().top;
         if (!best || top < bestTop) {
           bestTop = top;
           best = map[id];

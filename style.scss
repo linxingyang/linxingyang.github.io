@@ -17,11 +17,13 @@
 
 html {
   font-size: $base-font-size;
+  background-color: var(--bg);
 }
 
 body {
   font-family: $base-font;
   color: $base-color;
+  background-color: var(--bg);
   line-height: 1.7em;
 }
 
@@ -330,6 +332,7 @@ img {
 	position: fixed;
 	z-index: 4;
   border-right: 1px solid $divider-color;
+  transition: transform .3s ease-in-out;
 
   @include mobile {
     width: 100%;
@@ -434,10 +437,72 @@ nav {
 .wrapper-content {
   float: right;
   width: 80%;
+  transition: width .3s ease-in-out;
 
   @include mobile {
     float: none;
     width: 100%;
+  }
+}
+
+// Sidebar 展开/收缩（默认展开，仅桌面端）
+.sidebar-toggle {
+  position: fixed;
+  top: 20px;
+  left: calc(20% - 46px); // 展开时位于侧边栏右上角空白区
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background-color: $background-color;
+  border: 1px solid $divider-color;
+  border-radius: 6px;
+  color: $base-lighten-color;
+  cursor: pointer;
+  transition: left .3s ease-in-out, color .2s ease, background-color .2s ease;
+
+  svg {
+    transition: transform .3s ease-in-out;
+  }
+
+  &:hover {
+    color: $link-color;
+    background-color: $background-lighten-color;
+  }
+
+  @include mobile {
+    display: none;
+  }
+}
+
+body.sidebar-collapsed {
+  .wrapper-sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar-toggle {
+    left: 0;
+
+    svg {
+      transform: scaleX(-1);
+    }
+  }
+
+  .wrapper-content {
+    width: 100%;
+  }
+
+  .toc {
+    left: 0;
+  }
+
+  @include mobile {
+    .wrapper-sidebar {
+      transform: none;
+    }
   }
 }
 
@@ -545,11 +610,12 @@ nav {
 // TOC
 
 .toc {
-  width: 240px;
+  width: 300px;
   height: 100%;
   left: 20%;
   position: fixed;
   z-index: 4;
+  transition: left .3s ease-in-out;
   padding: 60px 20px 0 20px;
   overflow-y: auto;
   
@@ -574,7 +640,7 @@ nav {
 
 @media screen and (max-width:2200px) and (min-width:1200px){
   .withtoc{
-    padding-left: 260px;
+    padding-left: 320px;
   }
 }
 
@@ -716,7 +782,7 @@ nav {
     top: 0;
     max-height: calc(100vh - 40px);
     padding-right: 0;
-    background-color: $white;
+    background-color: var(--bg);
     z-index: 10;
   }
 
@@ -986,3 +1052,258 @@ footer {
 @import "resume";
 
 
+/*************************************************
+ 主题：CSS 变量（亮色为默认值）
+ html[data-theme="dark"] 时整体切换为暗色
+ 由 head.html 中的早期脚本 / 页面右下按钮驱动
+*************************************************/
+
+:root {
+  color-scheme: light;
+
+  // 页面背景 / 悬停底色
+  --bg: #f8f9fa;
+  --bg-hover: #eef0f3;
+
+  // 简历“纸张”及浮层
+  --paper-bg: #ffffff;
+  --paper-shadow: rgba(0, 0, 0, 0.08);
+
+  // 文字
+  --text: #343a40;            // 正文
+  --text-secondary: #495057;  // 次强调
+  --text-muted: #868e96;      // 弱化
+  --text-faint: #ced4da;      // 更弱
+
+  // 链接（teal）
+  --link: #099268;
+  --link-hover: #12b886;
+  --link-bg: #e6fcf5;
+
+  // 分隔线 / 边框
+  --divider: #f1f3f5;
+  --divider-strong: #dee2e6;
+
+  // 行内代码 / 代码块
+  --code-color: #364fc7;
+  --code-bg: #f1f3f5;
+  --code-block-bg: #f8f9fa;
+  --code-block-border: #dee2e6;
+
+  // 选中
+  --selection: #dee2e6;
+
+  // 表格 / 标签
+  --table-border: #e9ecef;
+  --table-stripe: #f1f3f5;
+  --tag-bg: #e9ecef;
+  --tag-count-bg: hsla(210, 7%, 56%, 0.102);
+
+  --danger: #e03131;
+
+  // 简历强调色
+  --accent: #0ca678;
+  --accent-hover: #099268;
+  --accent-strong: #099268;
+  --accent-soft: #e6fcf5;
+  --on-accent: #ffffff;
+
+  // 技能条轨道 / 列表圆点
+  --bar-bg: #f1f3f5;
+  --dot: #adb5bd;
+  --dot-soft: #ced4da;
+}
+
+// 暗色模式（关灯）
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #212529;
+  --bg-hover: #2b3036;
+
+  --paper-bg: #2b3036;
+  --paper-shadow: rgba(0, 0, 0, 0.5);
+
+  --text: #e9ecef;
+  --text-secondary: #ced4da;
+  --text-muted: #adb5bd;
+  --text-faint: #868e96;
+
+  --link: #38d9a9;
+  --link-hover: #63e6be;
+  --link-bg: rgba(56, 217, 169, 0.16);
+
+  --divider: #394046;
+  --divider-strong: #4a535c;
+
+  --code-color: #91a7ff;
+  --code-bg: #31363d;
+  --code-block-bg: #191d22;
+  --code-block-border: #343b44;
+
+  --selection: #47515b;
+
+  --table-border: #3d454e;
+  --table-stripe: #2c3138;
+  --tag-bg: #394046;
+  --tag-count-bg: rgba(173, 181, 189, 0.18);
+
+  --danger: #ff6b6b;
+
+  --accent: #63e6be;
+  --accent-hover: #7ce8c6;
+  --accent-strong: #63e6be;
+  --accent-soft: rgba(99, 230, 190, 0.16);
+  --on-accent: #063b2c;
+
+  --bar-bg: #39414a;
+  --dot: #8a929c;
+  --dot-soft: #6a727c;
+}
+
+// 切换时的平滑过渡（由脚本临时加上 .theme-anim）
+html.theme-anim,
+html.theme-anim * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, fill 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+/*************************************************
+ 关灯 / 开灯按钮
+*************************************************/
+
+.theme-toggle {
+  position: fixed;
+  top: 64px;                       // 位于侧栏折叠按钮下方
+  left: calc(20% - 46px);
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background-color: var(--bg);
+  border: 1px solid var(--divider);
+  border-radius: 6px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: left 0.3s ease-in-out, color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .icon-sun {
+    display: none;
+  }
+
+  &:hover {
+    color: var(--link);
+    background-color: var(--bg-hover);
+    border-color: var(--divider-strong);
+  }
+
+  // 移动端：固定到右上角（侧栏折叠状态下的 left:0 需一并覆盖）
+  @include mobile {
+    top: 16px;
+    left: auto;
+    right: 16px;
+
+    body.sidebar-collapsed & {
+      left: auto;
+      right: 16px;
+    }
+  }
+}
+
+// 折叠侧栏时按钮跟随移动
+body.sidebar-collapsed .theme-toggle {
+  left: 0;
+}
+
+html[data-theme="dark"] .theme-toggle {
+  color: var(--link);
+
+  .icon-sun {
+    display: block;
+  }
+
+  .icon-moon {
+    display: none;
+  }
+}
+
+// 打印：恢复为浅色纸面，避免暗色模式打印出深底浅字
+@media print {
+  :root {
+    --bg: #ffffff;
+    --bg-hover: #f1f3f5;
+    --paper-bg: #ffffff;
+    --paper-shadow: none;
+    --text: #333333;
+    --text-secondary: #444444;
+    --text-muted: #666666;
+    --text-faint: #999999;
+    --link: #099268;
+    --link-hover: #0ca678;
+    --link-bg: #e6fcf5;
+    --divider: #e9ecef;
+    --divider-strong: #d0d0d0;
+    --code-color: #364fc7;
+    --code-bg: #f1f3f5;
+    --code-block-bg: #f8f9fa;
+    --code-block-border: #dee2e6;
+    --selection: #dee2e6;
+    --table-border: #ced4da;
+    --table-stripe: #f1f3f5;
+    --tag-bg: #e9ecef;
+    --tag-count-bg: hsla(210, 7%, 56%, 0.102);
+    --danger: #e03131;
+    --accent: #0ca678;
+    --accent-hover: #099268;
+    --accent-strong: #099268;
+    --accent-soft: #e6fcf5;
+    --on-accent: #ffffff;
+    --bar-bg: #e9ecef;
+    --dot: #adb5bd;
+    --dot-soft: #ced4da;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+  }
+
+  // 打印时把暗色模式的代码高亮 token 还原为深色，保证可见
+  [data-theme="dark"] {
+    .highlight .c, .highlight .cm, .highlight .c1 { color: #999988; }
+    .highlight .cp, .highlight .cs, .highlight .gh, .highlight .bp { color: #999999; }
+    .highlight .gu { color: #aaaaaa; }
+    .highlight .go { color: #888888; }
+    .highlight .gp, .highlight .nn { color: #555555; }
+    .highlight .err { color: #a61717; background-color: #e3d2d2; }
+    .highlight .k, .highlight .kc, .highlight .kd, .highlight .kp,
+    .highlight .kr, .highlight .o, .highlight .ow { color: #000; }
+    .highlight .kt, .highlight .nc { color: #445588; }
+    .highlight .m, .highlight .mf, .highlight .mh, .highlight .mi,
+    .highlight .mo, .highlight .il { color: #009999; }
+    .highlight .s, .highlight .sb, .highlight .sc, .highlight .sd,
+    .highlight .s2, .highlight .se, .highlight .sh, .highlight .si,
+    .highlight .sx, .highlight .s1 { color: #d14; }
+    .highlight .sr { color: #009926; }
+    .highlight .ss { color: #990073; }
+    .highlight .na, .highlight .no, .highlight .nv,
+    .highlight .vc, .highlight .vg, .highlight .vi { color: #008080; }
+    .highlight .nb { color: #0086B3; }
+    .highlight .ni { color: #800080; }
+    .highlight .ne, .highlight .nf { color: #990000; }
+    .highlight .nt { color: #000080; }
+    .highlight .w { color: #bbbbbb; }
+    .highlight .gd { color: #000; background-color: #ffdddd; }
+    .highlight .gd .x { color: #000; background-color: #ffaaaa; }
+    .highlight .gi { color: #000; background-color: #ddffdd; }
+    .highlight .gi .x { color: #000; background-color: #aaffaa; }
+    .highlight .gr, .highlight .gt { color: #aa0000; }
+  }
+}

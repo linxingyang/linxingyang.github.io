@@ -119,6 +119,10 @@
             {{ job.position }}{% if job.department %} · {{ job.department }}{% endif %}
           </p>
 
+          {%- if job.desc -%}
+          <p class="r-item__desc">{{ job.desc }}</p>
+          {%- endif -%}
+
           {%- if job.points -%}
           <ul class="r-list">
             {%- for p in job.points -%}<li>{{ p }}</li>{%- endfor -%}
@@ -127,9 +131,11 @@
 
           {%- if job.projects -%}
           <div class="r-projects">
+            <p class="r-projects__title">重点项目</p>
             {%- for p in job.projects -%}
             <div class="r-project">
               <div class="r-project__head">
+                <span class="r-project__index">{{ forloop.index | prepend: '0' }}</span>
                 <span class="r-project__name">{{ p.name }}</span>
                 <span class="r-project__meta">{{ p.role }}{% if p.time %} · {{ p.time }}{% endif %}</span>
               </div>

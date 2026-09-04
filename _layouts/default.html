@@ -2,7 +2,21 @@
 <html>
   {% include head.html %}
   <body>
+    <script>
+      // 恢复侧边栏折叠状态（默认展开），提前设置避免闪烁
+      try { if (localStorage.getItem('sidebarCollapsed') === '1') { document.body.classList.add('sidebar-collapsed'); } } catch (e) {}
+    </script>
+
     {% include nav.html %}
+
+    <button type="button" id="sidebarToggle" class="sidebar-toggle" aria-label="折叠侧边栏" aria-expanded="true" aria-controls="sidebar">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="11 17 6 12 11 7"></polyline><polyline points="18 17 13 12 18 7"></polyline></svg>
+    </button>
+
+    <button type="button" id="themeToggle" class="theme-toggle" aria-label="开灯" aria-pressed="true">
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+    </button>
 
     {% if page.toc==true %}
       <aside class="toc">
@@ -21,13 +35,114 @@
     {% if site.busuanzi %}
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     {% endif %}
-  </body>
 
-  {% if page.toc==true %}
-  <script>
-    document.getElementById("main").classList.add("withtoc");
-  </script>
-  {% endif %}
+    <script>
+      // 站点根路径（baseurl 为空时即为网站根）
+      window.SITE_BASEURL = "{{ site.baseurl }}";
+    </script>
+    <script>
+      // 兼容笔记中不带前导斜杠的站内图片引用，例如：
+      //   ![](治国/编程/工具软件/xxx/assets/01.png)
+      // 浏览器会把它当作“相对当前页 URL”解析（页面在 /标题/ 下就变 404），
+      // 这里统一补上站点根前缀，转为 /治国/编程/.../assets/01.png。
+      (function () {
+        var BASE = (window.SITE_BASEURL || '').replace(/\/+$/, '');
+        var skipRe = /^(?:[a-z][a-z0-9+.\-]*:|\/\/)/i; // http: https: data: //cdn 等绝对地址
+        document.querySelectorAll('img').forEach(function (el) {
+          var src = el.getAttribute('src');
+          if (!src) return;
+          if (skipRe.test(src)) return;                     // 绝对地址不处理
+          var c = src.charAt(0);
+          if (c === '/' || c === '#' || c === '?') return;  // 站内绝对 / 锚点 / 查询参数不处理
+          if (src.indexOf('../') === 0 || src.indexOf('..\\') === 0) return; // 上级目录相对路径不处理
+          var clean = src.replace(/^[.\/\\]+/, '').replace(/\\/g, '/');
+          el.setAttribute('src', BASE + '/' + clean);
+        });
+      })();
+    </script>
+
+    <script>
+      {% if page.toc==true %}
+      document.getElementById("main").classList.add("withtoc");
+      {% endif %}
+
+      // 侧边栏展开/收缩开关
+      (function () {
+        var btn = document.getElementById('sidebarToggle');
+        if (!btn) return;
+
+        function syncUI() {
+          var collapsed = document.body.classList.contains('sidebar-collapsed');
+          var label = collapsed ? '展开侧边栏' : '折叠侧边栏';
+          btn.setAttribute('aria-expanded', String(!collapsed));
+          btn.setAttribute('aria-label', label);
+          btn.title = label;
+        }
+
+        function setCollapsed(collapsed) {
+          document.body.classList.toggle('sidebar-collapsed', collapsed);
+          try { localStorage.setItem('sidebarCollapsed', collapsed ? '1' : '0'); } catch (e) {}
+          syncUI();
+        }
+
+        syncUI();
+        btn.addEventListener('click', function () {
+          setCollapsed(!document.body.classList.contains('sidebar-collapsed'));
+        });
+      })();
+    </script>
+
+    <script>
+      // 关灯 / 开灯（暗色模式）
+      (function () {
+        var btn = document.getElementById('themeToggle');
+        if (!btn) return;
+        var root = document.documentElement;
+        var STORE_KEY = 'theme';
+
+        function isDark() {
+          return root.getAttribute('data-theme') === 'dark';
+        }
+
+        function setStored(v) {
+          try { localStorage.setItem(STORE_KEY, v); } catch (e) {}
+        }
+
+        // 短暂开启过渡，让颜色平滑切换
+        function animate(cb) {
+          root.classList.add('theme-anim');
+          cb();
+          setTimeout(function () {
+            root.classList.remove('theme-anim');
+          }, 400);
+        }
+
+        function sync() {
+          var dark = isDark();
+          btn.setAttribute('aria-pressed', String(dark));
+          btn.setAttribute('aria-label', dark ? '开灯（日间模式）' : '关灯（夜间模式）');
+          btn.title = dark ? '开灯' : '关灯';
+        }
+
+        function apply(dark) {
+          if (dark) {
+            root.setAttribute('data-theme', 'dark');
+          } else {
+            root.removeAttribute('data-theme');
+          }
+          setStored(dark ? 'dark' : 'light');
+          sync();
+        }
+
+        btn.addEventListener('click', function () {
+          animate(function () { apply(!isDark()); });
+        });
+
+        // 同步按钮状态到当前主题（head 中的初始化脚本已在渲染前设为默认暗色）
+        sync();
+      })();
+    </script>
+  </body>
 
   <div class="wrapper-footer-mobile">
     <footer class="footer">

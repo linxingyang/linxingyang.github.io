@@ -1,6 +1,17 @@
 <head>
   <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
 
+  <script>
+    // 主题初始化：尽可能早地设置 <html data-theme>，避免暗色模式刷新时闪白。
+    // 默认暗黑模式——只有用户手动“开灯”后（localStorage 存了 light）才使用亮色。
+    (function () {
+      try {
+        if (localStorage.getItem('theme') === 'light') return; // 用户手动开过灯
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } catch (e) {}
+    })();
+  </script>
+
   {% include meta.html %}
   {% include baidutongji.html %}
 

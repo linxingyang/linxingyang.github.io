@@ -4,8 +4,8 @@ pre, code {
 
 code.highlighter-rouge {
   font-size: 90%;
-  color: $oc-indigo-9;
-  background-color: $oc-gray-1;
+  color: var(--code-color);
+  background-color: var(--code-bg);
   padding: .1em .2em;
   border-radius: 3px;
 }
@@ -13,14 +13,14 @@ code.highlighter-rouge {
 pre.highlight {
   font-size: $small-font-size;
   padding: .45em .45em .45em .625em;
-  border: 1px solid $oc-gray-3;
+  border: 1px solid var(--code-block-border);
   border-radius: 3px;
   margin: 1em 0;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
 
-.highlight  { background: $oc-gray-0; }
+.highlight  { background: var(--code-block-bg); }
 .highlight .c { color: #999988; font-style: italic } /* Comment */
 .highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
 .highlight .k { font-weight: bold } /* Keyword */
@@ -80,3 +80,85 @@ pre.highlight {
 .highlight .vg { color: #008080 } /* Name.Variable.Global */
 .highlight .vi { color: #008080 } /* Name.Variable.Instance */
 .highlight .il { color: #009999 } /* Literal.Number.Integer.Long */
+
+// 暗色模式（关灯）下的代码高亮配色 —— GitHub Dark 风格
+[data-theme="dark"] {
+  .highlight .c,
+  .highlight .cm,
+  .highlight .c1,
+  .highlight .cs {
+    color: #8b949e;
+    font-style: italic;
+  }
+
+  .highlight .cp {
+    color: #8b949e;
+    font-weight: bold;
+  }
+
+  .highlight .err { color: #f85149; background-color: #3d0b0b; } /* Error */
+  .highlight .gd { color: #ffa198; background-color: #6e0016; } /* Generic.Deleted */
+  .highlight .gd .x { color: #ffa198; background-color: #6e0016; } /* Generic.Deleted.Specific */
+  .highlight .gi { color: #56d364; background-color: #033a16; } /* Generic.Inserted */
+  .highlight .gi .x { color: #56d364; background-color: #033a16; } /* Generic.Inserted.Specific */
+  .highlight .gr,
+  .highlight .gt { color: #ff7b72; } /* Generic.Error / Generic.Traceback */
+  .highlight .gh,
+  .highlight .gu { color: #8b949e; } /* Generic.Heading / Generic.Subheading */
+  .highlight .go { color: #8b949e; } /* Generic.Output */
+  .highlight .gp { color: #8b949e; } /* Generic.Prompt */
+  .highlight .w { color: #6e7681; } /* Text.Whitespace */
+
+  .highlight .k,
+  .highlight .kc,
+  .highlight .kd,
+  .highlight .kp,
+  .highlight .kr,
+  .highlight .o,
+  .highlight .ow,
+  .highlight .gs {
+    color: #ff7b72;
+    font-weight: bold;
+  }
+
+  .highlight .kt {
+    color: #ff7b72;
+    font-weight: bold;
+  }
+
+  .highlight .m,
+  .highlight .mf,
+  .highlight .mh,
+  .highlight .mi,
+  .highlight .mo,
+  .highlight .il { color: #79c0ff; } /* 数字 */
+
+  .highlight .s,
+  .highlight .sb,
+  .highlight .sc,
+  .highlight .sd,
+  .highlight .s2,
+  .highlight .se,
+  .highlight .sh,
+  .highlight .si,
+  .highlight .sx,
+  .highlight .s1 { color: #a5d6ff; } /* 字符串 */
+
+  .highlight .sr { color: #7ee787; } /* String.Regex */
+  .highlight .ss { color: #f2cc60; } /* String.Symbol */
+
+  .highlight .na { color: #ffa657; } /* Name.Attribute */
+  .highlight .nb { color: #79c0ff; } /* Name.Builtin */
+  .highlight .nc { color: #ff7b72; font-weight: bold; } /* Name.Class */
+  .highlight .no { color: #79c0ff; } /* Name.Constant */
+  .highlight .ni { color: #ffa657; } /* Name.Entity */
+  .highlight .ne { color: #ffa657; font-weight: bold; } /* Name.Exception */
+  .highlight .nf { color: #d2a8ff; font-weight: bold; } /* Name.Function */
+  .highlight .nn { color: #8b949e; } /* Name.Namespace */
+  .highlight .nt { color: #7ee787; } /* Name.Tag */
+  .highlight .nv,
+  .highlight .vc,
+  .highlight .vg,
+  .highlight .vi { color: #ffa657; } /* Name.Variable */
+  .highlight .bp { color: #8b949e; } /* Name.Builtin.Pseudo */
+}

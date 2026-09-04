@@ -4,11 +4,11 @@
    - 打印时自动铺满 A4，并隐藏侧边栏 / 页脚 / 按钮
    ========================================================== */
 
-$r-line: $oc-gray-3;
-$r-line-light: $oc-gray-2;
-$r-accent: $oc-teal-7;
-$r-accent-soft: $oc-teal-0;
-$r-muted: $oc-gray-6;
+$r-line: var(--divider-strong);
+$r-line-light: var(--divider);
+$r-accent: var(--accent);
+$r-accent-soft: var(--accent-soft);
+$r-muted: var(--text-muted);
 
 .resume {
   padding: 30px 0 60px;
@@ -34,12 +34,12 @@ $r-muted: $oc-gray-6;
   padding: 7px 16px;
   font-family: inherit;
   font-size: $small-font-size;
-  color: #fff;
+  color: var(--on-accent);
   background: $r-accent;
   border: 0;
   border-radius: 4px;
   cursor: pointer;
-  transition: background .2s;
+  transition: background .2s, color .2s;
 
   .r-icon {
     width: 15px;
@@ -47,7 +47,7 @@ $r-muted: $oc-gray-6;
   }
 
   &:hover {
-    background: $oc-teal-8;
+    background: var(--accent-hover);
   }
 }
 
@@ -64,10 +64,10 @@ $r-muted: $oc-gray-6;
   min-height: 260mm;
   margin: 0 auto;
   padding: 14mm 15mm;
-  background: #fff;
+  background: var(--paper-bg);
   border: 1px solid $r-line-light;
   border-radius: 2px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, .08);
+  box-shadow: var(--paper-shadow);
   color: $base-color;
 
   @include mobile {
@@ -143,7 +143,7 @@ $r-muted: $oc-gray-6;
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  color: $oc-gray-7;
+  color: var(--text-secondary);
 
   .r-icon {
     width: 13px;
@@ -252,7 +252,7 @@ $r-muted: $oc-gray-6;
   width: 84px;
   font-size: 14px;
   font-weight: 700;
-  color: $oc-gray-7;
+  color: var(--text-secondary);
   line-height: 1.9;
 }
 
@@ -288,7 +288,7 @@ $r-muted: $oc-gray-6;
   flex: 1;
   height: 6px;
   min-width: 40px;
-  background: $oc-gray-1;
+  background: var(--bar-bg);
   border-radius: 3px;
   overflow: hidden;
 
@@ -326,7 +326,7 @@ $r-muted: $oc-gray-6;
 .r-tag {
   padding: 1px 9px;
   font-size: $small-font-size;
-  color: $oc-teal-8;
+  color: var(--accent-strong);
   background: $r-accent-soft;
   border-radius: 3px;
   line-height: 1.7;
@@ -355,7 +355,7 @@ $r-muted: $oc-gray-6;
     width: 9px;
     height: 9px;
     border-radius: 50%;
-    background: #fff;
+    background: var(--paper-bg);
     border: 2px solid $r-accent;
   }
 }
@@ -387,6 +387,15 @@ $r-muted: $oc-gray-6;
   color: $r-accent;
 }
 
+/* ---------- 工作经历：总说明 ---------- */
+.r-item__desc {
+  margin: 6px 0 0;
+  font-size: 14px;
+  line-height: 1.85;
+  text-align: justify;
+  color: var(--text);
+}
+
 /* ---------- 列表 ---------- */
 .r-list {
   margin: 2px 0 0;
@@ -411,20 +420,27 @@ $r-muted: $oc-gray-6;
       width: 4px;
       height: 4px;
       border-radius: 50%;
-      background: $oc-gray-5;
+      background: var(--dot);
     }
   }
 }
 
 .r-list--sub > li:before {
-  background: $oc-gray-4;
+  background: var(--dot-soft);
 }
 
 /* ---------- 项目 ---------- */
 .r-projects {
-  margin-top: 8px;
+  margin-top: 10px;
   padding-left: 12px;
-  border-left: 2px solid $oc-gray-1;
+  border-left: 2px solid var(--divider);
+}
+
+.r-projects__title {
+  margin: 0 0 2px;
+  font-size: $small-font-size;
+  font-weight: 700;
+  color: $r-muted;
 }
 
 .r-project {
@@ -439,14 +455,21 @@ $r-muted: $oc-gray-6;
   gap: 4px 10px;
 }
 
+.r-project__index {
+  flex: none;
+  min-width: 22px;
+  text-align: center;
+  font-size: $small-font-size;
+  font-weight: 700;
+  color: $r-accent;
+  background: $r-accent-soft;
+  border-radius: 3px;
+  line-height: 1.6;
+}
+
 .r-project__name {
   font-size: 14px;
   font-weight: 700;
-
-  &:before {
-    content: "▸ ";
-    color: $r-accent;
-  }
 }
 
 .r-project__meta {
@@ -457,7 +480,7 @@ $r-muted: $oc-gray-6;
 .r-project__desc {
   margin: 2px 0 0;
   font-size: $small-font-size;
-  color: $oc-gray-7;
+  color: var(--text-secondary);
   line-height: 1.8;
   text-align: justify;
 }

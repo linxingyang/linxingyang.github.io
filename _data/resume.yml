@@ -11,13 +11,15 @@
 # ---------------- 头部 / 基本信息 ----------------
 profile:
   name: 林兴洋
-  headline: 服务端开发工程师 · Linux / C++ / Java 开发
+  headline: 物联网 / 服务端架构工程师 · C++ / Java / Linux
   avatar: /images/sys/fd.jpg   # 不需要头像就删掉这一行
   summary: >-
-    7 年嵌入式与桌面软件开发经验，长期从事工业人机界面（HMI）与上位机软件的研发工作。
-    熟悉 Linux 应用开发、Qt / C++ 桌面开发、多线程与串口 / 网络通信，
+    7 年嵌入式、物联网与桌面软件开发经验，长期负责企业级物联网平台与工业 HMI 产品的研发工作。
+    主导企业级 MQTT 物联网接入平台与企业跨境 VPN 的架构设计与落地，支撑百万级别设备接入，
+    熟悉 C++ / Java 服务端开发、中间件集群与 CI/CD 工程化建设；
+    熟悉嵌入式 Linux（RK3566 / RK3308、鲲鹏 arm64）与 Qt / MFC 桌面开发，
     具备从需求评审、方案设计、编码实现到量产维护的完整项目交付经验，
-    习惯沉淀技术文档，乐于在团队内做知识分享。
+    长期负责 7-14 人团队管理与项目推进，习惯沉淀技术文档，乐于做知识分享。
 
   contacts:
     # - icon: phone
@@ -34,8 +36,12 @@ profile:
       href: "https://github.com/linxingyang"
     - icon: globe
       label: 博客
-      value: linxingyang.github.io
-      href: "https://linxingyang.github.io"
+      value: 知乎 - zhihu.com/people/lin-xing-yang-98
+      href: "https://www.zhihu.com/people/lin-xing-yang-98"
+    - icon: globe
+      label: 博客
+      value: CSDN - blog.csdn.net/JKL852qaz
+      href: "https://blog.csdn.net/JKL852qaz?spm=1010.2135.3001.10640"
     - icon: map-pin
       label: 现居
       value: 福建 · 福州            # TODO
@@ -61,9 +67,9 @@ profile:
 # ---------------- 求职意向 ----------------
 intention:
   - label: 目标职位
-    value: 嵌入式软件工程师 / C++ 软件工程师
+    value: 服务端研发工程师/服务端架构工程师
   - label: 期望行业
-    value: 工业自动化 / 物联网 / 智能硬件
+    value: 物联网
   - label: 期望薪资
     value: 面议
   - label: 到岗时间
@@ -74,60 +80,81 @@ intention:
 skills:
   - group: 编程语言
     items:
-      - { name: C / C++, level: 90, desc: 精通 }
-      - { name: Shell,   level: 75, desc: 熟练 }
-      - { name: Go,  level: 70, desc: 了解 }
-      - { name: Python,  level: 70, desc: 了解 }
-      - { name: Lua,     level: 55, desc: 了解 }
+      - { name: C / C++, level: 85, desc: 熟练 }
+      - { name: Java,     level: 85, desc: 熟练 }
+      - { name: Shell,    level: 80, desc: 熟练 }
+      - { name: Go,   level: 50, desc: 了解 }
+      - { name: Lua,      level: 30, desc: 了解 }
   - group: 系统与平台
     items:
-      - { name: Linux 应用开发,    level: 88, desc: 精通 }
+      - { name: Linux 应用开发,     level: 88, desc: 精通 }
       - { name: 嵌入式 Linux / ARM, level: 80, desc: 熟练 }
-      - { name: 多线程 / 多进程,   level: 82, desc: 熟练 }
-      - { name: RTOS,              level: 65, desc: 了解 }
+      - { name: 多线程 / 多进程,    level: 82, desc: 熟练 }
+      - { name: x86 / arm64 / 鲲鹏适配, level: 75, desc: 熟练 }
+      - { name: windows桌面端QT、MFC开发, level: 45, desc: 了解 }
+  - group: 物联网 / 服务端
+    items:
+      - { name: MQTT / 百万级接入,  level: 82, desc: 熟练 }
+      - { name: VPN 架构（三端 / 跨境）, level: 78, desc: 熟练 }
+      - { name: 中间件选型 / 集群搭建, level: 75, desc: 熟练 }
+      - { name: 证书签名 / 安全接入,  level: 70, desc: 熟练 }
   - group: 框架与库
     items:
-      - { name: Qt / QML,        level: 85, desc: 精通 }
-      - { name: STL / Boost,     level: 78, desc: 熟练 }
+      - { name: Qt / QML / MFC,   level: 85, desc: 精通 }
+      - { name: STL / Boost,      level: 78, desc: 熟练 }
       - { name: Socket / 串口通信, level: 85, desc: 精通 }
-      - { name: SQLite,          level: 70, desc: 熟练 }
+      - { name: SQLite,           level: 70, desc: 熟练 }
   - group: 工具与工程
     items:
-      - { name: Git,             level: 85, desc: 熟练 }
+      - { name: Git,              level: 85, desc: 熟练 }
       - { name: CMake / Makefile, level: 80, desc: 熟练 }
-      - { name: Docker / CI,     level: 80, desc: 熟练 }
-      - { name: GDB / 性能调优,  level: 72, desc: 了解 }
+      - { name: Docker / CI / CD, level: 82, desc: 熟练 }
+      - { name: 服务器 / 多云平台管理, level: 75, desc: 熟练 }
+      - { name: CodeBuddy / Codex, level: 80, desc: 熟练 }
 
 # 技能关键词标签
 keywords:
   - 嵌入式 Linux
-  - C++11/14
-  - Qt
-  - 多线程
-  - TCP / UDP
-  - Modbus
-  - 串口通信
-  - 交叉编译
-  - CMake
-  - Git
-  - 性能优化
-  - 技术文档
+  - RK3566 / RK3308
+  - C++ / Java
+  - Qt / MFC
+  - MQTT
+  - VPN
+  - 集群
+  - 证书签名
+  - CI / CD
+  - 鲲鹏 arm64
+  - 多云平台
+  - 团队管理
 
 # ---------------- 工作经历 ----------------
 # projects 为该公司下的项目，可整段删除
 experience:
   - company: 福建富昌维控电子科技股份有限公司
     time: 2018.11 - 至今
-    position: 嵌入式软件工程师
+    position: 高级技术专家
     department: 研发中心
-    points:
-      - 负责工业人机界面（HMI）与组态软件的 Linux 应用层开发，参与 3 代产品从立项到量产的完整周期。
-      - 基于 C++ / Qt 重构上位机组态软件核心模块，界面启动与画面切换性能显著提升（TODO：补充具体数据）。
-      - 设计并实现设备与 PLC 的通信协议栈（Modbus RTU / TCP、串口），已在多条产品线复用。
-      - 搭建交叉编译与自动化构建脚本（CMake + Shell），出包时间由 30 分钟缩短至 5 分钟。
-      - 主导现场疑难问题定位（GDB、coredump、日志追踪），累计输出内部技术文档 20+ 篇。
-      - 指导新人熟悉代码框架与开发流程，承担小组内代码评审工作。
+    desc: >-
+      公司高级技术专家（全司 5 人 / 研发 110+）<br/>
+      负责 7-14 人研发团队管理与项目推进。<br/>
+      主导企业级MQTT物联网方案设计与落地、支撑百万级别设备接入；<br/>
+      企业VPN方案设计与落地；<br/>
+      负责研发服务器、内网编译服务器（DELL R730D 系列）及华为云 / 腾讯云 / 阿里云 / AWS / 联通云 / 天翼云等多云环境管理，
+      搭建企业内部 CI/CD 编译部署工作流；承担 RK3566 / RK3308 嵌入式平台 Linux 开发、x86 / arm64 / 鲲鹏多架构适配
+      与 Windows 端 MFC / Qt 开发；设计设备与 PLC 通信协议栈（Modbus RTU / TCP、串口），深度参与 3 代 HMI 产品从立项到量产。
     projects:
+      - name: 企业级 MQTT 物联网接入平台
+        role: 架构设计 / 主要负责人
+        desc: 搭建物联网设备入网主入口 MQTT，支撑百万级别设备连接入网。
+        points:
+          - 构建企业服务端底层框架，负责中间件选型与集群搭建，部署时间缩短到秒级；
+          - 实现设备入网证书签名，保障设备安全接入。
+      - name: 企业级跨境 VPN
+        role: 架构设计 / 核心开发
+        desc: 面向企业跨地域、跨境组网需求的 VPN 系统。
+        points:
+          - 负责 VPN 客户端 / 服务端 / 管理端三端架构设计与实现；
+          - 落地企业跨境 VPN 方案，支撑海外分支安全接入。
       - name: HMI 组态软件                 # TODO：换成真实项目名
         role: 核心开发
         time: 2021.03 - 至今
@@ -162,14 +189,16 @@ education:
 # ---------------- 证书 / 荣誉 ----------------
 # 没有就整段删除
 certificates:
-  - time: 2016
-    name: 全国大学英语四级（CET-6）   # TODO
-  - time: 2019
+  - time: 2015.6
+    name: CET-6   # TODO
+  - time: 2015.11
     name: 中级软件设计师
-  - time: 2022
+  - time: 2017
+    name: 优秀毕业生
+  - time: 2021.12
     name: 维控科技 - 公司年度优秀员工
-  - time: 2022
-    name: 维控科技 - 高级技术专家
+  - time: 2023.6
+    name: 维控科技 - 高级技术专家（共5人，研发人员120+）
 
 # ---------------- 兴趣爱好 ----------------
 hobbies: 编程 / 阅读 / 美食
