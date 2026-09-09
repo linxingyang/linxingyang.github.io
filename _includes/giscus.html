@@ -1,0 +1,69 @@
+{% if site.giscus.repo-id %}
+<div class="comments">
+  <script src="https://giscus.app/client.js"
+          data-repo="{{ site.giscus.repo }}"
+          data-repo-id="{{ site.giscus.repo-id }}"
+          data-category="{{ site.giscus.category }}"
+          data-category-id="{{ site.giscus.category-id }}"
+          data-mapping="{{ site.giscus.mapping | default: 'pathname' }}"
+          data-strict="{{ site.giscus.strict | default: 0 }}"
+          data-reactions-enabled="{{ site.giscus.reactions-enabled | default: 1 }}"
+          data-emit-metadata="{{ site.giscus.emit-metadata | default: 0 }}"
+          data-input-position="{{ site.giscus.input-position | default: 'bottom' }}"
+          data-theme="{{ site.giscus.dark-theme | default: 'dark_dimmed' }}"
+          data-lang="{{ site.giscus.lang | default: 'zh-CN' }}"
+          data-loading="{{ site.giscus.loading | default: 'lazy' }}"
+          crossorigin="anonymous"
+          async>
+  </script>
+
+  <script>
+    // giscus 主题跟随站点的 亮/暗 切换（开关灯按钮在 default.html 中控制 <html data-theme>）
+    (function () {
+      // 亮色/暗色分别使用的 giscus 主题名，可在 _config.yml 中调整
+      var LIGHT = {{ site.giscus.light-theme | default: 'light' | jsonify }};
+      var DARK  = {{ site.giscus.dark-theme | default: 'dark_dimmed' | jsonify }};
+      var giscusScript = document.querySelector('script[src*="giscus.app/client.js"]');
+
+      function isDark() {
+        return document.documentElement.getAttribute('data-theme') === 'dark';
+      }
+
+      function currentTheme() {
+        return isDark() ? DARK : LIGHT;
+      }
+
+      // giscus 客户端是 async 加载的，此时通常尚未执行。
+      // 先把 data-theme 改成与当前页面主题一致，避免首屏/懒加载时用错皮肤。
+      if (giscusScript) {
+        giscusScript.setAttribute('data-theme', currentTheme());
+      }
+
+      function syncTheme() {
+        // 懒加载尚未创建 iframe 时，更新属性即可让后续创建时生效
+        if (giscusScript) {
+          giscusScript.setAttribute('data-theme', currentTheme());
+        }
+        var frame = document.querySelector('iframe.giscus-frame');
+        if (frame && frame.contentWindow) {
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme: currentTheme() } } },
+            'https://giscus.app'
+          );
+        }
+      }
+
+      // 监听 <html data-theme> 变化（点击开关灯按钮时触发）
+      var observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (m) {
+          if (m.attributeName === 'data-theme') syncTheme();
+        });
+      });
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-theme']
+      });
+    })();
+  </script>
+</div>
+{% endif %}

@@ -7,7 +7,7 @@
 # 井号后面的文字是说明文档，不会被程序读取。
 
 # 描述/签名
-name: 金锐的博客
+name: 林金锐
 description: 在这晴朗的日子，应该出去走走
 
 # 输入你的网站域名（如果你没有添加自己的域名，而是直接用GitHub pages分配的域名的话可以省略）
@@ -79,7 +79,26 @@ footer-text: Copyright (c) 2026 林兴洋
 #
 
 # 输入Disqus shortname，即可添加评论区，请查阅文档，设置自己的disqus站点，不要继续使用我的站点loffer
-disqus: linxingyang #shortname
+# 2026-09 起已改用 giscus 评论，需要换回时可取消注释
+# disqus: linxingyang #shortname
+
+# giscus 评论（基于 GitHub Discussions）：配置好 repo / repo-id 后由
+# _includes/comments.html 统一调度自动启用。
+# 注意：请不要与 disqus / gitalk / utteranc 同时启用，避免一页出现两套评论区
+giscus:
+  repo: linxingyang/linxingyang.github.io
+  repo-id: MDEwOlJlcG9zaXRvcnk5OTUyNzQ5OQ==
+  category: General
+  category-id: MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMyNjEzNDk1
+  mapping: pathname        # 页面 URL 路径 ↔ Discussion 的映射方式
+  strict: 0                # 1=严格匹配 Discussion 标题；0=标题包含即可
+  reactions-enabled: 1     # 允许对主帖点赞 / 表情回应
+  emit-metadata: 0         # 是否向页面发送 Discussion 元数据（第三方统计用）
+  input-position: bottom   # 评论输入框位置：bottom / top
+  lang: zh-CN              # giscus 界面语言
+  loading: lazy            # lazy / eager
+  light-theme: light       # 亮色模式下使用的 giscus 主题
+  dark-theme: dark_dimmed  # 暗色模式下使用的 giscus 主题
 
 # 卜算子统计
 busuanzi: on

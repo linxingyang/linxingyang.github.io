@@ -1,0 +1,13 @@
+{%- comment -%}
+  评论区统一调度口：按优先级只渲染一套评论系统，由 _config.yml 决定启用哪套。
+  请勿同时配置多套，否则下面的优先级会只显示排在前面的那一个。
+{%- endcomment -%}
+{%- if site.giscus.repo and site.giscus.repo-id -%}
+  {% include giscus.html %}
+{%- elsif site.disqus -%}
+  {% include disqus.html %}
+{%- elsif site.gitalk.clientID -%}
+  {% include gitalk.html %}
+{%- elsif site.utteranc -%}
+  {% include utteranc.html %}
+{%- endif -%}
