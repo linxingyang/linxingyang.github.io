@@ -775,6 +775,7 @@ body.sidebar-collapsed {
   top: 20px;
   max-height: calc(100vh - 40px);
   overflow-y: auto;
+  overflow-x: auto;
   padding-right: 8px;
 
   @include mobile {
@@ -892,7 +893,8 @@ body.sidebar-collapsed {
   min-width: 0;
 
   .tag-group,
-  .tag-subgroup {
+  .tag-subgroup,
+  .tag-subgroup-3 {
     scroll-margin-top: 20px;
   }
 
@@ -916,7 +918,16 @@ body.sidebar-collapsed {
     }
   }
 
-  h2, h3 {
+  .tag-subgroup-3 {
+    margin-bottom: 22px;
+
+    > h4 {
+      font-size: 15px;
+      margin: 0 0 8px;
+    }
+  }
+
+  h2, h3, h4 {
     .count {
       color: $base-lighten-color;
       font-weight: 300;

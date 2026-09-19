@@ -41,13 +41,7 @@
       </div>
     </header>
 
-    <!-- ============ 个人简介 ============ -->
-    {%- if r.profile.summary -%}
-    <section class="r-section">
-      <h2 class="r-section__title">{% include resume-icon.html icon="user" %}<span>个人简介</span></h2>
-      <p class="r-summary">{{ r.profile.summary }}</p>
-    </section>
-    {%- endif -%}
+
 
     <!-- ============ 基本信息 ============ -->
     {%- if r.profile.facts -%}
@@ -103,6 +97,56 @@
     </section>
     {%- endif -%}
 
+    <!-- ============ 教育背景 ============ -->
+    {%- if r.education -%}
+    <section class="r-section">
+      <h2 class="r-section__title">{% include resume-icon.html icon="book" %}<span>教育背景</span></h2>
+
+      <div class="r-timeline">
+        {%- for e in r.education -%}
+        <div class="r-item">
+          <div class="r-item__head">
+            <h3 class="r-item__title">{{ e.school }}</h3>
+            <span class="r-item__time">{{ e.time }}</span>
+          </div>
+          <p class="r-item__sub">
+            {{ e.major }}{% if e.degree %} · {{ e.degree }}{% endif %}
+          </p>
+          {%- if e.points -%}
+          <ul class="r-list">
+            {%- for p in e.points -%}<li>{{ p }}</li>{%- endfor -%}
+          </ul>
+          {%- endif -%}
+        </div>
+        {%- endfor -%}
+      </div>
+    </section>
+    {%- endif -%}
+
+    <!-- ============ 证书 / 荣誉 ============ -->
+    {%- if r.certificates -%}
+    <section class="r-section">
+      <h2 class="r-section__title">{% include resume-icon.html icon="award" %}<span>证书 / 荣誉</span></h2>
+      <ul class="r-certs">
+        {%- for c in r.certificates -%}
+        <li class="r-cert">
+          <span class="r-cert__time">{{ c.time }}</span>
+          <span class="r-cert__name">{{ c.name }}</span>
+        </li>
+        {%- endfor -%}
+      </ul>
+    </section>
+    {%- endif -%}
+
+    <!-- ============ 个人简介 ============ -->
+    {%- if r.profile.summary -%}
+    <section class="r-section">
+      <h2 class="r-section__title">{% include resume-icon.html icon="user" %}<span>个人简介</span></h2>
+      <p class="r-summary">{{ r.profile.summary }}</p>
+    </section>
+    {%- endif -%}
+
+
     <!-- ============ 工作经历 ============ -->
     {%- if r.experience -%}
     <section class="r-section">
@@ -152,47 +196,6 @@
         </div>
         {%- endfor -%}
       </div>
-    </section>
-    {%- endif -%}
-
-    <!-- ============ 教育背景 ============ -->
-    {%- if r.education -%}
-    <section class="r-section">
-      <h2 class="r-section__title">{% include resume-icon.html icon="book" %}<span>教育背景</span></h2>
-
-      <div class="r-timeline">
-        {%- for e in r.education -%}
-        <div class="r-item">
-          <div class="r-item__head">
-            <h3 class="r-item__title">{{ e.school }}</h3>
-            <span class="r-item__time">{{ e.time }}</span>
-          </div>
-          <p class="r-item__sub">
-            {{ e.major }}{% if e.degree %} · {{ e.degree }}{% endif %}
-          </p>
-          {%- if e.points -%}
-          <ul class="r-list">
-            {%- for p in e.points -%}<li>{{ p }}</li>{%- endfor -%}
-          </ul>
-          {%- endif -%}
-        </div>
-        {%- endfor -%}
-      </div>
-    </section>
-    {%- endif -%}
-
-    <!-- ============ 证书 / 荣誉 ============ -->
-    {%- if r.certificates -%}
-    <section class="r-section">
-      <h2 class="r-section__title">{% include resume-icon.html icon="award" %}<span>证书 / 荣誉</span></h2>
-      <ul class="r-certs">
-        {%- for c in r.certificates -%}
-        <li class="r-cert">
-          <span class="r-cert__time">{{ c.time }}</span>
-          <span class="r-cert__name">{{ c.name }}</span>
-        </li>
-        {%- endfor -%}
-      </ul>
     </section>
     {%- endif -%}
 

@@ -9,8 +9,12 @@ permalink: /tags/
 {% endif %}
 
 {% comment %}
-  构建一级标签（父标签）列表：
-  取每个标签名第一段（/ 之前的部分）作为父标签，去重后按名称排序
+  构建标签树，标签支持 1~3 层（如“编程” / “编程/工具软件” / “编程/编程辅助/git”）：
+  - 第 1 段作为根级（parent）；
+  - 每个节点若本身是真实标签，则直接挂文章；
+  - 中间层（第 2 段）只做分组，展示其下的第 3 层子标签；
+  - 第 3 层是叶子，直接挂文章。
+  锚点 id 统一用完整路径（“/”替换为“-”），保证页面内唯一。
 {% endcomment %}
 {% assign parents = "" | split: "," %}
 {% for tag in site.tags %}
@@ -24,40 +28,80 @@ permalink: /tags/
 
 <div class="tags-page">
   <aside class="tag-tree">
-    <!-- <h2 class="tag-tree-title">标签列表</h2> -->
     <ul class="tree">
       {% for parent in parents %}
-        {% assign children = "" | split: "," %}
-        {% assign parent_count = 0 %}
+        {% assign parent_id = parent | replace: "/", "-" %}
+        {% assign parent_total = 0 %}
+        {% assign level2s = "" | split: "," %}
         {% for tag in site.tags %}
           {% assign parts = tag[0] | split: "/" %}
           {% if parts[0] == parent %}
-            {% assign children = children | push: tag %}
-            {% assign parent_count = parent_count | plus: tag[1].size %}
+            {% assign parent_total = parent_total | plus: tag[1].size %}
+            {% if parts.size > 1 %}
+              {% assign l2 = parts[0] | append: "/" | append: parts[1] %}
+              {% unless level2s contains l2 %}
+                {% assign level2s = level2s | push: l2 %}
+              {% endunless %}
+            {% endif %}
           {% endif %}
         {% endfor %}
-        {% assign children = children | sort %}
-        {% assign parent_id = parent | replace: "/", "-" %}
+        {% assign level2s = level2s | sort %}
         <li class="tree-parent">
           <div class="tree-row">
-            <button type="button" class="tree-toggle" data-target="tree-{{ parent_id }}" aria-label="折叠或展开 {{ parent }}">▾</button>
+            {% if level2s.size > 0 %}
+              <button type="button" class="tree-toggle" data-target="tree-{{ parent_id }}" aria-label="折叠或展开 {{ parent }}">▾</button>
+            {% endif %}
             <a href="#{{ parent_id }}" class="tree-link">
               {{ parent }}
-              <span class="count">{{ parent_count }}</span>
+              <span class="count">{{ parent_total }}</span>
             </a>
           </div>
-          <ul class="tree-children" id="tree-{{ parent_id }}">
-            {% for child in children %}
-              {% assign child_name = child[0] | split: "/" | last %}
-              {% assign child_id = child[0] | replace: "/", "-" %}
-              <li class="tree-child">
-                <a href="#{{ child_id }}" class="tree-link">
-                  {{ child_name }}
-                  <span class="count">{{ child[1].size }}</span>
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
+          {% if level2s.size > 0 %}
+            <ul class="tree-children" id="tree-{{ parent_id }}">
+              {% for l2 in level2s %}
+                {% assign l2_id = l2 | replace: "/", "-" %}
+                {% assign l2_total = 0 %}
+                {% assign level3s = "" | split: "," %}
+                {% for tag in site.tags %}
+                  {% assign parts = tag[0] | split: "/" %}
+                  {% if parts.size > 1 %}
+                    {% assign prefix2 = parts[0] | append: "/" | append: parts[1] %}
+                    {% if prefix2 == l2 %}
+                      {% assign l2_total = l2_total | plus: tag[1].size %}
+                      {% if parts.size > 2 %}
+                        {% assign level3s = level3s | push: tag[0] %}
+                      {% endif %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+                {% assign level3s = level3s | sort %}
+                <li class="tree-child">
+                  <div class="tree-row">
+                    {% if level3s.size > 0 %}
+                      <button type="button" class="tree-toggle" data-target="tree-{{ l2_id }}" aria-label="折叠或展开 {{ l2 }}">▾</button>
+                    {% endif %}
+                    <a href="#{{ l2_id }}" class="tree-link">
+                      {{ l2 | split: "/" | last }}
+                      <span class="count">{{ l2_total }}</span>
+                    </a>
+                  </div>
+                  {% if level3s.size > 0 %}
+                    <ul class="tree-children" id="tree-{{ l2_id }}">
+                      {% for l3 in level3s %}
+                        {% assign l3_id = l3 | replace: "/", "-" %}
+                        <li class="tree-child">
+                          <a href="#{{ l3_id }}" class="tree-link">
+                            {{ l3 | split: "/" | last }}
+                            <span class="count">{{ site.tags[l3].size }}</span>
+                          </a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
         </li>
       {% endfor %}
     </ul>
@@ -65,46 +109,110 @@ permalink: /tags/
 
   <div class="tag-posts">
     {% for parent in parents %}
-      {% assign children = "" | split: "," %}
-      {% assign parent_count = 0 %}
+      {% assign parent_id = parent | replace: "/", "-" %}
+      {% assign parent_total = 0 %}
+      {% assign level2s = "" | split: "," %}
       {% for tag in site.tags %}
         {% assign parts = tag[0] | split: "/" %}
         {% if parts[0] == parent %}
-          {% assign children = children | push: tag %}
-          {% assign parent_count = parent_count | plus: tag[1].size %}
+          {% assign parent_total = parent_total | plus: tag[1].size %}
+          {% if parts.size > 1 %}
+            {% assign l2 = parts[0] | append: "/" | append: parts[1] %}
+            {% unless level2s contains l2 %}
+              {% assign level2s = level2s | push: l2 %}
+            {% endunless %}
+          {% endif %}
         {% endif %}
       {% endfor %}
-      {% assign children = children | sort %}
-      {% assign parent_id = parent | replace: "/", "-" %}
+      {% assign level2s = level2s | sort %}
       <section class="tag-group" id="{{ parent_id }}">
         <h2>
           {{ parent }}
-          <span class="count">{{ parent_count }}</span>
+          <span class="count">{{ parent_total }}</span>
         </h2>
-        {% for child in children %}
-          {% assign child_name = child[0] | split: "/" | last %}
-          {% assign child_id = child[0] | replace: "/", "-" %}
-          <section class="tag-subgroup" id="{{ child_id }}">
-            <h3>
-              {{ child_name }}
-              <span class="count">{{ child[1].size }}</span>
-            </h3>
-            <ul class="tag">
-              {% for post in child[1] %}
-                {% if post.title != null %}
-                  <li>
-                    <time>{{ post.date | date: "%Y-%m-%d" }}</time>
-                    {% if post.link %}
-                      <a href="{{ post.link }}">
-                    {% else %}
-                      <a href="{{ site.baseurl }}{{ post.url }}">
-                    {% endif %}
-                      {{ post.title }}
-                    </a>
-                  </li>
+        {% if site.tags[parent] %}
+          <ul class="tag">
+            {% for post in site.tags[parent] %}
+              {% if post.title != null %}
+                <li>
+                  <time>{{ post.date | date: "%Y-%m-%d" }}</time>
+                  {% if post.link %}
+                    <a href="{{ post.link }}">
+                  {% else %}
+                    <a href="{{ site.baseurl }}{{ post.url }}">
+                  {% endif %}
+                    {{ post.title }}
+                  </a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        {% endif %}
+        {% for l2 in level2s %}
+          {% assign l2_id = l2 | replace: "/", "-" %}
+          {% assign l2_total = 0 %}
+          {% assign level3s = "" | split: "," %}
+          {% for tag in site.tags %}
+            {% assign parts = tag[0] | split: "/" %}
+            {% if parts.size > 1 %}
+              {% assign prefix2 = parts[0] | append: "/" | append: parts[1] %}
+              {% if prefix2 == l2 %}
+                {% assign l2_total = l2_total | plus: tag[1].size %}
+                {% if parts.size > 2 %}
+                  {% assign level3s = level3s | push: tag[0] %}
                 {% endif %}
-              {% endfor %}
-            </ul>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+          {% assign level3s = level3s | sort %}
+          <section class="tag-subgroup" id="{{ l2_id }}">
+            <h3>
+              {{ l2 | split: "/" | last }}
+              <span class="count">{{ l2_total }}</span>
+            </h3>
+            {% if site.tags[l2] %}
+              <ul class="tag">
+                {% for post in site.tags[l2] %}
+                  {% if post.title != null %}
+                    <li>
+                      <time>{{ post.date | date: "%Y-%m-%d" }}</time>
+                      {% if post.link %}
+                        <a href="{{ post.link }}">
+                      {% else %}
+                        <a href="{{ site.baseurl }}{{ post.url }}">
+                      {% endif %}
+                        {{ post.title }}
+                      </a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            {% endif %}
+            {% for l3 in level3s %}
+              {% assign l3_id = l3 | replace: "/", "-" %}
+              <section class="tag-subgroup-3" id="{{ l3_id }}">
+                <h4>
+                  {{ l3 | split: "/" | last }}
+                  <span class="count">{{ site.tags[l3].size }}</span>
+                </h4>
+                <ul class="tag">
+                  {% for post in site.tags[l3] %}
+                    {% if post.title != null %}
+                      <li>
+                        <time>{{ post.date | date: "%Y-%m-%d" }}</time>
+                        {% if post.link %}
+                          <a href="{{ post.link }}">
+                        {% else %}
+                          <a href="{{ site.baseurl }}{{ post.url }}">
+                        {% endif %}
+                          {{ post.title }}
+                        </a>
+                      </li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </section>
+            {% endfor %}
           </section>
         {% endfor %}
       </section>

@@ -425,14 +425,20 @@ $r-muted: var(--text-muted);
   }
 }
 
-.r-list--sub > li:before {
-  background: var(--dot-soft);
+/* 项目内的子要点：去掉圆点和缩进，让长句占满一行 */
+.r-list--sub > li {
+  padding-left: 0;
+  text-align: justify;
+
+  &:before {
+    display: none;
+  }
 }
 
 /* ---------- 项目 ---------- */
 .r-projects {
   margin-top: 10px;
-  padding-left: 12px;
+  padding-left: 10px;
   border-left: 2px solid var(--divider);
 }
 
