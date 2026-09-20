@@ -421,18 +421,19 @@ $r-muted: var(--text-muted);
       height: 4px;
       border-radius: 50%;
       background: var(--dot);
+      /* 覆盖全局 ul > li:before 的负外边距，防止圆点被拽到列表左侧 */
+      margin: 0;
+      padding: 0;
     }
   }
 }
 
-/* 项目内的子要点：去掉圆点和缩进，让长句占满一行 */
+/* 项目内的子要点：收紧缩进，圆点紧贴文字，换行与文字对齐 */
 .r-list--sub > li {
-  padding-left: 0;
+  padding-left: 12px;
+  margin-bottom: 5px;
+  line-height: 1.9;
   text-align: justify;
-
-  &:before {
-    display: none;
-  }
 }
 
 /* ---------- 项目 ---------- */
@@ -450,8 +451,13 @@ $r-muted: var(--text-muted);
 }
 
 .r-project {
-  padding: 4px 0 6px;
+  padding: 10px 0 12px;
   break-inside: avoid;
+
+  & + .r-project {
+    margin-top: 2px;
+    border-top: 1px dashed var(--divider);
+  }
 }
 
 .r-project__head {
@@ -484,7 +490,7 @@ $r-muted: var(--text-muted);
 }
 
 .r-project__desc {
-  margin: 2px 0 0;
+  margin: 4px 0 8px;
   font-size: $small-font-size;
   color: var(--text-secondary);
   line-height: 1.8;
