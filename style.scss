@@ -432,6 +432,76 @@ nav {
   }
 }
 
+// 侧边栏「我的站点 / 友情链接」
+.sidebar-links {
+  margin: 20px auto 0;
+  padding: 0 20px;
+  text-align: center;
+
+  .sidebar-links-group + .sidebar-links-group {
+    margin-top: 14px;
+  }
+
+  .sidebar-links-title {
+    margin: 0 0 6px;
+    font-size: $small-font-size;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 1px;
+    color: $base-lightener-color;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+
+    > li {
+      margin: 2px 0;
+
+      &:before {
+        content: none;
+      }
+    }
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: $small-font-size;
+    color: $base-lighten-color;
+    line-height: 1.6;
+
+    &:hover, &:active {
+      color: $link-color;
+      text-decoration: underline;
+    }
+  }
+
+  // 图标用 mask 渲染，颜色随文字（currentColor）变化，自动适配暗色模式
+  .link-icon {
+    flex: none;
+    width: 14px;
+    height: 14px;
+    background-color: currentColor;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+
+  @include mobile {
+    padding: 0 16px;
+
+    ul > li {
+      display: inline-block;
+      margin: 0 8px;
+    }
+  }
+}
+
 // content
 
 .wrapper-content {

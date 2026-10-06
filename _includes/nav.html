@@ -22,6 +22,28 @@
     </nav>
   </div>
 
+  {% if site.sidebar_links %}
+  <div class="sidebar-links">
+    {% for group in site.sidebar_links %}
+    <div class="sidebar-links-group">
+      <h2 class="sidebar-links-title">{{ group.title }}</h2>
+      <ul>
+        {% for item in group.items %}
+        <li>
+          <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">
+            {%- if site.sidebar_link_icons != false and item.icon -%}
+            <span class="link-icon" aria-hidden="true" style="-webkit-mask-image:url('{{ site.baseurl }}/images/icons/{{ item.icon }}.svg');mask-image:url('{{ site.baseurl }}/images/icons/{{ item.icon }}.svg')"></span>
+            {%- endif -%}
+            <span>{{ item.name }}</span>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
   <div class="wrapper-footer-desktop">
     <footer class="footer">
       {% include footer.html %}

@@ -43,6 +43,33 @@ navigation:
   - name: 关于
     url: /about
 
+# 侧边栏「我的站点 / 友情链接」，按分组展示，点开后在新标签页打开
+# 如需增删，按同样格式添加 name / url 即可；删除分组或整段则不显示
+# icon 可选，取 images/icons 下的 svg 文件名（github / csdn / zhihu / juejin / book），不填则只显示文字
+sidebar_links:
+  - title: 个人主页
+    items:
+      - name: Github Pages
+        url: https://linxingyang.github.io/
+        icon: github
+      - name: CSDN
+        url: https://blog.csdn.net/JKL852qaz
+        icon: csdn
+      - name: 知乎
+        url: https://www.zhihu.com/people/lin-xing-yang-98
+        icon: zhihu
+      - name: 掘金
+        url: https://juejin.cn/user/3660710807607984
+        icon: juejin
+  - title: 个人项目
+    items:
+      - name: 英语单词学习
+        url: https://linxingyang.github.io/my-ielts/
+        icon: book
+
+# 侧边栏链接是否显示图标（false 则只显示文字）
+sidebar_link_icons: true
+
 # 开关：开启（true）后，将「关于」页作为主页（访问 / 直接渲染简历），并隐藏导航中的「首页」；
 # 关闭（false）则保持原样（主页为文章列表，导航保留「首页」）
 homepage_about: true
