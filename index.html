@@ -3,7 +3,7 @@ layout: default
 ---
 
 {% if site.homepage_about %}
-  {% assign about_page = site.pages | where: "url", "/about/" | first %}
+  {% assign about_page = site.pages | where: "url", "/resume/" | first %}
   {% include resume-body.html content=about_page.content content_title=about_page.content_title %}
 {% else %}
 {% if site.posts.size == 0 %}

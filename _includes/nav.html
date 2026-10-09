@@ -1,48 +1,28 @@
 <div class="wrapper-sidebar" id="sidebar">
-  <header class="sidebar clearfix">
-    <div class="site-info">
-      {% if site.avatar %}
-        <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
-      {% endif %} 
-      <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
-      <p class="site-description">{{ site.description }}</p>
-    </div>
-  </header>
+  <div class="sidebar-main">
+    <header class="sidebar clearfix">
+      <div class="site-info">
+        {% if site.avatar %}
+          <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
+        {% endif %} 
+        <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
+        <p class="site-description">{{ site.description }}</p>
+      </div>
+    </header>
 
-  <div class="navlist">
-    <nav>
-      {% for nav in site.navigation %}
-      {% if site.homepage_about and nav.url == '/' %}{% continue %}{% endif %}
-      {% if nav.url contains 'http://' or nav.url contains 'https://' %}
-      <a href="{{ nav.url }}">{{ nav.name }}</a>
-      {% else %}
-      <a href="{{ site.baseurl }}{{ nav.url }}">{{ nav.name }}</a>
-      {% endif %}
-      {% endfor %}
-    </nav>
-  </div>
-
-  {% if site.sidebar_links %}
-  <div class="sidebar-links">
-    {% for group in site.sidebar_links %}
-    <div class="sidebar-links-group">
-      <h2 class="sidebar-links-title">{{ group.title }}</h2>
-      <ul>
-        {% for item in group.items %}
-        <li>
-          <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">
-            {%- if site.sidebar_link_icons != false and item.icon -%}
-            <span class="link-icon" aria-hidden="true" style="-webkit-mask-image:url('{{ site.baseurl }}/images/icons/{{ item.icon }}.svg');mask-image:url('{{ site.baseurl }}/images/icons/{{ item.icon }}.svg')"></span>
-            {%- endif -%}
-            <span>{{ item.name }}</span>
-          </a>
-        </li>
+    <div class="navlist">
+      <nav>
+        {% for nav in site.navigation %}
+        {% if site.homepage_about and nav.url == '/' %}{% continue %}{% endif %}
+        {% if nav.url contains 'http://' or nav.url contains 'https://' %}
+        <a href="{{ nav.url }}">{{ nav.name }}</a>
+        {% else %}
+        <a href="{{ site.baseurl }}{{ nav.url }}">{{ nav.name }}</a>
+        {% endif %}
         {% endfor %}
-      </ul>
+      </nav>
     </div>
-    {% endfor %}
   </div>
-  {% endif %}
 
   <div class="wrapper-footer-desktop">
     <footer class="footer">

@@ -1,0 +1,25 @@
+{%- comment -%}
+  页面内「我的站点 / 个人项目」链接分组（数据来自页面 front matter 的 links）
+  用法：{% include page-links.html links=page.links %}
+{%- endcomment -%}
+{%- if include.links -%}
+<div class="page-links">
+  {% for group in include.links %}
+  <div class="page-links-group">
+    <h2 class="page-links-title">{{ group.title }}</h2>
+    <ul>
+      {% for item in group.items %}
+      <li>
+        <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">
+          {%- if item.icon -%}
+          <span class="link-icon" aria-hidden="true" style="-webkit-mask-image:url('{{ site.baseurl }}/images/icons/{{ item.icon }}.svg');mask-image:url('{{ site.baseurl }}/images/icons/{{ item.icon }}.svg')"></span>
+          {%- endif -%}
+          <span>{{ item.name }}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</div>
+{%- endif -%}

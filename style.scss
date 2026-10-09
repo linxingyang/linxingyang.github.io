@@ -333,6 +333,17 @@ img {
 	z-index: 4;
   border-right: 1px solid $divider-color;
   transition: transform .3s ease-in-out;
+  // 侧边栏纵向排列：头像/导航/链接依次排布，页脚靠底；内容超出时可滚动，
+  // 避免窗口不高时「个人主页 / 个人项目」被挤掉看不到
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+
+  > * {
+    flex: 0 0 auto;
+  }
 
   @include mobile {
     width: 100%;
@@ -341,6 +352,7 @@ img {
     position: relative;
     border-bottom: 1px solid $divider-color;
     border-right: 0;
+    overflow: visible;
   }
 }
 
@@ -352,9 +364,16 @@ img {
   }
 }
 
+// 「头像 / 名字 / 简介 / 菜单」整组在侧边栏中垂直居中：
+// 上下都留 20px（.sidebar 的内边距 + 下方补齐），页脚固定在最底部。
+.sidebar-main {
+  margin: auto 0;
+  padding-bottom: 20px;
+}
+
 .site-info {
   text-align:center;
-  margin: 100px auto 0;
+  margin: 0 auto;
 
   @include mobile {
     float: none;
@@ -365,12 +384,12 @@ img {
   .site-avatar {
     margin:0 auto;
     display: block;
-    width: 150px;
-    height: 150px;
+    width: 130px;
+    height: 130px;
 
     @include mobile {
-      width: 90px;
-      height: 90px;
+      width: 88px;
+      height: 88px;
     }
 
     img {
@@ -384,35 +403,37 @@ img {
 }
 
 .site-name {
-  margin: 0 auto;
+  margin: 12px auto 0;
   color: $base-color;
   cursor: pointer;
   font-family: $base-font;
   font-weight: 700;
-  font-size: 28px;
+  font-size: 22px;
+  line-height: 1.4;
   letter-spacing: 1px;
 }
 
 .site-description {
-  margin: 15px auto;
+  margin: 8px auto;
   color: $base-lighten-color;
-  font-size: 16px;
+  font-size: 14px;
 
   @include mobile {
     margin: 10px auto;
   }
 }
 
-.navlist{
-  text-align:center;
+// 菜单在侧边栏内横向展示，填满简介到页脚之间的空间
+.navlist {
+  text-align: center;
 }
 
 nav {
   display: block;
-  margin-top: 23px; // @TODO: Vertically middle align
+  margin-top: 18px; // 紧贴简介下方，避免侧边栏中部过空
   font-family: $base-font;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 15px;
 
   @include mobile {
     margin-top: 9px;
@@ -420,10 +441,14 @@ nav {
   }
 
   a {
-    margin: 0 10px;
+    margin: 0 8px;
     text-align: right;
-    font-weight: 300;
-    letter-spacing: 1px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+
+    &:hover, &:active {
+      color: $link-color;
+    }
 
     @include mobile {
       margin: 0 10px;
@@ -432,31 +457,36 @@ nav {
   }
 }
 
-// 侧边栏「我的站点 / 友情链接」
-.sidebar-links {
-  margin: 20px auto 0;
-  padding: 0 20px;
-  text-align: center;
+// 页面内「我的站点 / 个人项目」链接分组（渲染在「关于」页正文里）
+.page-links {
+  margin: 24px 0 0;
+  padding: 0;
 
-  .sidebar-links-group + .sidebar-links-group {
-    margin-top: 14px;
+  .page-links-group + .page-links-group {
+    margin-top: 20px;
   }
 
-  .sidebar-links-title {
-    margin: 0 0 6px;
+  .page-links-title {
+    margin: 0 0 8px;
     font-size: $small-font-size;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.4;
-    letter-spacing: 1px;
-    color: $base-lightener-color;
+    letter-spacing: 0;                 // 中文全角字不需要额外字距
+    color: $base-lighten-color;
   }
 
+  // 链接横向并排排列，放不下时自动换行
   ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px;
     margin: 0;
     padding: 0;
 
     > li {
-      margin: 2px 0;
+      flex: 0 1 auto;
+      margin: 0;
 
       &:before {
         content: none;
@@ -468,13 +498,22 @@ nav {
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    padding: 6px 12px;
+    border: 1px solid $divider-color;
+    border-radius: 999px;
+    background-color: $background-lighten-color;
     font-size: $small-font-size;
     color: $base-lighten-color;
     line-height: 1.6;
+    white-space: nowrap;
+    transition: color .2s ease, border-color .2s ease, background-color .2s ease, transform .2s ease;
 
     &:hover, &:active {
       color: $link-color;
-      text-decoration: underline;
+      border-color: $link-color;
+      background-color: $link-bghv-color;
+      text-decoration: none;
+      transform: translateY(-1px);
     }
   }
 
@@ -491,14 +530,41 @@ nav {
     -webkit-mask-size: contain;
     mask-size: contain;
   }
+}
 
-  @include mobile {
-    padding: 0 16px;
-
-    ul > li {
-      display: inline-block;
-      margin: 0 8px;
+// 窗口高度不足时压缩侧边栏留白，尽量不出现滚动条（仅桌面端，移动端侧边栏本身是自适应高度）
+@media screen and (min-width: 1201px) and (max-height: 820px) {
+  .site-info {
+    .site-avatar {
+      width: 104px;
+      height: 104px;
     }
+  }
+
+  .site-description {
+    margin: 6px auto;
+  }
+
+  nav {
+    margin-top: 14px;
+  }
+}
+
+@media screen and (min-width: 1201px) and (max-height: 680px) {
+  .site-info {
+    .site-avatar {
+      width: 80px;
+      height: 80px;
+    }
+  }
+
+  .site-description {
+    margin: 4px auto;
+    font-size: 13px;
+  }
+
+  nav {
+    margin-top: 10px;
   }
 }
 
@@ -1054,13 +1120,11 @@ body.sidebar-collapsed {
 
 // Footer
 .wrapper-footer-desktop {
-  margin-top: 50px;
+  margin-top: 0;  // 贴底由 .sidebar-main 的 auto 外边距实现，这里不能再抢一份剩余空间
+  padding-top: 20px;
   border-top: 1px solid $footer-border-color;
   background-color: $footer-background-color;
-  position: absolute;
-  clear:both;
-  width:100%;
-  bottom:0;
+  width: 100%;
   
   @include mobile {
     display: none;
